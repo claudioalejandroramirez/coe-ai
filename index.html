@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Centro de Excelência em Inteligência Artificial — Assaí Atacadista">
+    <title>CoE IA — Assaí Atacadista</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/shared.css">
+    <style>
+        /* Home-specific */
+        .home-hero { background: var(--dark); padding: 72px 24px 64px; position: relative; overflow: hidden; }
+        .home-hero::before { content:''; position:absolute; top:0; left:0; right:0; bottom:0; background: linear-gradient(135deg, rgba(227,30,36,0.15) 0%, transparent 55%); pointer-events:none; }
+        .home-hero::after { content:''; position:absolute; bottom:0; left:0; right:0; height:4px; background: linear-gradient(to right, var(--red), var(--yellow)); }
+        .home-hero-inner { max-width:1200px; margin:0 auto; position:relative; display:flex; gap:48px; align-items:center; flex-wrap:wrap; }
+        .home-hero-text { flex:1; min-width:280px; }
+        .home-hero-eyebrow { font-size:0.72rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--red); margin-bottom:14px; display:flex; align-items:center; gap:10px; }
+        .home-hero-eyebrow::before { content:''; display:block; width:24px; height:2px; background:var(--red); flex-shrink:0; }
+        .home-hero-title { font-size:clamp(2rem,5vw,3.2rem); font-weight:800; color:#fff; line-height:1.12; margin-bottom:16px; }
+        .home-hero-title em { color:var(--red); font-style:normal; }
+        .home-hero-sub { font-size:1.05rem; color:rgba(255,255,255,0.6); max-width:560px; line-height:1.7; margin-bottom:32px; }
+        .home-hero-stats { display:flex; gap:32px; flex-wrap:wrap; }
+        .hstat { text-align:center; }
+        .hstat-val { font-size:2rem; font-weight:800; color:var(--red); display:block; line-height:1; }
+        .hstat-label { font-size:0.72rem; color:rgba(255,255,255,0.45); text-transform:uppercase; letter-spacing:1px; margin-top:4px; }
+
+        /* Levels section */
+        .levels { max-width:1200px; margin:0 auto; padding:56px 24px; }
+        .levels-title { font-size:1.6rem; font-weight:800; color:var(--dark); margin-bottom:8px; }
+        .levels-sub { color:var(--muted); font-size:0.95rem; margin-bottom:36px; }
+        .levels-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+        .level-card { background:var(--white); border:1px solid var(--border); border-radius:var(--radius-lg); overflow:hidden; box-shadow:var(--shadow); transition:transform 0.2s, box-shadow 0.2s; }
+        .level-card:hover { transform:translateY(-3px); box-shadow:var(--shadow-md); }
+        .level-card-header { padding:20px 22px 16px; }
+        .level-card-header.exec  { background:var(--dark); }
+        .level-card-header.strat { background:#1E3A8A; }
+        .level-card-header.oper  { background:var(--red); }
+        .level-num { font-size:0.65rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.5); margin-bottom:6px; }
+        .level-name { font-size:1.1rem; font-weight:800; color:#fff; margin-bottom:4px; }
+        .level-who { font-size:0.8rem; color:rgba(255,255,255,0.6); }
+        .level-card-body { padding:20px 22px; }
+        .level-mission { font-size:0.82rem; color:var(--muted); line-height:1.6; margin-bottom:14px; }
+        .level-items { list-style:none; padding:0; display:flex; flex-direction:column; gap:6px; }
+        .level-items li { font-size:0.8rem; color:var(--text); display:flex; gap:8px; align-items:flex-start; line-height:1.5; }
+        .level-items li::before { content:'→'; color:var(--red); font-weight:700; flex-shrink:0; font-size:0.75rem; margin-top:1px; }
+        .level-freq { display:inline-block; margin-top:14px; font-size:0.72rem; font-weight:700; background:var(--light); border:1px solid var(--border); border-radius:4px; padding:3px 10px; color:var(--muted); }
+        .level-cta { display:block; margin-top:16px; text-align:center; padding:10px; background:var(--red); color:#fff; border-radius:var(--radius); font-size:0.82rem; font-weight:700; text-decoration:none; transition:background 0.15s; }
+        .level-cta:hover { background:var(--red-dark); text-decoration:none; }
+
+        /* Pillars overview */
+        .pillars-section { background:var(--dark); padding:56px 24px; }
+        .pillars-inner { max-width:1200px; margin:0 auto; }
+        .pillars-header { margin-bottom:32px; }
+        .pillars-header h2 { font-size:1.6rem; font-weight:800; color:#fff; margin-bottom:8px; }
+        .pillars-header p { color:rgba(255,255,255,0.55); font-size:0.95rem; }
+        .pillars-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+        .pillar-card { background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); border-radius:var(--radius-lg); padding:24px; border-top:3px solid var(--red); transition:transform 0.2s; text-decoration:none; display:block; }
+        .pillar-card:hover { transform:translateY(-2px); text-decoration:none; }
+        .pillar-icon { font-size:1.8rem; margin-bottom:12px; }
+        .pillar-num-label { font-size:0.62rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--red); margin-bottom:6px; }
+        .pillar-name { font-size:0.95rem; font-weight:700; color:#fff; margin-bottom:8px; }
+        .pillar-desc { font-size:0.8rem; color:rgba(255,255,255,0.5); line-height:1.6; }
+
+        /* Quick links */
+        .quicklinks { max-width:1200px; margin:0 auto; padding:48px 24px 64px; }
+        .quicklinks h2 { font-size:1.4rem; font-weight:800; color:var(--dark); margin-bottom:24px; }
+        .ql-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+        .ql-card { background:var(--white); border:1px solid var(--border); border-radius:var(--radius-lg); padding:20px; text-decoration:none; display:flex; gap:14px; align-items:flex-start; box-shadow:var(--shadow); transition:all 0.15s; }
+        .ql-card:hover { border-color:var(--red); box-shadow:var(--shadow-md); text-decoration:none; }
+        .ql-icon { font-size:1.5rem; flex-shrink:0; }
+        .ql-title { font-size:0.88rem; font-weight:700; color:var(--dark); margin-bottom:4px; }
+        .ql-desc { font-size:0.78rem; color:var(--muted); line-height:1.5; }
+
+        @media (max-width:1024px) { .pillars-grid { grid-template-columns:repeat(2,1fr); } }
+        @media (max-width:768px) {
+            .levels-grid, .pillars-grid, .ql-grid { grid-template-columns:1fr; }
+            .home-hero-stats { gap:20px; }
+        }
+    </style>
+</head>
+<body>
+<div id="progress"></div>
+
+<!-- NAV -->
+<nav id="topnav" role="navigation" aria-label="Navegação principal">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo" aria-label="Assaí Atacadista - CoE IA">
+            <img src="assets/Assaí_Atacadista_logo_2024.svg.png" alt="Assaí Atacadista">
+            <span class="nav-logo-divider" aria-hidden="true"></span>
+            <span class="nav-logo-label"><strong>CoE de IA</strong>Centro de Excelência</span>
+        </a>
+        <ul class="nav-links" role="list">
+            <li><a href="index.html" class="active">Início</a></li>
+            <li><a href="time.html">Time & Fluxo</a></li>
+            <li><a href="pilar-1-arquitetura.html">Arquitetura</a></li>
+            <li><a href="pilar-2-governanca.html">Governança</a></li>
+            <li><a href="pilar-3-llmops.html">LLMOps</a></li>
+            <li><a href="pilar-4-enablement.html">Enablement</a></li>
+            <li><a href="operacao.html">Operação</a></li>
+        </ul>
+        <button id="nav-toggle" aria-label="Abrir menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+<div id="nav-mobile" role="navigation" aria-label="Menu mobile">
+    <a href="index.html" class="active">🏠 Início</a>
+    <a href="time.html">👥 Time & Fluxo</a>
+    <a href="pilar-1-arquitetura.html">🏗️ Pilar 1 · Arquitetura</a>
+    <a href="pilar-2-governanca.html">🛡️ Pilar 2 · Governança</a>
+    <a href="pilar-3-llmops.html">⚙️ Pilar 3 · LLMOps</a>
+    <a href="pilar-4-enablement.html">🚀 Pilar 4 · Enablement</a>
+    <a href="operacao.html">📊 Operação & Métricas</a>
+</div>
+
+<!-- HERO -->
+<header class="home-hero">
+    <div class="home-hero-inner">
+        <div class="home-hero-text">
+            <div class="home-hero-eyebrow">Centro de Excelência em Inteligência Artificial</div>
+            <h1 class="home-hero-title">CoE de <em>IA</em><br>Assaí Atacadista</h1>
+            <p class="home-hero-sub">Estrutura de governança em três frentes para transformar Inteligência Artificial em vantagem competitiva real — com segurança, escala e resultado mensurável.</p>
+            <div class="home-hero-stats">
+                <div class="hstat"><span class="hstat-val">3</span><span class="hstat-label">Frentes de Governança</span></div>
+                <div class="hstat"><span class="hstat-val">4</span><span class="hstat-label">Pilares Técnicos</span></div>
+                <div class="hstat"><span class="hstat-val">18</span><span class="hstat-label">Meses de Roadmap</span></div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- 3 NÍVEIS -->
+<section class="levels" aria-labelledby="levels-heading">
+    <h2 class="levels-title" id="levels-heading">Os 3 Níveis do CoE</h2>
+    <p class="levels-sub">Cada nível tem uma missão clara. A IA só escala quando os três funcionam em sincronia.</p>
+    <div class="levels-grid">
+        <div class="level-card">
+            <div class="level-card-header exec">
+                <div class="level-num">Nível 01</div>
+                <div class="level-name">🏛️ CoE Executivo</div>
+                <div class="level-who">Diretoria</div>
+            </div>
+            <div class="level-card-body">
+                <p class="level-mission">Define a visão estratégica, aprova investimentos e garante que a IA esteja alinhada aos objetivos do negócio e às exigências regulatórias.</p>
+                <ul class="level-items">
+                    <li>Aprovar o roadmap anual de IA</li>
+                    <li>Decidir sobre investimentos acima de R$ 500k</li>
+                    <li>Garantir conformidade ética e LGPD</li>
+                    <li>Remover barreiras organizacionais</li>
+                </ul>
+                <span class="level-freq">Reunião mensal</span>
+            </div>
+        </div>
+        <div class="level-card">
+            <div class="level-card-header strat">
+                <div class="level-num">Nível 02</div>
+                <div class="level-name">📊 CoE Estratégico</div>
+                <div class="level-who">Gerentes das Áreas</div>
+            </div>
+            <div class="level-card-body">
+                <p class="level-mission">Traduz a visão executiva em portfólio de projetos viável, gerenciando prioridades, recursos e métricas de sucesso entre as áreas.</p>
+                <ul class="level-items">
+                    <li>Priorizar o backlog de oportunidades de IA</li>
+                    <li>Validar business cases antes do Executivo</li>
+                    <li>Monitorar KPIs e decidir sobre continuidade</li>
+                    <li>Liderar gestão da mudança e letramento</li>
+                </ul>
+                <span class="level-freq">Reunião quinzenal</span>
+            </div>
+        </div>
+        <div class="level-card">
+            <div class="level-card-header oper">
+                <div class="level-num">Nível 03</div>
+                <div class="level-name">⚙️ CoE Operacional</div>
+                <div class="level-who">Time Técnico</div>
+            </div>
+            <div class="level-card-body">
+                <p class="level-mission">Onde a IA sai do papel e vira produto. Define padrões, garante qualidade técnica, opera as soluções em produção e distribui capacidade para os times.</p>
+                <ul class="level-items">
+                    <li>Definir arquitetura e padrões técnicos</li>
+                    <li>Revisar soluções antes de ir para produção</li>
+                    <li>Operar e monitorar sistemas de IA</li>
+                    <li>Capacitar times para construir com autonomia</li>
+                </ul>
+                <span class="level-freq">Reunião semanal</span>
+                <a href="time.html" class="level-cta">Ver documentação completa →</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 4 PILARES -->
+<section class="pillars-section" aria-labelledby="pillars-heading">
+    <div class="pillars-inner">
+        <div class="pillars-header">
+            <h2 id="pillars-heading">Os 4 Pilares do CoE Operacional</h2>
+            <p>A estrutura técnica que sustenta todas as iniciativas de IA da empresa</p>
+        </div>
+        <div class="pillars-grid">
+            <a href="pilar-1-arquitetura.html" class="pillar-card">
+                <div class="pillar-icon">🏗️</div>
+                <div class="pillar-num-label">Pilar 1</div>
+                <div class="pillar-name">Arquitetura de Referência</div>
+                <div class="pillar-desc">Padrões reutilizáveis, decisões de stack, segurança de dados e blueprints que todos os projetos seguem.</div>
+            </a>
+            <a href="pilar-2-governanca.html" class="pillar-card">
+                <div class="pillar-icon">🛡️</div>
+                <div class="pillar-num-label">Pilar 2</div>
+                <div class="pillar-name">Governança Técnica</div>
+                <div class="pillar-desc">ARB, matriz de risco, model cards e critérios de aceite que garantem qualidade antes de qualquer deploy.</div>
+            </a>
+            <a href="pilar-3-llmops.html" class="pillar-card">
+                <div class="pillar-icon">⚙️</div>
+                <div class="pillar-num-label">Pilar 3</div>
+                <div class="pillar-name">Integração & LLMOps</div>
+                <div class="pillar-desc">Gateway de LLM, observabilidade, pipeline de dados e gestão de custo para operar IA em produção.</div>
+            </a>
+            <a href="pilar-4-enablement.html" class="pillar-card">
+                <div class="pillar-icon">🚀</div>
+                <div class="pillar-num-label">Pilar 4</div>
+                <div class="pillar-name">Enablement dos Times</div>
+                <div class="pillar-desc">Playbooks, evals, funil de maturidade e comunidade de prática para multiplicar capacidade técnica.</div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- QUICK LINKS -->
+<section class="quicklinks" aria-labelledby="ql-heading">
+    <h2 id="ql-heading">Acesso Rápido</h2>
+    <div class="ql-grid">
+        <a href="time.html" class="ql-card">
+            <span class="ql-icon">👥</span>
+            <div><div class="ql-title">Time & Fluxo de Trabalho</div><div class="ql-desc">Composição do time, matriz RACI, perfis, fluxo de demandas e escopo do CoE Operacional.</div></div>
+        </a>
+        <a href="pilar-1-arquitetura.html" class="ql-card">
+            <span class="ql-icon">🏗️</span>
+            <div><div class="ql-title">Arquitetura de Referência</div><div class="ql-desc">ADRs, padrão RAG, agentes, classificação de dados e gateway de LLM.</div></div>
+        </a>
+        <a href="pilar-2-governanca.html" class="ql-card">
+            <span class="ql-icon">🛡️</span>
+            <div><div class="ql-title">Governança Técnica</div><div class="ql-desc">ARB, checklist de deploy, matriz de risco e critérios de aceite para IA.</div></div>
+        </a>
+        <a href="pilar-3-llmops.html" class="ql-card">
+            <span class="ql-icon">⚙️</span>
+            <div><div class="ql-title">LLMOps & Integração</div><div class="ql-desc">Observabilidade, pipeline de dados, controle de custo e versionamento de modelos.</div></div>
+        </a>
+        <a href="pilar-4-enablement.html" class="ql-card">
+            <span class="ql-icon">🚀</span>
+            <div><div class="ql-title">Enablement & Capacitação</div><div class="ql-desc">Funil de maturidade, playbooks, evals e trilhas de capacitação por perfil.</div></div>
+        </a>
+        <a href="operacao.html" class="ql-card">
+            <span class="ql-icon">📊</span>
+            <div><div class="ql-title">Operação & Primeiros 90 Dias</div><div class="ql-desc">Métricas de sucesso do CoE e plano de ação para os primeiros três meses.</div></div>
+        </a>
+        <a href="coe-doc.html" class="ql-card">
+            <span class="ql-icon">📄</span>
+            <div><div class="ql-title">Documento linear (coe-doc)</div><div class="ql-desc">Versão única em página longa, com sumário lateral — ideal para leitura contínua ou impressão.</div></div>
+        </a>
+        <a href="coe-operacional.html" class="ql-card">
+            <span class="ql-icon">🎬</span>
+            <div><div class="ql-title">Apresentação em slides</div><div class="ql-desc">Deck vertical coe-operacional: navegação por slide, bom para workshops e alinhamentos rápidos.</div></div>
+        </a>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="footer">
+    <img src="assets/Assaí_Atacadista_logo_2024.svg.png" alt="Assaí Atacadista">
+    <span>CoE de Inteligência Artificial · Documentação Técnica</span>
+    <span>v1.0 · Maio 2026 · Confidencial</span>
+    <span class="footer-doc-links"><a href="coe-doc.html">Documento linear (coe-doc)</a><span class="footer-doc-sep" aria-hidden="true">·</span><a href="coe-operacional.html">Apresentação em slides</a></span>
+    <span class="footer-author">Criado por Claudio Ramirez - Arquiteto Tech Lead CoE Operacional</span>
+</footer>
+
+<script src="js/shared.js"></script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pilar 3 — Integração e LLMOps: gateway de LLM, observabilidade, pipeline de dados e custo do CoE IA Assaí">
+    <title>Pilar 3 · LLMOps — CoE IA · Assaí Atacadista</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/shared.css">
+</head>
+<body>
+<div id="progress"></div>
+
+<nav id="topnav" role="navigation" aria-label="Navegação principal">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo" aria-label="Assaí Atacadista - CoE IA">
+            <img src="assets/Assaí_Atacadista_logo_2024.svg.png" alt="Assaí Atacadista">
+            <span class="nav-logo-divider" aria-hidden="true"></span>
+            <span class="nav-logo-label"><strong>CoE de IA</strong>Centro de Excelência</span>
+        </a>
+        <ul class="nav-links" role="list">
+            <li><a href="index.html">Início</a></li>
+            <li><a href="time.html">Time & Fluxo</a></li>
+            <li><a href="pilar-1-arquitetura.html">Arquitetura</a></li>
+            <li><a href="pilar-2-governanca.html">Governança</a></li>
+            <li><a href="pilar-3-llmops.html" class="active">LLMOps</a></li>
+            <li><a href="pilar-4-enablement.html">Enablement</a></li>
+            <li><a href="operacao.html">Operação</a></li>
+        </ul>
+        <button id="nav-toggle" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+</nav>
+<div id="nav-mobile" role="navigation" aria-label="Menu mobile">
+    <a href="index.html">🏠 Início</a>
+    <a href="time.html">👥 Time & Fluxo</a>
+    <a href="pilar-1-arquitetura.html">🏗️ Pilar 1 · Arquitetura</a>
+    <a href="pilar-2-governanca.html">🛡️ Pilar 2 · Governança</a>
+    <a href="pilar-3-llmops.html" class="active">⚙️ Pilar 3 · LLMOps</a>
+    <a href="pilar-4-enablement.html">🚀 Pilar 4 · Enablement</a>
+    <a href="operacao.html">📊 Operação & Métricas</a>
+</div>
+
+<header class="page-hero">
+    <div class="hero-inner">
+        <div class="hero-eyebrow">Pilar 3</div>
+        <h1 class="hero-title">Integração &amp; <em>LLMOps</em></h1>
+        <p class="hero-subtitle">O pilar mais subestimado. A maioria dos CoEs sabe fazer PoC, mas não sabe operar IA em produção. Aqui garantimos soluções observáveis, mensuráveis e operáveis em escala.</p>
+        <div class="hero-chips">
+            <span class="chip">🚪 Gateway de LLM</span>
+            <span class="chip">📈 Observabilidade</span>
+            <span class="chip">🗂️ Pipeline de dados</span>
+            <span class="chip">💰 Gestão de custo</span>
+        </div>
+    </div>
+</header>
+
+<div class="page-body with-sidebar">
+    <aside class="sidebar" aria-label="Navegação da página">
+        <div class="sidebar-title">Nesta página</div>
+        <ul class="sidebar-nav">
+            <li><a href="#visao" class="active">🎯 Visão do pilar</a></li>
+            <li><a href="#operacao">🏭 Operação em escala</a></li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        <nav class="breadcrumb" aria-label="Localização">
+            <a href="index.html">Início</a>
+            <span class="breadcrumb-sep" aria-hidden="true">›</span>
+            <span>Pilar 3 · LLMOps</span>
+        </nav>
+
+        <section id="visao" class="doc-section">
+            <div class="section-label">Pilar 3</div>
+            <h2 class="section-title">Visão do pilar</h2>
+            <p class="section-desc">Infraestrutura que sustenta produção — não só demos</p>
+            <hr class="section-divider">
+
+            <div class="summary-box">
+                <div class="summary-box-label">📌 Resumo para todos</div>
+                <p>O gateway centraliza chamadas, políticas e custo. A observabilidade cobre latência por etapa, qualidade de retrieval e drift. O pipeline de dados sustenta RAG com reindexação segura. Custo é tratado como disciplina de engenharia, não surpresa na fatura.</p>
+            </div>
+
+            <div class="cards cards-3">
+                <div class="stat-card">
+                    <span class="stat-val">1</span>
+                    <span class="stat-label">Gateway centralizado de LLM</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-val">∞</span>
+                    <span class="stat-label">PoCs que morreram sem isso</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-val">$</span>
+                    <span class="stat-label">Custo como disciplina de eng.</span>
+                </div>
+            </div>
+
+            <div class="callout danger">
+                <div class="callout-label">⚠️ Alerta de maturidade</div>
+                CoEs que pulam o Pilar 3 acumulam PoCs que não sobrevivem ao contato com produção. Este pilar é a ponte entre “funcionou na demo” e “aguenta segunda-feira de manhã”.
+            </div>
+        </section>
+
+        <section id="operacao" class="doc-section">
+            <div class="section-label">Operação</div>
+            <h2 class="section-title">Operação de IA em escala</h2>
+            <p class="section-desc">Gateway, observabilidade, dados e custo — os quatro blocos operacionais</p>
+            <hr class="section-divider">
+
+            <div class="cards cards-2">
+                <div class="card accent-blue">
+                    <span class="badge badge-blue">Gateway de LLM</span>
+                    <div class="card-title" style="margin-top:10px;">Ponto central de todas as chamadas</div>
+                    <div class="card-body">Roteamento inteligente entre providers. Fallback automático. Rate limiting por projeto. Logging centralizado. Cache semântico para reduzir custo e latência.</div>
+                </div>
+                <div class="card accent-blue">
+                    <span class="badge badge-blue">Observabilidade</span>
+                    <div class="card-title" style="margin-top:10px;">Métricas que importam em IA</div>
+                    <div class="card-body">Latência por etapa (embedding, retrieval, geração). Custo por sessão, usuário e feature. Qualidade de retrieval (MRR, NDCG). Feedback implícito e explícito. Drift de comportamento.</div>
+                </div>
+                <div class="card accent-red">
+                    <span class="badge badge-red">Pipeline de dados</span>
+                    <div class="card-title" style="margin-top:10px;">RAG é tão bom quanto seus dados</div>
+                    <div class="card-body">Ingestão de fontes corporativas. Chunking com preservação semântica. Metadata enrichment com permissões. Reindexação atômica quando documentos mudam.</div>
+                </div>
+                <div class="card accent-red">
+                    <span class="badge badge-gray">Gestão de custos</span>
+                    <div class="card-title" style="margin-top:10px;">Custo é responsabilidade de arquitetura</div>
+                    <div class="card-body">Orçamento por projeto com alertas. Seleção de modelo por complexidade da tarefa. Batch processing para o que não é tempo real (tipicamente mais barato). Inventário de versões de modelos.</div>
+                </div>
+            </div>
+        </section>
+
+        <nav class="page-nav" aria-label="Navegação entre páginas">
+            <a href="pilar-2-governanca.html" class="page-nav-card">
+                <div class="page-nav-dir">← Anterior</div>
+                <div class="page-nav-title">Pilar 2 · Governança</div>
+            </a>
+            <a href="pilar-4-enablement.html" class="page-nav-card next">
+                <div class="page-nav-dir">Próximo →</div>
+                <div class="page-nav-title">Pilar 4 · Enablement</div>
+            </a>
+        </nav>
+    </main>
+</div>
+
+<footer id="footer">
+    <img src="assets/Assaí_Atacadista_logo_2024.svg.png" alt="Assaí Atacadista">
+    <span>CoE de Inteligência Artificial · Documentação Técnica</span>
+    <span>v1.0 · Maio 2026 · Confidencial</span>
+    <span class="footer-doc-links"><a href="coe-doc.html">Documento linear (coe-doc)</a><span class="footer-doc-sep" aria-hidden="true">·</span><a href="coe-operacional.html">Apresentação em slides</a></span>
+    <span class="footer-author">Criado por Claudio Ramirez - Arquiteto Tech Lead CoE Operacional</span>
+</footer>
+
+<script src="js/shared.js"></script>
+</body>
+</html>

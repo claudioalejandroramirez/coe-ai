@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Composição do time, fluxo de trabalho e escopo do CoE Operacional de IA — Assaí Atacadista">
+    <title>Time & Fluxo — CoE IA · Assaí Atacadista</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/shared.css">
+</head>
+<body>
+<div id="progress"></div>
+
+<nav id="topnav" role="navigation" aria-label="Navegação principal">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo" aria-label="Assaí Atacadista - CoE IA">
+            <img src="assets/Assaí_Atacadista_logo_2024.svg.png" alt="Assaí Atacadista">
+            <span class="nav-logo-divider" aria-hidden="true"></span>
+            <span class="nav-logo-label"><strong>CoE de IA</strong>Centro de Excelência</span>
+        </a>
+        <ul class="nav-links" role="list">
+            <li><a href="index.html">Início</a></li>
+            <li><a href="time.html" class="active">Time & Fluxo</a></li>
+            <li><a href="pilar-1-arquitetura.html">Arquitetura</a></li>
+            <li><a href="pilar-2-governanca.html">Governança</a></li>
+            <li><a href="pilar-3-llmops.html">LLMOps</a></li>
+            <li><a href="pilar-4-enablement.html">Enablement</a></li>
+            <li><a href="operacao.html">Operação</a></li>
+        </ul>
+        <button id="nav-toggle" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+</nav>
+<div id="nav-mobile" role="navigation" aria-label="Menu mobile">
+    <a href="index.html">🏠 Início</a>
+    <a href="time.html" class="active">👥 Time & Fluxo</a>
+    <a href="pilar-1-arquitetura.html">🏗️ Pilar 1 · Arquitetura</a>
+    <a href="pilar-2-governanca.html">🛡️ Pilar 2 · Governança</a>
+    <a href="pilar-3-llmops.html">⚙️ Pilar 3 · LLMOps</a>
+    <a href="pilar-4-enablement.html">🚀 Pilar 4 · Enablement</a>
+    <a href="operacao.html">📊 Operação & Métricas</a>
+</div>
+
+<header class="page-hero">
+    <div class="hero-inner">
+        <div class="hero-eyebrow">CoE Operacional</div>
+        <h1 class="hero-title">Time, Fluxo de Trabalho<br>& <em>Escopo</em></h1>
+        <p class="hero-subtitle">Quem somos, como trabalhamos e onde começa e termina nossa responsabilidade.</p>
+        <div class="hero-chips">
+            <span class="chip">👥 6 Perfis Técnicos</span>
+            <span class="chip">⊞ Matriz RACI</span>
+            <span class="chip">🔄 5 Etapas de Fluxo</span>
+            <span class="chip">🎯 Escopo Definido</span>
+        </div>
+    </div>
+</header>
+
+<div class="page-body with-sidebar">
+    <aside class="sidebar" aria-label="Navegação da página">
+        <div class="sidebar-title">Nesta página</div>
+        <ul class="sidebar-nav">
+            <li><a href="#time" class="active">👥 Composição do Time</a></li>
+            <li><a href="#raci">⊞ Matriz RACI</a></li>
+            <li><a href="#fluxo">🔄 Fluxo de Trabalho</a></li>
+            <li><a href="#escopo">🎯 Escopo e Limites</a></li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        <nav class="breadcrumb" aria-label="Localização">
+            <a href="index.html">Início</a>
+            <span class="breadcrumb-sep" aria-hidden="true">›</span>
+            <span>Time & Fluxo</span>
+        </nav>
+
+        <!-- COMPOSIÇÃO DO TIME -->
+        <section id="time" class="doc-section">
+            <div class="section-label">Time</div>
+            <h2 class="section-title">Composição do CoE Operacional</h2>
+            <p class="section-desc">Os perfis que tornam os 4 pilares possíveis</p>
+            <hr class="section-divider">
+
+            <div class="summary-box">
+                <div class="summary-box-label">📌 Resumo para todos</div>
+                <p>O CoE Operacional é formado por especialistas técnicos com perfis complementares. Cada perfil tem responsabilidades claras e contribui para pilares específicos. Nenhum perfil trabalha isolado — a colaboração entre eles é o que garante soluções completas e seguras.</p>
+            </div>
+
+            <div class="subsection">
+                <div class="subsection-title">Perfis e Responsabilidades</div>
+                <div class="cards cards-2">
+                    <div class="team-card">
+                        <div class="team-icon">🏛️</div>
+                        <div>
+                            <div class="team-title">Arquiteto de Soluções</div>
+                            <div class="team-body">Define os padrões técnicos, lidera o Architecture Review Board (ARB), toma decisões de stack e é a ponte entre o que o negócio quer e o que o time consegue entregar com qualidade. Responsável pelos Pilares 1 e 2.</div>
+                            <div class="team-tags"><span class="team-tag">Pilar 1</span><span class="team-tag">Pilar 2</span><span class="team-tag">ADR</span><span class="team-tag">ARB</span></div>
+                        </div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-icon">🤖</div>
+                        <div>
+                            <div class="team-title">Engenheiro de ML / NLP</div>
+                            <div class="team-body">Constrói e avalia modelos, implementa pipelines de RAG e fine-tuning, define métricas de qualidade e conduz os processos de avaliação (evals). Garante que o modelo funciona para o problema certo.</div>
+                            <div class="team-tags"><span class="team-tag">Pilar 1</span><span class="team-tag">Pilar 3</span><span class="team-tag">RAG</span><span class="team-tag">Evals</span></div>
+                        </div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-icon">🗄️</div>
+                        <div>
+                            <div class="team-title">Especialista em Dados</div>
+                            <div class="team-body">Garante a qualidade dos dados que alimentam os modelos. Cuida de ingestão de fontes corporativas, estratégia de chunking, enriquecimento de metadados e reindexação. RAG é tão bom quanto seus dados.</div>
+                            <div class="team-tags"><span class="team-tag">Pilar 3</span><span class="team-tag">Pipeline</span><span class="team-tag">Chunking</span><span class="team-tag">Metadata</span></div>
+                        </div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-icon">⚡</div>
+                        <div>
+                            <div class="team-title">Especialista em Automação</div>
+                            <div class="team-body">RPA, agentes de IA e BPM. Constrói os fluxos inteligentes que conectam sistemas e processos. Suporta o programa de Citizen Developers nas áreas de negócio, garantindo que automações sigam os padrões do CoE.</div>
+                            <div class="team-tags"><span class="team-tag">Pilar 1</span><span class="team-tag">Pilar 4</span><span class="team-tag">Agentes</span><span class="team-tag">RPA</span></div>
+                        </div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-icon">☁️</div>
+                        <div>
+                            <div class="team-title">Especialista em Cloud & Infraestrutura</div>
+                            <div class="team-body">Provisiona e mantém o ambiente de IA. Garante escalabilidade, disponibilidade e controle de custo de infraestrutura. Responsável pelo gateway de LLM e pela plataforma de observabilidade.</div>
+                            <div class="team-tags"><span class="team-tag">Pilar 3</span><span class="team-tag">Gateway</span><span class="team-tag">Infra</span><span class="team-tag">Custo</span></div>
+                        </div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-icon">🔒</div>
+                        <div>
+                            <div class="team-title">DevSecOps</div>
+                            <div class="team-body">Segurança no pipeline de desenvolvimento. Garante que políticas de dados, LGPD e controles de acesso sejam aplicados em todo o ciclo de vida das soluções. Participa do ARB em todos os projetos de risco médio ou alto.</div>
+                            <div class="team-tags"><span class="team-tag">Pilar 2</span><span class="team-tag">LGPD</span><span class="team-tag">Segurança</span><span class="team-tag">ARB</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MATRIZ RACI -->
+        <section id="raci" class="doc-section">
+            <div class="section-label">Governança do time</div>
+            <h2 class="section-title">Matriz RACI — quem faz o quê</h2>
+            <p class="section-desc">Mapeamento de responsabilidades entre os perfis do CoE Operacional (uma letra por papel; A/R quando o mesmo perfil presta contas e executa).</p>
+            <hr class="section-divider">
+
+            <div class="summary-box">
+                <div class="summary-box-label">📌 Como ler</div>
+                <p><strong>R</strong> executa a entrega. <strong>A</strong> aprova e presta contas (há no máximo um A por linha; quando coincide com quem executa, usamos <strong>A/R</strong>). <strong>C</strong> é consultado antes de decisões ou entregas. <strong>I</strong> recebe atualizações. A matriz é viva: revisão trimestral ou quando mudar o desenho do time.</p>
+            </div>
+
+            <ul class="raci-legend" aria-label="Legenda RACI">
+                <li><code class="raci-r">R</code> Responsável (executa)</li>
+                <li><code class="raci-a">A</code> Presta contas (aprova)</li>
+                <li><code class="raci-c">C</code> Consultado</li>
+                <li><code class="raci-i">I</code> Informado</li>
+                <li><code class="raci-ar">A/R</code> Presta contas e executa</li>
+            </ul>
+
+            <div class="table-wrap">
+                <table class="doc-table raci-matrix" aria-label="Matriz RACI do CoE Operacional">
+                    <thead>
+                        <tr>
+                            <th scope="col">Entrega / decisão</th>
+                            <th scope="col">Arquiteto de Soluções</th>
+                            <th scope="col">Eng. ML / NLP</th>
+                            <th scope="col">Especialista em Dados</th>
+                            <th scope="col">Especialista em Automação</th>
+                            <th scope="col">Cloud &amp; Infra</th>
+                            <th scope="col">DevSecOps</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>ADRs, blueprints e arquitetura de referência</td>
+                            <td class="raci-ar" title="Presta contas e executa">A/R</td>
+                            <td class="raci-c">C</td>
+                            <td class="raci-c">C</td>
+                            <td class="raci-c">C</td>
+                            <td class="raci-c">C</td>
+                            <td class="raci-c">C</td>
+                        </tr>
+                        <tr>
+                            <td>ARB e revisão técnica pré-produção</td>
+                            <td class="raci-ar" title="Presta contas e executa">A/R</td>
+                            <td class="raci-c">C</td>
+                            <td class="raci-c">C</td>
+                            <td class="raci-c">C</td>
+                            <td class="raci-c">C</td>
+                            <td class="raci-c">C</td>
+                        </tr>
+                        <tr>
+                            <td>Model cards, evals e baseline de qualidade</td>
+                            <td class="raci-c">C</td>
+                            <td class="raci-ar" title="Presta contas e executa">A/R</td>
+                            <td class="raci-c">C</td>
+                            <td class="raci-i">I</td>
+                            <td class="raci-i">I</td>
+                            <td class="raci-c">C</td>
+                        </tr>
+                        <tr>
+                            <td>Gateway de LLM, observabilidade e SRE de IA</td>
+                            <td class="raci-c">C</td>
+                            <td class="raci-c">C</td>
+                            <td class="raci-i">I</td>
+                            <td class="raci-i">I</td>
+                            <td class="raci-ar" title="Presta contas e executa">A/R</td>
+                            <td class="raci-c">C</td>
+                        </tr>
+                        <tr>
+                            <td>Pipeline de dados corporativo, RAG e metadados</td>
+                            <td class="raci-c">C</td>
+                            <td class="raci-c">C</td>
+                            <td class="raci-ar" title="Presta contas e executa">A/R</td>
+                            <td class="raci-i">I</td>
+                            <td class="raci-c">C</td>
+                            <td class="raci-c">C</td>
+                        </tr>
+                        <tr>
+                            <td>Segurança, LGPD e classificação de dados</td>
+                            <td class="raci-c">C</td>
+                            <td class="raci-i">I</td>
+                            <td class="raci-c">C</td>
+                            <td class="raci-i">I</td>
+                            <td class="raci-c">C</td>
+                            <td class="raci-ar" title="Presta contas e executa">A/R</td>
+                        </tr>
+                        <tr>
+                            <td>Agentes, RPA e orquestração de fluxos</td>
+                            <td class="raci-c">C</td>
+                            <td class="raci-c">C</td>
+                            <td class="raci-i">I</td>
+                            <td class="raci-ar" title="Presta contas e executa">A/R</td>
+                            <td class="raci-c">C</td>
+                            <td class="raci-c">C</td>
+                        </tr>
+                        <tr>
+                            <td>Playbooks, trilhas e comunidade de prática</td>
+                            <td class="raci-ar" title="Presta contas e executa">A/R</td>
+                            <td class="raci-c">C</td>
+                            <td class="raci-c">C</td>
+                            <td class="raci-c">C</td>
+                            <td class="raci-c">C</td>
+                            <td class="raci-i">I</td>
+                        </tr>
+                        <tr>
+                            <td>Triagem e viabilidade técnica de demandas</td>
+                            <td class="raci-ar" title="Presta contas e executa">A/R</td>
+                            <td class="raci-c">C</td>
+                            <td class="raci-c">C</td>
+                            <td class="raci-i">I</td>
+                            <td class="raci-i">I</td>
+                            <td class="raci-i">I</td>
+                        </tr>
+                        <tr>
+                            <td>Resposta a incidentes de produção (IA)</td>
+                            <td class="raci-c">C</td>
+                            <td class="raci-c">C</td>
+                            <td class="raci-i">I</td>
+                            <td class="raci-i">I</td>
+                            <td class="raci-ar" title="Presta contas e executa">A/R</td>
+                            <td class="raci-c">C</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="callout info">
+                <div class="callout-label">Nota de uso</div>
+                Em projetos de <strong>risco alto</strong>, o DevSecOps entra como <strong>C</strong> obrigatório no ARB (já refletido nas linhas de ARB e segurança). Times de negócio e o CoE Estratégico são <strong>I/C</strong> conforme o fluxo de demandas — não entram nesta matriz, que é só do núcleo operacional.
+            </div>
+        </section>
+
+        <!-- FLUXO DE TRABALHO -->
+        <section id="fluxo" class="doc-section">
+            <div class="section-label">Fluxo</div>
+            <h2 class="section-title">Como uma Demanda Chega e Sai do CoE</h2>
+            <p class="section-desc">Do pedido do negócio ao produto em produção — quem faz o quê em cada etapa</p>
+            <hr class="section-divider">
+
+            <div class="summary-box">
+                <div class="summary-box-label">📌 Resumo para todos</div>
+                <p>Uma demanda de IA nunca começa no CoE Operacional. Ela nasce no negócio, é priorizada pelo CoE Estratégico e chega até nós com um business case. Nós avaliamos a viabilidade técnica, executamos seguindo nossos padrões e devolvemos métricas de impacto para fechar o ciclo.</p>
+            </div>
+
+            <div class="funnel">
+                <div class="funnel-step">
+                    <div class="funnel-num">①</div>
+                    <div class="funnel-content">
+                        <div class="funnel-title">CoE Estratégico identifica e prioriza</div>
+                        <div class="funnel-desc">Gerentes das áreas identificam oportunidades e submetem ao backlog com um business case preliminar (problema, impacto esperado, área responsável). O CoE Estratégico prioriza usando a matriz Quick Wins / Estratégicos / Longo Prazo.</div>
+                    </div>
+                    <div class="funnel-badge">Entrada</div>
+                </div>
+                <div class="funnel-step">
+                    <div class="funnel-num">②</div>
+                    <div class="funnel-content">
+                        <div class="funnel-title">CoE Operacional avalia viabilidade técnica</div>
+                        <div class="funnel-desc">O Arquiteto analisa: os dados necessários existem e têm qualidade suficiente? A complexidade técnica é compatível com o prazo e o budget? Qual é o nível de risco? A demanda é encaixada na fase correta do funil de maturidade.</div>
+                    </div>
+                    <div class="funnel-badge">Triagem</div>
+                </div>
+                <div class="funnel-step">
+                    <div class="funnel-num">③</div>
+                    <div class="funnel-content">
+                        <div class="funnel-title">Desenvolvimento seguindo os padrões do CoE</div>
+                        <div class="funnel-desc">O time executa usando os blueprints, playbooks e ADRs publicados. Sprints de 2 semanas com revisões quinzenais com o CoE Estratégico. Antes de qualquer deploy, o projeto passa pelo ARB para validação técnica.</div>
+                    </div>
+                    <div class="funnel-badge">Execução</div>
+                </div>
+                <div class="funnel-step hl">
+                    <div class="funnel-num">④</div>
+                    <div class="funnel-content">
+                        <div class="funnel-title">Deploy com observabilidade ativa desde o dia 1</div>
+                        <div class="funnel-desc">Nenhuma solução vai para produção sem: gateway de LLM configurado, monitoramento de custo e qualidade ativo, alertas definidos, model card preenchido e plano de rollback documentado. Estes são requisitos não-negociáveis.</div>
+                    </div>
+                    <div class="funnel-badge">Produção</div>
+                </div>
+                <div class="funnel-step">
+                    <div class="funnel-num">⑤</div>
+                    <div class="funnel-content">
+                        <div class="funnel-title">Métricas de impacto alimentam o próximo ciclo</div>
+                        <div class="funnel-desc">Os resultados (ROI realizado, adoção, custo por interação, qualidade) são reportados ao CoE Estratégico e Executivo. Esses dados alimentam a próxima rodada de priorização e o relatório trimestral de IA da empresa.</div>
+                    </div>
+                    <div class="funnel-badge">Feedback</div>
+                </div>
+            </div>
+
+            <div class="callout info">
+                <div class="callout-label">💡 Ponto importante</div>
+                O CoE Operacional precisa ser consultado <strong>antes</strong> da priorização dos casos de uso, não depois. Arquitetura mal pensada no início cria dívida técnica difícil de pagar. Quanto mais cedo o time técnico entra, melhor o resultado.
+            </div>
+        </section>
+
+        <!-- ESCOPO -->
+        <section id="escopo" class="doc-section">
+            <div class="section-label">Escopo</div>
+            <h2 class="section-title">O que o CoE Faz — e o que Não Faz</h2>
+            <p class="section-desc">Delimitar o escopo é tão importante quanto definir responsabilidades</p>
+            <hr class="section-divider">
+
+            <div class="summary-box">
+                <div class="summary-box-label">📌 Resumo para todos</div>
+                <p>O CoE Operacional não é o time de desenvolvimento de todas as áreas. Nosso papel é criar os padrões, garantir que sejam seguidos e distribuir capacidade. Se o CoE fizer tudo, vira gargalo. Se não fizer nada, a empresa acumula soluções frágeis e inseguras.</p>
+            </div>
+
+            <div class="two-col">
+                <div>
+                    <div class="col-label">✅ Dentro do escopo</div>
+                    <ul class="doc-list checks">
+                        <li>Definir e manter os padrões técnicos de IA da empresa</li>
+                        <li>Revisar arquitetura de projetos antes do deploy (ARB)</li>
+                        <li>Operar o gateway centralizado de LLM</li>
+                        <li>Criar e manter playbooks, blueprints e ADRs</li>
+                        <li>Conduzir projetos piloto de referência</li>
+                        <li>Capacitar times para construir com autonomia</li>
+                        <li>Monitorar soluções em produção que seguem os padrões</li>
+                        <li>Definir critérios de aceite técnico para projetos de IA</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="col-label">✗ Fora do escopo</div>
+                    <ul class="doc-list blocks">
+                        <li>Ser o time de desenvolvimento de todas as áreas</li>
+                        <li>Dar suporte técnico geral de TI ou resolver bugs de sistemas legados</li>
+                        <li>Tomar decisões de negócio — priorizamos tecnicamente, não estrategicamente</li>
+                        <li>Construir soluções que não passaram pelo funil de maturidade</li>
+                        <li>Operar sistemas que não seguem os padrões de observabilidade do CoE</li>
+                        <li>Aprovar projetos de IA sem critérios técnicos definidos</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="subsection" style="margin-top:32px;">
+                <div class="subsection-title">Como Evitamos Virar Gargalo</div>
+                <ul class="doc-list">
+                    <li><strong>Playbooks públicos:</strong> qualquer time pode consultar e seguir os padrões sem precisar acionar o CoE para cada dúvida.</li>
+                    <li><strong>Citizen Developers:</strong> times de negócio treinados para construir automações e agentes simples sob supervisão, sem depender do CoE para execução.</li>
+                    <li><strong>SLA de revisão:</strong> o ARB tem prazo definido para responder — revisões de baixo risco têm resposta em até 3 dias úteis.</li>
+                    <li><strong>Métricas de autonomia:</strong> medimos o sucesso do CoE pelo número de times que constroem com independência, não pelo número de projetos que passam por nós.</li>
+                </ul>
+            </div>
+        </section>
+
+        <nav class="page-nav" aria-label="Navegação entre páginas">
+            <a href="index.html" class="page-nav-card">
+                <div class="page-nav-dir">← Anterior</div>
+                <div class="page-nav-title">Início</div>
+            </a>
+            <a href="pilar-1-arquitetura.html" class="page-nav-card next">
+                <div class="page-nav-dir">Próximo →</div>
+                <div class="page-nav-title">Pilar 1 · Arquitetura</div>
+            </a>
+        </nav>
+    </main>
+</div>
+
+<footer id="footer">
+    <img src="assets/Assaí_Atacadista_logo_2024.svg.png" alt="Assaí Atacadista">
+    <span>CoE de Inteligência Artificial · Documentação Técnica</span>
+    <span>v1.0 · Maio 2026 · Confidencial</span>
+    <span class="footer-doc-links"><a href="coe-doc.html">Documento linear (coe-doc)</a><span class="footer-doc-sep" aria-hidden="true">·</span><a href="coe-operacional.html">Apresentação em slides</a></span>
+    <span class="footer-author">Criado por Claudio Ramirez - Arquiteto Tech Lead CoE Operacional</span>
+</footer>
+
+<script src="js/shared.js"></script>
+</body>
+</html>
