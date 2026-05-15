@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoE Tático — Documento Linear</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/shared.css">
+</head>
+<body style="background: white;">
+    <div style="max-width: 800px; margin: 40px auto; padding: 20px;">
+        <nav class="breadcrumb" style="margin-bottom: 40px;">
+            <a href="../index.html">Início</a>
+            <span class="breadcrumb-sep">›</span>
+            <a href="visao-geral.html">CoE Tático</a>
+            <span class="breadcrumb-sep">›</span>
+            <span>Documento Linear</span>
+        </nav>
+        
+        <h1 style="font-size: 2.5rem; margin-bottom: 20px;">Documento Técnico Linear — CoE Tático</h1>
+        <p style="font-size: 1.1rem; color: #666; margin-bottom: 40px;">Versão consolidada para leitura contínua e impressão.</p>
+
+        <h2 style="font-size: 1.8rem; margin-top: 40px; margin-bottom: 15px; border-bottom: 2px solid #eee; padding-bottom: 10px;">1. Missão Estratégica-Tática</h2>
+        <p style="margin-bottom: 20px; line-height: 1.8;">O CoE Tático responde à pergunta crítica: "Temos orçamento, dados e capacidade para fazer isso agora, e o retorno justifica o esforço?" Ele atua como o filtro entre a diretriz executiva global e a operação técnica no dia a dia. É aqui que ideias genéricas se transformam em Casos de Uso (Business Cases) concretos.</p>
+
+        <h2 style="font-size: 1.8rem; margin-top: 40px; margin-bottom: 15px; border-bottom: 2px solid #eee; padding-bottom: 10px;">2. Comitê de Decisão</h2>
+        <ul style="margin-bottom: 20px; line-height: 1.8; padding-left: 20px;">
+            <li><strong>Gerentes de Negócio (Sponsors):</strong> Donos do problema e do business case. Trazem a dor, as metas e respondem pelo sucesso da adoção da solução na ponta.</li>
+            <li><strong>Tech Lead / Arquiteto (CoE Op):</strong> Realiza a avaliação de viabilidade técnica. Determina se a infraestrutura e os dados estão maduros ou se o caso de uso precisa retornar à área de dados.</li>
+            <li><strong>PMO / Agile Coach de IA:</strong> Gerencia os ritos, facilita as reuniões quinzenais e consolida o backlog único de iniciativas do CoE.</li>
+            <li><strong>Representante de Finanças / FinOps:</strong> Avalia as premissas de ROI e aprova o budget inicial estimado para Provas de Conceito (PoCs) e produção.</li>
+        </ul>
+
+        <h2 style="font-size: 1.8rem; margin-top: 40px; margin-bottom: 15px; border-bottom: 2px solid #eee; padding-bottom: 10px;">3. Critérios Matemáticos de Priorização</h2>
+        <p style="margin-bottom: 20px; line-height: 1.8;">Não aprovamos projetos por intuição. O comitê utiliza quatro vetores centrais:</p>
+        <ul style="margin-bottom: 20px; line-height: 1.8; padding-left: 20px;">
+            <li><strong>Viabilidade de Dados:</strong> Onde os dados estão e qual a latência? Sem dados íntegros, não há IA.</li>
+            <li><strong>Alavanca de Valor (ROI):</strong> O projeto precisa se pagar reduzindo FTE ou aumentando conversões ao longo de seu ciclo.</li>
+            <li><strong>Complexidade Técnica:</strong> Soluções determinísticas (RAG) são priorizadas frente a soluções sistêmicas complexas (Agentes transacionais) nos primeiros meses.</li>
+            <li><strong>Time to Value:</strong> Favorecimento de Quick Wins para demonstrar valor rápido.</li>
+        </ul>
+
+        <h2 style="font-size: 1.8rem; margin-top: 40px; margin-bottom: 15px; border-bottom: 2px solid #eee; padding-bottom: 10px;">4. Processo de Ingestão e Funil</h2>
+        <p style="margin-bottom: 20px; line-height: 1.8;">As demandas passam por um funil rigoroso de 4 etapas:</p>
+        <ol style="margin-bottom: 20px; line-height: 1.8; padding-left: 20px;">
+            <li><strong>Ingestão (Intake):</strong> Preenchimento do Business Case pela área de negócio.</li>
+            <li><strong>Triagem (T-Shirt Sizing):</strong> Análise rápida de complexidade (P, M, G) pelo Tech Lead.</li>
+            <li><strong>Priorização (Comitê):</strong> Decisão sob demanda de Go, No-Go ou Backlog.</li>
+            <li><strong>Acompanhamento:</strong> Reunião regular para revisar custos vs ROI de aplicações já em produção.</li>
+        </ol>
+    </div>
+</body>
+</html>

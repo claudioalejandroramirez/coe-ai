@@ -1,0 +1,391 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="CoE Tático — Filtro de demandas, orçamento e viabilidade do Centro de Excelência em IA Assaí Atacadista">
+    <title>CoE Tático — AI CoE · Assaí Atacadista</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../css/shared.css">
+    <style>
+        .page-hero.tatico {
+            background: #1E3A8A; /* Azul escuro do CoE Tático */
+        }
+        .page-hero.tatico::after {
+            background: linear-gradient(to right, #3B82F6, #93C5FD);
+        }
+        .hero-eyebrow.tatico {
+            color: #93C5FD;
+        }
+        .hero-eyebrow.tatico::before {
+            background: #93C5FD;
+        }
+        .chip.tatico {
+            border-color: rgba(147, 197, 253, 0.3);
+            color: #BFDBFE;
+            background: rgba(147, 197, 253, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="progress"></div>
+
+    <nav id="topnav" role="navigation" aria-label="Navegação principal">
+        <div class="nav-inner">
+            <a href="../index.html" class="nav-logo" aria-label="Assaí Atacadista - CoE IA">
+                <img src="../assets/Assaí_Atacadista_logo_2024.svg.png" alt="Assaí Atacadista">
+                <span class="nav-logo-divider" aria-hidden="true"></span>
+                <span class="nav-logo-label"><strong>AI CoE</strong>Centro de Excelência</span>
+            </a>
+            <ul class="nav-links" role="list">
+                <li><a href="../index.html">← Início</a></li>
+                <li><a href="visao-geral.html" class="active">Visão Tática</a></li>
+                <li><a href="documento.html">Documento Linear</a></li>
+                <li><a href="apresentacao.html">Apresentação</a></li>
+            </ul>
+            <button id="nav-toggle" aria-label="Abrir menu"
+                aria-expanded="false"><span></span><span></span><span></span></button>
+        </div>
+    </nav>
+    <div id="nav-mobile" role="navigation" aria-label="Menu mobile">
+        <a href="../index.html">🏠 Início</a>
+        <a href="visao-geral.html" class="active">📊 Visão Tática</a>
+        <a href="documento.html">📄 Documento Linear</a>
+        <a href="apresentacao.html">🎬 Apresentação</a>
+    </div>
+
+    <header class="page-hero tatico">
+        <div class="hero-inner">
+            <div class="hero-eyebrow tatico">Nível 02</div>
+            <h1 class="hero-title">CoE <em>Tático</em></h1>
+            <p class="hero-subtitle">O filtro essencial entre a estratégia executiva e a implementação técnica. Avaliamos orçamento, capacidade do time e viabilidade de negócio antes de qualquer linha de código ser escrita.</p>
+            <div class="hero-chips">
+                <span class="chip tatico">📊 Gestão de Backlog</span>
+                <span class="chip tatico">💰 Orçamento & ROI</span>
+                <span class="chip tatico">⚖️ Viabilidade</span>
+                <span class="chip tatico">🎯 Priorização</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="page-body with-sidebar">
+        <aside class="sidebar" aria-label="Navegação da página">
+            <div class="sidebar-title">Nesta página</div>
+            <ul class="sidebar-nav">
+                <li><a href="#papel" class="active">🎯 Missão e Papel</a></li>
+                <li><a href="#criterios">⚖️ Critérios de Priorização</a></li>
+                <li><a href="#businesscase">📄 O Business Case</a></li>
+                <li><a href="#time">👥 Composição do Comitê</a></li>
+                <li><a href="#fluxo">🔄 Funil de Demandas</a></li>
+                <li><a href="#raci">⊞ Matriz RACI</a></li>
+                <li><a href="#rituais">📅 Rituais</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <nav class="breadcrumb" aria-label="Localização">
+                <a href="../index.html">Início</a>
+                <span class="breadcrumb-sep" aria-hidden="true">›</span>
+                <span>CoE Tático</span>
+            </nav>
+
+            <!-- MISSÃO E PAPEL -->
+            <section id="papel" class="doc-section">
+                <div class="section-label">Visão Geral</div>
+                <h2 class="section-title">Missão e Papel do CoE Tático</h2>
+                <p class="section-desc">Proteger a capacidade de execução garantindo que apenas demandas viáveis avancem</p>
+                <hr class="section-divider">
+
+                <div class="summary-box">
+                    <div class="summary-box-label">📌 Resumo para todos</div>
+                    <p>Enquanto o CoE Estratégico define a direção ("Para onde vamos?") e o CoE Operacional constrói a solução ("Como fazemos?"), o <strong>CoE Tático</strong> responde à pergunta crítica: <strong>"Temos orçamento, dados e capacidade para fazer isso agora, e o retorno justifica o esforço?"</strong></p>
+                </div>
+
+                <div class="cards cards-3">
+                    <div class="stat-card">
+                        <span class="stat-val">Filtro</span>
+                        <span class="stat-label">Viabilidade e Business Case</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-val">Orçamento</span>
+                        <span class="stat-label">Gestão de Custos e LLMs</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-val">Backlog</span>
+                        <span class="stat-label">Priorização Contínua</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CRITÉRIOS DE PRIORIZAÇÃO -->
+            <section id="criterios" class="doc-section">
+                <div class="section-label">Fundamentos Táticos</div>
+                <h2 class="section-title">Critérios de Priorização</h2>
+                <p class="section-desc">Como decidimos matematicamente o que vai para desenvolvimento</p>
+                <hr class="section-divider">
+
+                <div class="summary-box" style="background:#F0FDF4; border-color:#BBF7D0; border-left:4px solid #16A34A;">
+                    <div class="summary-box-label" style="color:#166534;">✅ A Fórmula do Sim</div>
+                    <p style="color:#14532D;">No CoE Tático não existe priorização por "feeling" ou cargo. Utilizamos a matriz <strong>Impacto × Viabilidade</strong>, descontando os custos estimados (FinOps) para obter um ranking claro do backlog.</p>
+                </div>
+
+                <div class="two-col">
+                    <div>
+                        <div class="col-label">1. Viabilidade de Dados</div>
+                        <p style="font-size: 0.9rem; color: var(--text); line-height: 1.6;">Onde os dados vivem? Qual a latência necessária? Os dados têm qualidade mínima para alimentar um LLM? Sem dados maduros, a iniciativa volta para a área solicitante como projeto de Engenharia de Dados, não de IA.</p>
+                    </div>
+                    <div>
+                        <div class="col-label">2. Alavanca de Valor (ROI)</div>
+                        <p style="font-size: 0.9rem; color: var(--text); line-height: 1.6;">O caso de uso aumenta receita, reduz custo operacional (FTE) ou mitiga riscos regulatórios? A projeção de economia deve superar os custos de infraestrutura e tokens no horizonte do projeto.</p>
+                    </div>
+                    <div>
+                        <div class="col-label">3. Risco de Execução e Complexidade</div>
+                        <p style="font-size: 0.9rem; color: var(--text); line-height: 1.6;">Projetos baseados em RAG simples passam rápido. Projetos que exigem Agentes Autônomos com poder de escrita em sistemas legados sofrem maior escrutínio de segurança e complexidade técnica.</p>
+                    </div>
+                    <div>
+                        <div class="col-label">4. Tempo até o Valor (Time to Value)</div>
+                        <p style="font-size: 0.9rem; color: var(--text); line-height: 1.6;">Privilegiamos "Quick Wins" para provar valor de forma contínua. Demandas longas para gerar o primeiro MVP são normalmente "fatiadas" em entregas menores pelo Arquiteto.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- O BUSINESS CASE -->
+            <section id="businesscase" class="doc-section">
+                <div class="section-label">Documentação Exigida</div>
+                <h2 class="section-title">O Modelo de Business Case de IA</h2>
+                <p class="section-desc">O que deve ser respondido para defender uma iniciativa no comitê</p>
+                <hr class="section-divider">
+
+                <div class="callout info">
+                    <div class="callout-label">ℹ️ A Regra de Ouro</div>
+                    Se o problema pode ser resolvido com uma query SQL, um dashboard ou uma automação simples (RPA/Regras Fixas), <strong>não é um caso para Inteligência Artificial</strong>. A IA deve ser usada para lidar com dados não estruturados, probabilidade e raciocínio contextual.
+                </div>
+
+                <div class="cards cards-2">
+                    <div class="card accent-blue">
+                        <span class="badge badge-blue">Contexto do Negócio</span>
+                        <div class="card-title" style="margin-top:10px;">O Problema</div>
+                        <div class="card-body">Qual processo manual está sendo substituído? Quantas horas são gastas hoje por mês? Qual a taxa de erro humana atual?</div>
+                    </div>
+                    <div class="card accent-red">
+                        <span class="badge badge-red">Dados e Conformidade</span>
+                        <div class="card-title" style="margin-top:10px;">Os Insumos</div>
+                        <div class="card-body">Quais fontes de dados serão consultadas (ex: SAP, Salesforce, PDFs)? Contém PII (Dados sensíveis de clientes/colaboradores)?</div>
+                    </div>
+                    <div class="card accent-green">
+                        <span class="badge badge-green">KPIs de Sucesso</span>
+                        <div class="card-title" style="margin-top:10px;">Como medimos a vitória</div>
+                        <div class="card-body">O que precisa acontecer para declarar o MVP um sucesso? Exemplo: Reduzir tempo de resposta de 24h para 1h, mantendo 90% de satisfação.</div>
+                    </div>
+                    <div class="card accent-gray">
+                        <span class="badge badge-gray">Sponsor e Governança</span>
+                        <div class="card-title" style="margin-top:10px;">A Liderança</div>
+                        <div class="card-body">Quem é o diretor executivo bancando o projeto? Quem validará o modelo de LLM antes da entrada em produção no teste beta?</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- COMPOSIÇÃO DO COMITÊ -->
+            <section id="time" class="doc-section">
+                <div class="section-label">O Comitê</div>
+                <h2 class="section-title">Quem participa do CoE Tático</h2>
+                <p class="section-desc">Uma mesa multidisciplinar composta por líderes de negócio, tecnologia e finanças</p>
+                <hr class="section-divider">
+
+                <div class="cards cards-2">
+                    <div class="team-card">
+                        <div class="team-icon">👔</div>
+                        <div>
+                            <div class="team-title">Gerentes de Negócio (Product Owners / Sponsors)</div>
+                            <div class="team-body">Trazem as demandas, justificam o valor de negócio (business case), estimam o ROI e representam as necessidades dos usuários finais. São os donos do problema.</div>
+                        </div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-icon">🏛️</div>
+                        <div>
+                            <div class="team-title">Tech Lead / Arquiteto do CoE Operacional</div>
+                            <div class="team-body">Avalia a viabilidade técnica inicial, disponibilidade de dados e encaixe nos padrões de arquitetura (Pilar 1). Traz o choque de realidade sobre esforço e complexidade.</div>
+                        </div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-icon">📊</div>
+                        <div>
+                            <div class="team-title">PMO / Agile Coach de IA</div>
+                            <div class="team-body">Facilita os ritos, gerencia o backlog unificado de demandas, cobra o preenchimento correto dos business cases e acompanha o avanço das iniciativas pelo funil de maturidade.</div>
+                        </div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-icon">💰</div>
+                        <div>
+                            <div class="team-title">Representante de Finanças / FinOps</div>
+                            <div class="team-body">Valida as projeções financeiras (ROI) e aprova o orçamento estimado para uso de APIs, infraestrutura e ferramentas necessárias para o projeto.</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FUNIL DE DEMANDAS -->
+            <section id="fluxo" class="doc-section">
+                <div class="section-label">Processo</div>
+                <h2 class="section-title">O Funil Tático de Avaliação</h2>
+                <p class="section-desc">Como uma ideia vira um projeto priorizado no backlog do CoE Operacional</p>
+                <hr class="section-divider">
+
+                <div class="funnel">
+                    <div class="funnel-step">
+                        <div class="funnel-num">①</div>
+                        <div class="funnel-content">
+                            <div class="funnel-title">Ingestão (Intake)</div>
+                            <div class="funnel-desc">A área de negócio submete uma ideia através de um formulário padrão. Requisito mínimo: problema claro e estimativa de impacto (redução de tempo, aumento de receita, etc).</div>
+                        </div>
+                        <div class="funnel-badge">Negócio</div>
+                    </div>
+                    <div class="funnel-step">
+                        <div class="funnel-num">②</div>
+                        <div class="funnel-content">
+                            <div class="funnel-title">Triagem Inicial (T-Shirt Sizing)</div>
+                            <div class="funnel-desc">O Arquiteto faz uma análise rápida (P, M, G) da complexidade técnica. FinOps analisa o custo estimado. PMO verifica alinhamento com os objetivos estratégicos.</div>
+                        </div>
+                        <div class="funnel-badge">CoE Tático</div>
+                    </div>
+                    <div class="funnel-step hl">
+                        <div class="funnel-num">③</div>
+                        <div class="funnel-content">
+                            <div class="funnel-title">Comitê de Priorização (Por Demanda)</div>
+                            <div class="funnel-desc">As demandas triadas são apresentadas e discutidas. Decisão colegiada: <strong>Aprovar para Discovery (CoE Operacional), Rejeitar, ou Manter em Backlog</strong> aguardando capacidade.</div>
+                        </div>
+                        <div class="funnel-badge">Decisão</div>
+                    </div>
+                    <div class="funnel-step">
+                        <div class="funnel-num">④</div>
+                        <div class="funnel-content">
+                            <div class="funnel-title">Acompanhamento de Resultados</div>
+                            <div class="funnel-desc">Projetos em produção reportam KPIs e custos reais vs. projetados de volta ao comitê Tático, retroalimentando as premissas de ROI para futuras aprovações.</div>
+                        </div>
+                        <div class="funnel-badge">Métricas</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- MATRIZ RACI -->
+            <section id="raci" class="doc-section">
+                <div class="section-label">Responsabilidades</div>
+                <h2 class="section-title">Matriz RACI do Nível Tático</h2>
+                <p class="section-desc">Clareza sobre aprovações e prestações de contas na governança tática</p>
+                <hr class="section-divider">
+
+                <ul class="raci-legend" aria-label="Legenda RACI">
+                    <li><code class="raci-r">R</code> Responsável (executa)</li>
+                    <li><code class="raci-a">A</code> Presta contas (aprova)</li>
+                    <li><code class="raci-c">C</code> Consultado</li>
+                    <li><code class="raci-i">I</code> Informado</li>
+                </ul>
+
+                <div class="table-wrap">
+                    <table class="doc-table raci-matrix" aria-label="Matriz RACI do CoE Tático">
+                        <thead>
+                            <tr>
+                                <th scope="col">Atividade / Decisão</th>
+                                <th scope="col">Gerente de Negócio</th>
+                                <th scope="col">PMO de IA</th>
+                                <th scope="col">Arquiteto (CoE Op)</th>
+                                <th scope="col">FinOps</th>
+                                <th scope="col">CoE Estratégico</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Elaboração do Business Case</td>
+                                <td class="raci-r">R</td>
+                                <td class="raci-c">C</td>
+                                <td class="raci-i">I</td>
+                                <td class="raci-c">C</td>
+                                <td class="raci-i">I</td>
+                            </tr>
+                            <tr>
+                                <td>Avaliação de Viabilidade Técnica e Dados</td>
+                                <td class="raci-i">I</td>
+                                <td class="raci-i">I</td>
+                                <td class="raci-a raci-r">A/R</td>
+                                <td class="raci-i">I</td>
+                                <td class="raci-i">I</td>
+                            </tr>
+                            <tr>
+                                <td>Aprovação de Budget do Projeto</td>
+                                <td class="raci-i">I</td>
+                                <td class="raci-i">I</td>
+                                <td class="raci-c">C</td>
+                                <td class="raci-a raci-r">A/R</td>
+                                <td class="raci-i">I</td>
+                            </tr>
+                            <tr>
+                                <td>Priorização no Backlog Unificado</td>
+                                <td class="raci-c">C</td>
+                                <td class="raci-a raci-r">A/R</td>
+                                <td class="raci-c">C</td>
+                                <td class="raci-c">C</td>
+                                <td class="raci-i">I</td>
+                            </tr>
+                            <tr>
+                                <td>Reporte de ROI (Pós-Produção)</td>
+                                <td class="raci-r">R</td>
+                                <td class="raci-a">A</td>
+                                <td class="raci-i">I</td>
+                                <td class="raci-c">C</td>
+                                <td class="raci-i">I</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- RITUAIS -->
+            <section id="rituais" class="doc-section">
+                <div class="section-label">Cadência</div>
+                <h2 class="section-title">Rituais do CoE Tático</h2>
+                <hr class="section-divider">
+
+                <div class="two-col">
+                    <div>
+                        <div class="col-label">Reunião de Priorização (Conforme Necessidade)</div>
+                        <ul class="doc-list checks">
+                            <li><strong>Duração:</strong> Flexível</li>
+                            <li><strong>Pauta:</strong> Apresentação de novas demandas (pitches rápidos), revisão de estimativas técnicas, decisão de go/no-go para a esteira do Operacional.</li>
+                            <li><strong>Saída:</strong> Backlog atualizado e priorizado.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="col-label">Revisão de Portfólio e Custos (Regular)</div>
+                        <ul class="doc-list checks">
+                            <li><strong>Duração:</strong> Flexível</li>
+                            <li><strong>Pauta:</strong> Análise do consumo de tokens/cloud das soluções em produção, acompanhamento de ROI dos projetos piloto, identificação de desvios.</li>
+                            <li><strong>Saída:</strong> Ajustes orçamentários, decisão de escalar, otimizar ou desligar soluções ativas.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+
+        </main>
+    </div>
+
+    <footer id="footer">
+        <img src="../assets/Assaí_Atacadista_logo_2024.svg.png" alt="Assaí Atacadista">
+        <span>AI CoE · Documentação Técnica</span>
+        <span>v1.0 · Maio 2026 · Confidencial</span>
+        <span class="footer-doc-links"><a href="documento.html">Documento Linear</a><span class="footer-doc-sep"
+                aria-hidden="true">·</span><a href="apresentacao.html">Apresentação Tática</a></span>
+        <span class="footer-author">Criado por Claudio Ramirez - Arquiteto Tech Lead CoE Operacional</span>
+    </footer>
+
+    <script src="../js/shared.js"></script>
+</body>
+
+</html>

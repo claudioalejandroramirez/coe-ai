@@ -1,0 +1,227 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoE Tático — Centro de Excelência em IA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../css/coe-operacional.css">
+    <style>
+        .nav-brand {
+            color: #93C5FD;
+        }
+        .s-hero {
+            background: #1E3A8A;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="progress"></div>
+
+    <nav id="nav">
+        <span class="nav-brand">CoE Tático · IA</span>
+        <div class="nav-dots">
+            <button class="nav-dot active" title="Slide 1"></button>
+            <button class="nav-dot" title="Slide 2"></button>
+            <button class="nav-dot" title="Slide 3"></button>
+            <button class="nav-dot" title="Slide 4"></button>
+            <button class="nav-dot" title="Slide 5"></button>
+        </div>
+        <span id="slide-counter">1 / 5</span>
+    </nav>
+
+    <div id="slides">
+
+        <!-- SLIDE 1: HERO -->
+        <section class="slide s-hero">
+            <div class="slide-inner">
+                <div class="eyebrow">Artificial Intelligence Center of Excellence</div>
+                <h1 class="hero-title">CoE <em>Tático</em><br>O filtro entre<br>estratégia e execução</h1>
+                <p class="hero-sub">O CoE Tático é a mesa de aprovação. Protegemos a capacidade de entrega garantindo que apenas projetos viáveis, com orçamento e ROI claro, cheguem à esteira de desenvolvimento.</p>
+                <div class="hero-chips">
+                    <span class="chip">📊 Gestão de Backlog</span>
+                    <span class="chip">💰 Orçamento & ROI</span>
+                    <span class="chip">⚖️ Viabilidade</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 2: O QUE É O COE TATICO -->
+        <section class="slide s-slate">
+            <div class="slide-inner">
+                <div class="eyebrow">Contexto</div>
+                <h2 class="slide-title">O que é o CoE Tático?</h2>
+                <p class="slide-lead">O guardião dos recursos e da priorização</p>
+                <div class="two-col">
+                    <div>
+                        <div class="col-label">Os três níveis do CoE</div>
+                        <div class="funnel">
+                            <div class="funnel-step">
+                                <span class="funnel-num">01</span>
+                                <span class="funnel-title">CoE Estratégico</span>
+                                <span class="funnel-desc">Prioridades · Processos · Roadmap</span>
+                            </div>
+                            <div class="funnel-step" style="border-left: 3px solid var(--red);">
+                                <span class="funnel-num">02</span>
+                                <span class="funnel-title" style="color:#fff;">CoE Tático</span>
+                                <span class="funnel-desc" style="color:var(--red);">Você está aqui</span>
+                            </div>
+                            <div class="funnel-step">
+                                <span class="funnel-num">03</span>
+                                <span class="funnel-title">CoE Operacional</span>
+                                <span class="funnel-desc">Padrões · Construção · Operação</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col-label">Nossa missão</div>
+                        <ul class="check-list">
+                            <li>Avaliar <strong>Business Cases</strong> submetidos pelas áreas</li>
+                            <li>Aprovar orçamento (APIs, Cloud, Ferramentas)</li>
+                            <li>Garantir alinhamento com a estratégia corporativa</li>
+                            <li>Priorizar o Backlog do CoE Operacional</li>
+                            <li>Acompanhar o ROI de projetos em produção</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 3: O COMITÊ -->
+        <section class="slide s-dark">
+            <div class="slide-inner">
+                <div class="eyebrow">Estrutura</div>
+                <h2 class="slide-title">Composição do Comitê Tático</h2>
+                <p class="slide-lead">Uma mesa multidisciplinar para decisões colegiadas</p>
+                <div class="cards cards-2">
+                    <div class="pillar">
+                        <div class="pillar-num">👔 Negócio</div>
+                        <div class="pillar-title">Product Owners / Sponsors</div>
+                        <div class="pillar-body">Trazem as demandas, justificam o valor de negócio (business case), estimam o ROI e representam as necessidades dos usuários finais. São os donos do problema.</div>
+                    </div>
+                    <div class="pillar">
+                        <div class="pillar-num">🏛️ Arquitetura</div>
+                        <div class="pillar-title">Tech Lead CoE Operacional</div>
+                        <div class="pillar-body">Avalia a viabilidade técnica inicial, disponibilidade de dados e encaixe nos padrões de arquitetura. Traz o choque de realidade sobre esforço.</div>
+                    </div>
+                    <div class="pillar">
+                        <div class="pillar-num">📊 Gestão</div>
+                        <div class="pillar-title">PMO de IA</div>
+                        <div class="pillar-body">Facilita os ritos, gerencia o backlog unificado de demandas, cobra o preenchimento correto dos business cases e acompanha o funil de maturidade.</div>
+                    </div>
+                    <div class="pillar">
+                        <div class="pillar-num">💰 Finanças</div>
+                        <div class="pillar-title">FinOps / Representante Financeiro</div>
+                        <div class="pillar-body">Valida as projeções financeiras (ROI) e aprova o orçamento estimado para uso de APIs, infraestrutura e ferramentas necessárias para o projeto.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 4: FUNIL -->
+        <section class="slide s-blue">
+            <div class="slide-inner">
+                <div class="eyebrow">Processo</div>
+                <h2 class="slide-title">O Funil de Priorização</h2>
+                <p class="slide-lead">Como ideias viram projetos na esteira</p>
+                <div class="funnel">
+                    <div class="funnel-step">
+                        <span class="funnel-num">①</span>
+                        <div>
+                            <div class="funnel-title">Ingestão (Intake)</div>
+                            <div style="font-size:0.78rem;color:rgba(255,255,255,0.45);margin-top:3px;">Problema claro e estimativa de impacto</div>
+                        </div>
+                        <span class="funnel-desc">Negócio</span>
+                    </div>
+                    <div class="funnel-step">
+                        <span class="funnel-num">②</span>
+                        <div>
+                            <div class="funnel-title">Triagem (T-Shirt Sizing)</div>
+                            <div style="font-size:0.78rem;color:rgba(255,255,255,0.45);margin-top:3px;">Esforço técnico (P, M, G) e custo estimado</div>
+                        </div>
+                        <span class="funnel-desc">CoE</span>
+                    </div>
+                    <div class="funnel-step" style="border-left: 3px solid var(--red);">
+                        <span class="funnel-num">③</span>
+                        <div>
+                            <div class="funnel-title">Comitê (Go / No-Go)</div>
+                            <div style="font-size:0.78rem;color:rgba(255,255,255,0.45);margin-top:3px;">Aprovar, rejeitar ou aguardar capacidade</div>
+                        </div>
+                        <span class="funnel-desc" style="color:var(--red);">Decisão colegiada</span>
+                    </div>
+                    <div class="funnel-step">
+                        <span class="funnel-num">④</span>
+                        <div>
+                            <div class="funnel-title">Discovery & Execução</div>
+                            <div style="font-size:0.78rem;color:rgba(255,255,255,0.45);margin-top:3px;">Projeto entra na fila do Operacional</div>
+                        </div>
+                        <span class="funnel-desc">CoE Operacional</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 5: FECHAMENTO -->
+        <section class="slide s-red">
+            <div class="slide-inner">
+                <div class="eyebrow">Resumo</div>
+                <h2 class="section-title">O CoE Tático<br>em uma frase</h2>
+                <p class="section-desc" style="margin-bottom:28px;">Garantimos que a empresa invista tempo e dinheiro apenas em projetos de IA que tenham viabilidade técnica comprovada, orçamento aprovado e retorno de negócio claro.</p>
+                <div class="closing-grid">
+                    <div class="closing-item">
+                        <strong>📊 Gestão de Backlog</strong>
+                        <span>Um funil unificado para toda a empresa</span>
+                    </div>
+                    <div class="closing-item">
+                        <strong>💰 Orçamento</strong>
+                        <span>Controle de gastos antes do desenvolvimento começar</span>
+                    </div>
+                    <div class="closing-item">
+                        <strong>🎯 Priorização</strong>
+                        <span>Foco no que traz mais valor com menor esforço</span>
+                    </div>
+                    <div class="closing-item">
+                        <strong>⚖️ Balanceamento</strong>
+                        <span>Proteção da capacidade do CoE Operacional</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div><!-- #slides -->
+
+    <footer id="coe-credit">
+        <div class="coe-credit-links">
+            <a href="visao-geral.html">Site em páginas</a><span aria-hidden="true"> · </span><a href="../index.html">Início</a>
+        </div>
+        <div class="coe-credit-author">Criado por Claudio Ramirez - Arquiteto Tech Lead CoE Operacional</div>
+    </footer>
+
+    <div id="nav-arrows">
+        <button class="arrow-btn" id="btn-up">↑</button>
+        <button class="arrow-btn" id="btn-down">↓</button>
+    </div>
+
+    <script src="../js/coe-operacional.js"></script>
+    <script>
+        // Adjust the JS to only use 5 dots
+        document.addEventListener('DOMContentLoaded', () => {
+            const dots = document.querySelectorAll('.nav-dot');
+            const totalSlides = dots.length; // 5
+            const slideCounter = document.getElementById('slide-counter');
+            
+            // The existing coe-operacional.js will handle the core logic, 
+            // we just need to ensure the counter updates correctly if it expects 18.
+            // But since coe-operacional.js counts the elements dynamically, it should work perfectly.
+        });
+    </script>
+</body>
+
+</html>
