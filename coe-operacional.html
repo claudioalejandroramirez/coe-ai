@@ -1,583 +1,666 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CoE Operacional — Centro de Excelência em IA</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="css/coe-operacional.css">
 </head>
+
 <body>
 
-<div id="progress"></div>
+    <div id="progress"></div>
 
-<nav id="nav">
-    <span class="nav-brand">CoE Operacional · IA</span>
-    <div class="nav-dots">
-        <button class="nav-dot active" title="Slide 1"></button>
-        <button class="nav-dot" title="Slide 2"></button>
-        <button class="nav-dot" title="Slide 3"></button>
-        <button class="nav-dot" title="Slide 4"></button>
-        <button class="nav-dot" title="Slide 5"></button>
-        <button class="nav-dot" title="Slide 6"></button>
-        <button class="nav-dot" title="Slide 7"></button>
-        <button class="nav-dot" title="Slide 8"></button>
-        <button class="nav-dot" title="Slide 9"></button>
-        <button class="nav-dot" title="Slide 10"></button>
-        <button class="nav-dot" title="Slide 11"></button>
-        <button class="nav-dot" title="Slide 12"></button>
-        <button class="nav-dot" title="Slide 13"></button>
-        <button class="nav-dot" title="Slide 14"></button>
-        <button class="nav-dot" title="Slide 15"></button>
-        <button class="nav-dot" title="Slide 16"></button>
-        <button class="nav-dot" title="Slide 17"></button>
-        <button class="nav-dot" title="Slide 18"></button>
+    <nav id="nav">
+        <span class="nav-brand">CoE Operacional · IA</span>
+        <div class="nav-dots">
+            <button class="nav-dot active" title="Slide 1"></button>
+            <button class="nav-dot" title="Slide 2"></button>
+            <button class="nav-dot" title="Slide 3"></button>
+            <button class="nav-dot" title="Slide 4"></button>
+            <button class="nav-dot" title="Slide 5"></button>
+            <button class="nav-dot" title="Slide 6"></button>
+            <button class="nav-dot" title="Slide 7"></button>
+            <button class="nav-dot" title="Slide 8"></button>
+            <button class="nav-dot" title="Slide 9"></button>
+            <button class="nav-dot" title="Slide 10"></button>
+            <button class="nav-dot" title="Slide 11"></button>
+            <button class="nav-dot" title="Slide 12"></button>
+            <button class="nav-dot" title="Slide 13"></button>
+            <button class="nav-dot" title="Slide 14"></button>
+            <button class="nav-dot" title="Slide 15"></button>
+            <button class="nav-dot" title="Slide 16"></button>
+            <button class="nav-dot" title="Slide 17"></button>
+            <button class="nav-dot" title="Slide 18"></button>
+        </div>
+        <span id="slide-counter">1 / 18</span>
+    </nav>
+
+    <div id="slides">
+
+        <!-- SLIDE 1: HERO -->
+        <section class="slide s-hero">
+            <div class="slide-inner">
+                <div class="eyebrow">Centro de Excelência em Inteligência Artificial</div>
+                <h1 class="hero-title">CoE <em>Operacional</em><br>Como a IA sai<br>do papel e vira produto</h1>
+                <p class="hero-sub">O CoE Operacional é onde a visão estratégica se transforma em soluções reais,
+                    escaláveis e sustentáveis. Aqui definimos como construir, operar e evoluir IA na empresa.</p>
+                <div class="hero-chips">
+                    <span class="chip">🏗️ Arquitetura de Referência</span>
+                    <span class="chip">🛡️ Governança Técnica</span>
+                    <span class="chip">⚙️ LLMOps</span>
+                    <span class="chip">🚀 Enablement</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 2: O QUE É O COE OPERACIONAL -->
+        <section class="slide s-slate">
+            <div class="slide-inner">
+                <div class="eyebrow">Contexto</div>
+                <h2 class="slide-title">O que é o CoE Operacional?</h2>
+                <p class="slide-lead">A camada técnica que conecta estratégia com execução</p>
+                <div class="two-col">
+                    <div>
+                        <div class="col-label">Os três níveis do CoE</div>
+                        <div class="funnel">
+                            <div class="funnel-step">
+                                <span class="funnel-num">01</span>
+                                <span class="funnel-title">CoE Estratégico</span>
+                                <span class="funnel-desc">Prioridades · Processos · Roadmap</span>
+                            </div>
+                            <div class="funnel-step">
+                                <span class="funnel-num">02</span>
+                                <span class="funnel-title">CoE Tático</span>
+                                <span class="funnel-desc">Orçamento · Time · Viabilidade</span>
+                            </div>
+                            <div class="funnel-step" style="border-left: 3px solid var(--red);">
+                                <span class="funnel-num">03</span>
+                                <span class="funnel-title" style="color:#fff;">CoE Operacional</span>
+                                <span class="funnel-desc" style="color:var(--red);">Você está aqui</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col-label">Nossa missão</div>
+                        <ul class="check-list">
+                            <li>Definir <strong>como</strong> a empresa constrói soluções de IA</li>
+                            <li>Garantir que soluções sejam seguras, observáveis e escaláveis</li>
+                            <li>Criar padrões reutilizáveis — não resolver caso a caso</li>
+                            <li>Distribuir capacidade técnica para todos os times</li>
+                            <li>Responder a pergunta: <em>"como isso vai ser construído e sustentado?"</em></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 3: OS 4 PILARES -->
+        <section class="slide s-dark">
+            <div class="slide-inner">
+                <div class="eyebrow">Estrutura</div>
+                <h2 class="slide-title">4 Pilares de Responsabilidade</h2>
+                <p class="slide-lead">O fio que conecta os pilares é sequencial — cada um sustenta o próximo</p>
+                <div class="cards cards-4">
+                    <div class="card">
+                        <div class="card-icon">🏗️</div>
+                        <div class="card-title">Arquitetura de Referência</div>
+                        <div class="card-body">Padrões reutilizáveis para todas as soluções de IA da empresa</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🛡️</div>
+                        <div class="card-title">Governança Técnica</div>
+                        <div class="card-body">Processos que garantem qualidade antes de ir para produção</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">⚙️</div>
+                        <div class="card-title">Integração & LLMOps</div>
+                        <div class="card-body">Observabilidade, custo e operação contínua em escala</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🚀</div>
+                        <div class="card-title">Enablement dos Times</div>
+                        <div class="card-body">Multiplicar capacidade — não fazer tudo sozinho</div>
+                    </div>
+                </div>
+                <div class="highlight" style="margin-top:20px;">
+                    CoEs que pulam o Pilar 3 acumulam PoCs que não sobrevivem ao contato com produção. CoEs que só fazem
+                    o Pilar 4 viram academia sem produto.
+                </div>
+            </div>
+        </section>
+
+
+        <!-- SLIDE 4: PILAR 1 - ARQUITETURA -->
+        <section class="slide s-blue">
+            <div class="slide-inner">
+                <span class="section-num">1</span>
+                <div class="eyebrow">Pilar 1</div>
+                <h2 class="section-title">Arquitetura<br>de Referência</h2>
+                <p class="section-desc">Não resolvemos um projeto. Criamos o molde que todos os projetos seguem —
+                    padrões documentados, versionados e acessíveis a todos os times.</p>
+                <div class="stats">
+                    <div><span class="stat-val">ADR</span><span class="stat-label">Architecture Decision Records</span>
+                    </div>
+                    <div><span class="stat-val">4</span><span class="stat-label">Padrões de solução críticos</span>
+                    </div>
+                    <div><span class="stat-val">0</span><span class="stat-label">Decisões na cabeça de alguém</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 5: PILAR 1 - DETALHES -->
+        <section class="slide s-dark">
+            <div class="slide-inner">
+                <div class="eyebrow">Pilar 1 · Arquitetura de Referência</div>
+                <h2 class="slide-title">O que definimos e documentamos</h2>
+                <p class="slide-lead">Decisões que não podem ficar na cabeça de ninguém</p>
+                <div class="cards cards-2">
+                    <div class="pillar">
+                        <div class="pillar-num">Stack de IA</div>
+                        <div class="pillar-title">Matriz de decisão de tecnologia</div>
+                        <div class="pillar-body">Quando usar GPT-4o vs Claude vs modelo open-source. Quando RAG é
+                            suficiente vs fine-tuning. Quando agente autônomo vs fluxo determinístico. Tudo em ADR
+                            escrito e versionado.</div>
+                    </div>
+                    <div class="pillar">
+                        <div class="pillar-num">Padrões de Solução</div>
+                        <div class="pillar-title">Blueprints reutilizáveis</div>
+                        <div class="pillar-body">Padrão RAG corporativo (chunking, embedding, vector DB, permissões).
+                            Padrão de agente (orquestrador, estado, ferramentas). Padrão de prompt management. Gateway
+                            de LLM centralizado.</div>
+                    </div>
+                    <div class="pillar">
+                        <div class="pillar-num">Segurança de Dados</div>
+                        <div class="pillar-title">Classificação × modelo permitido</div>
+                        <div class="pillar-body">Dado público → API externa. Dado confidencial → modelo self-hosted ou
+                            DPA assinado. Dado com PII → anonimização obrigatória antes de qualquer LLM. Alinhado com
+                            LGPD.</div>
+                    </div>
+                    <div class="pillar">
+                        <div class="pillar-num">Fronteiras de Aprovação</div>
+                        <div class="pillar-title">O que pode ser construído</div>
+                        <div class="pillar-body">Lista viva: aprovado por padrão / requer revisão de arquitetura /
+                            proibido sem aprovação do CoE Estratégico. Critério baseado em impacto e autonomia do
+                            sistema.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 6: PILAR 2 - GOVERNANÇA -->
+        <section class="slide s-red">
+            <div class="slide-inner">
+                <span class="section-num">2</span>
+                <div class="eyebrow">Pilar 2</div>
+                <h2 class="section-title">Governança<br>Técnica</h2>
+                <p class="section-desc">Governança sem dentes não é governança. Criamos processos que de fato bloqueiam
+                    soluções ruins de chegarem em produção.</p>
+                <div class="stats">
+                    <div><span class="stat-val">ARB</span><span class="stat-label">Architecture Review Board</span>
+                    </div>
+                    <div><span class="stat-val">2×2</span><span class="stat-label">Matriz de risco de IA</span></div>
+                    <div><span class="stat-val">100%</span><span class="stat-label">Projetos com model card</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 7: PILAR 2 - DETALHES -->
+        <section class="slide s-slate">
+            <div class="slide-inner">
+                <div class="eyebrow">Pilar 2 · Governança Técnica</div>
+                <h2 class="slide-title">Processos que garantem qualidade</h2>
+                <p class="slide-lead">Checklist técnico obrigatório antes de qualquer deploy</p>
+                <div class="two-col">
+                    <div>
+                        <div class="col-label">Architecture Review Board (ARB)</div>
+                        <ul class="check-list">
+                            <li>A solução tem fallback se o modelo alucinar?</li>
+                            <li>Como o sistema detecta que a resposta está errada?</li>
+                            <li>Existe logging suficiente para debugar um incidente?</li>
+                            <li>Foi testado com adversarial inputs (prompt injection)?</li>
+                            <li>O custo projetado por mês foi calculado e aprovado?</li>
+                            <li>Existe plano de rollback documentado?</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="col-label">Critérios de Aceite Técnico para IA</div>
+                        <ul class="check-list">
+                            <li>Taxa de alucinação abaixo de X% (medida por avaliador automático)</li>
+                            <li>Latência P95 abaixo de Y segundos</li>
+                            <li>Custo por interação abaixo de Z centavos</li>
+                            <li>Faithfulness do RAG acima de W% (LLM-as-judge)</li>
+                            <li>Model card preenchido com limitações e responsável técnico</li>
+                            <li>Matriz de risco: impacto do erro × autonomia do sistema</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- SLIDE 8: PILAR 3 - LLMOPS -->
+        <section class="slide s-blue">
+            <div class="slide-inner">
+                <span class="section-num">3</span>
+                <div class="eyebrow">Pilar 3</div>
+                <h2 class="section-title">Integração<br>& LLMOps</h2>
+                <p class="section-desc">O pilar mais subestimado. A maioria dos CoEs sabe fazer PoC mas não sabe operar
+                    IA em produção. Aqui garantimos que as soluções sejam observáveis, mensuráveis e operáveis.</p>
+                <div class="stats">
+                    <div><span class="stat-val">1</span><span class="stat-label">Gateway centralizado de LLM</span>
+                    </div>
+                    <div><span class="stat-val">∞</span><span class="stat-label">PoCs que morreram sem isso</span></div>
+                    <div><span class="stat-val">$</span><span class="stat-label">Custo como disciplina de eng.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 9: PILAR 3 - DETALHES -->
+        <section class="slide s-dark">
+            <div class="slide-inner">
+                <div class="eyebrow">Pilar 3 · LLMOps</div>
+                <h2 class="slide-title">Operação de IA em escala</h2>
+                <p class="slide-lead">Infraestrutura que sustenta produção — não só demos</p>
+                <div class="cards cards-2">
+                    <div class="pillar">
+                        <div class="pillar-num">Gateway de LLM</div>
+                        <div class="pillar-title">Ponto central de todas as chamadas</div>
+                        <div class="pillar-body">Roteamento inteligente entre providers. Fallback automático. Rate
+                            limiting por projeto. Logging centralizado. Cache semântico para reduzir custo e latência.
+                        </div>
+                    </div>
+                    <div class="pillar">
+                        <div class="pillar-num">Observabilidade</div>
+                        <div class="pillar-title">Métricas que importam em IA</div>
+                        <div class="pillar-body">Latência por etapa (embedding, retrieval, geração). Custo por
+                            sessão/usuário/feature. Qualidade de retrieval (MRR, NDCG). Feedback implícito e explícito.
+                            Drift de comportamento.</div>
+                    </div>
+                    <div class="pillar">
+                        <div class="pillar-num">Pipeline de Dados</div>
+                        <div class="pillar-title">RAG é tão bom quanto seus dados</div>
+                        <div class="pillar-body">Ingestão de fontes corporativas. Chunking strategy com preservação
+                            semântica. Metadata enrichment com permissões. Reindexação atômica quando documentos mudam.
+                        </div>
+                    </div>
+                    <div class="pillar">
+                        <div class="pillar-num">Gestão de Custos</div>
+                        <div class="pillar-title">Custo é responsabilidade de arquitetura</div>
+                        <div class="pillar-body">Orçamento por projeto com alertas. Seleção de modelo por complexidade
+                            da tarefa. Batch processing para o que não é tempo real (50% mais barato). Inventário de
+                            versões de modelos.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 10: PILAR 4 - ENABLEMENT -->
+        <section class="slide s-red">
+            <div class="slide-inner">
+                <span class="section-num">4</span>
+                <div class="eyebrow">Pilar 4</div>
+                <h2 class="section-title">Enablement<br>dos Times</h2>
+                <p class="section-desc">Nosso maior multiplicador de impacto. Um CoE que não distribui capacidade vira
+                    gargalo. Nosso objetivo é que os times construam com qualidade sem depender de nós para cada
+                    projeto.</p>
+                <div class="stats">
+                    <div><span class="stat-val">×N</span><span class="stat-label">Capacidade multiplicada</span></div>
+                    <div><span class="stat-val">4</span><span class="stat-label">Fases do funil de maturidade</span>
+                    </div>
+                    <div><span class="stat-val">0</span><span class="stat-label">PoCs sem critério de avanço</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 11: PILAR 4 - DETALHES -->
+        <section class="slide s-slate">
+            <div class="slide-inner">
+                <div class="eyebrow">Pilar 4 · Enablement</div>
+                <h2 class="slide-title">Funil de Maturidade de IA</h2>
+                <p class="slide-lead">Critérios claros para cada fase — não "o exec achou bonito na demo"</p>
+                <div class="funnel">
+                    <div class="funnel-step">
+                        <span class="funnel-num">01</span>
+                        <div>
+                            <div class="funnel-title">Exploração · 2–4 semanas</div>
+                            <div style="font-size:0.78rem;color:rgba(255,255,255,0.45);margin-top:3px;">Vale a pena
+                                tecnicamente? Existe dado suficiente? O problema está bem definido?</div>
+                        </div>
+                        <span class="funnel-desc">Entrega: ADR + avaliação técnica</span>
+                    </div>
+                    <div class="funnel-step">
+                        <span class="funnel-num">02</span>
+                        <div>
+                            <div class="funnel-title">PoC · 4–8 semanas</div>
+                            <div style="font-size:0.78rem;color:rgba(255,255,255,0.45);margin-top:3px;">Funciona no
+                                cenário real? Quais são as limitações? Qual o custo de produção?</div>
+                        </div>
+                        <span class="funnel-desc">Entrega: demo + métricas + estimativa</span>
+                    </div>
+                    <div class="funnel-step">
+                        <span class="funnel-num">03</span>
+                        <div>
+                            <div class="funnel-title">Piloto · 8–16 semanas</div>
+                            <div style="font-size:0.78rem;color:rgba(255,255,255,0.45);margin-top:3px;">Funciona com
+                                usuários reais? O ROI está se confirmando?</div>
+                        </div>
+                        <span class="funnel-desc">Entrega: produto com observabilidade</span>
+                    </div>
+                    <div class="funnel-step" style="border-left:3px solid var(--red);">
+                        <span class="funnel-num">04</span>
+                        <div>
+                            <div class="funnel-title">Produção</div>
+                            <div style="font-size:0.78rem;color:rgba(255,255,255,0.45);margin-top:3px;">Sustentável,
+                                operado, monitorado, com dono de negócio comprometido</div>
+                        </div>
+                        <span class="funnel-desc" style="color:var(--red);">Destino final</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- SLIDE 12: PLAYBOOKS E EVALS -->
+        <section class="slide s-dark">
+            <div class="slide-inner">
+                <div class="eyebrow">Pilar 4 · Enablement</div>
+                <h2 class="slide-title">Playbooks, Evals e Comunidade</h2>
+                <p class="slide-lead">As ferramentas que distribuem capacidade técnica para toda a empresa</p>
+                <div class="cards cards-3">
+                    <div class="card">
+                        <div class="card-icon">📋</div>
+                        <div class="card-title">Playbooks de Desenvolvimento</div>
+                        <div class="card-body">Documentos vivos: como fazer discovery técnico, montar ambiente,
+                            versionar prompts, avaliar modelos, estruturar código testável e fazer deploy seguindo os
+                            padrões do CoE.</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🧪</div>
+                        <div class="card-title">Evals como Cultura</div>
+                        <div class="card-body">Golden datasets por domínio. LLM-as-judge para avaliação em escala.
+                            Processo de avaliação humana. Regra: nenhum projeto vai para produção sem baseline medida.
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🤝</div>
+                        <div class="card-title">Comunidade Interna</div>
+                        <div class="card-body">Canal com padrão de postagem (problema → solução → aprendizado). Show
+                            &amp; tell quinzenal. Biblioteca de prompts reutilizáveis. Registro de experimentos que
+                            falharam — tão valioso quanto os que funcionaram.</div>
+                    </div>
+                </div>
+                <div class="highlight" style="margin-top:18px;">
+                    <strong>Capacitação por perfil:</strong> Dev sem experiência em IA → fundamentos e integração
+                    production-grade. Analista de dados → pipelines com LLM. Arquiteto de outros times → trade-offs e
+                    como o CoE apoia sem criar dependência.
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 13: COMPOSIÇÃO DO TIME -->
+        <section class="slide s-slate">
+            <div class="slide-inner">
+                <div class="eyebrow">Time</div>
+                <h2 class="slide-title">Composição do CoE Operacional</h2>
+                <p class="slide-lead">Os perfis que tornam os 4 pilares possíveis</p>
+                <div class="cards cards-3">
+                    <div class="card">
+                        <div class="card-icon">🏛️</div>
+                        <div class="card-title">Arquiteto de Soluções</div>
+                        <div class="card-body">Define padrões, lidera o ARB, toma decisões de stack, é a ponte entre
+                            negócio e técnica. Responsável pelos Pilares 1 e 2.</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🤖</div>
+                        <div class="card-title">Engenheiro de ML / NLP</div>
+                        <div class="card-body">Constrói e avalia modelos, implementa pipelines de RAG e fine-tuning,
+                            define métricas de qualidade e conduz evals.</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🗄️</div>
+                        <div class="card-title">Especialista em Dados</div>
+                        <div class="card-body">Garante a qualidade dos dados que alimentam os modelos. Cuida de
+                            ingestão, chunking, metadata e reindexação.</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">⚡</div>
+                        <div class="card-title">Especialista em Automação</div>
+                        <div class="card-body">RPA, agentes e BPM. Constrói os fluxos inteligentes e suporta o programa
+                            de Citizen Developers nas áreas de negócio.</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">☁️</div>
+                        <div class="card-title">Cloud & Infraestrutura</div>
+                        <div class="card-body">Provisiona e mantém o ambiente de IA. Garante escalabilidade,
+                            disponibilidade e controle de custo de infraestrutura.</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🔒</div>
+                        <div class="card-title">DevSecOps</div>
+                        <div class="card-body">Segurança no pipeline de desenvolvimento. Garante que políticas de dados,
+                            LGPD e controles de acesso sejam aplicados em todo o ciclo.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 14: FLUXO DE TRABALHO -->
+        <section class="slide s-dark">
+            <div class="slide-inner">
+                <div class="eyebrow">Fluxo</div>
+                <h2 class="slide-title">Como uma demanda chega e sai do CoE</h2>
+                <p class="slide-lead">Do pedido do negócio ao produto em produção — quem faz o quê</p>
+                <div class="funnel">
+                    <div class="funnel-step">
+                        <span class="funnel-num">①</span>
+                        <div>
+                            <div class="funnel-title">CoE Estratégico define prioridades</div>
+                            <div style="font-size:0.78rem;color:rgba(255,255,255,0.45);margin-top:3px;">O que construir
+                                e em que ordem</div>
+                        </div>
+                        <span class="funnel-desc">Estratégia</span>
+                    </div>
+                    <div class="funnel-step">
+                        <span class="funnel-num">②</span>
+                        <div>
+                            <div class="funnel-title">CoE Tático filtra demandas</div>
+                            <div style="font-size:0.78rem;color:rgba(255,255,255,0.45);margin-top:3px;">Orçamento, time
+                                e viabilidade de negócio</div>
+                        </div>
+                        <span class="funnel-desc">Filtro</span>
+                    </div>
+                    <div class="funnel-step">
+                        <span class="funnel-num">③</span>
+                        <div>
+                            <div class="funnel-title">CoE Operacional avalia e implementa</div>
+                            <div style="font-size:0.78rem;color:rgba(255,255,255,0.45);margin-top:3px;">Triagem técnica,
+                                padrões, ARB e deploy</div>
+                        </div>
+                        <span class="funnel-desc">Operação</span>
+                    </div>
+                    <div class="funnel-step">
+                        <span class="funnel-num">④</span>
+                        <div>
+                            <div class="funnel-title">Métricas alimentam o próximo ciclo</div>
+                            <div style="font-size:0.78rem;color:rgba(255,255,255,0.45);margin-top:3px;">Reportadas ao
+                                CoE Tático e ao CoE Estratégico</div>
+                        </div>
+                        <span class="funnel-desc">Feedback</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 15: O QUE O COE NÃO FAZ -->
+        <section class="slide s-red">
+            <div class="slide-inner">
+                <div class="eyebrow">Escopo</div>
+                <h2 class="slide-title">O que o CoE Operacional<br><em
+                        style="font-style:normal;color:rgba(255,255,255,0.5);">não</em> faz</h2>
+                <p class="slide-lead">Delimitar o escopo é tão importante quanto definir responsabilidades</p>
+                <div class="two-col">
+                    <div>
+                        <div class="col-label">Fora do nosso escopo</div>
+                        <ul class="check-list">
+                            <li>Ser o time de desenvolvimento de todas as áreas — cada área tem seu time</li>
+                            <li>Dar suporte técnico geral de TI ou resolver bugs de sistemas legados</li>
+                            <li>Tomar decisões de negócio — priorizamos tecnicamente, não estrategicamente</li>
+                            <li>Construir soluções que não passaram pelo funil de maturidade</li>
+                            <li>Operar sistemas que não seguem os padrões de observabilidade do CoE</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="col-label">Como evitamos virar gargalo</div>
+                        <ul class="check-list">
+                            <li>Playbooks permitem que times construam sem depender de nós</li>
+                            <li>Programa de Citizen Developers distribui capacidade para o negócio</li>
+                            <li>Revisões de arquitetura têm SLA definido — não bloqueamos indefinidamente</li>
+                            <li>Padrões são públicos e documentados — qualquer time pode consultar</li>
+                            <li>Nosso sucesso é medido por autonomia dos times, não por centralização</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 16: MÉTRICAS DE SUCESSO -->
+        <section class="slide s-slate">
+            <div class="slide-inner">
+                <div class="eyebrow">Resultados</div>
+                <h2 class="slide-title">Como medimos o sucesso do CoE</h2>
+                <p class="slide-lead">Sem métricas definidas, o CoE não consegue demonstrar valor</p>
+                <div class="cards cards-2">
+                    <div class="card">
+                        <div class="card-icon">🏭</div>
+                        <div class="card-title">Produção</div>
+                        <div class="card-body">Número de soluções de IA em produção. Taxa de conversão PoC → produção.
+                            Tempo médio de PoC para produção. Uptime e SLA dos sistemas em operação.</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">📐</div>
+                        <div class="card-title">Adoção de Padrões</div>
+                        <div class="card-body">% de projetos usando blueprints do CoE. % de projetos com observabilidade
+                            ativa. % de projetos com model card preenchido. Cobertura de evals nos projetos ativos.
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">💰</div>
+                        <div class="card-title">Eficiência</div>
+                        <div class="card-body">Custo médio por interação por projeto. Redução de custo via cache
+                            semântico e batch. ROI realizado vs estimado nos business cases. Custo de infraestrutura por
+                            solução.</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🚀</div>
+                        <div class="card-title">Capacitação</div>
+                        <div class="card-body">Número de times com autonomia para construir sem o CoE. Participação
+                            ativa na comunidade de prática. Citizen Developers certificados. NPS interno do CoE com os
+                            times.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 17: PRIMEIROS 90 DIAS -->
+        <section class="slide s-blue">
+            <div class="slide-inner">
+                <div class="eyebrow">Agora</div>
+                <h2 class="slide-title">Primeiros 90 dias</h2>
+                <p class="slide-lead">Por onde começamos na segunda-feira</p>
+                <div class="funnel">
+                    <div class="funnel-step">
+                        <span class="funnel-num">M1</span>
+                        <div>
+                            <div class="funnel-title">Diagnóstico e fundação</div>
+                            <div style="font-size:0.78rem;color:rgba(255,255,255,0.45);margin-top:3px;">Mapear
+                                maturidade atual: existe data platform? MLOps? Quais projetos de IA já existem? Auditar
+                                o que está em produção sem padrão.</div>
+                        </div>
+                        <span class="funnel-desc">Semanas 1–4</span>
+                    </div>
+                    <div class="funnel-step">
+                        <span class="funnel-num">M2</span>
+                        <div>
+                            <div class="funnel-title">Primeiros padrões e gateway</div>
+                            <div style="font-size:0.78rem;color:rgba(255,255,255,0.45);margin-top:3px;">Publicar os
+                                primeiros ADRs. Subir o gateway de LLM centralizado. Definir a matriz de classificação
+                                de dados × modelo permitido.</div>
+                        </div>
+                        <span class="funnel-desc">Semanas 5–8</span>
+                    </div>
+                    <div class="funnel-step">
+                        <span class="funnel-num">M3</span>
+                        <div>
+                            <div class="funnel-title">Primeiro projeto piloto com os padrões</div>
+                            <div style="font-size:0.78rem;color:rgba(255,255,255,0.45);margin-top:3px;">Escolher um
+                                projeto de baixo risco e alto valor para rodar do zero seguindo todos os pilares.
+                                Documentar tudo como referência.</div>
+                        </div>
+                        <span class="funnel-desc">Semanas 9–12</span>
+                    </div>
+                </div>
+                <div class="highlight" style="margin-top:18px;">
+                    A maturidade atual da empresa muda radicalmente o que priorizamos. Se não existe data platform,
+                    começamos por lá. Se já existe, pulamos direto para os padrões de IA.
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 18: FECHAMENTO -->
+        <section class="slide s-hero">
+            <div class="slide-inner">
+                <div class="eyebrow">Resumo</div>
+                <h2 class="section-title">O CoE Operacional<br>em uma frase</h2>
+                <p class="section-desc" style="margin-bottom:28px;">Criamos os padrões, garantimos que sejam seguidos,
+                    asseguramos que funcionem em escala e distribuímos a capacidade para que mais times consigam fazer
+                    tudo isso com qualidade.</p>
+                <div class="closing-grid">
+                    <div class="closing-item">
+                        <strong>🏗️ Pilar 1 — Arquitetura</strong>
+                        <span>ADRs, blueprints, decisões de stack, segurança de dados</span>
+                    </div>
+                    <div class="closing-item">
+                        <strong>🛡️ Pilar 2 — Governança</strong>
+                        <span>ARB, matriz de risco, model cards, critérios de aceite</span>
+                    </div>
+                    <div class="closing-item">
+                        <strong>⚙️ Pilar 3 — LLMOps</strong>
+                        <span>Gateway, observabilidade, pipeline de dados, gestão de custo</span>
+                    </div>
+                    <div class="closing-item">
+                        <strong>🚀 Pilar 4 — Enablement</strong>
+                        <span>Playbooks, evals, funil de maturidade, comunidade de prática</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div><!-- #slides -->
+
+    <footer id="coe-credit">
+        <div class="coe-credit-links">
+            <a href="index.html">Site em páginas</a><span aria-hidden="true"> · </span><a href="coe-doc.html">Documento
+                linear</a>
+        </div>
+        <div class="coe-credit-author">Criado por Claudio Ramirez - Arquiteto Tech Lead CoE Operacional</div>
+    </footer>
+
+    <div id="nav-arrows">
+        <button class="arrow-btn" id="btn-up">↑</button>
+        <button class="arrow-btn" id="btn-down">↓</button>
     </div>
-    <span id="slide-counter">1 / 18</span>
-</nav>
 
-<div id="slides">
-
-    <!-- SLIDE 1: HERO -->
-    <section class="slide s-hero">
-        <div class="slide-inner">
-            <div class="eyebrow">Centro de Excelência em Inteligência Artificial</div>
-            <h1 class="hero-title">CoE <em>Operacional</em><br>Como a IA sai<br>do papel e vira produto</h1>
-            <p class="hero-sub">O CoE Operacional é onde a visão estratégica se transforma em soluções reais, escaláveis e sustentáveis. Aqui definimos como construir, operar e evoluir IA na empresa.</p>
-            <div class="hero-chips">
-                <span class="chip">🏗️ Arquitetura de Referência</span>
-                <span class="chip">🛡️ Governança Técnica</span>
-                <span class="chip">⚙️ LLMOps</span>
-                <span class="chip">🚀 Enablement</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- SLIDE 2: O QUE É O COE OPERACIONAL -->
-    <section class="slide s-slate">
-        <div class="slide-inner">
-            <div class="eyebrow">Contexto</div>
-            <h2 class="slide-title">O que é o CoE Operacional?</h2>
-            <p class="slide-lead">A camada técnica que conecta estratégia com execução</p>
-            <div class="two-col">
-                <div>
-                    <div class="col-label">Os três níveis do CoE</div>
-                    <div class="funnel">
-                        <div class="funnel-step">
-                            <span class="funnel-num">01</span>
-                            <span class="funnel-title">CoE Executivo</span>
-                            <span class="funnel-desc">Visão · Budget · Risco</span>
-                        </div>
-                        <div class="funnel-step">
-                            <span class="funnel-num">02</span>
-                            <span class="funnel-title">CoE Estratégico</span>
-                            <span class="funnel-desc">OKRs · Priorização · Adoção</span>
-                        </div>
-                        <div class="funnel-step" style="border-left: 3px solid var(--red);">
-                            <span class="funnel-num">03</span>
-                            <span class="funnel-title" style="color:#fff;">CoE Operacional</span>
-                            <span class="funnel-desc" style="color:var(--red);">Você está aqui</span>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="col-label">Nossa missão</div>
-                    <ul class="check-list">
-                        <li>Definir <strong>como</strong> a empresa constrói soluções de IA</li>
-                        <li>Garantir que soluções sejam seguras, observáveis e escaláveis</li>
-                        <li>Criar padrões reutilizáveis — não resolver caso a caso</li>
-                        <li>Distribuir capacidade técnica para todos os times</li>
-                        <li>Responder a pergunta: <em>"como isso vai ser construído e sustentado?"</em></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SLIDE 3: OS 4 PILARES -->
-    <section class="slide s-dark">
-        <div class="slide-inner">
-            <div class="eyebrow">Estrutura</div>
-            <h2 class="slide-title">4 Pilares de Responsabilidade</h2>
-            <p class="slide-lead">O fio que conecta os pilares é sequencial — cada um sustenta o próximo</p>
-            <div class="cards cards-4">
-                <div class="card">
-                    <div class="card-icon">🏗️</div>
-                    <div class="card-title">Arquitetura de Referência</div>
-                    <div class="card-body">Padrões reutilizáveis para todas as soluções de IA da empresa</div>
-                </div>
-                <div class="card">
-                    <div class="card-icon">🛡️</div>
-                    <div class="card-title">Governança Técnica</div>
-                    <div class="card-body">Processos que garantem qualidade antes de ir para produção</div>
-                </div>
-                <div class="card">
-                    <div class="card-icon">⚙️</div>
-                    <div class="card-title">Integração & LLMOps</div>
-                    <div class="card-body">Observabilidade, custo e operação contínua em escala</div>
-                </div>
-                <div class="card">
-                    <div class="card-icon">🚀</div>
-                    <div class="card-title">Enablement dos Times</div>
-                    <div class="card-body">Multiplicar capacidade — não fazer tudo sozinho</div>
-                </div>
-            </div>
-            <div class="highlight" style="margin-top:20px;">
-                CoEs que pulam o Pilar 3 acumulam PoCs que não sobrevivem ao contato com produção. CoEs que só fazem o Pilar 4 viram academia sem produto.
-            </div>
-        </div>
-    </section>
-
-
-    <!-- SLIDE 4: PILAR 1 - ARQUITETURA -->
-    <section class="slide s-blue">
-        <div class="slide-inner">
-            <span class="section-num">1</span>
-            <div class="eyebrow">Pilar 1</div>
-            <h2 class="section-title">Arquitetura<br>de Referência</h2>
-            <p class="section-desc">Não resolvemos um projeto. Criamos o molde que todos os projetos seguem — padrões documentados, versionados e acessíveis a todos os times.</p>
-            <div class="stats">
-                <div><span class="stat-val">ADR</span><span class="stat-label">Architecture Decision Records</span></div>
-                <div><span class="stat-val">4</span><span class="stat-label">Padrões de solução críticos</span></div>
-                <div><span class="stat-val">0</span><span class="stat-label">Decisões na cabeça de alguém</span></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SLIDE 5: PILAR 1 - DETALHES -->
-    <section class="slide s-dark">
-        <div class="slide-inner">
-            <div class="eyebrow">Pilar 1 · Arquitetura de Referência</div>
-            <h2 class="slide-title">O que definimos e documentamos</h2>
-            <p class="slide-lead">Decisões que não podem ficar na cabeça de ninguém</p>
-            <div class="cards cards-2">
-                <div class="pillar">
-                    <div class="pillar-num">Stack de IA</div>
-                    <div class="pillar-title">Matriz de decisão de tecnologia</div>
-                    <div class="pillar-body">Quando usar GPT-4o vs Claude vs modelo open-source. Quando RAG é suficiente vs fine-tuning. Quando agente autônomo vs fluxo determinístico. Tudo em ADR escrito e versionado.</div>
-                </div>
-                <div class="pillar">
-                    <div class="pillar-num">Padrões de Solução</div>
-                    <div class="pillar-title">Blueprints reutilizáveis</div>
-                    <div class="pillar-body">Padrão RAG corporativo (chunking, embedding, vector DB, permissões). Padrão de agente (orquestrador, estado, ferramentas). Padrão de prompt management. Gateway de LLM centralizado.</div>
-                </div>
-                <div class="pillar">
-                    <div class="pillar-num">Segurança de Dados</div>
-                    <div class="pillar-title">Classificação × modelo permitido</div>
-                    <div class="pillar-body">Dado público → API externa. Dado confidencial → modelo self-hosted ou DPA assinado. Dado com PII → anonimização obrigatória antes de qualquer LLM. Alinhado com LGPD.</div>
-                </div>
-                <div class="pillar">
-                    <div class="pillar-num">Fronteiras de Aprovação</div>
-                    <div class="pillar-title">O que pode ser construído</div>
-                    <div class="pillar-body">Lista viva: aprovado por padrão / requer revisão de arquitetura / proibido sem aprovação executiva. Critério baseado em impacto e autonomia do sistema.</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SLIDE 6: PILAR 2 - GOVERNANÇA -->
-    <section class="slide s-red">
-        <div class="slide-inner">
-            <span class="section-num">2</span>
-            <div class="eyebrow">Pilar 2</div>
-            <h2 class="section-title">Governança<br>Técnica</h2>
-            <p class="section-desc">Governança sem dentes não é governança. Criamos processos que de fato bloqueiam soluções ruins de chegarem em produção.</p>
-            <div class="stats">
-                <div><span class="stat-val">ARB</span><span class="stat-label">Architecture Review Board</span></div>
-                <div><span class="stat-val">2×2</span><span class="stat-label">Matriz de risco de IA</span></div>
-                <div><span class="stat-val">100%</span><span class="stat-label">Projetos com model card</span></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SLIDE 7: PILAR 2 - DETALHES -->
-    <section class="slide s-slate">
-        <div class="slide-inner">
-            <div class="eyebrow">Pilar 2 · Governança Técnica</div>
-            <h2 class="slide-title">Processos que garantem qualidade</h2>
-            <p class="slide-lead">Checklist técnico obrigatório antes de qualquer deploy</p>
-            <div class="two-col">
-                <div>
-                    <div class="col-label">Architecture Review Board (ARB)</div>
-                    <ul class="check-list">
-                        <li>A solução tem fallback se o modelo alucinar?</li>
-                        <li>Como o sistema detecta que a resposta está errada?</li>
-                        <li>Existe logging suficiente para debugar um incidente?</li>
-                        <li>Foi testado com adversarial inputs (prompt injection)?</li>
-                        <li>O custo projetado por mês foi calculado e aprovado?</li>
-                        <li>Existe plano de rollback documentado?</li>
-                    </ul>
-                </div>
-                <div>
-                    <div class="col-label">Critérios de Aceite Técnico para IA</div>
-                    <ul class="check-list">
-                        <li>Taxa de alucinação abaixo de X% (medida por avaliador automático)</li>
-                        <li>Latência P95 abaixo de Y segundos</li>
-                        <li>Custo por interação abaixo de Z centavos</li>
-                        <li>Faithfulness do RAG acima de W% (LLM-as-judge)</li>
-                        <li>Model card preenchido com limitações e responsável técnico</li>
-                        <li>Matriz de risco: impacto do erro × autonomia do sistema</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <!-- SLIDE 8: PILAR 3 - LLMOPS -->
-    <section class="slide s-blue">
-        <div class="slide-inner">
-            <span class="section-num">3</span>
-            <div class="eyebrow">Pilar 3</div>
-            <h2 class="section-title">Integração<br>& LLMOps</h2>
-            <p class="section-desc">O pilar mais subestimado. A maioria dos CoEs sabe fazer PoC mas não sabe operar IA em produção. Aqui garantimos que as soluções sejam observáveis, mensuráveis e operáveis.</p>
-            <div class="stats">
-                <div><span class="stat-val">1</span><span class="stat-label">Gateway centralizado de LLM</span></div>
-                <div><span class="stat-val">∞</span><span class="stat-label">PoCs que morreram sem isso</span></div>
-                <div><span class="stat-val">$</span><span class="stat-label">Custo como disciplina de eng.</span></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SLIDE 9: PILAR 3 - DETALHES -->
-    <section class="slide s-dark">
-        <div class="slide-inner">
-            <div class="eyebrow">Pilar 3 · LLMOps</div>
-            <h2 class="slide-title">Operação de IA em escala</h2>
-            <p class="slide-lead">Infraestrutura que sustenta produção — não só demos</p>
-            <div class="cards cards-2">
-                <div class="pillar">
-                    <div class="pillar-num">Gateway de LLM</div>
-                    <div class="pillar-title">Ponto central de todas as chamadas</div>
-                    <div class="pillar-body">Roteamento inteligente entre providers. Fallback automático. Rate limiting por projeto. Logging centralizado. Cache semântico para reduzir custo e latência.</div>
-                </div>
-                <div class="pillar">
-                    <div class="pillar-num">Observabilidade</div>
-                    <div class="pillar-title">Métricas que importam em IA</div>
-                    <div class="pillar-body">Latência por etapa (embedding, retrieval, geração). Custo por sessão/usuário/feature. Qualidade de retrieval (MRR, NDCG). Feedback implícito e explícito. Drift de comportamento.</div>
-                </div>
-                <div class="pillar">
-                    <div class="pillar-num">Pipeline de Dados</div>
-                    <div class="pillar-title">RAG é tão bom quanto seus dados</div>
-                    <div class="pillar-body">Ingestão de fontes corporativas. Chunking strategy com preservação semântica. Metadata enrichment com permissões. Reindexação atômica quando documentos mudam.</div>
-                </div>
-                <div class="pillar">
-                    <div class="pillar-num">Gestão de Custos</div>
-                    <div class="pillar-title">Custo é responsabilidade de arquitetura</div>
-                    <div class="pillar-body">Orçamento por projeto com alertas. Seleção de modelo por complexidade da tarefa. Batch processing para o que não é tempo real (50% mais barato). Inventário de versões de modelos.</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SLIDE 10: PILAR 4 - ENABLEMENT -->
-    <section class="slide s-red">
-        <div class="slide-inner">
-            <span class="section-num">4</span>
-            <div class="eyebrow">Pilar 4</div>
-            <h2 class="section-title">Enablement<br>dos Times</h2>
-            <p class="section-desc">Nosso maior multiplicador de impacto. Um CoE que não distribui capacidade vira gargalo. Nosso objetivo é que os times construam com qualidade sem depender de nós para cada projeto.</p>
-            <div class="stats">
-                <div><span class="stat-val">×N</span><span class="stat-label">Capacidade multiplicada</span></div>
-                <div><span class="stat-val">4</span><span class="stat-label">Fases do funil de maturidade</span></div>
-                <div><span class="stat-val">0</span><span class="stat-label">PoCs sem critério de avanço</span></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SLIDE 11: PILAR 4 - DETALHES -->
-    <section class="slide s-slate">
-        <div class="slide-inner">
-            <div class="eyebrow">Pilar 4 · Enablement</div>
-            <h2 class="slide-title">Funil de Maturidade de IA</h2>
-            <p class="slide-lead">Critérios claros para cada fase — não "o exec achou bonito na demo"</p>
-            <div class="funnel">
-                <div class="funnel-step">
-                    <span class="funnel-num">01</span>
-                    <div>
-                        <div class="funnel-title">Exploração · 2–4 semanas</div>
-                        <div style="font-size:0.78rem;color:rgba(255,255,255,0.45);margin-top:3px;">Vale a pena tecnicamente? Existe dado suficiente? O problema está bem definido?</div>
-                    </div>
-                    <span class="funnel-desc">Entrega: ADR + avaliação técnica</span>
-                </div>
-                <div class="funnel-step">
-                    <span class="funnel-num">02</span>
-                    <div>
-                        <div class="funnel-title">PoC · 4–8 semanas</div>
-                        <div style="font-size:0.78rem;color:rgba(255,255,255,0.45);margin-top:3px;">Funciona no cenário real? Quais são as limitações? Qual o custo de produção?</div>
-                    </div>
-                    <span class="funnel-desc">Entrega: demo + métricas + estimativa</span>
-                </div>
-                <div class="funnel-step">
-                    <span class="funnel-num">03</span>
-                    <div>
-                        <div class="funnel-title">Piloto · 8–16 semanas</div>
-                        <div style="font-size:0.78rem;color:rgba(255,255,255,0.45);margin-top:3px;">Funciona com usuários reais? O ROI está se confirmando?</div>
-                    </div>
-                    <span class="funnel-desc">Entrega: produto com observabilidade</span>
-                </div>
-                <div class="funnel-step" style="border-left:3px solid var(--red);">
-                    <span class="funnel-num">04</span>
-                    <div>
-                        <div class="funnel-title">Produção</div>
-                        <div style="font-size:0.78rem;color:rgba(255,255,255,0.45);margin-top:3px;">Sustentável, operado, monitorado, com dono de negócio comprometido</div>
-                    </div>
-                    <span class="funnel-desc" style="color:var(--red);">Destino final</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <!-- SLIDE 12: PLAYBOOKS E EVALS -->
-    <section class="slide s-dark">
-        <div class="slide-inner">
-            <div class="eyebrow">Pilar 4 · Enablement</div>
-            <h2 class="slide-title">Playbooks, Evals e Comunidade</h2>
-            <p class="slide-lead">As ferramentas que distribuem capacidade técnica para toda a empresa</p>
-            <div class="cards cards-3">
-                <div class="card">
-                    <div class="card-icon">📋</div>
-                    <div class="card-title">Playbooks de Desenvolvimento</div>
-                    <div class="card-body">Documentos vivos: como fazer discovery técnico, montar ambiente, versionar prompts, avaliar modelos, estruturar código testável e fazer deploy seguindo os padrões do CoE.</div>
-                </div>
-                <div class="card">
-                    <div class="card-icon">🧪</div>
-                    <div class="card-title">Evals como Cultura</div>
-                    <div class="card-body">Golden datasets por domínio. LLM-as-judge para avaliação em escala. Processo de avaliação humana. Regra: nenhum projeto vai para produção sem baseline medida.</div>
-                </div>
-                <div class="card">
-                    <div class="card-icon">🤝</div>
-                    <div class="card-title">Comunidade Interna</div>
-                    <div class="card-body">Canal com padrão de postagem (problema → solução → aprendizado). Show &amp; tell quinzenal. Biblioteca de prompts reutilizáveis. Registro de experimentos que falharam — tão valioso quanto os que funcionaram.</div>
-                </div>
-            </div>
-            <div class="highlight" style="margin-top:18px;">
-                <strong>Capacitação por perfil:</strong> Dev sem experiência em IA → fundamentos e integração production-grade. Analista de dados → pipelines com LLM. Arquiteto de outros times → trade-offs e como o CoE apoia sem criar dependência.
-            </div>
-        </div>
-    </section>
-
-    <!-- SLIDE 13: COMPOSIÇÃO DO TIME -->
-    <section class="slide s-slate">
-        <div class="slide-inner">
-            <div class="eyebrow">Time</div>
-            <h2 class="slide-title">Composição do CoE Operacional</h2>
-            <p class="slide-lead">Os perfis que tornam os 4 pilares possíveis</p>
-            <div class="cards cards-3">
-                <div class="card">
-                    <div class="card-icon">🏛️</div>
-                    <div class="card-title">Arquiteto de Soluções</div>
-                    <div class="card-body">Define padrões, lidera o ARB, toma decisões de stack, é a ponte entre negócio e técnica. Responsável pelos Pilares 1 e 2.</div>
-                </div>
-                <div class="card">
-                    <div class="card-icon">🤖</div>
-                    <div class="card-title">Engenheiro de ML / NLP</div>
-                    <div class="card-body">Constrói e avalia modelos, implementa pipelines de RAG e fine-tuning, define métricas de qualidade e conduz evals.</div>
-                </div>
-                <div class="card">
-                    <div class="card-icon">🗄️</div>
-                    <div class="card-title">Especialista em Dados</div>
-                    <div class="card-body">Garante a qualidade dos dados que alimentam os modelos. Cuida de ingestão, chunking, metadata e reindexação.</div>
-                </div>
-                <div class="card">
-                    <div class="card-icon">⚡</div>
-                    <div class="card-title">Especialista em Automação</div>
-                    <div class="card-body">RPA, agentes e BPM. Constrói os fluxos inteligentes e suporta o programa de Citizen Developers nas áreas de negócio.</div>
-                </div>
-                <div class="card">
-                    <div class="card-icon">☁️</div>
-                    <div class="card-title">Cloud & Infraestrutura</div>
-                    <div class="card-body">Provisiona e mantém o ambiente de IA. Garante escalabilidade, disponibilidade e controle de custo de infraestrutura.</div>
-                </div>
-                <div class="card">
-                    <div class="card-icon">🔒</div>
-                    <div class="card-title">DevSecOps</div>
-                    <div class="card-body">Segurança no pipeline de desenvolvimento. Garante que políticas de dados, LGPD e controles de acesso sejam aplicados em todo o ciclo.</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SLIDE 14: FLUXO DE TRABALHO -->
-    <section class="slide s-dark">
-        <div class="slide-inner">
-            <div class="eyebrow">Fluxo</div>
-            <h2 class="slide-title">Como uma demanda chega e sai do CoE</h2>
-            <p class="slide-lead">Do pedido do negócio ao produto em produção — quem faz o quê</p>
-            <div class="funnel">
-                <div class="funnel-step">
-                    <span class="funnel-num">①</span>
-                    <div><div class="funnel-title">CoE Estratégico prioriza</div><div style="font-size:0.78rem;color:rgba(255,255,255,0.45);margin-top:3px;">Gerentes identificam oportunidade e submetem ao backlog com business case preliminar</div></div>
-                    <span class="funnel-desc">Entrada</span>
-                </div>
-                <div class="funnel-step">
-                    <span class="funnel-num">②</span>
-                    <div><div class="funnel-title">CoE Operacional avalia viabilidade técnica</div><div style="font-size:0.78rem;color:rgba(255,255,255,0.45);margin-top:3px;">Arquiteto analisa dados disponíveis, complexidade, risco e encaixa no funil de maturidade</div></div>
-                    <span class="funnel-desc">Triagem</span>
-                </div>
-                <div class="funnel-step">
-                    <span class="funnel-num">③</span>
-                    <div><div class="funnel-title">Desenvolvimento seguindo padrões do CoE</div><div style="font-size:0.78rem;color:rgba(255,255,255,0.45);margin-top:3px;">Time executa usando blueprints, playbooks e passando pelo ARB antes de qualquer deploy</div></div>
-                    <span class="funnel-desc">Execução</span>
-                </div>
-                <div class="funnel-step">
-                    <span class="funnel-num">④</span>
-                    <div><div class="funnel-title">Deploy com observabilidade ativa</div><div style="font-size:0.78rem;color:rgba(255,255,255,0.45);margin-top:3px;">Gateway de LLM, monitoramento de custo e qualidade, alertas configurados desde o dia 1</div></div>
-                    <span class="funnel-desc">Produção</span>
-                </div>
-                <div class="funnel-step">
-                    <span class="funnel-num">⑤</span>
-                    <div><div class="funnel-title">CoE Estratégico recebe métricas de impacto</div><div style="font-size:0.78rem;color:rgba(255,255,255,0.45);margin-top:3px;">Resultados alimentam o próximo ciclo de priorização e o relatório para o CoE Executivo</div></div>
-                    <span class="funnel-desc">Feedback</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SLIDE 15: O QUE O COE NÃO FAZ -->
-    <section class="slide s-red">
-        <div class="slide-inner">
-            <div class="eyebrow">Escopo</div>
-            <h2 class="slide-title">O que o CoE Operacional<br><em style="font-style:normal;color:rgba(255,255,255,0.5);">não</em> faz</h2>
-            <p class="slide-lead">Delimitar o escopo é tão importante quanto definir responsabilidades</p>
-            <div class="two-col">
-                <div>
-                    <div class="col-label">Fora do nosso escopo</div>
-                    <ul class="check-list">
-                        <li>Ser o time de desenvolvimento de todas as áreas — cada área tem seu time</li>
-                        <li>Dar suporte técnico geral de TI ou resolver bugs de sistemas legados</li>
-                        <li>Tomar decisões de negócio — priorizamos tecnicamente, não estrategicamente</li>
-                        <li>Construir soluções que não passaram pelo funil de maturidade</li>
-                        <li>Operar sistemas que não seguem os padrões de observabilidade do CoE</li>
-                    </ul>
-                </div>
-                <div>
-                    <div class="col-label">Como evitamos virar gargalo</div>
-                    <ul class="check-list">
-                        <li>Playbooks permitem que times construam sem depender de nós</li>
-                        <li>Programa de Citizen Developers distribui capacidade para o negócio</li>
-                        <li>Revisões de arquitetura têm SLA definido — não bloqueamos indefinidamente</li>
-                        <li>Padrões são públicos e documentados — qualquer time pode consultar</li>
-                        <li>Nosso sucesso é medido por autonomia dos times, não por centralização</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SLIDE 16: MÉTRICAS DE SUCESSO -->
-    <section class="slide s-slate">
-        <div class="slide-inner">
-            <div class="eyebrow">Resultados</div>
-            <h2 class="slide-title">Como medimos o sucesso do CoE</h2>
-            <p class="slide-lead">Sem métricas definidas, o CoE não consegue demonstrar valor</p>
-            <div class="cards cards-2">
-                <div class="card">
-                    <div class="card-icon">🏭</div>
-                    <div class="card-title">Produção</div>
-                    <div class="card-body">Número de soluções de IA em produção. Taxa de conversão PoC → produção. Tempo médio de PoC para produção. Uptime e SLA dos sistemas em operação.</div>
-                </div>
-                <div class="card">
-                    <div class="card-icon">📐</div>
-                    <div class="card-title">Adoção de Padrões</div>
-                    <div class="card-body">% de projetos usando blueprints do CoE. % de projetos com observabilidade ativa. % de projetos com model card preenchido. Cobertura de evals nos projetos ativos.</div>
-                </div>
-                <div class="card">
-                    <div class="card-icon">💰</div>
-                    <div class="card-title">Eficiência</div>
-                    <div class="card-body">Custo médio por interação por projeto. Redução de custo via cache semântico e batch. ROI realizado vs estimado nos business cases. Custo de infraestrutura por solução.</div>
-                </div>
-                <div class="card">
-                    <div class="card-icon">🚀</div>
-                    <div class="card-title">Capacitação</div>
-                    <div class="card-body">Número de times com autonomia para construir sem o CoE. Participação ativa na comunidade de prática. Citizen Developers certificados. NPS interno do CoE com os times.</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SLIDE 17: PRIMEIROS 90 DIAS -->
-    <section class="slide s-blue">
-        <div class="slide-inner">
-            <div class="eyebrow">Agora</div>
-            <h2 class="slide-title">Primeiros 90 dias</h2>
-            <p class="slide-lead">Por onde começamos na segunda-feira</p>
-            <div class="funnel">
-                <div class="funnel-step">
-                    <span class="funnel-num">M1</span>
-                    <div>
-                        <div class="funnel-title">Diagnóstico e fundação</div>
-                        <div style="font-size:0.78rem;color:rgba(255,255,255,0.45);margin-top:3px;">Mapear maturidade atual: existe data platform? MLOps? Quais projetos de IA já existem? Auditar o que está em produção sem padrão.</div>
-                    </div>
-                    <span class="funnel-desc">Semanas 1–4</span>
-                </div>
-                <div class="funnel-step">
-                    <span class="funnel-num">M2</span>
-                    <div>
-                        <div class="funnel-title">Primeiros padrões e gateway</div>
-                        <div style="font-size:0.78rem;color:rgba(255,255,255,0.45);margin-top:3px;">Publicar os primeiros ADRs. Subir o gateway de LLM centralizado. Definir a matriz de classificação de dados × modelo permitido.</div>
-                    </div>
-                    <span class="funnel-desc">Semanas 5–8</span>
-                </div>
-                <div class="funnel-step">
-                    <span class="funnel-num">M3</span>
-                    <div>
-                        <div class="funnel-title">Primeiro projeto piloto com os padrões</div>
-                        <div style="font-size:0.78rem;color:rgba(255,255,255,0.45);margin-top:3px;">Escolher um projeto de baixo risco e alto valor para rodar do zero seguindo todos os pilares. Documentar tudo como referência.</div>
-                    </div>
-                    <span class="funnel-desc">Semanas 9–12</span>
-                </div>
-            </div>
-            <div class="highlight" style="margin-top:18px;">
-                A maturidade atual da empresa muda radicalmente o que priorizamos. Se não existe data platform, começamos por lá. Se já existe, pulamos direto para os padrões de IA.
-            </div>
-        </div>
-    </section>
-
-    <!-- SLIDE 18: FECHAMENTO -->
-    <section class="slide s-hero">
-        <div class="slide-inner">
-            <div class="eyebrow">Resumo</div>
-            <h2 class="section-title">O CoE Operacional<br>em uma frase</h2>
-            <p class="section-desc" style="margin-bottom:28px;">Criamos os padrões, garantimos que sejam seguidos, asseguramos que funcionem em escala e distribuímos a capacidade para que mais times consigam fazer tudo isso com qualidade.</p>
-            <div class="closing-grid">
-                <div class="closing-item">
-                    <strong>🏗️ Pilar 1 — Arquitetura</strong>
-                    <span>ADRs, blueprints, decisões de stack, segurança de dados</span>
-                </div>
-                <div class="closing-item">
-                    <strong>🛡️ Pilar 2 — Governança</strong>
-                    <span>ARB, matriz de risco, model cards, critérios de aceite</span>
-                </div>
-                <div class="closing-item">
-                    <strong>⚙️ Pilar 3 — LLMOps</strong>
-                    <span>Gateway, observabilidade, pipeline de dados, gestão de custo</span>
-                </div>
-                <div class="closing-item">
-                    <strong>🚀 Pilar 4 — Enablement</strong>
-                    <span>Playbooks, evals, funil de maturidade, comunidade de prática</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-</div><!-- #slides -->
-
-<footer id="coe-credit">
-    <div class="coe-credit-links">
-        <a href="index.html">Site em páginas</a><span aria-hidden="true"> · </span><a href="coe-doc.html">Documento linear</a>
-    </div>
-    <div class="coe-credit-author">Criado por Claudio Ramirez - Arquiteto Tech Lead CoE Operacional</div>
-</footer>
-
-<div id="nav-arrows">
-    <button class="arrow-btn" id="btn-up">↑</button>
-    <button class="arrow-btn" id="btn-down">↓</button>
-</div>
-
-<script src="js/coe-operacional.js"></script>
+    <script src="js/coe-operacional.js"></script>
 </body>
+
 </html>

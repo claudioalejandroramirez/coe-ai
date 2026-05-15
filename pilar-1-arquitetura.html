@@ -1,160 +1,181 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Pilar 1 — Arquitetura de referência, ADRs, blueprints e segurança de dados do CoE IA Assaí">
+    <meta name="description"
+        content="Pilar 1 — Arquitetura de referência, ADRs, blueprints e segurança de dados do CoE IA Assaí">
     <title>Pilar 1 · Arquitetura — CoE IA · Assaí Atacadista</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="css/shared.css">
 </head>
+
 <body>
-<div id="progress"></div>
+    <div id="progress"></div>
 
-<nav id="topnav" role="navigation" aria-label="Navegação principal">
-    <div class="nav-inner">
-        <a href="index.html" class="nav-logo" aria-label="Assaí Atacadista - CoE IA">
-            <img src="assets/Assaí_Atacadista_logo_2024.svg.png" alt="Assaí Atacadista">
-            <span class="nav-logo-divider" aria-hidden="true"></span>
-            <span class="nav-logo-label"><strong>CoE de IA</strong>Centro de Excelência</span>
-        </a>
-        <ul class="nav-links" role="list">
-            <li><a href="index.html">Início</a></li>
-            <li><a href="time.html">Time & Fluxo</a></li>
-            <li><a href="pilar-1-arquitetura.html" class="active">Arquitetura</a></li>
-            <li><a href="pilar-2-governanca.html">Governança</a></li>
-            <li><a href="pilar-3-llmops.html">LLMOps</a></li>
-            <li><a href="pilar-4-enablement.html">Enablement</a></li>
-            <li><a href="operacao.html">Operação</a></li>
-        </ul>
-        <button id="nav-toggle" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span><span></span></button>
-    </div>
-</nav>
-<div id="nav-mobile" role="navigation" aria-label="Menu mobile">
-    <a href="index.html">🏠 Início</a>
-    <a href="time.html">👥 Time & Fluxo</a>
-    <a href="pilar-1-arquitetura.html" class="active">🏗️ Pilar 1 · Arquitetura</a>
-    <a href="pilar-2-governanca.html">🛡️ Pilar 2 · Governança</a>
-    <a href="pilar-3-llmops.html">⚙️ Pilar 3 · LLMOps</a>
-    <a href="pilar-4-enablement.html">🚀 Pilar 4 · Enablement</a>
-    <a href="operacao.html">📊 Operação & Métricas</a>
-</div>
-
-<header class="page-hero">
-    <div class="hero-inner">
-        <div class="hero-eyebrow">Pilar 1</div>
-        <h1 class="hero-title">Arquitetura de <em>Referência</em></h1>
-        <p class="hero-subtitle">Não resolvemos um projeto isolado — criamos o molde que todos os projetos seguem: padrões documentados, versionados e acessíveis a todos os times.</p>
-        <div class="hero-chips">
-            <span class="chip">📜 ADRs</span>
-            <span class="chip">🏗️ Blueprints</span>
-            <span class="chip">🔐 Dados × modelo</span>
-            <span class="chip">✅ Fronteiras de aprovação</span>
+    <nav id="topnav" role="navigation" aria-label="Navegação principal">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo" aria-label="Assaí Atacadista - CoE IA">
+                <img src="assets/Assaí_Atacadista_logo_2024.svg.png" alt="Assaí Atacadista">
+                <span class="nav-logo-divider" aria-hidden="true"></span>
+                <span class="nav-logo-label"><strong>CoE de IA</strong>Centro de Excelência</span>
+            </a>
+            <ul class="nav-links" role="list">
+                <li><a href="index.html">Início</a></li>
+                <li><a href="time.html">Time & Fluxo</a></li>
+                <li><a href="pilar-1-arquitetura.html" class="active">Arquitetura</a></li>
+                <li><a href="pilar-2-governanca.html">Governança</a></li>
+                <li><a href="pilar-3-llmops.html">LLMOps</a></li>
+                <li><a href="pilar-4-enablement.html">Enablement</a></li>
+                <li><a href="operacao.html">Operação</a></li>
+            </ul>
+            <button id="nav-toggle" aria-label="Abrir menu"
+                aria-expanded="false"><span></span><span></span><span></span></button>
         </div>
+    </nav>
+    <div id="nav-mobile" role="navigation" aria-label="Menu mobile">
+        <a href="index.html">🏠 Início</a>
+        <a href="time.html">👥 Time & Fluxo</a>
+        <a href="pilar-1-arquitetura.html" class="active">🏗️ Pilar 1 · Arquitetura</a>
+        <a href="pilar-2-governanca.html">🛡️ Pilar 2 · Governança</a>
+        <a href="pilar-3-llmops.html">⚙️ Pilar 3 · LLMOps</a>
+        <a href="pilar-4-enablement.html">🚀 Pilar 4 · Enablement</a>
+        <a href="operacao.html">📊 Operação & Métricas</a>
     </div>
-</header>
 
-<div class="page-body with-sidebar">
-    <aside class="sidebar" aria-label="Navegação da página">
-        <div class="sidebar-title">Nesta página</div>
-        <ul class="sidebar-nav">
-            <li><a href="#visao" class="active">🎯 Visão do pilar</a></li>
-            <li><a href="#definicoes">📐 O que definimos</a></li>
-        </ul>
-    </aside>
-
-    <main class="main-content">
-        <nav class="breadcrumb" aria-label="Localização">
-            <a href="index.html">Início</a>
-            <span class="breadcrumb-sep" aria-hidden="true">›</span>
-            <span>Pilar 1 · Arquitetura</span>
-        </nav>
-
-        <section id="visao" class="doc-section">
-            <div class="section-label">Pilar 1</div>
-            <h2 class="section-title">Visão do pilar</h2>
-            <p class="section-desc">Decisões que não podem ficar na cabeça de ninguém</p>
-            <hr class="section-divider">
-
-            <div class="summary-box">
-                <div class="summary-box-label">📌 Resumo para todos</div>
-                <p>A Arquitetura de Referência responde <em>como</em> construímos: stack, padrões de solução (RAG, agentes, gateway), classificação de dados e regras do que pode ser construído sem escalonar aprovação. Tudo vive em ADRs e blueprints versionados.</p>
+    <header class="page-hero">
+        <div class="hero-inner">
+            <div class="hero-eyebrow">Pilar 1</div>
+            <h1 class="hero-title">Arquitetura de <em>Referência</em></h1>
+            <p class="hero-subtitle">Não resolvemos um projeto isolado — criamos o molde que todos os projetos seguem:
+                padrões documentados, versionados e acessíveis a todos os times.</p>
+            <div class="hero-chips">
+                <span class="chip">📜 ADRs</span>
+                <span class="chip">🏗️ Blueprints</span>
+                <span class="chip">🔐 Dados × modelo</span>
+                <span class="chip">✅ Fronteiras de aprovação</span>
             </div>
+        </div>
+    </header>
 
-            <div class="cards cards-3">
-                <div class="stat-card">
-                    <span class="stat-val">ADR</span>
-                    <span class="stat-label">Architecture Decision Records</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-val">4</span>
-                    <span class="stat-label">Padrões de solução críticos</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-val">0</span>
-                    <span class="stat-label">Decisões só na cabeça de alguém</span>
-                </div>
-            </div>
+    <div class="page-body with-sidebar">
+        <aside class="sidebar" aria-label="Navegação da página">
+            <div class="sidebar-title">Nesta página</div>
+            <ul class="sidebar-nav">
+                <li><a href="#visao" class="active">🎯 Visão do pilar</a></li>
+                <li><a href="#definicoes">📐 O que definimos</a></li>
+            </ul>
+        </aside>
 
-            <div class="callout warn">
-                <div class="callout-label">⚠️ Por que isso importa</div>
-                Sem Pilar 1 consistente, cada time reinventa integração, segurança e custo. O CoE publica o “caminho feliz” e as exceções documentadas — acelerando entrega e reduzindo risco.
-            </div>
-        </section>
+        <main class="main-content">
+            <nav class="breadcrumb" aria-label="Localização">
+                <a href="index.html">Início</a>
+                <span class="breadcrumb-sep" aria-hidden="true">›</span>
+                <span>Pilar 1 · Arquitetura</span>
+            </nav>
 
-        <section id="definicoes" class="doc-section">
-            <div class="section-label">Detalhes</div>
-            <h2 class="section-title">O que definimos e documentamos</h2>
-            <p class="section-desc">Matriz de tecnologia, blueprints, segurança de dados e fronteiras de aprovação</p>
-            <hr class="section-divider">
+            <section id="visao" class="doc-section">
+                <div class="section-label">Pilar 1</div>
+                <h2 class="section-title">Visão do pilar</h2>
+                <p class="section-desc">Decisões que não podem ficar na cabeça de ninguém</p>
+                <hr class="section-divider">
 
-            <div class="cards cards-2">
-                <div class="card accent-blue">
-                    <span class="badge badge-blue">Stack de IA</span>
-                    <div class="card-title" style="margin-top:10px;">Matriz de decisão de tecnologia</div>
-                    <div class="card-body">Quando usar GPT-4o vs Claude vs modelo open-source. Quando RAG é suficiente vs fine-tuning. Quando agente autônomo vs fluxo determinístico. Tudo em ADR escrito e versionado.</div>
+                <div class="summary-box">
+                    <div class="summary-box-label">📌 Resumo para todos</div>
+                    <p>A Arquitetura de Referência responde <em>como</em> construímos: stack, padrões de solução (RAG,
+                        agentes, gateway), classificação de dados e regras do que pode ser construído sem escalonar
+                        aprovação. Tudo vive em ADRs e blueprints versionados.</p>
                 </div>
-                <div class="card accent-blue">
-                    <span class="badge badge-blue">Padrões de solução</span>
-                    <div class="card-title" style="margin-top:10px;">Blueprints reutilizáveis</div>
-                    <div class="card-body">Padrão RAG corporativo (chunking, embedding, vector DB, permissões). Padrão de agente (orquestrador, estado, ferramentas). Padrão de prompt management. Gateway de LLM centralizado.</div>
-                </div>
-                <div class="card accent-red">
-                    <span class="badge badge-red">Segurança de dados</span>
-                    <div class="card-title" style="margin-top:10px;">Classificação × modelo permitido</div>
-                    <div class="card-body">Dado público → API externa. Dado confidencial → modelo self-hosted ou DPA assinado. Dado com PII → anonimização obrigatória antes de qualquer LLM. Alinhado com LGPD.</div>
-                </div>
-                <div class="card accent-red">
-                    <span class="badge badge-gray">Fronteiras de aprovação</span>
-                    <div class="card-title" style="margin-top:10px;">O que pode ser construído</div>
-                    <div class="card-body">Lista viva: aprovado por padrão / requer revisão de arquitetura / proibido sem aprovação executiva. Critério baseado em impacto e autonomia do sistema.</div>
-                </div>
-            </div>
-        </section>
 
-        <nav class="page-nav" aria-label="Navegação entre páginas">
-            <a href="time.html" class="page-nav-card">
-                <div class="page-nav-dir">← Anterior</div>
-                <div class="page-nav-title">Time & Fluxo</div>
-            </a>
-            <a href="pilar-2-governanca.html" class="page-nav-card next">
-                <div class="page-nav-dir">Próximo →</div>
-                <div class="page-nav-title">Pilar 2 · Governança</div>
-            </a>
-        </nav>
-    </main>
-</div>
+                <div class="cards cards-3">
+                    <div class="stat-card">
+                        <span class="stat-val">ADR</span>
+                        <span class="stat-label">Architecture Decision Records</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-val">4</span>
+                        <span class="stat-label">Padrões de solução críticos</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-val">0</span>
+                        <span class="stat-label">Decisões só na cabeça de alguém</span>
+                    </div>
+                </div>
 
-<footer id="footer">
-    <img src="assets/Assaí_Atacadista_logo_2024.svg.png" alt="Assaí Atacadista">
-    <span>CoE de Inteligência Artificial · Documentação Técnica</span>
-    <span>v1.0 · Maio 2026 · Confidencial</span>
-    <span class="footer-doc-links"><a href="coe-doc.html">Documento linear (coe-doc)</a><span class="footer-doc-sep" aria-hidden="true">·</span><a href="coe-operacional.html">Apresentação em slides</a></span>
-    <span class="footer-author">Criado por Claudio Ramirez - Arquiteto Tech Lead CoE Operacional</span>
-</footer>
+                <div class="callout warn">
+                    <div class="callout-label">⚠️ Por que isso importa</div>
+                    Sem Pilar 1 consistente, cada time reinventa integração, segurança e custo. O CoE publica o “caminho
+                    feliz” e as exceções documentadas — acelerando entrega e reduzindo risco.
+                </div>
+            </section>
 
-<script src="js/shared.js"></script>
+            <section id="definicoes" class="doc-section">
+                <div class="section-label">Detalhes</div>
+                <h2 class="section-title">O que definimos e documentamos</h2>
+                <p class="section-desc">Matriz de tecnologia, blueprints, segurança de dados e fronteiras de aprovação
+                </p>
+                <hr class="section-divider">
+
+                <div class="cards cards-2">
+                    <div class="card accent-blue">
+                        <span class="badge badge-blue">Stack de IA</span>
+                        <div class="card-title" style="margin-top:10px;">Matriz de decisão de tecnologia</div>
+                        <div class="card-body">Quando usar GPT-4o vs Claude vs modelo open-source. Quando RAG é
+                            suficiente vs fine-tuning. Quando agente autônomo vs fluxo determinístico. Tudo em ADR
+                            escrito e versionado.</div>
+                    </div>
+                    <div class="card accent-blue">
+                        <span class="badge badge-blue">Padrões de solução</span>
+                        <div class="card-title" style="margin-top:10px;">Blueprints reutilizáveis</div>
+                        <div class="card-body">Padrão RAG corporativo (chunking, embedding, vector DB, permissões).
+                            Padrão de agente (orquestrador, estado, ferramentas). Padrão de prompt management. Gateway
+                            de LLM centralizado.</div>
+                    </div>
+                    <div class="card accent-red">
+                        <span class="badge badge-red">Segurança de dados</span>
+                        <div class="card-title" style="margin-top:10px;">Classificação × modelo permitido</div>
+                        <div class="card-body">Dado público → API externa. Dado confidencial → modelo self-hosted ou DPA
+                            assinado. Dado com PII → anonimização obrigatória antes de qualquer LLM. Alinhado com LGPD.
+                        </div>
+                    </div>
+                    <div class="card accent-red">
+                        <span class="badge badge-gray">Fronteiras de aprovação</span>
+                        <div class="card-title" style="margin-top:10px;">O que pode ser construído</div>
+                        <div class="card-body">Lista viva: aprovado por padrão / requer revisão de arquitetura /
+                            proibido sem aprovação do CoE Estratégico. Critério baseado em impacto e autonomia do
+                            sistema.</div>
+                    </div>
+                </div>
+            </section>
+
+            <nav class="page-nav" aria-label="Navegação entre páginas">
+                <a href="time.html" class="page-nav-card">
+                    <div class="page-nav-dir">← Anterior</div>
+                    <div class="page-nav-title">Time & Fluxo</div>
+                </a>
+                <a href="pilar-2-governanca.html" class="page-nav-card next">
+                    <div class="page-nav-dir">Próximo →</div>
+                    <div class="page-nav-title">Pilar 2 · Governança</div>
+                </a>
+            </nav>
+        </main>
+    </div>
+
+    <footer id="footer">
+        <img src="assets/Assaí_Atacadista_logo_2024.svg.png" alt="Assaí Atacadista">
+        <span>CoE de Inteligência Artificial · Documentação Técnica</span>
+        <span>v1.0 · Maio 2026 · Confidencial</span>
+        <span class="footer-doc-links"><a href="coe-doc.html">Documento linear (coe-doc)</a><span class="footer-doc-sep"
+                aria-hidden="true">·</span><a href="coe-operacional.html">Apresentação em slides</a></span>
+        <span class="footer-author">Criado por Claudio Ramirez - Arquiteto Tech Lead CoE Operacional</span>
+    </footer>
+
+    <script src="js/shared.js"></script>
 </body>
+
 </html>

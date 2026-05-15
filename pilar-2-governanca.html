@@ -1,162 +1,174 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Pilar 2 — Governança técnica, ARB, matriz de risco e critérios de aceite do CoE IA Assaí">
+    <meta name="description"
+        content="Pilar 2 — Governança técnica, ARB, matriz de risco e critérios de aceite do CoE IA Assaí">
     <title>Pilar 2 · Governança — CoE IA · Assaí Atacadista</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="css/shared.css">
 </head>
+
 <body>
-<div id="progress"></div>
+    <div id="progress"></div>
 
-<nav id="topnav" role="navigation" aria-label="Navegação principal">
-    <div class="nav-inner">
-        <a href="index.html" class="nav-logo" aria-label="Assaí Atacadista - CoE IA">
-            <img src="assets/Assaí_Atacadista_logo_2024.svg.png" alt="Assaí Atacadista">
-            <span class="nav-logo-divider" aria-hidden="true"></span>
-            <span class="nav-logo-label"><strong>CoE de IA</strong>Centro de Excelência</span>
-        </a>
-        <ul class="nav-links" role="list">
-            <li><a href="index.html">Início</a></li>
-            <li><a href="time.html">Time & Fluxo</a></li>
-            <li><a href="pilar-1-arquitetura.html">Arquitetura</a></li>
-            <li><a href="pilar-2-governanca.html" class="active">Governança</a></li>
-            <li><a href="pilar-3-llmops.html">LLMOps</a></li>
-            <li><a href="pilar-4-enablement.html">Enablement</a></li>
-            <li><a href="operacao.html">Operação</a></li>
-        </ul>
-        <button id="nav-toggle" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span><span></span></button>
-    </div>
-</nav>
-<div id="nav-mobile" role="navigation" aria-label="Menu mobile">
-    <a href="index.html">🏠 Início</a>
-    <a href="time.html">👥 Time & Fluxo</a>
-    <a href="pilar-1-arquitetura.html">🏗️ Pilar 1 · Arquitetura</a>
-    <a href="pilar-2-governanca.html" class="active">🛡️ Pilar 2 · Governança</a>
-    <a href="pilar-3-llmops.html">⚙️ Pilar 3 · LLMOps</a>
-    <a href="pilar-4-enablement.html">🚀 Pilar 4 · Enablement</a>
-    <a href="operacao.html">📊 Operação & Métricas</a>
-</div>
-
-<header class="page-hero">
-    <div class="hero-inner">
-        <div class="hero-eyebrow">Pilar 2</div>
-        <h1 class="hero-title">Governança <em>Técnica</em></h1>
-        <p class="hero-subtitle">Governança sem dentes não é governança. Processos que de fato bloqueiam soluções ruins de chegarem em produção — com ARB, matriz de risco e critérios de aceite mensuráveis.</p>
-        <div class="hero-chips">
-            <span class="chip">🛡️ ARB</span>
-            <span class="chip">⊞ Matriz 2×2</span>
-            <span class="chip">📋 Model cards</span>
-            <span class="chip">✓ Aceite técnico</span>
+    <nav id="topnav" role="navigation" aria-label="Navegação principal">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo" aria-label="Assaí Atacadista - CoE IA">
+                <img src="assets/Assaí_Atacadista_logo_2024.svg.png" alt="Assaí Atacadista">
+                <span class="nav-logo-divider" aria-hidden="true"></span>
+                <span class="nav-logo-label"><strong>CoE de IA</strong>Centro de Excelência</span>
+            </a>
+            <ul class="nav-links" role="list">
+                <li><a href="index.html">Início</a></li>
+                <li><a href="time.html">Time & Fluxo</a></li>
+                <li><a href="pilar-1-arquitetura.html">Arquitetura</a></li>
+                <li><a href="pilar-2-governanca.html" class="active">Governança</a></li>
+                <li><a href="pilar-3-llmops.html">LLMOps</a></li>
+                <li><a href="pilar-4-enablement.html">Enablement</a></li>
+                <li><a href="operacao.html">Operação</a></li>
+            </ul>
+            <button id="nav-toggle" aria-label="Abrir menu"
+                aria-expanded="false"><span></span><span></span><span></span></button>
         </div>
+    </nav>
+    <div id="nav-mobile" role="navigation" aria-label="Menu mobile">
+        <a href="index.html">🏠 Início</a>
+        <a href="time.html">👥 Time & Fluxo</a>
+        <a href="pilar-1-arquitetura.html">🏗️ Pilar 1 · Arquitetura</a>
+        <a href="pilar-2-governanca.html" class="active">🛡️ Pilar 2 · Governança</a>
+        <a href="pilar-3-llmops.html">⚙️ Pilar 3 · LLMOps</a>
+        <a href="pilar-4-enablement.html">🚀 Pilar 4 · Enablement</a>
+        <a href="operacao.html">📊 Operação & Métricas</a>
     </div>
-</header>
 
-<div class="page-body with-sidebar">
-    <aside class="sidebar" aria-label="Navegação da página">
-        <div class="sidebar-title">Nesta página</div>
-        <ul class="sidebar-nav">
-            <li><a href="#visao" class="active">🎯 Visão do pilar</a></li>
-            <li><a href="#processos">⚙️ Processos</a></li>
-        </ul>
-    </aside>
-
-    <main class="main-content">
-        <nav class="breadcrumb" aria-label="Localização">
-            <a href="index.html">Início</a>
-            <span class="breadcrumb-sep" aria-hidden="true">›</span>
-            <span>Pilar 2 · Governança</span>
-        </nav>
-
-        <section id="visao" class="doc-section">
-            <div class="section-label">Pilar 2</div>
-            <h2 class="section-title">Visão do pilar</h2>
-            <p class="section-desc">Qualidade antes do deploy — checklist técnico obrigatório</p>
-            <hr class="section-divider">
-
-            <div class="summary-box">
-                <div class="summary-box-label">📌 Resumo para todos</div>
-                <p>O Pilar 2 traduz risco de IA em perguntas objetivas no ARB, exige model card e critérios de aceite (latência, custo, qualidade, adversarial). O objetivo não é burocracia: é reduzir incidentes, custo surpresa e retrabalho.</p>
+    <header class="page-hero">
+        <div class="hero-inner">
+            <div class="hero-eyebrow">Pilar 2</div>
+            <h1 class="hero-title">Governança <em>Técnica</em></h1>
+            <p class="hero-subtitle">Governança sem dentes não é governança. Processos que de fato bloqueiam soluções
+                ruins de chegarem em produção — com ARB, matriz de risco e critérios de aceite mensuráveis.</p>
+            <div class="hero-chips">
+                <span class="chip">🛡️ ARB</span>
+                <span class="chip">⊞ Matriz 2×2</span>
+                <span class="chip">📋 Model cards</span>
+                <span class="chip">✓ Aceite técnico</span>
             </div>
+        </div>
+    </header>
 
-            <div class="cards cards-3">
-                <div class="stat-card">
-                    <span class="stat-val">ARB</span>
-                    <span class="stat-label">Architecture Review Board</span>
+    <div class="page-body with-sidebar">
+        <aside class="sidebar" aria-label="Navegação da página">
+            <div class="sidebar-title">Nesta página</div>
+            <ul class="sidebar-nav">
+                <li><a href="#visao" class="active">🎯 Visão do pilar</a></li>
+                <li><a href="#processos">⚙️ Processos</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <nav class="breadcrumb" aria-label="Localização">
+                <a href="index.html">Início</a>
+                <span class="breadcrumb-sep" aria-hidden="true">›</span>
+                <span>Pilar 2 · Governança</span>
+            </nav>
+
+            <section id="visao" class="doc-section">
+                <div class="section-label">Pilar 2</div>
+                <h2 class="section-title">Visão do pilar</h2>
+                <p class="section-desc">Qualidade antes do deploy — checklist técnico obrigatório</p>
+                <hr class="section-divider">
+
+                <div class="summary-box">
+                    <div class="summary-box-label">📌 Resumo para todos</div>
+                    <p>O Pilar 2 traduz risco de IA em perguntas objetivas no ARB, exige model card e critérios de
+                        aceite (latência, custo, qualidade, adversarial). O objetivo não é burocracia: é reduzir
+                        incidentes, custo surpresa e retrabalho.</p>
                 </div>
-                <div class="stat-card">
-                    <span class="stat-val">2×2</span>
-                    <span class="stat-label">Matriz de risco de IA</span>
+
+                <div class="cards cards-3">
+                    <div class="stat-card">
+                        <span class="stat-val">ARB</span>
+                        <span class="stat-label">Architecture Review Board</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-val">2×2</span>
+                        <span class="stat-label">Matriz de risco de IA</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-val">100%</span>
+                        <span class="stat-label">Projetos com model card</span>
+                    </div>
                 </div>
-                <div class="stat-card">
-                    <span class="stat-val">100%</span>
-                    <span class="stat-label">Projetos com model card</span>
+            </section>
+
+            <section id="processos" class="doc-section">
+                <div class="section-label">Processos</div>
+                <h2 class="section-title">Processos que garantem qualidade</h2>
+                <p class="section-desc">Checklist técnico obrigatório antes de qualquer deploy</p>
+                <hr class="section-divider">
+
+                <div class="two-col">
+                    <div>
+                        <div class="col-label">Architecture Review Board (ARB)</div>
+                        <ul class="doc-list checks">
+                            <li>A solução tem fallback se o modelo alucinar?</li>
+                            <li>Como o sistema detecta que a resposta está errada?</li>
+                            <li>Existe logging suficiente para debugar um incidente?</li>
+                            <li>Foi testado com adversarial inputs (prompt injection)?</li>
+                            <li>O custo projetado por mês foi calculado e aprovado?</li>
+                            <li>Existe plano de rollback documentado?</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="col-label">Critérios de aceite técnico para IA</div>
+                        <ul class="doc-list checks">
+                            <li>Taxa de alucinação abaixo de X% (avaliador automático)</li>
+                            <li>Latência P95 abaixo de Y segundos</li>
+                            <li>Custo por interação abaixo de Z centavos</li>
+                            <li>Faithfulness do RAG acima de W% (LLM-as-judge)</li>
+                            <li>Model card preenchido com limitações e responsável técnico</li>
+                            <li>Matriz de risco: impacto do erro × autonomia do sistema</li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </section>
 
-        <section id="processos" class="doc-section">
-            <div class="section-label">Processos</div>
-            <h2 class="section-title">Processos que garantem qualidade</h2>
-            <p class="section-desc">Checklist técnico obrigatório antes de qualquer deploy</p>
-            <hr class="section-divider">
-
-            <div class="two-col">
-                <div>
-                    <div class="col-label">Architecture Review Board (ARB)</div>
-                    <ul class="doc-list checks">
-                        <li>A solução tem fallback se o modelo alucinar?</li>
-                        <li>Como o sistema detecta que a resposta está errada?</li>
-                        <li>Existe logging suficiente para debugar um incidente?</li>
-                        <li>Foi testado com adversarial inputs (prompt injection)?</li>
-                        <li>O custo projetado por mês foi calculado e aprovado?</li>
-                        <li>Existe plano de rollback documentado?</li>
-                    </ul>
+                <div class="callout info">
+                    <div class="callout-label">💡 Como usar na prática</div>
+                    Os limiares <strong>X, Y, Z, W</strong> são definidos por domínio e revisados trimestralmente com o
+                    CoE Estratégico. O importante é que existam números e donos — não slides genéricos.
                 </div>
-                <div>
-                    <div class="col-label">Critérios de aceite técnico para IA</div>
-                    <ul class="doc-list checks">
-                        <li>Taxa de alucinação abaixo de X% (avaliador automático)</li>
-                        <li>Latência P95 abaixo de Y segundos</li>
-                        <li>Custo por interação abaixo de Z centavos</li>
-                        <li>Faithfulness do RAG acima de W% (LLM-as-judge)</li>
-                        <li>Model card preenchido com limitações e responsável técnico</li>
-                        <li>Matriz de risco: impacto do erro × autonomia do sistema</li>
-                    </ul>
-                </div>
-            </div>
+            </section>
 
-            <div class="callout info">
-                <div class="callout-label">💡 Como usar na prática</div>
-                Os limiares <strong>X, Y, Z, W</strong> são definidos por domínio e revisados trimestralmente com o CoE Estratégico. O importante é que existam números e donos — não slides genéricos.
-            </div>
-        </section>
+            <nav class="page-nav" aria-label="Navegação entre páginas">
+                <a href="pilar-1-arquitetura.html" class="page-nav-card">
+                    <div class="page-nav-dir">← Anterior</div>
+                    <div class="page-nav-title">Pilar 1 · Arquitetura</div>
+                </a>
+                <a href="pilar-3-llmops.html" class="page-nav-card next">
+                    <div class="page-nav-dir">Próximo →</div>
+                    <div class="page-nav-title">Pilar 3 · LLMOps</div>
+                </a>
+            </nav>
+        </main>
+    </div>
 
-        <nav class="page-nav" aria-label="Navegação entre páginas">
-            <a href="pilar-1-arquitetura.html" class="page-nav-card">
-                <div class="page-nav-dir">← Anterior</div>
-                <div class="page-nav-title">Pilar 1 · Arquitetura</div>
-            </a>
-            <a href="pilar-3-llmops.html" class="page-nav-card next">
-                <div class="page-nav-dir">Próximo →</div>
-                <div class="page-nav-title">Pilar 3 · LLMOps</div>
-            </a>
-        </nav>
-    </main>
-</div>
+    <footer id="footer">
+        <img src="assets/Assaí_Atacadista_logo_2024.svg.png" alt="Assaí Atacadista">
+        <span>CoE de Inteligência Artificial · Documentação Técnica</span>
+        <span>v1.0 · Maio 2026 · Confidencial</span>
+        <span class="footer-doc-links"><a href="coe-doc.html">Documento linear (coe-doc)</a><span class="footer-doc-sep"
+                aria-hidden="true">·</span><a href="coe-operacional.html">Apresentação em slides</a></span>
+        <span class="footer-author">Criado por Claudio Ramirez - Arquiteto Tech Lead CoE Operacional</span>
+    </footer>
 
-<footer id="footer">
-    <img src="assets/Assaí_Atacadista_logo_2024.svg.png" alt="Assaí Atacadista">
-    <span>CoE de Inteligência Artificial · Documentação Técnica</span>
-    <span>v1.0 · Maio 2026 · Confidencial</span>
-    <span class="footer-doc-links"><a href="coe-doc.html">Documento linear (coe-doc)</a><span class="footer-doc-sep" aria-hidden="true">·</span><a href="coe-operacional.html">Apresentação em slides</a></span>
-    <span class="footer-author">Criado por Claudio Ramirez - Arquiteto Tech Lead CoE Operacional</span>
-</footer>
-
-<script src="js/shared.js"></script>
+    <script src="js/shared.js"></script>
 </body>
+
 </html>

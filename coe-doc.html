@@ -1,1111 +1,2171 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CoE Operacional — Documentação Técnica</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap"
+        rel="stylesheet">
     <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    :root {
-        --red: #e31e24;
-        --blue: #1a56db;
-        --dark: #0f172a;
-        --slate: #1e293b;
-        --text: #1f2937;
-        --muted: #6b7280;
-        --light: #f8fafc;
-        --border: #e5e7eb;
-        --border-light: #f3f4f6;
-        --white: #ffffff;
-        --font: 'Inter', system-ui, sans-serif;
-        --sidebar-w: 260px;
-    }
+        :root {
+            --red: #e31e24;
+            --blue: #1a56db;
+            --dark: #0f172a;
+            --slate: #1e293b;
+            --text: #1f2937;
+            --muted: #6b7280;
+            --light: #f8fafc;
+            --border: #e5e7eb;
+            --border-light: #f3f4f6;
+            --white: #ffffff;
+            --font: 'Inter', system-ui, sans-serif;
+            --sidebar-w: 260px;
+        }
 
-    body { font-family: var(--font); background: var(--light); color: var(--text); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+        body {
+            font-family: var(--font);
+            background: var(--light);
+            color: var(--text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
 
-    /* ── LAYOUT ── */
-    #layout { display: flex; min-height: 100vh; }
+        /* ── LAYOUT ── */
+        #layout {
+            display: flex;
+            min-height: 100vh;
+        }
 
-    /* ── SIDEBAR ── */
-    #sidebar {
-        width: var(--sidebar-w); flex-shrink: 0;
-        background: var(--dark); color: #fff;
-        position: sticky; top: 0; height: 100vh; overflow-y: auto;
-        padding: 28px 0;
-        scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.1) transparent;
-    }
-    #sidebar::-webkit-scrollbar { width: 4px; }
-    #sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+        /* ── SIDEBAR ── */
+        #sidebar {
+            width: var(--sidebar-w);
+            flex-shrink: 0;
+            background: var(--dark);
+            color: #fff;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            padding: 28px 0;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+        }
 
-    .sidebar-brand { padding: 0 24px 24px; border-bottom: 1px solid rgba(255,255,255,0.07); margin-bottom: 16px; }
-    .sidebar-brand-tag { font-size: 0.65rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--red); margin-bottom: 6px; }
-    .sidebar-brand-title { font-size: 0.95rem; font-weight: 700; line-height: 1.3; }
+        #sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
 
-    .sidebar-section { padding: 6px 24px 2px; font-size: 0.62rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.25); margin-top: 14px; }
+        #sidebar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+        }
 
-    .sidebar-link {
-        display: flex; align-items: center; gap: 10px;
-        padding: 8px 24px; font-size: 0.82rem; color: rgba(255,255,255,0.55);
-        text-decoration: none; transition: all 0.15s; border-left: 3px solid transparent;
-    }
-    .sidebar-link:hover { color: #fff; background: rgba(255,255,255,0.04); }
-    .sidebar-link.active { color: #fff; border-left-color: var(--red); background: rgba(227,30,36,0.08); }
-    .sidebar-link .icon { font-size: 0.9rem; flex-shrink: 0; }
+        .sidebar-brand {
+            padding: 0 24px 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+            margin-bottom: 16px;
+        }
 
-    /* ── MAIN ── */
-    #main { flex: 1; min-width: 0; }
+        .sidebar-brand-tag {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--red);
+            margin-bottom: 6px;
+        }
 
-    /* ── TOP BAR ── */
-    #topbar {
-        position: sticky; top: 0; z-index: 50;
-        background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
-        border-bottom: 1px solid var(--border);
-        padding: 12px 48px; display: flex; justify-content: space-between; align-items: center;
-    }
-    .topbar-breadcrumb { font-size: 0.8rem; color: var(--muted); }
-    .topbar-breadcrumb span { color: var(--text); font-weight: 600; }
-    #progress-bar { height: 3px; background: var(--red); position: fixed; top: 0; left: var(--sidebar-w); right: 0; z-index: 100; width: 0; transition: width 0.2s; }
+        .sidebar-brand-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            line-height: 1.3;
+        }
 
-    /* ── CONTENT ── */
-    #content { padding: 56px 48px 100px; max-width: 860px; }
+        .sidebar-section {
+            padding: 6px 24px 2px;
+            font-size: 0.62rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.25);
+            margin-top: 14px;
+        }
 
-    /* ── PAGE HEADER ── */
-    .page-header { margin-bottom: 64px; padding-bottom: 40px; border-bottom: 2px solid var(--border-light); }
-    .page-eyebrow { font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--red); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
-    .page-eyebrow::before { content: ''; display: block; width: 28px; height: 2px; background: var(--red); }
-    .page-title { font-size: 2.6rem; font-weight: 800; color: var(--dark); line-height: 1.15; margin-bottom: 16px; }
-    .page-subtitle { font-size: 1.1rem; color: var(--muted); max-width: 620px; line-height: 1.7; margin-bottom: 32px; }
-    .page-meta { display: flex; gap: 24px; flex-wrap: wrap; }
-    .meta-item { font-size: 0.8rem; color: var(--muted); display: flex; align-items: center; gap: 6px; }
-    .meta-item strong { color: var(--text); }
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 24px;
+            font-size: 0.82rem;
+            color: rgba(255, 255, 255, 0.55);
+            text-decoration: none;
+            transition: all 0.15s;
+            border-left: 3px solid transparent;
+        }
 
-    /* ── PILLAR SUMMARY CARDS ── */
-    .pillar-overview { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 32px; }
-    .pillar-ov-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 20px; border-left: 4px solid var(--red); }
-    .pillar-ov-num { font-size: 0.65rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--red); margin-bottom: 4px; }
-    .pillar-ov-title { font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; }
-    .pillar-ov-body { font-size: 0.82rem; color: var(--muted); line-height: 1.55; }
+        .sidebar-link:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.04);
+        }
 
-    /* ── SECTION ── */
-    .doc-section { margin-bottom: 80px; scroll-margin-top: 80px; }
+        .sidebar-link.active {
+            color: #fff;
+            border-left-color: var(--red);
+            background: rgba(227, 30, 36, 0.08);
+        }
 
-    .section-header { margin-bottom: 32px; }
-    .section-tag { font-size: 0.65rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--red); margin-bottom: 10px; }
-    .section-title { font-size: 1.9rem; font-weight: 800; color: var(--dark); line-height: 1.2; margin-bottom: 10px; }
-    .section-subtitle { font-size: 0.95rem; color: var(--muted); }
+        .sidebar-link .icon {
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
 
-    /* ── SUMMARY BOX ── */
-    .summary-box {
-        background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 12px;
-        padding: 24px 28px; margin-bottom: 36px;
-    }
-    .summary-box-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--blue); margin-bottom: 10px; }
-    .summary-box p { font-size: 0.92rem; color: #1e3a8a; line-height: 1.7; }
-    .summary-box p + p { margin-top: 8px; }
+        /* ── MAIN ── */
+        #main {
+            flex: 1;
+            min-width: 0;
+        }
 
-    /* ── SUBSECTION ── */
-    .subsection { margin-bottom: 40px; }
-    .subsection-title { font-size: 1.15rem; font-weight: 700; color: var(--dark); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border-light); display: flex; align-items: center; gap: 10px; }
-    .subsection-title .badge { font-size: 0.65rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; background: #fee2e2; color: #991b1b; padding: 2px 8px; border-radius: 4px; }
-    .subsection-title .badge.blue { background: #dbeafe; color: #1e40af; }
-    .subsection-title .badge.green { background: #dcfce7; color: #166534; }
+        /* ── TOP BAR ── */
+        #topbar {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 12px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-    /* ── PROSE ── */
-    .prose p { font-size: 0.92rem; color: var(--text); line-height: 1.75; margin-bottom: 14px; }
-    .prose p:last-child { margin-bottom: 0; }
-    .prose strong { color: var(--dark); font-weight: 600; }
-    .prose em { color: var(--muted); }
-    .prose code { font-family: 'Fira Code', 'Courier New', monospace; font-size: 0.82rem; background: #f1f5f9; border: 1px solid var(--border); border-radius: 4px; padding: 1px 6px; color: #be185d; }
+        .topbar-breadcrumb {
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
 
-    /* ── LISTS ── */
-    .doc-list { list-style: none; display: flex; flex-direction: column; gap: 8px; margin: 14px 0; }
-    .doc-list li { display: flex; gap: 12px; align-items: flex-start; font-size: 0.88rem; color: var(--text); line-height: 1.6; }
-    .doc-list li::before { content: '→'; color: var(--red); font-weight: 700; flex-shrink: 0; margin-top: 2px; font-size: 0.8rem; }
-    .doc-list.checks li::before { content: '✓'; color: #16a34a; }
-    .doc-list.blocks li::before { content: '✗'; color: var(--red); }
+        .topbar-breadcrumb span {
+            color: var(--text);
+            font-weight: 600;
+        }
 
-    /* ── CARDS ── */
-    .cards { display: grid; gap: 14px; margin: 20px 0; }
-    .cards-2 { grid-template-columns: repeat(2, 1fr); }
-    .cards-3 { grid-template-columns: repeat(3, 1fr); }
+        #progress-bar {
+            height: 3px;
+            background: var(--red);
+            position: fixed;
+            top: 0;
+            left: var(--sidebar-w);
+            right: 0;
+            z-index: 100;
+            width: 0;
+            transition: width 0.2s;
+        }
 
-    .card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 22px; }
-    .card-icon { font-size: 1.5rem; margin-bottom: 10px; }
-    .card-title { font-size: 0.9rem; font-weight: 700; color: var(--dark); margin-bottom: 7px; }
-    .card-body { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+        /* ── CONTENT ── */
+        #content {
+            padding: 56px 48px 100px;
+            max-width: 860px;
+        }
 
-    /* ── TABLE ── */
-    .doc-table-wrap { overflow-x: auto; margin: 20px 0; border-radius: 10px; border: 1px solid var(--border); }
-    .doc-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-    .doc-table th { background: #f8fafc; font-weight: 600; color: var(--dark); padding: 12px 16px; text-align: left; border-bottom: 2px solid var(--border); white-space: nowrap; }
-    .doc-table td { padding: 11px 16px; border-bottom: 1px solid var(--border-light); color: var(--text); vertical-align: top; line-height: 1.55; }
-    .doc-table tbody tr:last-child td { border-bottom: none; }
-    .doc-table tbody tr:hover td { background: #f8fafc; }
+        /* ── PAGE HEADER ── */
+        .page-header {
+            margin-bottom: 64px;
+            padding-bottom: 40px;
+            border-bottom: 2px solid var(--border-light);
+        }
 
-    /* ── CALLOUT ── */
-    .callout { border-radius: 10px; padding: 18px 22px; margin: 20px 0; font-size: 0.88rem; line-height: 1.65; }
-    .callout-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
-    .callout.info { background: #eff6ff; border: 1px solid #bfdbfe; color: #1e3a8a; }
-    .callout.info .callout-label { color: var(--blue); }
-    .callout.warn { background: #fffbeb; border: 1px solid #fde68a; color: #92400e; }
-    .callout.warn .callout-label { color: #d97706; }
-    .callout.danger { background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; }
-    .callout.danger .callout-label { color: var(--red); }
-    .callout.success { background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; }
-    .callout.success .callout-label { color: #16a34a; }
+        .page-eyebrow {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--red);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-    /* ── FUNNEL ── */
-    .funnel { display: flex; flex-direction: column; gap: 0; margin: 20px 0; }
-    .funnel-step { display: flex; gap: 16px; padding: 18px 20px; background: var(--white); border: 1px solid var(--border); border-bottom: none; }
-    .funnel-step:first-child { border-radius: 10px 10px 0 0; }
-    .funnel-step:last-child { border-bottom: 1px solid var(--border); border-radius: 0 0 10px 10px; }
-    .funnel-step.highlight-step { border-left: 4px solid var(--red); background: #fef2f2; }
-    .funnel-num { font-size: 0.72rem; font-weight: 700; color: var(--red); min-width: 28px; padding-top: 2px; }
-    .funnel-content { flex: 1; }
-    .funnel-title { font-size: 0.9rem; font-weight: 700; color: var(--dark); margin-bottom: 4px; }
-    .funnel-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.55; }
-    .funnel-badge { font-size: 0.72rem; font-weight: 600; color: var(--muted); white-space: nowrap; padding-top: 2px; }
+        .page-eyebrow::before {
+            content: '';
+            display: block;
+            width: 28px;
+            height: 2px;
+            background: var(--red);
+        }
 
-    /* ── TWO-COL ── */
-    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin: 20px 0; }
-    .col-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--red); margin-bottom: 12px; }
+        .page-title {
+            font-size: 2.6rem;
+            font-weight: 800;
+            color: var(--dark);
+            line-height: 1.15;
+            margin-bottom: 16px;
+        }
 
-    /* ── DIVIDER ── */
-    .divider { border: none; border-top: 1px solid var(--border-light); margin: 40px 0; }
+        .page-subtitle {
+            font-size: 1.1rem;
+            color: var(--muted);
+            max-width: 620px;
+            line-height: 1.7;
+            margin-bottom: 32px;
+        }
 
-    /* ── TEAM CARD ── */
-    .team-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 22px; display: flex; gap: 16px; }
-    .team-icon { font-size: 2rem; flex-shrink: 0; }
-    .team-title { font-size: 0.92rem; font-weight: 700; color: var(--dark); margin-bottom: 4px; }
-    .team-body { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
-    .team-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
-    .team-tag { font-size: 0.7rem; font-weight: 600; background: #f1f5f9; border: 1px solid var(--border); border-radius: 4px; padding: 2px 8px; color: var(--muted); }
+        .page-meta {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
 
-    /* ── METRIC CARD ── */
-    .metric-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 22px; text-align: center; }
-    .metric-val { font-size: 2rem; font-weight: 800; color: var(--red); display: block; line-height: 1; margin-bottom: 6px; }
-    .metric-label { font-size: 0.78rem; color: var(--muted); font-weight: 500; }
+        .meta-item {
+            font-size: 0.8rem;
+            color: var(--muted);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
 
-    /* ── FOOTER ── */
-    #footer { border-top: 1px solid var(--border); padding: 28px 48px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; font-size: 0.8rem; color: var(--muted); }
-    #footer .footer-doc-links { flex-basis: 100%; order: 5; margin-top: 6px; text-align: center; font-size: 0.82rem; font-weight: 600; }
-    #footer .footer-doc-links a { color: var(--red); text-decoration: none; border-bottom: 1px solid rgba(227,30,36,0.25); }
-    #footer .footer-doc-links a:hover { border-bottom-color: var(--red); }
-    #footer .footer-doc-links .footer-doc-sep { padding: 0 10px; color: #cbd5e1; font-weight: 400; border: none; }
-    #footer .footer-author {
-        flex-basis: 100%;
-        order: 10;
-        margin-top: 6px;
-        padding: 14px 20px;
-        text-align: center;
-        font-size: 0.9rem;
-        font-weight: 700;
-        letter-spacing: 0.02em;
-        line-height: 1.45;
-        color: #7f1d1d;
-        background: linear-gradient(180deg, #fef2f2 0%, #fee2e2 100%);
-        border: 1px solid #fecaca;
-        border-left: 4px solid var(--red);
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(185, 21, 25, 0.08);
-    }
+        .meta-item strong {
+            color: var(--text);
+        }
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
-        #sidebar { display: none; }
-        #progress-bar { left: 0; }
-        #content { padding: 32px 24px 80px; }
-        #topbar { padding: 12px 24px; }
-        .pillar-overview, .cards-2, .cards-3, .two-col { grid-template-columns: 1fr; }
-        .page-title { font-size: 1.9rem; }
-    }
+        /* ── PILLAR SUMMARY CARDS ── */
+        .pillar-overview {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+            margin-top: 32px;
+        }
+
+        .pillar-ov-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+            border-left: 4px solid var(--red);
+        }
+
+        .pillar-ov-num {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--red);
+            margin-bottom: 4px;
+        }
+
+        .pillar-ov-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .pillar-ov-body {
+            font-size: 0.82rem;
+            color: var(--muted);
+            line-height: 1.55;
+        }
+
+        /* ── SECTION ── */
+        .doc-section {
+            margin-bottom: 80px;
+            scroll-margin-top: 80px;
+        }
+
+        .section-header {
+            margin-bottom: 32px;
+        }
+
+        .section-tag {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--red);
+            margin-bottom: 10px;
+        }
+
+        .section-title {
+            font-size: 1.9rem;
+            font-weight: 800;
+            color: var(--dark);
+            line-height: 1.2;
+            margin-bottom: 10px;
+        }
+
+        .section-subtitle {
+            font-size: 0.95rem;
+            color: var(--muted);
+        }
+
+        /* ── SUMMARY BOX ── */
+        .summary-box {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 12px;
+            padding: 24px 28px;
+            margin-bottom: 36px;
+        }
+
+        .summary-box-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--blue);
+            margin-bottom: 10px;
+        }
+
+        .summary-box p {
+            font-size: 0.92rem;
+            color: #1e3a8a;
+            line-height: 1.7;
+        }
+
+        .summary-box p+p {
+            margin-top: 8px;
+        }
+
+        /* ── SUBSECTION ── */
+        .subsection {
+            margin-bottom: 40px;
+        }
+
+        .subsection-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .subsection-title .badge {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .subsection-title .badge.blue {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .subsection-title .badge.green {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        /* ── PROSE ── */
+        .prose p {
+            font-size: 0.92rem;
+            color: var(--text);
+            line-height: 1.75;
+            margin-bottom: 14px;
+        }
+
+        .prose p:last-child {
+            margin-bottom: 0;
+        }
+
+        .prose strong {
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        .prose em {
+            color: var(--muted);
+        }
+
+        .prose code {
+            font-family: 'Fira Code', 'Courier New', monospace;
+            font-size: 0.82rem;
+            background: #f1f5f9;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 1px 6px;
+            color: #be185d;
+        }
+
+        /* ── LISTS ── */
+        .doc-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin: 14px 0;
+        }
+
+        .doc-list li {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            font-size: 0.88rem;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .doc-list li::before {
+            content: '→';
+            color: var(--red);
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-top: 2px;
+            font-size: 0.8rem;
+        }
+
+        .doc-list.checks li::before {
+            content: '✓';
+            color: #16a34a;
+        }
+
+        .doc-list.blocks li::before {
+            content: '✗';
+            color: var(--red);
+        }
+
+        /* ── CARDS ── */
+        .cards {
+            display: grid;
+            gap: 14px;
+            margin: 20px 0;
+        }
+
+        .cards-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .cards-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 22px;
+        }
+
+        .card-icon {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .card-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 7px;
+        }
+
+        .card-body {
+            font-size: 0.82rem;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        /* ── TABLE ── */
+        .doc-table-wrap {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+
+        .doc-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+
+        .doc-table th {
+            background: #f8fafc;
+            font-weight: 600;
+            color: var(--dark);
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 2px solid var(--border);
+            white-space: nowrap;
+        }
+
+        .doc-table td {
+            padding: 11px 16px;
+            border-bottom: 1px solid var(--border-light);
+            color: var(--text);
+            vertical-align: top;
+            line-height: 1.55;
+        }
+
+        .doc-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .doc-table tbody tr:hover td {
+            background: #f8fafc;
+        }
+
+        /* ── CALLOUT ── */
+        .callout {
+            border-radius: 10px;
+            padding: 18px 22px;
+            margin: 20px 0;
+            font-size: 0.88rem;
+            line-height: 1.65;
+        }
+
+        .callout-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .callout.info {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            color: #1e3a8a;
+        }
+
+        .callout.info .callout-label {
+            color: var(--blue);
+        }
+
+        .callout.warn {
+            background: #fffbeb;
+            border: 1px solid #fde68a;
+            color: #92400e;
+        }
+
+        .callout.warn .callout-label {
+            color: #d97706;
+        }
+
+        .callout.danger {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #991b1b;
+        }
+
+        .callout.danger .callout-label {
+            color: var(--red);
+        }
+
+        .callout.success {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            color: #166534;
+        }
+
+        .callout.success .callout-label {
+            color: #16a34a;
+        }
+
+        /* ── FUNNEL ── */
+        .funnel {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            margin: 20px 0;
+        }
+
+        .funnel-step {
+            display: flex;
+            gap: 16px;
+            padding: 18px 20px;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-bottom: none;
+        }
+
+        .funnel-step:first-child {
+            border-radius: 10px 10px 0 0;
+        }
+
+        .funnel-step:last-child {
+            border-bottom: 1px solid var(--border);
+            border-radius: 0 0 10px 10px;
+        }
+
+        .funnel-step.highlight-step {
+            border-left: 4px solid var(--red);
+            background: #fef2f2;
+        }
+
+        .funnel-num {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--red);
+            min-width: 28px;
+            padding-top: 2px;
+        }
+
+        .funnel-content {
+            flex: 1;
+        }
+
+        .funnel-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 4px;
+        }
+
+        .funnel-desc {
+            font-size: 0.82rem;
+            color: var(--muted);
+            line-height: 1.55;
+        }
+
+        .funnel-badge {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--muted);
+            white-space: nowrap;
+            padding-top: 2px;
+        }
+
+        /* ── TWO-COL ── */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+            margin: 20px 0;
+        }
+
+        .col-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--red);
+            margin-bottom: 12px;
+        }
+
+        /* ── DIVIDER ── */
+        .divider {
+            border: none;
+            border-top: 1px solid var(--border-light);
+            margin: 40px 0;
+        }
+
+        /* ── TEAM CARD ── */
+        .team-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 22px;
+            display: flex;
+            gap: 16px;
+        }
+
+        .team-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .team-title {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 4px;
+        }
+
+        .team-body {
+            font-size: 0.82rem;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .team-tags {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+
+        .team-tag {
+            font-size: 0.7rem;
+            font-weight: 600;
+            background: #f1f5f9;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 2px 8px;
+            color: var(--muted);
+        }
+
+        /* ── METRIC CARD ── */
+        .metric-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 22px;
+            text-align: center;
+        }
+
+        .metric-val {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--red);
+            display: block;
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+
+        .metric-label {
+            font-size: 0.78rem;
+            color: var(--muted);
+            font-weight: 500;
+        }
+
+        /* ── FOOTER ── */
+        #footer {
+            border-top: 1px solid var(--border);
+            padding: 28px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        #footer .footer-doc-links {
+            flex-basis: 100%;
+            order: 5;
+            margin-top: 6px;
+            text-align: center;
+            font-size: 0.82rem;
+            font-weight: 600;
+        }
+
+        #footer .footer-doc-links a {
+            color: var(--red);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(227, 30, 36, 0.25);
+        }
+
+        #footer .footer-doc-links a:hover {
+            border-bottom-color: var(--red);
+        }
+
+        #footer .footer-doc-links .footer-doc-sep {
+            padding: 0 10px;
+            color: #cbd5e1;
+            font-weight: 400;
+            border: none;
+        }
+
+        #footer .footer-author {
+            flex-basis: 100%;
+            order: 10;
+            margin-top: 6px;
+            padding: 14px 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            line-height: 1.45;
+            color: #7f1d1d;
+            background: linear-gradient(180deg, #fef2f2 0%, #fee2e2 100%);
+            border: 1px solid #fecaca;
+            border-left: 4px solid var(--red);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(185, 21, 25, 0.08);
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 900px) {
+            #sidebar {
+                display: none;
+            }
+
+            #progress-bar {
+                left: 0;
+            }
+
+            #content {
+                padding: 32px 24px 80px;
+            }
+
+            #topbar {
+                padding: 12px 24px;
+            }
+
+            .pillar-overview,
+            .cards-2,
+            .cards-3,
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+
+            .page-title {
+                font-size: 1.9rem;
+            }
+        }
     </style>
 </head>
+
 <body>
-<div id="progress-bar"></div>
-<div id="layout">
+    <div id="progress-bar"></div>
+    <div id="layout">
 
-<!-- SIDEBAR -->
-<aside id="sidebar">
-    <div class="sidebar-brand">
-        <div class="sidebar-brand-tag">CoE · IA</div>
-        <div class="sidebar-brand-title">CoE Operacional<br>Documentação Técnica</div>
-    </div>
+        <!-- SIDEBAR -->
+        <aside id="sidebar">
+            <div class="sidebar-brand">
+                <div class="sidebar-brand-tag">CoE · IA</div>
+                <div class="sidebar-brand-title">CoE Operacional<br>Documentação Técnica</div>
+            </div>
 
-    <div class="sidebar-section">Visão Geral</div>
-    <a href="#intro" class="sidebar-link active"><span class="icon">🏠</span> Introdução</a>
-    <a href="#time" class="sidebar-link"><span class="icon">👥</span> Composição do Time</a>
-    <a href="#fluxo" class="sidebar-link"><span class="icon">🔄</span> Fluxo de Trabalho</a>
-    <a href="#escopo" class="sidebar-link"><span class="icon">🎯</span> Escopo e Limites</a>
+            <div class="sidebar-section">Visão Geral</div>
+            <a href="#intro" class="sidebar-link active"><span class="icon">🏠</span> Introdução</a>
+            <a href="#time" class="sidebar-link"><span class="icon">👥</span> Composição do Time</a>
+            <a href="#fluxo" class="sidebar-link"><span class="icon">🔄</span> Fluxo de Trabalho</a>
+            <a href="#escopo" class="sidebar-link"><span class="icon">🎯</span> Escopo e Limites</a>
 
-    <div class="sidebar-section">Os 4 Pilares</div>
-    <a href="#p1" class="sidebar-link"><span class="icon">🏗️</span> P1 · Arquitetura</a>
-    <a href="#p2" class="sidebar-link"><span class="icon">🛡️</span> P2 · Governança</a>
-    <a href="#p3" class="sidebar-link"><span class="icon">⚙️</span> P3 · LLMOps</a>
-    <a href="#p4" class="sidebar-link"><span class="icon">🚀</span> P4 · Enablement</a>
+            <div class="sidebar-section">Os 4 Pilares</div>
+            <a href="#p1" class="sidebar-link"><span class="icon">🏗️</span> P1 · Arquitetura</a>
+            <a href="#p2" class="sidebar-link"><span class="icon">🛡️</span> P2 · Governança</a>
+            <a href="#p3" class="sidebar-link"><span class="icon">⚙️</span> P3 · LLMOps</a>
+            <a href="#p4" class="sidebar-link"><span class="icon">🚀</span> P4 · Enablement</a>
 
-    <div class="sidebar-section">Operação</div>
-    <a href="#metricas" class="sidebar-link"><span class="icon">📊</span> Métricas de Sucesso</a>
-    <a href="#90dias" class="sidebar-link"><span class="icon">📅</span> Primeiros 90 Dias</a>
-</aside>
+            <div class="sidebar-section">Operação</div>
+            <a href="#metricas" class="sidebar-link"><span class="icon">📊</span> Métricas de Sucesso</a>
+            <a href="#90dias" class="sidebar-link"><span class="icon">📅</span> Primeiros 90 Dias</a>
+        </aside>
 
-<!-- MAIN -->
-<div id="main">
-<div id="topbar">
-    <div class="topbar-breadcrumb">CoE de IA &rsaquo; <span>CoE Operacional</span></div>
-    <div style="font-size:0.78rem;color:var(--muted);">Documentação Técnica · v1.0 · Mai 2026</div>
-</div>
-<div id="content">
+        <!-- MAIN -->
+        <div id="main">
+            <div id="topbar">
+                <div class="topbar-breadcrumb">CoE de IA &rsaquo; <span>CoE Operacional</span></div>
+                <div style="font-size:0.78rem;color:var(--muted);">Documentação Técnica · v1.0 · Mai 2026</div>
+            </div>
+            <div id="content">
 
 
-<!-- ═══════════════════════════════════════════════
+                <!-- ═══════════════════════════════════════════════
      INTRODUÇÃO
 ════════════════════════════════════════════════ -->
-<section id="intro" class="doc-section">
-    <div class="page-header">
-        <div class="page-eyebrow">Centro de Excelência em Inteligência Artificial</div>
-        <h1 class="page-title">CoE Operacional</h1>
-        <p class="page-subtitle">A camada técnica onde a IA sai do papel e vira produto. Esta documentação descreve como o CoE Operacional funciona, o que entrega, como se organiza e quais padrões todos os times devem seguir.</p>
-        <div class="page-meta">
-            <div class="meta-item">📅 <strong>Versão 1.0</strong> · Maio 2026</div>
-            <div class="meta-item">👥 <strong>Audiência:</strong> Todo o time do CoE e times parceiros</div>
-            <div class="meta-item">🔄 <strong>Revisão:</strong> Trimestral</div>
-        </div>
-    </div>
+                <section id="intro" class="doc-section">
+                    <div class="page-header">
+                        <div class="page-eyebrow">Centro de Excelência em Inteligência Artificial</div>
+                        <h1 class="page-title">CoE Operacional</h1>
+                        <p class="page-subtitle">A camada técnica onde a IA sai do papel e vira produto. Esta
+                            documentação descreve como o CoE Operacional funciona, o que entrega, como se organiza e
+                            quais padrões todos os times devem seguir.</p>
+                        <div class="page-meta">
+                            <div class="meta-item">📅 <strong>Versão 1.0</strong> · Maio 2026</div>
+                            <div class="meta-item">👥 <strong>Audiência:</strong> Todo o time do CoE e times parceiros
+                            </div>
+                            <div class="meta-item">🔄 <strong>Revisão:</strong> Trimestral</div>
+                        </div>
+                    </div>
 
-    <div class="summary-box">
-        <div class="summary-box-label">📌 Resumo para todos</div>
-        <p>O CoE de IA tem três níveis: o <strong>Executivo</strong> (diretoria) define a visão e aprova investimentos; o <strong>Estratégico</strong> (gerentes) prioriza os projetos e cuida da adoção; e o <strong>Operacional</strong> — este documento — é onde a IA é de fato construída e colocada em produção.</p>
-        <p>Nosso papel não é desenvolver tudo sozinhos. É criar os padrões, garantir que sejam seguidos, manter a operação saudável e distribuir capacidade para que cada time da empresa consiga construir soluções de IA com qualidade e segurança.</p>
-    </div>
+                    <div class="summary-box">
+                        <div class="summary-box-label">📌 Resumo para todos</div>
+                        <p>O CoE de IA tem três níveis: o <strong>Estratégico</strong> (diretoria) define prioridades e
+                            processos a construir; o <strong>Tático</strong> (gerentes) filtra por orçamento, time e
+                            viabilidade; e o <strong>Operacional</strong> — este documento — é onde a IA é de fato
+                            construída e colocada em produção.</p>
+                        <p>Nosso papel não é desenvolver tudo sozinhos. É criar os padrões, garantir que sejam seguidos,
+                            manter a operação saudável e distribuir capacidade para que cada time da empresa consiga
+                            construir soluções de IA com qualidade e segurança.</p>
+                    </div>
 
-    <div class="section-header">
-        <div class="section-tag">Estrutura</div>
-        <h2 class="section-title">Os 4 Pilares de Responsabilidade</h2>
-        <p class="section-subtitle">Tudo que o CoE Operacional faz se encaixa em um destes quatro pilares. Eles são sequenciais: cada um sustenta o próximo.</p>
-    </div>
+                    <div class="section-header">
+                        <div class="section-tag">Estrutura</div>
+                        <h2 class="section-title">Os 4 Pilares de Responsabilidade</h2>
+                        <p class="section-subtitle">Tudo que o CoE Operacional faz se encaixa em um destes quatro
+                            pilares. Eles são sequenciais: cada um sustenta o próximo.</p>
+                    </div>
 
-    <div class="pillar-overview">
-        <div class="pillar-ov-card">
-            <div class="pillar-ov-num">Pilar 1</div>
-            <div class="pillar-ov-title">🏗️ Arquitetura de Referência</div>
-            <div class="pillar-ov-body">Definimos como a empresa constrói soluções de IA — não caso a caso, mas em padrões reutilizáveis documentados. Decisões de stack, segurança de dados, blueprints de solução.</div>
-        </div>
-        <div class="pillar-ov-card">
-            <div class="pillar-ov-num">Pilar 2</div>
-            <div class="pillar-ov-title">🛡️ Governança Técnica</div>
-            <div class="pillar-ov-body">Somos os guardiões da qualidade arquitetural. Nenhuma solução vai para produção sem passar por critérios técnicos claros de segurança, qualidade e risco.</div>
-        </div>
-        <div class="pillar-ov-card">
-            <div class="pillar-ov-num">Pilar 3</div>
-            <div class="pillar-ov-title">⚙️ Integração & LLMOps</div>
-            <div class="pillar-ov-body">Garantimos que as soluções sejam observáveis, mensuráveis e operáveis em produção. Sem isso, a IA vira uma PoC eterna que nunca escala.</div>
-        </div>
-        <div class="pillar-ov-card">
-            <div class="pillar-ov-num">Pilar 4</div>
-            <div class="pillar-ov-title">🚀 Enablement dos Times</div>
-            <div class="pillar-ov-body">Criamos playbooks, templates e trilhas de capacitação para que os times construam com qualidade sem depender do CoE para cada projeto.</div>
-        </div>
-    </div>
+                    <div class="pillar-overview">
+                        <div class="pillar-ov-card">
+                            <div class="pillar-ov-num">Pilar 1</div>
+                            <div class="pillar-ov-title">🏗️ Arquitetura de Referência</div>
+                            <div class="pillar-ov-body">Definimos como a empresa constrói soluções de IA — não caso a
+                                caso, mas em padrões reutilizáveis documentados. Decisões de stack, segurança de dados,
+                                blueprints de solução.</div>
+                        </div>
+                        <div class="pillar-ov-card">
+                            <div class="pillar-ov-num">Pilar 2</div>
+                            <div class="pillar-ov-title">🛡️ Governança Técnica</div>
+                            <div class="pillar-ov-body">Somos os guardiões da qualidade arquitetural. Nenhuma solução
+                                vai para produção sem passar por critérios técnicos claros de segurança, qualidade e
+                                risco.</div>
+                        </div>
+                        <div class="pillar-ov-card">
+                            <div class="pillar-ov-num">Pilar 3</div>
+                            <div class="pillar-ov-title">⚙️ Integração & LLMOps</div>
+                            <div class="pillar-ov-body">Garantimos que as soluções sejam observáveis, mensuráveis e
+                                operáveis em produção. Sem isso, a IA vira uma PoC eterna que nunca escala.</div>
+                        </div>
+                        <div class="pillar-ov-card">
+                            <div class="pillar-ov-num">Pilar 4</div>
+                            <div class="pillar-ov-title">🚀 Enablement dos Times</div>
+                            <div class="pillar-ov-body">Criamos playbooks, templates e trilhas de capacitação para que
+                                os times construam com qualidade sem depender do CoE para cada projeto.</div>
+                        </div>
+                    </div>
 
-    <div class="callout warn" style="margin-top:28px;">
-        <div class="callout-label">⚠️ Atenção</div>
-        CoEs que pulam o Pilar 3 acumulam PoCs que não sobrevivem ao contato com produção. CoEs que só fazem o Pilar 4 viram academia sem produto. CoEs que só fazem o Pilar 1 viram comitê de documentação. Os quatro pilares precisam funcionar juntos.
-    </div>
-</section>
+                    <div class="callout warn" style="margin-top:28px;">
+                        <div class="callout-label">⚠️ Atenção</div>
+                        CoEs que pulam o Pilar 3 acumulam PoCs que não sobrevivem ao contato com produção. CoEs que só
+                        fazem o Pilar 4 viram academia sem produto. CoEs que só fazem o Pilar 1 viram comitê de
+                        documentação. Os quatro pilares precisam funcionar juntos.
+                    </div>
+                </section>
 
-<!-- ═══════════════════════════════════════════════
+                <!-- ═══════════════════════════════════════════════
      COMPOSIÇÃO DO TIME
 ════════════════════════════════════════════════ -->
-<section id="time" class="doc-section">
-    <div class="section-header">
-        <div class="section-tag">Time</div>
-        <h2 class="section-title">Composição do CoE Operacional</h2>
-        <p class="section-subtitle">Os perfis que tornam os 4 pilares possíveis</p>
-    </div>
+                <section id="time" class="doc-section">
+                    <div class="section-header">
+                        <div class="section-tag">Time</div>
+                        <h2 class="section-title">Composição do CoE Operacional</h2>
+                        <p class="section-subtitle">Os perfis que tornam os 4 pilares possíveis</p>
+                    </div>
 
-    <div class="summary-box">
-        <div class="summary-box-label">📌 Resumo para todos</div>
-        <p>O CoE Operacional é formado por especialistas técnicos com perfis complementares. Cada perfil tem responsabilidades claras e contribui para pilares específicos. Nenhum perfil trabalha isolado — a colaboração entre eles é o que garante soluções completas e seguras.</p>
-    </div>
+                    <div class="summary-box">
+                        <div class="summary-box-label">📌 Resumo para todos</div>
+                        <p>O CoE Operacional é formado por especialistas técnicos com perfis complementares. Cada perfil
+                            tem responsabilidades claras e contribui para pilares específicos. Nenhum perfil trabalha
+                            isolado — a colaboração entre eles é o que garante soluções completas e seguras.</p>
+                    </div>
 
-    <div class="subsection">
-        <div class="subsection-title">Perfis e Responsabilidades</div>
-        <div class="cards cards-2" style="margin-top:16px;">
-            <div class="team-card">
-                <div class="team-icon">🏛️</div>
-                <div>
-                    <div class="team-title">Arquiteto de Soluções</div>
-                    <div class="team-body">Define os padrões técnicos, lidera o Architecture Review Board (ARB), toma decisões de stack e é a ponte entre o que o negócio quer e o que o time consegue entregar com qualidade. Responsável pelos Pilares 1 e 2.</div>
-                    <div class="team-tags"><span class="team-tag">Pilar 1</span><span class="team-tag">Pilar 2</span><span class="team-tag">ADR</span><span class="team-tag">ARB</span></div>
-                </div>
-            </div>
-            <div class="team-card">
-                <div class="team-icon">🤖</div>
-                <div>
-                    <div class="team-title">Engenheiro de ML / NLP</div>
-                    <div class="team-body">Constrói e avalia modelos, implementa pipelines de RAG e fine-tuning, define métricas de qualidade e conduz os processos de avaliação (evals). É quem garante que o modelo funciona para o problema certo.</div>
-                    <div class="team-tags"><span class="team-tag">Pilar 1</span><span class="team-tag">Pilar 3</span><span class="team-tag">RAG</span><span class="team-tag">Evals</span></div>
-                </div>
-            </div>
-            <div class="team-card">
-                <div class="team-icon">🗄️</div>
-                <div>
-                    <div class="team-title">Especialista em Dados</div>
-                    <div class="team-body">Garante a qualidade dos dados que alimentam os modelos. Cuida de ingestão de fontes corporativas, estratégia de chunking, enriquecimento de metadados e reindexação. RAG é tão bom quanto seus dados.</div>
-                    <div class="team-tags"><span class="team-tag">Pilar 3</span><span class="team-tag">Pipeline</span><span class="team-tag">Chunking</span><span class="team-tag">Metadata</span></div>
-                </div>
-            </div>
-            <div class="team-card">
-                <div class="team-icon">⚡</div>
-                <div>
-                    <div class="team-title">Especialista em Automação</div>
-                    <div class="team-body">RPA, agentes de IA e BPM. Constrói os fluxos inteligentes que conectam sistemas e processos. Suporta o programa de Citizen Developers nas áreas de negócio, garantindo que automações sigam os padrões do CoE.</div>
-                    <div class="team-tags"><span class="team-tag">Pilar 1</span><span class="team-tag">Pilar 4</span><span class="team-tag">Agentes</span><span class="team-tag">RPA</span></div>
-                </div>
-            </div>
-            <div class="team-card">
-                <div class="team-icon">☁️</div>
-                <div>
-                    <div class="team-title">Especialista em Cloud & Infraestrutura</div>
-                    <div class="team-body">Provisiona e mantém o ambiente de IA. Garante escalabilidade, disponibilidade e controle de custo de infraestrutura. Responsável pelo gateway de LLM e pela plataforma de observabilidade.</div>
-                    <div class="team-tags"><span class="team-tag">Pilar 3</span><span class="team-tag">Gateway</span><span class="team-tag">Infra</span><span class="team-tag">Custo</span></div>
-                </div>
-            </div>
-            <div class="team-card">
-                <div class="team-icon">🔒</div>
-                <div>
-                    <div class="team-title">DevSecOps</div>
-                    <div class="team-body">Segurança no pipeline de desenvolvimento. Garante que políticas de dados, LGPD e controles de acesso sejam aplicados em todo o ciclo de vida das soluções. Participa do ARB em todos os projetos de risco médio ou alto.</div>
-                    <div class="team-tags"><span class="team-tag">Pilar 2</span><span class="team-tag">LGPD</span><span class="team-tag">Segurança</span><span class="team-tag">ARB</span></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+                    <div class="subsection">
+                        <div class="subsection-title">Perfis e Responsabilidades</div>
+                        <div class="cards cards-2" style="margin-top:16px;">
+                            <div class="team-card">
+                                <div class="team-icon">🏛️</div>
+                                <div>
+                                    <div class="team-title">Arquiteto de Soluções</div>
+                                    <div class="team-body">Define os padrões técnicos, lidera o Architecture Review
+                                        Board (ARB), toma decisões de stack e é a ponte entre o que o negócio quer e o
+                                        que o time consegue entregar com qualidade. Responsável pelos Pilares 1 e 2.
+                                    </div>
+                                    <div class="team-tags"><span class="team-tag">Pilar 1</span><span
+                                            class="team-tag">Pilar 2</span><span class="team-tag">ADR</span><span
+                                            class="team-tag">ARB</span></div>
+                                </div>
+                            </div>
+                            <div class="team-card">
+                                <div class="team-icon">🤖</div>
+                                <div>
+                                    <div class="team-title">Engenheiro de ML / NLP</div>
+                                    <div class="team-body">Constrói e avalia modelos, implementa pipelines de RAG e
+                                        fine-tuning, define métricas de qualidade e conduz os processos de avaliação
+                                        (evals). É quem garante que o modelo funciona para o problema certo.</div>
+                                    <div class="team-tags"><span class="team-tag">Pilar 1</span><span
+                                            class="team-tag">Pilar 3</span><span class="team-tag">RAG</span><span
+                                            class="team-tag">Evals</span></div>
+                                </div>
+                            </div>
+                            <div class="team-card">
+                                <div class="team-icon">🗄️</div>
+                                <div>
+                                    <div class="team-title">Especialista em Dados</div>
+                                    <div class="team-body">Garante a qualidade dos dados que alimentam os modelos. Cuida
+                                        de ingestão de fontes corporativas, estratégia de chunking, enriquecimento de
+                                        metadados e reindexação. RAG é tão bom quanto seus dados.</div>
+                                    <div class="team-tags"><span class="team-tag">Pilar 3</span><span
+                                            class="team-tag">Pipeline</span><span class="team-tag">Chunking</span><span
+                                            class="team-tag">Metadata</span></div>
+                                </div>
+                            </div>
+                            <div class="team-card">
+                                <div class="team-icon">⚡</div>
+                                <div>
+                                    <div class="team-title">Especialista em Automação</div>
+                                    <div class="team-body">RPA, agentes de IA e BPM. Constrói os fluxos inteligentes que
+                                        conectam sistemas e processos. Suporta o programa de Citizen Developers nas
+                                        áreas de negócio, garantindo que automações sigam os padrões do CoE.</div>
+                                    <div class="team-tags"><span class="team-tag">Pilar 1</span><span
+                                            class="team-tag">Pilar 4</span><span class="team-tag">Agentes</span><span
+                                            class="team-tag">RPA</span></div>
+                                </div>
+                            </div>
+                            <div class="team-card">
+                                <div class="team-icon">☁️</div>
+                                <div>
+                                    <div class="team-title">Especialista em Cloud & Infraestrutura</div>
+                                    <div class="team-body">Provisiona e mantém o ambiente de IA. Garante escalabilidade,
+                                        disponibilidade e controle de custo de infraestrutura. Responsável pelo gateway
+                                        de LLM e pela plataforma de observabilidade.</div>
+                                    <div class="team-tags"><span class="team-tag">Pilar 3</span><span
+                                            class="team-tag">Gateway</span><span class="team-tag">Infra</span><span
+                                            class="team-tag">Custo</span></div>
+                                </div>
+                            </div>
+                            <div class="team-card">
+                                <div class="team-icon">🔒</div>
+                                <div>
+                                    <div class="team-title">DevSecOps</div>
+                                    <div class="team-body">Segurança no pipeline de desenvolvimento. Garante que
+                                        políticas de dados, LGPD e controles de acesso sejam aplicados em todo o ciclo
+                                        de vida das soluções. Participa do ARB em todos os projetos de risco médio ou
+                                        alto.</div>
+                                    <div class="team-tags"><span class="team-tag">Pilar 2</span><span
+                                            class="team-tag">LGPD</span><span class="team-tag">Segurança</span><span
+                                            class="team-tag">ARB</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
 
 
-<!-- ═══════════════════════════════════════════════
+                <!-- ═══════════════════════════════════════════════
      FLUXO DE TRABALHO
 ════════════════════════════════════════════════ -->
-<section id="fluxo" class="doc-section">
-    <div class="section-header">
-        <div class="section-tag">Fluxo</div>
-        <h2 class="section-title">Como uma demanda chega e sai do CoE</h2>
-        <p class="section-subtitle">Do pedido do negócio ao produto em produção — quem faz o quê em cada etapa</p>
-    </div>
+                <section id="fluxo" class="doc-section">
+                    <div class="section-header">
+                        <div class="section-tag">Fluxo</div>
+                        <h2 class="section-title">Como uma demanda chega e sai do CoE</h2>
+                        <p class="section-subtitle">Do pedido do negócio ao produto em produção — quem faz o quê em cada
+                            etapa</p>
+                    </div>
 
-    <div class="summary-box">
-        <div class="summary-box-label">📌 Resumo para todos</div>
-        <p>Uma demanda de IA nunca começa no CoE Operacional. Ela nasce no negócio, é priorizada pelo CoE Estratégico e chega até nós com um business case. Nós avaliamos a viabilidade técnica, executamos seguindo nossos padrões e devolvemos métricas de impacto para fechar o ciclo.</p>
-    </div>
+                    <div class="summary-box">
+                        <div class="summary-box-label">📌 Resumo para todos</div>
+                        <p>Uma demanda de IA nunca começa no CoE Operacional. O <strong>CoE Estratégico</strong> define
+                            prioridades e processos; o <strong>CoE Tático</strong> filtra por orçamento, time e
+                            viabilidade; só então o <strong>CoE Operacional</strong> implementa, com business case
+                            validado.</p>
+                    </div>
 
-    <div class="funnel">
-        <div class="funnel-step">
-            <div class="funnel-num">①</div>
-            <div class="funnel-content">
-                <div class="funnel-title">CoE Estratégico identifica e prioriza</div>
-                <div class="funnel-desc">Gerentes das áreas identificam oportunidades e submetem ao backlog com um business case preliminar (problema, impacto esperado, área responsável). O CoE Estratégico prioriza usando a matriz Quick Wins / Estratégicos / Longo Prazo.</div>
-            </div>
-            <div class="funnel-badge">Entrada</div>
-        </div>
-        <div class="funnel-step">
-            <div class="funnel-num">②</div>
-            <div class="funnel-content">
-                <div class="funnel-title">CoE Operacional avalia viabilidade técnica</div>
-                <div class="funnel-desc">O Arquiteto analisa: os dados necessários existem e têm qualidade suficiente? A complexidade técnica é compatível com o prazo e o budget? Qual é o nível de risco? A demanda é encaixada na fase correta do funil de maturidade (Exploração, PoC, Piloto ou Produção).</div>
-            </div>
-            <div class="funnel-badge">Triagem</div>
-        </div>
-        <div class="funnel-step">
-            <div class="funnel-num">③</div>
-            <div class="funnel-content">
-                <div class="funnel-title">Desenvolvimento seguindo os padrões do CoE</div>
-                <div class="funnel-desc">O time executa usando os blueprints, playbooks e ADRs publicados. Sprints de 2 semanas com revisões quinzenais com o CoE Estratégico. Antes de qualquer deploy, o projeto passa pelo ARB (Architecture Review Board) para validação técnica.</div>
-            </div>
-            <div class="funnel-badge">Execução</div>
-        </div>
-        <div class="funnel-step highlight-step">
-            <div class="funnel-num">④</div>
-            <div class="funnel-content">
-                <div class="funnel-title">Deploy com observabilidade ativa desde o dia 1</div>
-                <div class="funnel-desc">Nenhuma solução vai para produção sem: gateway de LLM configurado, monitoramento de custo e qualidade ativo, alertas definidos, model card preenchido e plano de rollback documentado. Estes são requisitos não-negociáveis.</div>
-            </div>
-            <div class="funnel-badge">Produção</div>
-        </div>
-        <div class="funnel-step">
-            <div class="funnel-num">⑤</div>
-            <div class="funnel-content">
-                <div class="funnel-title">Métricas de impacto alimentam o próximo ciclo</div>
-                <div class="funnel-desc">Os resultados (ROI realizado, adoção, custo por interação, qualidade) são reportados ao CoE Estratégico e Executivo. Esses dados alimentam a próxima rodada de priorização e o relatório trimestral de IA da empresa.</div>
-            </div>
-            <div class="funnel-badge">Feedback</div>
-        </div>
-    </div>
+                    <div class="funnel">
+                        <div class="funnel-step">
+                            <div class="funnel-num">①</div>
+                            <div class="funnel-content">
+                                <div class="funnel-title">CoE Estratégico define prioridades e processos</div>
+                                <div class="funnel-desc">Alinha diretoria e áreas sobre o que construir: quais processos
+                                    e capacidades de IA entram no portfólio, em que ordem e com qual direcionamento de
+                                    negócio.</div>
+                            </div>
+                            <div class="funnel-badge">Estratégia</div>
+                        </div>
+                        <div class="funnel-step">
+                            <div class="funnel-num">②</div>
+                            <div class="funnel-content">
+                                <div class="funnel-title">CoE Tático filtra demandas</div>
+                                <div class="funnel-desc">Avalia orçamento, time disponível e viabilidade de negócio.
+                                    Oportunidades das áreas chegam com business case preliminar; Junto com o Arquiteto
+                                    do
+                                    CoE operacional analisa dados, complexidade, risco e encaixa a demanda
+                                    no funil de maturidade. Define se e como implementar dentro dos padrões do CoE. só
+                                    as
+                                    aprovadas seguem para
+                                    o CoE Operacional.</div>
+                            </div>
+                            <div class="funnel-badge">Filtro e Triagem</div>
+                        </div>
+                        <div class="funnel-step">
+                            <div class="funnel-num">③</div>
+                            <div class="funnel-content">
+                                <div class="funnel-title">CoE Operacional implementa</div>
+                                <div class="funnel-desc">O time constrói com blueprints, playbooks e ADRs. Sprints de 2
+                                    semanas com revisões quinzenais com o CoE Tático. Antes do deploy, o projeto passa
+                                    pelo ARB.</div>
+                            </div>
+                            <div class="funnel-badge">Execução</div>
+                        </div>
+                        <div class="funnel-step highlight-step">
+                            <div class="funnel-num">④</div>
+                            <div class="funnel-content">
+                                <div class="funnel-title">Deploy com observabilidade ativa desde o dia 1</div>
+                                <div class="funnel-desc">Nenhuma solução vai para produção sem gateway de LLM,
+                                    monitoramento de custo e qualidade, alertas, model card e plano de rollback
+                                    documentados.</div>
+                            </div>
+                            <div class="funnel-badge">Produção</div>
+                        </div>
+                        <div class="funnel-step">
+                            <div class="funnel-num">⑤</div>
+                            <div class="funnel-content">
+                                <div class="funnel-title">Métricas de impacto alimentam o próximo ciclo</div>
+                                <div class="funnel-desc">ROI, adoção, custo por interação e qualidade são reportados ao
+                                    CoE Tático e ao CoE Estratégico, alimentando a próxima rodada de priorização.</div>
+                            </div>
+                            <div class="funnel-badge">Feedback</div>
+                        </div>
+                    </div>
 
-    <div class="callout info" style="margin-top:24px;">
-        <div class="callout-label">💡 Ponto importante</div>
-        O CoE Operacional precisa ser consultado <strong>antes</strong> da priorização dos casos de uso, não depois. Arquitetura mal pensada no início cria dívida técnica difícil de pagar. Quanto mais cedo o time técnico entra, melhor o resultado.
-    </div>
-</section>
 
-<!-- ═══════════════════════════════════════════════
+                    <div class="callout info" style="margin-top:24px;">
+                        <div class="callout-label">💡 Ponto importante</div>
+                        O CoE Operacional deve ser consultado na <strong>triagem técnica</strong>, antes da
+                        implementação — não depois que o projeto já foi comprometido no papel. Arquitetura mal pensada
+                        no início gera dívida técnica difícil de pagar.
+                    </div>
+                </section>
+
+                <!-- ═══════════════════════════════════════════════
      ESCOPO E LIMITES
 ════════════════════════════════════════════════ -->
-<section id="escopo" class="doc-section">
-    <div class="section-header">
-        <div class="section-tag">Escopo</div>
-        <h2 class="section-title">O que o CoE faz — e o que não faz</h2>
-        <p class="section-subtitle">Delimitar o escopo é tão importante quanto definir responsabilidades</p>
-    </div>
+                <section id="escopo" class="doc-section">
+                    <div class="section-header">
+                        <div class="section-tag">Escopo</div>
+                        <h2 class="section-title">O que o CoE faz — e o que não faz</h2>
+                        <p class="section-subtitle">Delimitar o escopo é tão importante quanto definir responsabilidades
+                        </p>
+                    </div>
 
-    <div class="summary-box">
-        <div class="summary-box-label">📌 Resumo para todos</div>
-        <p>O CoE Operacional não é o time de desenvolvimento de todas as áreas. Nosso papel é criar os padrões, garantir que sejam seguidos e distribuir capacidade. Se o CoE fizer tudo, vira gargalo. Se não fizer nada, a empresa acumula soluções frágeis e inseguras.</p>
-    </div>
+                    <div class="summary-box">
+                        <div class="summary-box-label">📌 Resumo para todos</div>
+                        <p>O CoE Operacional não é o time de desenvolvimento de todas as áreas. Nosso papel é criar os
+                            padrões, garantir que sejam seguidos e distribuir capacidade. Se o CoE fizer tudo, vira
+                            gargalo. Se não fizer nada, a empresa acumula soluções frágeis e inseguras.</p>
+                    </div>
 
-    <div class="two-col">
-        <div>
-            <div class="col-label">✅ Dentro do escopo</div>
-            <ul class="doc-list checks">
-                <li>Definir e manter os padrões técnicos de IA da empresa</li>
-                <li>Revisar arquitetura de projetos antes do deploy (ARB)</li>
-                <li>Operar o gateway centralizado de LLM</li>
-                <li>Criar e manter playbooks, blueprints e ADRs</li>
-                <li>Conduzir projetos piloto de referência</li>
-                <li>Capacitar times para construir com autonomia</li>
-                <li>Monitorar soluções em produção que seguem os padrões</li>
-                <li>Definir critérios de aceite técnico para projetos de IA</li>
-            </ul>
-        </div>
-        <div>
-            <div class="col-label">✗ Fora do escopo</div>
-            <ul class="doc-list blocks">
-                <li>Ser o time de desenvolvimento de todas as áreas da empresa</li>
-                <li>Dar suporte técnico geral de TI ou resolver bugs de sistemas legados</li>
-                <li>Tomar decisões de negócio — priorizamos tecnicamente, não estrategicamente</li>
-                <li>Construir soluções que não passaram pelo funil de maturidade</li>
-                <li>Operar sistemas que não seguem os padrões de observabilidade do CoE</li>
-                <li>Aprovar projetos de IA sem critérios técnicos definidos</li>
-            </ul>
-        </div>
-    </div>
+                    <div class="two-col">
+                        <div>
+                            <div class="col-label">✅ Dentro do escopo</div>
+                            <ul class="doc-list checks">
+                                <li>Definir e manter os padrões técnicos de IA da empresa</li>
+                                <li>Revisar arquitetura de projetos antes do deploy (ARB)</li>
+                                <li>Operar o gateway centralizado de LLM</li>
+                                <li>Criar e manter playbooks, blueprints e ADRs</li>
+                                <li>Conduzir projetos piloto de referência</li>
+                                <li>Capacitar times para construir com autonomia</li>
+                                <li>Monitorar soluções em produção que seguem os padrões</li>
+                                <li>Definir critérios de aceite técnico para projetos de IA</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="col-label">✗ Fora do escopo</div>
+                            <ul class="doc-list blocks">
+                                <li>Ser o time de desenvolvimento de todas as áreas da empresa</li>
+                                <li>Dar suporte técnico geral de TI ou resolver bugs de sistemas legados</li>
+                                <li>Tomar decisões de negócio — priorizamos tecnicamente, não estrategicamente</li>
+                                <li>Construir soluções que não passaram pelo funil de maturidade</li>
+                                <li>Operar sistemas que não seguem os padrões de observabilidade do CoE</li>
+                                <li>Aprovar projetos de IA sem critérios técnicos definidos</li>
+                            </ul>
+                        </div>
+                    </div>
 
-    <div class="subsection" style="margin-top:32px;">
-        <div class="subsection-title">Como evitamos virar gargalo</div>
-        <div class="prose">
-            <p>O risco mais comum em CoEs é centralizar demais. Quando tudo precisa passar pelo CoE, o CoE vira o gargalo de toda a empresa. Nossa estratégia para evitar isso tem três frentes:</p>
-        </div>
-        <ul class="doc-list" style="margin-top:14px;">
-            <li><strong>Playbooks públicos:</strong> qualquer time pode consultar e seguir os padrões sem precisar acionar o CoE para cada dúvida.</li>
-            <li><strong>Citizen Developers:</strong> times de negócio treinados para construir automações e agentes simples sob supervisão, sem depender do CoE para execução.</li>
-            <li><strong>SLA de revisão:</strong> o ARB tem prazo definido para responder — não bloqueamos projetos indefinidamente. Revisões de baixo risco têm resposta em até 3 dias úteis.</li>
-            <li><strong>Métricas de autonomia:</strong> medimos o sucesso do CoE pelo número de times que constroem com independência, não pelo número de projetos que passam por nós.</li>
-        </ul>
-    </div>
-</section>
+                    <div class="subsection" style="margin-top:32px;">
+                        <div class="subsection-title">Como evitamos virar gargalo</div>
+                        <div class="prose">
+                            <p>O risco mais comum em CoEs é centralizar demais. Quando tudo precisa passar pelo CoE, o
+                                CoE vira o gargalo de toda a empresa. Nossa estratégia para evitar isso tem três
+                                frentes:</p>
+                        </div>
+                        <ul class="doc-list" style="margin-top:14px;">
+                            <li><strong>Playbooks públicos:</strong> qualquer time pode consultar e seguir os padrões
+                                sem precisar acionar o CoE para cada dúvida.</li>
+                            <li><strong>Citizen Developers:</strong> times de negócio treinados para construir
+                                automações e agentes simples sob supervisão, sem depender do CoE para execução.</li>
+                            <li><strong>SLA de revisão:</strong> o ARB tem prazo definido para responder — não
+                                bloqueamos projetos indefinidamente. Revisões de baixo risco têm resposta em até 3 dias
+                                úteis.</li>
+                            <li><strong>Métricas de autonomia:</strong> medimos o sucesso do CoE pelo número de times
+                                que constroem com independência, não pelo número de projetos que passam por nós.</li>
+                        </ul>
+                    </div>
+                </section>
 
 
-<!-- ═══════════════════════════════════════════════
+                <!-- ═══════════════════════════════════════════════
      PILAR 1 — ARQUITETURA DE REFERÊNCIA
 ════════════════════════════════════════════════ -->
-<section id="p1" class="doc-section">
-    <div class="section-header">
-        <div class="section-tag">Pilar 1</div>
-        <h2 class="section-title">🏗️ Arquitetura de Referência</h2>
-        <p class="section-subtitle">O molde que todos os projetos seguem — não resolvemos um projeto, criamos o padrão</p>
-    </div>
+                <section id="p1" class="doc-section">
+                    <div class="section-header">
+                        <div class="section-tag">Pilar 1</div>
+                        <h2 class="section-title">🏗️ Arquitetura de Referência</h2>
+                        <p class="section-subtitle">O molde que todos os projetos seguem — não resolvemos um projeto,
+                            criamos o padrão</p>
+                    </div>
 
-    <div class="summary-box">
-        <div class="summary-box-label">📌 Resumo para todos</div>
-        <p>Imagine que cada time da empresa começa um projeto de IA do zero, tomando decisões diferentes sobre qual tecnologia usar, como proteger os dados, como estruturar o código. O resultado seria caos: soluções incompatíveis, inseguras e impossíveis de manter.</p>
-        <p>O Pilar 1 resolve isso criando um conjunto de padrões documentados — chamados de ADRs (Architecture Decision Records) — que qualquer time pode consultar e seguir. Não é burocracia: é o que permite escalar com qualidade.</p>
-    </div>
+                    <div class="summary-box">
+                        <div class="summary-box-label">📌 Resumo para todos</div>
+                        <p>Imagine que cada time da empresa começa um projeto de IA do zero, tomando decisões diferentes
+                            sobre qual tecnologia usar, como proteger os dados, como estruturar o código. O resultado
+                            seria caos: soluções incompatíveis, inseguras e impossíveis de manter.</p>
+                        <p>O Pilar 1 resolve isso criando um conjunto de padrões documentados — chamados de ADRs
+                            (Architecture Decision Records) — que qualquer time pode consultar e seguir. Não é
+                            burocracia: é o que permite escalar com qualidade.</p>
+                    </div>
 
-    <div class="subsection">
-        <div class="subsection-title">Matriz de Decisão de Stack <span class="badge blue">ADR obrigatório</span></div>
-        <div class="prose">
-            <p>Toda decisão de tecnologia relevante precisa ser documentada em um ADR — um documento curto que registra qual foi a decisão, por que foi tomada, quais alternativas foram consideradas e quais são as consequências. ADRs são versionados e acessíveis a todos os times.</p>
-            <p>As decisões mais críticas que precisam de ADR:</p>
-        </div>
-        <div class="doc-table-wrap">
-            <table class="doc-table">
-                <thead>
-                    <tr><th>Decisão</th><th>Critério principal</th><th>Exemplos de opções</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td><strong>Qual LLM usar</strong></td><td>Custo, latência, capacidade, data residency</td><td>GPT-4o, Claude 3.5, Gemini, Llama 3 (self-hosted)</td></tr>
-                    <tr><td><strong>RAG vs Fine-tuning</strong></td><td>Volume de dados, frequência de atualização, custo</td><td>RAG para conhecimento dinâmico; fine-tuning para estilo/formato fixo</td></tr>
-                    <tr><td><strong>Agente vs fluxo determinístico</strong></td><td>Complexidade da tarefa, tolerância a erro, custo</td><td>LangGraph, CrewAI, AutoGen vs fluxo com LLM embutido</td></tr>
-                    <tr><td><strong>Vector database</strong></td><td>Escala, latência, custo, integração com infra existente</td><td>pgvector, Pinecone, Weaviate, Qdrant</td></tr>
-                    <tr><td><strong>Orquestrador de agentes</strong></td><td>Maturidade, suporte, controle de estado</td><td>LangGraph (recomendado), SDK nativo do provider</td></tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+                    <div class="subsection">
+                        <div class="subsection-title">Matriz de Decisão de Stack <span class="badge blue">ADR
+                                obrigatório</span></div>
+                        <div class="prose">
+                            <p>Toda decisão de tecnologia relevante precisa ser documentada em um ADR — um documento
+                                curto que registra qual foi a decisão, por que foi tomada, quais alternativas foram
+                                consideradas e quais são as consequências. ADRs são versionados e acessíveis a todos os
+                                times.</p>
+                            <p>As decisões mais críticas que precisam de ADR:</p>
+                        </div>
+                        <div class="doc-table-wrap">
+                            <table class="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Decisão</th>
+                                        <th>Critério principal</th>
+                                        <th>Exemplos de opções</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Qual LLM usar</strong></td>
+                                        <td>Custo, latência, capacidade, data residency</td>
+                                        <td>GPT-4o, Claude 3.5, Gemini, Llama 3 (self-hosted)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>RAG vs Fine-tuning</strong></td>
+                                        <td>Volume de dados, frequência de atualização, custo</td>
+                                        <td>RAG para conhecimento dinâmico; fine-tuning para estilo/formato fixo</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Agente vs fluxo determinístico</strong></td>
+                                        <td>Complexidade da tarefa, tolerância a erro, custo</td>
+                                        <td>LangGraph, CrewAI, AutoGen vs fluxo com LLM embutido</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Vector database</strong></td>
+                                        <td>Escala, latência, custo, integração com infra existente</td>
+                                        <td>pgvector, Pinecone, Weaviate, Qdrant</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Orquestrador de agentes</strong></td>
+                                        <td>Maturidade, suporte, controle de estado</td>
+                                        <td>LangGraph (recomendado), SDK nativo do provider</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
 
-    <div class="subsection">
-        <div class="subsection-title">Padrão RAG Corporativo <span class="badge">Crítico</span></div>
-        <div class="prose">
-            <p>RAG (Retrieval-Augmented Generation) é a arquitetura mais comum para soluções de IA que precisam responder perguntas com base em documentos da empresa. O padrão corporativo define cada etapa do pipeline para garantir qualidade e segurança consistentes.</p>
-        </div>
-        <ul class="doc-list" style="margin-top:14px;">
-            <li><strong>Chunking:</strong> documentos são divididos em pedaços menores respeitando limites semânticos (parágrafos, seções) — nunca corte fixo por caractere. Tamanho recomendado: 512–1024 tokens com overlap de 10–15%.</li>
-            <li><strong>Embedding model:</strong> modelo definido centralmente e versionado. Mudança de modelo exige reindexação completa — decisão não pode ser feita por projeto individual.</li>
-            <li><strong>Vector database:</strong> instância corporativa compartilhada com namespaces por projeto. Cada chunk preserva metadados: fonte, data de criação/atualização, departamento, classificação de acesso.</li>
-            <li><strong>Retrieval com filtro de permissão:</strong> o sistema só retorna chunks que o usuário tem permissão de ver. Permissão é verificada no momento do retrieval, não apenas na exibição.</li>
-            <li><strong>Reranking:</strong> após o retrieval inicial, um modelo de reranking ordena os chunks por relevância real para a query — reduz ruído e melhora a qualidade da resposta.</li>
-            <li><strong>Reindexação atômica:</strong> quando um documento é atualizado, os chunks antigos são removidos e os novos são indexados em uma única operação — sem estado inconsistente.</li>
-        </ul>
-    </div>
+                    <div class="subsection">
+                        <div class="subsection-title">Padrão RAG Corporativo <span class="badge">Crítico</span></div>
+                        <div class="prose">
+                            <p>RAG (Retrieval-Augmented Generation) é a arquitetura mais comum para soluções de IA que
+                                precisam responder perguntas com base em documentos da empresa. O padrão corporativo
+                                define cada etapa do pipeline para garantir qualidade e segurança consistentes.</p>
+                        </div>
+                        <ul class="doc-list" style="margin-top:14px;">
+                            <li><strong>Chunking:</strong> documentos são divididos em pedaços menores respeitando
+                                limites semânticos (parágrafos, seções) — nunca corte fixo por caractere. Tamanho
+                                recomendado: 512–1024 tokens com overlap de 10–15%.</li>
+                            <li><strong>Embedding model:</strong> modelo definido centralmente e versionado. Mudança de
+                                modelo exige reindexação completa — decisão não pode ser feita por projeto individual.
+                            </li>
+                            <li><strong>Vector database:</strong> instância corporativa compartilhada com namespaces por
+                                projeto. Cada chunk preserva metadados: fonte, data de criação/atualização,
+                                departamento, classificação de acesso.</li>
+                            <li><strong>Retrieval com filtro de permissão:</strong> o sistema só retorna chunks que o
+                                usuário tem permissão de ver. Permissão é verificada no momento do retrieval, não apenas
+                                na exibição.</li>
+                            <li><strong>Reranking:</strong> após o retrieval inicial, um modelo de reranking ordena os
+                                chunks por relevância real para a query — reduz ruído e melhora a qualidade da resposta.
+                            </li>
+                            <li><strong>Reindexação atômica:</strong> quando um documento é atualizado, os chunks
+                                antigos são removidos e os novos são indexados em uma única operação — sem estado
+                                inconsistente.</li>
+                        </ul>
+                    </div>
 
-    <div class="subsection">
-        <div class="subsection-title">Padrão de Agentes <span class="badge blue">Em definição</span></div>
-        <div class="prose">
-            <p>Agentes de IA são sistemas que usam LLMs para tomar decisões e executar ações de forma autônoma ou semi-autônoma. São mais poderosos que RAG simples, mas também mais complexos e arriscados. O padrão define como construí-los de forma controlada.</p>
-        </div>
-        <ul class="doc-list" style="margin-top:14px;">
-            <li><strong>Orquestrador:</strong> LangGraph é o padrão recomendado para agentes com estado complexo. Para agentes simples, o SDK nativo do provider é suficiente.</li>
-            <li><strong>Persistência de estado:</strong> o estado do agente é sempre persistido em banco de dados — nunca apenas em memória. Isso permite retomada após falha e auditoria.</li>
-            <li><strong>Registro de ferramentas:</strong> todas as ferramentas (funções que o agente pode chamar) são registradas centralmente com versão, descrição e permissões necessárias.</li>
-            <li><strong>Prevenção de loops:</strong> todo agente tem limite máximo de iterações configurado. Agentes que excedem o limite são interrompidos e o incidente é logado.</li>
-            <li><strong>Human-in-the-loop:</strong> ações irreversíveis (envio de e-mail, modificação de dados, chamadas a APIs externas) exigem confirmação humana explícita, exceto quando aprovado no ARB.</li>
-        </ul>
-    </div>
+                    <div class="subsection">
+                        <div class="subsection-title">Padrão de Agentes <span class="badge blue">Em definição</span>
+                        </div>
+                        <div class="prose">
+                            <p>Agentes de IA são sistemas que usam LLMs para tomar decisões e executar ações de forma
+                                autônoma ou semi-autônoma. São mais poderosos que RAG simples, mas também mais complexos
+                                e arriscados. O padrão define como construí-los de forma controlada.</p>
+                        </div>
+                        <ul class="doc-list" style="margin-top:14px;">
+                            <li><strong>Orquestrador:</strong> LangGraph é o padrão recomendado para agentes com estado
+                                complexo. Para agentes simples, o SDK nativo do provider é suficiente.</li>
+                            <li><strong>Persistência de estado:</strong> o estado do agente é sempre persistido em banco
+                                de dados — nunca apenas em memória. Isso permite retomada após falha e auditoria.</li>
+                            <li><strong>Registro de ferramentas:</strong> todas as ferramentas (funções que o agente
+                                pode chamar) são registradas centralmente com versão, descrição e permissões
+                                necessárias.</li>
+                            <li><strong>Prevenção de loops:</strong> todo agente tem limite máximo de iterações
+                                configurado. Agentes que excedem o limite são interrompidos e o incidente é logado.</li>
+                            <li><strong>Human-in-the-loop:</strong> ações irreversíveis (envio de e-mail, modificação de
+                                dados, chamadas a APIs externas) exigem confirmação humana explícita, exceto quando
+                                aprovado no ARB.</li>
+                        </ul>
+                    </div>
 
-    <div class="subsection">
-        <div class="subsection-title">Segurança de Dados e Classificação</div>
-        <div class="prose">
-            <p>Esta é a responsabilidade mais crítica e mais negligenciada em CoEs de IA. Antes de qualquer dado chegar a um modelo, ele precisa ser classificado. A classificação determina qual modelo pode processá-lo.</p>
-        </div>
-        <div class="doc-table-wrap">
-            <table class="doc-table">
-                <thead>
-                    <tr><th>Classificação</th><th>Exemplos</th><th>Modelos permitidos</th><th>Tratamento obrigatório</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td><strong>Público</strong></td><td>Conteúdo do site, catálogo de produtos</td><td>Qualquer API externa</td><td>Nenhum</td></tr>
-                    <tr><td><strong>Interno</strong></td><td>Políticas internas, manuais operacionais</td><td>APIs com DPA assinado</td><td>Logging de acesso</td></tr>
-                    <tr><td><strong>Confidencial</strong></td><td>Dados financeiros, contratos, estratégia</td><td>Modelo self-hosted ou Azure OpenAI com DPA</td><td>Auditoria completa</td></tr>
-                    <tr><td><strong>PII / Sensível</strong></td><td>CPF, dados de saúde, dados de colaboradores</td><td>Apenas modelo self-hosted após anonimização</td><td>Anonimização obrigatória (Presidio/GLiNER)</td></tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="callout danger" style="margin-top:16px;">
-            <div class="callout-label">🔴 Regra inegociável</div>
-            Nenhum dado classificado como PII ou Sensível pode ser enviado para uma API externa sem passar pelo pipeline de anonimização. Violação desta regra é um incidente de segurança e deve ser reportado imediatamente.
-        </div>
-    </div>
+                    <div class="subsection">
+                        <div class="subsection-title">Segurança de Dados e Classificação</div>
+                        <div class="prose">
+                            <p>Esta é a responsabilidade mais crítica e mais negligenciada em CoEs de IA. Antes de
+                                qualquer dado chegar a um modelo, ele precisa ser classificado. A classificação
+                                determina qual modelo pode processá-lo.</p>
+                        </div>
+                        <div class="doc-table-wrap">
+                            <table class="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Classificação</th>
+                                        <th>Exemplos</th>
+                                        <th>Modelos permitidos</th>
+                                        <th>Tratamento obrigatório</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Público</strong></td>
+                                        <td>Conteúdo do site, catálogo de produtos</td>
+                                        <td>Qualquer API externa</td>
+                                        <td>Nenhum</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Interno</strong></td>
+                                        <td>Políticas internas, manuais operacionais</td>
+                                        <td>APIs com DPA assinado</td>
+                                        <td>Logging de acesso</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Confidencial</strong></td>
+                                        <td>Dados financeiros, contratos, estratégia</td>
+                                        <td>Modelo self-hosted ou Azure OpenAI com DPA</td>
+                                        <td>Auditoria completa</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>PII / Sensível</strong></td>
+                                        <td>CPF, dados de saúde, dados de colaboradores</td>
+                                        <td>Apenas modelo self-hosted após anonimização</td>
+                                        <td>Anonimização obrigatória (Presidio/GLiNER)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="callout danger" style="margin-top:16px;">
+                            <div class="callout-label">🔴 Regra inegociável</div>
+                            Nenhum dado classificado como PII ou Sensível pode ser enviado para uma API externa sem
+                            passar pelo pipeline de anonimização. Violação desta regra é um incidente de segurança e
+                            deve ser reportado imediatamente.
+                        </div>
+                    </div>
 
-    <div class="subsection">
-        <div class="subsection-title">Gateway de LLM e Prompt Management</div>
-        <div class="prose">
-            <p><strong>Gateway de LLM:</strong> toda chamada a modelo externo da empresa passa por um único ponto central. Isso não é opcional — é a base de toda a observabilidade, controle de custo e segurança. O gateway é responsável por:</p>
-        </div>
-        <ul class="doc-list" style="margin-top:10px;">
-            <li><strong>Roteamento inteligente:</strong> a mesma chamada pode ir para GPT-4o, Claude ou Gemini dependendo do custo, disponibilidade e tipo de tarefa.</li>
-            <li><strong>Fallback automático:</strong> se o provider principal está fora ou lento demais, redireciona para alternativa sem o usuário perceber.</li>
-            <li><strong>Rate limiting por projeto:</strong> evita que um projeto em loop infinito consuma o budget de todos os outros.</li>
-            <li><strong>Cache semântico:</strong> chamadas similares não precisam ir até o modelo — cache por similaridade de embedding reduz custo e latência em até 40%.</li>
-        </ul>
-        <div class="prose" style="margin-top:16px;">
-            <p><strong>Prompt management:</strong> prompts não ficam hardcoded no código. Eles vivem em um repositório central, são versionados como código, têm histórico de mudanças e podem ser testados em A/B antes de ir para produção. Mudança de prompt sem versionamento é uma das principais causas de regressão silenciosa em sistemas de IA.</p>
-        </div>
-    </div>
-</section>
+                    <div class="subsection">
+                        <div class="subsection-title">Gateway de LLM e Prompt Management</div>
+                        <div class="prose">
+                            <p><strong>Gateway de LLM:</strong> toda chamada a modelo externo da empresa passa por um
+                                único ponto central. Isso não é opcional — é a base de toda a observabilidade, controle
+                                de custo e segurança. O gateway é responsável por:</p>
+                        </div>
+                        <ul class="doc-list" style="margin-top:10px;">
+                            <li><strong>Roteamento inteligente:</strong> a mesma chamada pode ir para GPT-4o, Claude ou
+                                Gemini dependendo do custo, disponibilidade e tipo de tarefa.</li>
+                            <li><strong>Fallback automático:</strong> se o provider principal está fora ou lento demais,
+                                redireciona para alternativa sem o usuário perceber.</li>
+                            <li><strong>Rate limiting por projeto:</strong> evita que um projeto em loop infinito
+                                consuma o budget de todos os outros.</li>
+                            <li><strong>Cache semântico:</strong> chamadas similares não precisam ir até o modelo —
+                                cache por similaridade de embedding reduz custo e latência em até 40%.</li>
+                        </ul>
+                        <div class="prose" style="margin-top:16px;">
+                            <p><strong>Prompt management:</strong> prompts não ficam hardcoded no código. Eles vivem em
+                                um repositório central, são versionados como código, têm histórico de mudanças e podem
+                                ser testados em A/B antes de ir para produção. Mudança de prompt sem versionamento é uma
+                                das principais causas de regressão silenciosa em sistemas de IA.</p>
+                        </div>
+                    </div>
+                </section>
 
-<!-- ═══════════════════════════════════════════════
+                <!-- ═══════════════════════════════════════════════
      PILAR 2 — GOVERNANÇA TÉCNICA
 ════════════════════════════════════════════════ -->
-<section id="p2" class="doc-section">
-    <div class="section-header">
-        <div class="section-tag">Pilar 2</div>
-        <h2 class="section-title">🛡️ Governança Técnica</h2>
-        <p class="section-subtitle">Processos que de fato bloqueiam soluções ruins de chegarem em produção</p>
-    </div>
+                <section id="p2" class="doc-section">
+                    <div class="section-header">
+                        <div class="section-tag">Pilar 2</div>
+                        <h2 class="section-title">🛡️ Governança Técnica</h2>
+                        <p class="section-subtitle">Processos que de fato bloqueiam soluções ruins de chegarem em
+                            produção</p>
+                    </div>
 
-    <div class="summary-box">
-        <div class="summary-box-label">📌 Resumo para todos</div>
-        <p>Governança sem dentes não é governança. Não basta ter padrões documentados — precisamos de processos que garantam que eles sejam seguidos. O Pilar 2 cria os mecanismos de verificação: quem revisa, o que verifica, quais são os critérios para aprovar ou reprovar um projeto antes de ir para produção.</p>
-        <p>Diferente de software convencional, IA tem riscos específicos: o modelo pode alucinar, pode ter viés, pode vazar dados sensíveis, pode mudar de comportamento quando o provider atualiza silenciosamente. A governança técnica existe para gerenciar esses riscos de forma sistemática.</p>
-    </div>
+                    <div class="summary-box">
+                        <div class="summary-box-label">📌 Resumo para todos</div>
+                        <p>Governança sem dentes não é governança. Não basta ter padrões documentados — precisamos de
+                            processos que garantam que eles sejam seguidos. O Pilar 2 cria os mecanismos de verificação:
+                            quem revisa, o que verifica, quais são os critérios para aprovar ou reprovar um projeto
+                            antes de ir para produção.</p>
+                        <p>Diferente de software convencional, IA tem riscos específicos: o modelo pode alucinar, pode
+                            ter viés, pode vazar dados sensíveis, pode mudar de comportamento quando o provider atualiza
+                            silenciosamente. A governança técnica existe para gerenciar esses riscos de forma
+                            sistemática.</p>
+                    </div>
 
-    <div class="subsection">
-        <div class="subsection-title">Architecture Review Board (ARB) <span class="badge">Obrigatório para produção</span></div>
-        <div class="prose">
-            <p>O ARB é uma revisão técnica formal que todo projeto de IA acima de determinado nível de complexidade ou risco precisa passar antes de ir para produção. Não é uma reunião burocrática — é um checklist técnico estruturado com critérios claros de aprovação.</p>
-            <p><strong>Quando o ARB é obrigatório:</strong> projetos com acesso a dados confidenciais ou PII; agentes com capacidade de executar ações (enviar e-mails, modificar dados, chamar APIs externas); qualquer solução com impacto direto em processos financeiros, jurídicos ou de RH; projetos com custo projetado acima de R$ 5.000/mês.</p>
-        </div>
-        <div class="doc-table-wrap" style="margin-top:16px;">
-            <table class="doc-table">
-                <thead>
-                    <tr><th>Critério de revisão</th><th>O que verificamos</th><th>Bloqueante?</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td><strong>Fallback e degradação</strong></td><td>A solução funciona (de forma degradada) se o modelo falhar ou alucinar?</td><td>Sim</td></tr>
-                    <tr><td><strong>Detecção de erro</strong></td><td>Como o sistema sabe que a resposta está errada? Existe validação de output?</td><td>Sim</td></tr>
-                    <tr><td><strong>Observabilidade</strong></td><td>Existe logging suficiente para debugar um incidente em produção?</td><td>Sim</td></tr>
-                    <tr><td><strong>Segurança adversarial</strong></td><td>Foi testado com prompt injection, jailbreak e inputs maliciosos?</td><td>Sim (risco alto)</td></tr>
-                    <tr><td><strong>Custo projetado</strong></td><td>O custo mensal foi calculado e aprovado pelo responsável de negócio?</td><td>Sim</td></tr>
-                    <tr><td><strong>Plano de rollback</strong></td><td>Existe um procedimento documentado para reverter o deploy?</td><td>Sim</td></tr>
-                    <tr><td><strong>Model card</strong></td><td>O documento de modelo está preenchido com limitações e responsável técnico?</td><td>Sim</td></tr>
-                    <tr><td><strong>Classificação de dados</strong></td><td>Os dados foram classificados e o modelo permitido foi respeitado?</td><td>Sim</td></tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+                    <div class="subsection">
+                        <div class="subsection-title">Architecture Review Board (ARB) <span class="badge">Obrigatório
+                                para produção</span></div>
+                        <div class="prose">
+                            <p>O ARB é uma revisão técnica formal que todo projeto de IA acima de determinado nível de
+                                complexidade ou risco precisa passar antes de ir para produção. Não é uma reunião
+                                burocrática — é um checklist técnico estruturado com critérios claros de aprovação.</p>
+                            <p><strong>Quando o ARB é obrigatório:</strong> projetos com acesso a dados confidenciais ou
+                                PII; agentes com capacidade de executar ações (enviar e-mails, modificar dados, chamar
+                                APIs externas); qualquer solução com impacto direto em processos financeiros, jurídicos
+                                ou de RH; projetos com custo projetado acima de R$ 5.000/mês.</p>
+                        </div>
+                        <div class="doc-table-wrap" style="margin-top:16px;">
+                            <table class="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Critério de revisão</th>
+                                        <th>O que verificamos</th>
+                                        <th>Bloqueante?</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Fallback e degradação</strong></td>
+                                        <td>A solução funciona (de forma degradada) se o modelo falhar ou alucinar?</td>
+                                        <td>Sim</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Detecção de erro</strong></td>
+                                        <td>Como o sistema sabe que a resposta está errada? Existe validação de output?
+                                        </td>
+                                        <td>Sim</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Observabilidade</strong></td>
+                                        <td>Existe logging suficiente para debugar um incidente em produção?</td>
+                                        <td>Sim</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Segurança adversarial</strong></td>
+                                        <td>Foi testado com prompt injection, jailbreak e inputs maliciosos?</td>
+                                        <td>Sim (risco alto)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Custo projetado</strong></td>
+                                        <td>O custo mensal foi calculado e aprovado pelo responsável de negócio?</td>
+                                        <td>Sim</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Plano de rollback</strong></td>
+                                        <td>Existe um procedimento documentado para reverter o deploy?</td>
+                                        <td>Sim</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Model card</strong></td>
+                                        <td>O documento de modelo está preenchido com limitações e responsável técnico?
+                                        </td>
+                                        <td>Sim</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Classificação de dados</strong></td>
+                                        <td>Os dados foram classificados e o modelo permitido foi respeitado?</td>
+                                        <td>Sim</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
 
-    <div class="subsection">
-        <div class="subsection-title">Matriz de Risco de IA</div>
-        <div class="prose">
-            <p>Cada projeto é classificado em uma matriz com dois eixos: <strong>impacto do erro</strong> (o que acontece se o modelo errar?) e <strong>autonomia do sistema</strong> (o sistema age sozinho ou apenas sugere?). A célula da matriz determina os requisitos mínimos para o projeto.</p>
-        </div>
-        <div class="doc-table-wrap" style="margin-top:16px;">
-            <table class="doc-table">
-                <thead>
-                    <tr><th>Autonomia ↓ / Impacto →</th><th>Baixo</th><th>Médio</th><th>Alto</th><th>Crítico</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td><strong>Assistivo</strong> (só sugere)</td><td>Padrão mínimo</td><td>Logging obrigatório</td><td>ARB + auditoria mensal</td><td>ARB + aprovação executiva</td></tr>
-                    <tr><td><strong>Semi-autônomo</strong> (age com confirmação)</td><td>Logging obrigatório</td><td>ARB obrigatório</td><td>ARB + human-in-the-loop</td><td>ARB + aprovação executiva + auditoria semanal</td></tr>
-                    <tr><td><strong>Autônomo</strong> (age sem confirmação)</td><td>ARB obrigatório</td><td>ARB + human-in-the-loop</td><td>Aprovação executiva obrigatória</td><td>Proibido sem aprovação do CoE Executivo</td></tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+                    <div class="subsection">
+                        <div class="subsection-title">Matriz de Risco de IA</div>
+                        <div class="prose">
+                            <p>Cada projeto é classificado em uma matriz com dois eixos: <strong>impacto do
+                                    erro</strong> (o que acontece se o modelo errar?) e <strong>autonomia do
+                                    sistema</strong> (o sistema age sozinho ou apenas sugere?). A célula da matriz
+                                determina os requisitos mínimos para o projeto.</p>
+                        </div>
+                        <div class="doc-table-wrap" style="margin-top:16px;">
+                            <table class="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Autonomia ↓ / Impacto →</th>
+                                        <th>Baixo</th>
+                                        <th>Médio</th>
+                                        <th>Alto</th>
+                                        <th>Crítico</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Assistivo</strong> (só sugere)</td>
+                                        <td>Padrão mínimo</td>
+                                        <td>Logging obrigatório</td>
+                                        <td>ARB + auditoria mensal</td>
+                                        <td>ARB + aprovação do CoE Estratégico</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Semi-autônomo</strong> (age com confirmação)</td>
+                                        <td>Logging obrigatório</td>
+                                        <td>ARB obrigatório</td>
+                                        <td>ARB + human-in-the-loop</td>
+                                        <td>ARB + aprovação do CoE Estratégico + auditoria semanal</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Autônomo</strong> (age sem confirmação)</td>
+                                        <td>ARB obrigatório</td>
+                                        <td>ARB + human-in-the-loop</td>
+                                        <td>Aprovação do CoE Estratégico obrigatória</td>
+                                        <td>Proibido sem aprovação do CoE Estratégico</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
 
-    <div class="subsection">
-        <div class="subsection-title">Model Cards e Registro de Modelos</div>
-        <div class="prose">
-            <p>Todo modelo ou solução de IA em produção precisa de um model card — um documento vivo que responde perguntas essenciais sobre aquela solução. Quando um provider atualiza silenciosamente um modelo (o que acontece com frequência), o registro permite identificar imediatamente quais sistemas foram afetados.</p>
-            <p><strong>O model card deve conter:</strong> qual modelo está sendo usado e em qual versão; para qual tarefa específica ele foi avaliado; quais são as limitações conhecidas e casos de uso não recomendados; qual foi a performance nos testes de avaliação (métricas concretas); quem é o responsável técnico; quando foi o último review; qual é o custo médio por interação.</p>
-        </div>
-    </div>
+                    <div class="subsection">
+                        <div class="subsection-title">Model Cards e Registro de Modelos</div>
+                        <div class="prose">
+                            <p>Todo modelo ou solução de IA em produção precisa de um model card — um documento vivo que
+                                responde perguntas essenciais sobre aquela solução. Quando um provider atualiza
+                                silenciosamente um modelo (o que acontece com frequência), o registro permite
+                                identificar imediatamente quais sistemas foram afetados.</p>
+                            <p><strong>O model card deve conter:</strong> qual modelo está sendo usado e em qual versão;
+                                para qual tarefa específica ele foi avaliado; quais são as limitações conhecidas e casos
+                                de uso não recomendados; qual foi a performance nos testes de avaliação (métricas
+                                concretas); quem é o responsável técnico; quando foi o último review; qual é o custo
+                                médio por interação.</p>
+                        </div>
+                    </div>
 
-    <div class="subsection">
-        <div class="subsection-title">Critérios de Aceite Técnico para IA <span class="badge blue">Definidos antes do desenvolvimento</span></div>
-        <div class="prose">
-            <p>Diferente de software convencional, aceite de IA não é só "passou nos testes unitários". As métricas de aceite precisam ser definidas <em>antes</em> do desenvolvimento começar — sem isso, o time não sabe o que é "pronto" e o projeto nunca termina.</p>
-        </div>
-        <ul class="doc-list" style="margin-top:14px;">
-            <li><strong>Taxa de alucinação:</strong> abaixo de X% medida por avaliador automático (LLM-as-judge). O valor de X é definido por projeto com base no risco.</li>
-            <li><strong>Latência P95:</strong> 95% das respostas em menos de Y segundos. Para chatbots: geralmente &lt; 3s. Para processamento batch: pode ser mais flexível.</li>
-            <li><strong>Custo por interação:</strong> abaixo de Z centavos. Calculado com base no volume esperado e no budget aprovado.</li>
-            <li><strong>Faithfulness do RAG:</strong> acima de W% medido por LLM-as-judge — a resposta é fiel aos documentos recuperados?</li>
-            <li><strong>Relevância do retrieval:</strong> os documentos recuperados são relevantes para a pergunta? Medido por MRR (Mean Reciprocal Rank) ou NDCG.</li>
-        </ul>
-    </div>
+                    <div class="subsection">
+                        <div class="subsection-title">Critérios de Aceite Técnico para IA <span
+                                class="badge blue">Definidos antes do desenvolvimento</span></div>
+                        <div class="prose">
+                            <p>Diferente de software convencional, aceite de IA não é só "passou nos testes unitários".
+                                As métricas de aceite precisam ser definidas <em>antes</em> do desenvolvimento começar —
+                                sem isso, o time não sabe o que é "pronto" e o projeto nunca termina.</p>
+                        </div>
+                        <ul class="doc-list" style="margin-top:14px;">
+                            <li><strong>Taxa de alucinação:</strong> abaixo de X% medida por avaliador automático
+                                (LLM-as-judge). O valor de X é definido por projeto com base no risco.</li>
+                            <li><strong>Latência P95:</strong> 95% das respostas em menos de Y segundos. Para chatbots:
+                                geralmente &lt; 3s. Para processamento batch: pode ser mais flexível.</li>
+                            <li><strong>Custo por interação:</strong> abaixo de Z centavos. Calculado com base no volume
+                                esperado e no budget aprovado.</li>
+                            <li><strong>Faithfulness do RAG:</strong> acima de W% medido por LLM-as-judge — a resposta é
+                                fiel aos documentos recuperados?</li>
+                            <li><strong>Relevância do retrieval:</strong> os documentos recuperados são relevantes para
+                                a pergunta? Medido por MRR (Mean Reciprocal Rank) ou NDCG.</li>
+                        </ul>
+                    </div>
 
-    <div class="subsection">
-        <div class="subsection-title">Gestão de Dívida Técnica Específica de IA</div>
-        <div class="prose">
-            <p>IA tem um tipo específico de dívida técnica que poucos times gerenciam ativamente. O CoE Operacional é responsável por identificar e endereçar essas dívidas periodicamente:</p>
-        </div>
-        <ul class="doc-list" style="margin-top:14px;">
-            <li><strong>Model drift:</strong> o modelo muda (atualização do provider), o mundo muda (novos dados, novos padrões de uso), o comportamento muda. Revisão trimestral obrigatória para todos os modelos em produção.</li>
-            <li><strong>Prompt rot:</strong> prompts que funcionavam há 6 meses começam a degradar com novas versões de modelos. Monitoramento contínuo de métricas de qualidade detecta isso antes que o usuário perceba.</li>
-            <li><strong>Evaluation debt:</strong> testes que nunca foram escritos porque "o modelo é não-determinístico". Não é desculpa — evals automatizados com LLM-as-judge resolvem isso.</li>
-            <li><strong>Data staleness:</strong> documentos no vector database que não são atualizados há mais de X dias precisam de revisão. Dados desatualizados geram respostas desatualizadas.</li>
-        </ul>
-    </div>
-</section>
+                    <div class="subsection">
+                        <div class="subsection-title">Gestão de Dívida Técnica Específica de IA</div>
+                        <div class="prose">
+                            <p>IA tem um tipo específico de dívida técnica que poucos times gerenciam ativamente. O CoE
+                                Operacional é responsável por identificar e endereçar essas dívidas periodicamente:</p>
+                        </div>
+                        <ul class="doc-list" style="margin-top:14px;">
+                            <li><strong>Model drift:</strong> o modelo muda (atualização do provider), o mundo muda
+                                (novos dados, novos padrões de uso), o comportamento muda. Revisão trimestral
+                                obrigatória para todos os modelos em produção.</li>
+                            <li><strong>Prompt rot:</strong> prompts que funcionavam há 6 meses começam a degradar com
+                                novas versões de modelos. Monitoramento contínuo de métricas de qualidade detecta isso
+                                antes que o usuário perceba.</li>
+                            <li><strong>Evaluation debt:</strong> testes que nunca foram escritos porque "o modelo é
+                                não-determinístico". Não é desculpa — evals automatizados com LLM-as-judge resolvem
+                                isso.</li>
+                            <li><strong>Data staleness:</strong> documentos no vector database que não são atualizados
+                                há mais de X dias precisam de revisão. Dados desatualizados geram respostas
+                                desatualizadas.</li>
+                        </ul>
+                    </div>
+                </section>
 
 
-<!-- ═══════════════════════════════════════════════
+                <!-- ═══════════════════════════════════════════════
      PILAR 3 — INTEGRAÇÃO E LLMOPS
 ════════════════════════════════════════════════ -->
-<section id="p3" class="doc-section">
-    <div class="section-header">
-        <div class="section-tag">Pilar 3</div>
-        <h2 class="section-title">⚙️ Integração & LLMOps</h2>
-        <p class="section-subtitle">O pilar mais subestimado — saber fazer PoC é diferente de saber operar IA em produção</p>
-    </div>
+                <section id="p3" class="doc-section">
+                    <div class="section-header">
+                        <div class="section-tag">Pilar 3</div>
+                        <h2 class="section-title">⚙️ Integração & LLMOps</h2>
+                        <p class="section-subtitle">O pilar mais subestimado — saber fazer PoC é diferente de saber
+                            operar IA em produção</p>
+                    </div>
 
-    <div class="summary-box">
-        <div class="summary-box-label">📌 Resumo para todos</div>
-        <p>A maioria dos projetos de IA morre aqui. Uma PoC funciona no notebook do engenheiro, impressiona na demo, e depois nunca vai para produção — ou vai, mas ninguém sabe se está funcionando, quanto está custando ou quando parou de funcionar.</p>
-        <p>LLMOps é o conjunto de práticas que garante que sistemas de IA sejam operados com a mesma disciplina que qualquer sistema de software crítico: monitoramento, alertas, controle de custo, versionamento e processos de atualização.</p>
-    </div>
+                    <div class="summary-box">
+                        <div class="summary-box-label">📌 Resumo para todos</div>
+                        <p>A maioria dos projetos de IA morre aqui. Uma PoC funciona no notebook do engenheiro,
+                            impressiona na demo, e depois nunca vai para produção — ou vai, mas ninguém sabe se está
+                            funcionando, quanto está custando ou quando parou de funcionar.</p>
+                        <p>LLMOps é o conjunto de práticas que garante que sistemas de IA sejam operados com a mesma
+                            disciplina que qualquer sistema de software crítico: monitoramento, alertas, controle de
+                            custo, versionamento e processos de atualização.</p>
+                    </div>
 
-    <div class="subsection">
-        <div class="subsection-title">Gateway de LLM Centralizado <span class="badge">Infraestrutura obrigatória</span></div>
-        <div class="prose">
-            <p>O gateway é o ponto central por onde toda chamada a modelo externo da empresa passa. Não é opcional — é a base de toda a observabilidade, controle de custo e segurança. Sem ele, cada projeto faz suas próprias chamadas diretas, e a empresa perde visibilidade total sobre o que está acontecendo.</p>
-            <p><strong>Ferramentas de referência:</strong> <code>LiteLLM</code> (open source, recomendado), <code>Portkey</code>, <code>MLflow AI Gateway</code>. A decisão de qual usar é um ADR.</p>
-        </div>
-        <div class="cards cards-2" style="margin-top:16px;">
-            <div class="card">
-                <div class="card-title">🔀 Roteamento inteligente</div>
-                <div class="card-body">A mesma chamada pode ir para GPT-4o, Claude ou Gemini dependendo do custo atual, disponibilidade e tipo de tarefa. Tarefas simples de classificação não precisam do modelo mais caro.</div>
-            </div>
-            <div class="card">
-                <div class="card-title">🔄 Fallback automático</div>
-                <div class="card-body">Se o provider principal está fora ou com latência alta, o gateway redireciona automaticamente para o provider alternativo sem que o usuário perceba a falha.</div>
-            </div>
-            <div class="card">
-                <div class="card-title">🚦 Rate limiting por projeto</div>
-                <div class="card-body">Cada projeto tem um limite de tokens por minuto/hora/mês. Um projeto em loop infinito não consegue consumir o budget de todos os outros.</div>
-            </div>
-            <div class="card">
-                <div class="card-title">💾 Cache semântico</div>
-                <div class="card-body">Chamadas com perguntas similares (mesmo significado, palavras diferentes) retornam do cache sem ir até o modelo. Reduz custo em até 40% em casos de uso com perguntas repetitivas.</div>
-            </div>
-        </div>
-    </div>
+                    <div class="subsection">
+                        <div class="subsection-title">Gateway de LLM Centralizado <span class="badge">Infraestrutura
+                                obrigatória</span></div>
+                        <div class="prose">
+                            <p>O gateway é o ponto central por onde toda chamada a modelo externo da empresa passa. Não
+                                é opcional — é a base de toda a observabilidade, controle de custo e segurança. Sem ele,
+                                cada projeto faz suas próprias chamadas diretas, e a empresa perde visibilidade total
+                                sobre o que está acontecendo.</p>
+                            <p><strong>Ferramentas de referência:</strong> <code>LiteLLM</code> (open source,
+                                recomendado), <code>Portkey</code>, <code>MLflow AI Gateway</code>. A decisão de qual
+                                usar é um ADR.</p>
+                        </div>
+                        <div class="cards cards-2" style="margin-top:16px;">
+                            <div class="card">
+                                <div class="card-title">🔀 Roteamento inteligente</div>
+                                <div class="card-body">A mesma chamada pode ir para GPT-4o, Claude ou Gemini dependendo
+                                    do custo atual, disponibilidade e tipo de tarefa. Tarefas simples de classificação
+                                    não precisam do modelo mais caro.</div>
+                            </div>
+                            <div class="card">
+                                <div class="card-title">🔄 Fallback automático</div>
+                                <div class="card-body">Se o provider principal está fora ou com latência alta, o gateway
+                                    redireciona automaticamente para o provider alternativo sem que o usuário perceba a
+                                    falha.</div>
+                            </div>
+                            <div class="card">
+                                <div class="card-title">🚦 Rate limiting por projeto</div>
+                                <div class="card-body">Cada projeto tem um limite de tokens por minuto/hora/mês. Um
+                                    projeto em loop infinito não consegue consumir o budget de todos os outros.</div>
+                            </div>
+                            <div class="card">
+                                <div class="card-title">💾 Cache semântico</div>
+                                <div class="card-body">Chamadas com perguntas similares (mesmo significado, palavras
+                                    diferentes) retornam do cache sem ir até o modelo. Reduz custo em até 40% em casos
+                                    de uso com perguntas repetitivas.</div>
+                            </div>
+                        </div>
+                    </div>
 
-    <div class="subsection">
-        <div class="subsection-title">Observabilidade de IA — Métricas que Importam</div>
-        <div class="prose">
-            <p>Métricas convencionais de APM (CPU, memória, latência HTTP) não capturam o que importa em sistemas de IA. Precisamos de métricas específicas para entender se o sistema está funcionando bem do ponto de vista do usuário e do negócio.</p>
-            <p><strong>Ferramentas de referência:</strong> <code>LangSmith</code>, <code>Langfuse</code> (open source, recomendado), <code>Arize Phoenix</code>, <code>Weights & Biases</code>.</p>
-        </div>
-        <div class="doc-table-wrap" style="margin-top:16px;">
-            <table class="doc-table">
-                <thead>
-                    <tr><th>Categoria</th><th>Métrica</th><th>Por que importa</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td><strong>Performance</strong></td><td>Latência por etapa (embedding, retrieval, geração)</td><td>Quando algo fica lento, você sabe exatamente onde está o gargalo</td></tr>
-                    <tr><td><strong>Custo</strong></td><td>Custo por sessão / usuário / feature</td><td>Cada área vê o custo do que usa — não um número global sem contexto</td></tr>
-                    <tr><td><strong>Qualidade RAG</strong></td><td>MRR, NDCG, faithfulness</td><td>Os documentos recuperados são relevantes? A resposta é fiel a eles?</td></tr>
-                    <tr><td><strong>Feedback</strong></td><td>Thumbs down, reformulação de pergunta, abandono</td><td>Sinais implícitos de que a resposta foi ruim, mesmo sem o usuário reclamar</td></tr>
-                    <tr><td><strong>Drift</strong></td><td>Distribuição de tópicos, taxa de respostas fora do escopo</td><td>O modelo está sendo usado para fins não previstos? O comportamento mudou?</td></tr>
-                    <tr><td><strong>Erros</strong></td><td>Taxa de fallback acionado, timeouts, erros de parsing</td><td>Saúde operacional do sistema — o que está quebrando e com que frequência</td></tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+                    <div class="subsection">
+                        <div class="subsection-title">Observabilidade de IA — Métricas que Importam</div>
+                        <div class="prose">
+                            <p>Métricas convencionais de APM (CPU, memória, latência HTTP) não capturam o que importa em
+                                sistemas de IA. Precisamos de métricas específicas para entender se o sistema está
+                                funcionando bem do ponto de vista do usuário e do negócio.</p>
+                            <p><strong>Ferramentas de referência:</strong> <code>LangSmith</code>, <code>Langfuse</code>
+                                (open source, recomendado), <code>Arize Phoenix</code>, <code>Weights & Biases</code>.
+                            </p>
+                        </div>
+                        <div class="doc-table-wrap" style="margin-top:16px;">
+                            <table class="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Categoria</th>
+                                        <th>Métrica</th>
+                                        <th>Por que importa</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Performance</strong></td>
+                                        <td>Latência por etapa (embedding, retrieval, geração)</td>
+                                        <td>Quando algo fica lento, você sabe exatamente onde está o gargalo</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Custo</strong></td>
+                                        <td>Custo por sessão / usuário / feature</td>
+                                        <td>Cada área vê o custo do que usa — não um número global sem contexto</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Qualidade RAG</strong></td>
+                                        <td>MRR, NDCG, faithfulness</td>
+                                        <td>Os documentos recuperados são relevantes? A resposta é fiel a eles?</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Feedback</strong></td>
+                                        <td>Thumbs down, reformulação de pergunta, abandono</td>
+                                        <td>Sinais implícitos de que a resposta foi ruim, mesmo sem o usuário reclamar
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Drift</strong></td>
+                                        <td>Distribuição de tópicos, taxa de respostas fora do escopo</td>
+                                        <td>O modelo está sendo usado para fins não previstos? O comportamento mudou?
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Erros</strong></td>
+                                        <td>Taxa de fallback acionado, timeouts, erros de parsing</td>
+                                        <td>Saúde operacional do sistema — o que está quebrando e com que frequência
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
 
-    <div class="subsection">
-        <div class="subsection-title">Pipeline de Dados para IA</div>
-        <div class="prose">
-            <p>RAG só é tão bom quanto a qualidade dos dados que o alimenta. Um pipeline de dados mal construído é a causa mais comum de respostas ruins em sistemas de IA corporativos. O CoE define a arquitetura padrão para ingestão e processamento de documentos corporativos.</p>
-        </div>
-        <ul class="doc-list" style="margin-top:14px;">
-            <li><strong>Fontes suportadas:</strong> SharePoint, Confluence, SAP, bancos de dados relacionais, PDFs, e-mails. Cada fonte tem um conector padronizado com frequência de atualização definida (tempo real, diária, semanal).</li>
-            <li><strong>Pré-processamento:</strong> limpeza de formatação HTML/XML, extração de tabelas como texto estruturado, OCR para PDFs escaneados, preservação de estrutura hierárquica (título → seção → parágrafo).</li>
-            <li><strong>Chunking strategy:</strong> respeitar limites semânticos é mais importante que tamanho fixo. Um parágrafo completo é melhor que metade de dois parágrafos. Overlap de 10–15% entre chunks adjacentes preserva contexto.</li>
-            <li><strong>Metadata obrigatório por chunk:</strong> ID do documento fonte, URL/caminho, data de criação, data de última atualização, departamento responsável, classificação de acesso, versão do pipeline de ingestão.</li>
-            <li><strong>Reindexação incremental:</strong> apenas documentos novos ou modificados são reprocessados. Reindexação completa é reservada para mudanças de embedding model ou chunking strategy.</li>
-        </ul>
-    </div>
+                    <div class="subsection">
+                        <div class="subsection-title">Pipeline de Dados para IA</div>
+                        <div class="prose">
+                            <p>RAG só é tão bom quanto a qualidade dos dados que o alimenta. Um pipeline de dados mal
+                                construído é a causa mais comum de respostas ruins em sistemas de IA corporativos. O CoE
+                                define a arquitetura padrão para ingestão e processamento de documentos corporativos.
+                            </p>
+                        </div>
+                        <ul class="doc-list" style="margin-top:14px;">
+                            <li><strong>Fontes suportadas:</strong> SharePoint, Confluence, SAP, bancos de dados
+                                relacionais, PDFs, e-mails. Cada fonte tem um conector padronizado com frequência de
+                                atualização definida (tempo real, diária, semanal).</li>
+                            <li><strong>Pré-processamento:</strong> limpeza de formatação HTML/XML, extração de tabelas
+                                como texto estruturado, OCR para PDFs escaneados, preservação de estrutura hierárquica
+                                (título → seção → parágrafo).</li>
+                            <li><strong>Chunking strategy:</strong> respeitar limites semânticos é mais importante que
+                                tamanho fixo. Um parágrafo completo é melhor que metade de dois parágrafos. Overlap de
+                                10–15% entre chunks adjacentes preserva contexto.</li>
+                            <li><strong>Metadata obrigatório por chunk:</strong> ID do documento fonte, URL/caminho,
+                                data de criação, data de última atualização, departamento responsável, classificação de
+                                acesso, versão do pipeline de ingestão.</li>
+                            <li><strong>Reindexação incremental:</strong> apenas documentos novos ou modificados são
+                                reprocessados. Reindexação completa é reservada para mudanças de embedding model ou
+                                chunking strategy.</li>
+                        </ul>
+                    </div>
 
-    <div class="subsection">
-        <div class="subsection-title">Gestão de Custos como Disciplina de Engenharia</div>
-        <div class="prose">
-            <p>Em IA, custo é uma responsabilidade de arquitetura — não do financeiro. Decisões técnicas têm impacto direto e imediato no custo. Um loop de agente mal configurado pode gerar uma fatura de milhares de reais em horas.</p>
-        </div>
-        <ul class="doc-list" style="margin-top:14px;">
-            <li><strong>Orçamento por projeto com alertas:</strong> cada projeto tem um limite mensal configurado no gateway. Alertas em 70% e 90% do limite. Bloqueio automático em 100% (configurável).</li>
-            <li><strong>Seleção de modelo por complexidade:</strong> tarefas simples (classificação, extração de entidades, resumo curto) não precisam de GPT-4o. <code>GPT-4o-mini</code> ou <code>Claude Haiku</code> resolvem com 10–20% do custo.</li>
-            <li><strong>Batch processing:</strong> o que não precisa ser em tempo real é processado em batch. As APIs de batch dos principais providers custam 50% menos que as APIs síncronas.</li>
-            <li><strong>Context window discipline:</strong> prompts gordos custam caro. O padrão define o que pode e o que não pode ser incluído no contexto. Documentos inteiros no prompt são proibidos — use RAG.</li>
-            <li><strong>Inventário de versões:</strong> quando um provider deprecia um modelo, o inventário mostra imediatamente quais sistemas precisam ser migrados e qual é o prazo.</li>
-        </ul>
-        <div class="callout warn" style="margin-top:16px;">
-            <div class="callout-label">⚠️ Atenção</div>
-            Agentes autônomos sem rate limiting são o maior risco de custo em IA. Um agente em loop pode fazer centenas de chamadas por minuto. Todo agente em produção precisa de limite de iterações e alerta de custo configurados antes do deploy.
-        </div>
-    </div>
-</section>
+                    <div class="subsection">
+                        <div class="subsection-title">Gestão de Custos como Disciplina de Engenharia</div>
+                        <div class="prose">
+                            <p>Em IA, custo é uma responsabilidade de arquitetura — não do financeiro. Decisões técnicas
+                                têm impacto direto e imediato no custo. Um loop de agente mal configurado pode gerar uma
+                                fatura de milhares de reais em horas.</p>
+                        </div>
+                        <ul class="doc-list" style="margin-top:14px;">
+                            <li><strong>Orçamento por projeto com alertas:</strong> cada projeto tem um limite mensal
+                                configurado no gateway. Alertas em 70% e 90% do limite. Bloqueio automático em 100%
+                                (configurável).</li>
+                            <li><strong>Seleção de modelo por complexidade:</strong> tarefas simples (classificação,
+                                extração de entidades, resumo curto) não precisam de GPT-4o. <code>GPT-4o-mini</code> ou
+                                <code>Claude Haiku</code> resolvem com 10–20% do custo.
+                            </li>
+                            <li><strong>Batch processing:</strong> o que não precisa ser em tempo real é processado em
+                                batch. As APIs de batch dos principais providers custam 50% menos que as APIs síncronas.
+                            </li>
+                            <li><strong>Context window discipline:</strong> prompts gordos custam caro. O padrão define
+                                o que pode e o que não pode ser incluído no contexto. Documentos inteiros no prompt são
+                                proibidos — use RAG.</li>
+                            <li><strong>Inventário de versões:</strong> quando um provider deprecia um modelo, o
+                                inventário mostra imediatamente quais sistemas precisam ser migrados e qual é o prazo.
+                            </li>
+                        </ul>
+                        <div class="callout warn" style="margin-top:16px;">
+                            <div class="callout-label">⚠️ Atenção</div>
+                            Agentes autônomos sem rate limiting são o maior risco de custo em IA. Um agente em loop pode
+                            fazer centenas de chamadas por minuto. Todo agente em produção precisa de limite de
+                            iterações e alerta de custo configurados antes do deploy.
+                        </div>
+                    </div>
+                </section>
 
 
-<!-- ═══════════════════════════════════════════════
+                <!-- ═══════════════════════════════════════════════
      PILAR 4 — ENABLEMENT
 ════════════════════════════════════════════════ -->
-<section id="p4" class="doc-section">
-    <div class="section-header">
-        <div class="section-tag">Pilar 4</div>
-        <h2 class="section-title">🚀 Enablement dos Times</h2>
-        <p class="section-subtitle">Nosso maior multiplicador de impacto — distribuir capacidade, não centralizar execução</p>
-    </div>
+                <section id="p4" class="doc-section">
+                    <div class="section-header">
+                        <div class="section-tag">Pilar 4</div>
+                        <h2 class="section-title">🚀 Enablement dos Times</h2>
+                        <p class="section-subtitle">Nosso maior multiplicador de impacto — distribuir capacidade, não
+                            centralizar execução</p>
+                    </div>
 
-    <div class="summary-box">
-        <div class="summary-box-label">📌 Resumo para todos</div>
-        <p>Se o CoE Operacional for o único time que sabe construir IA na empresa, ele vira gargalo. Cada nova demanda depende de nós, o backlog cresce, os times ficam frustrados e a IA não escala.</p>
-        <p>O Pilar 4 existe para evitar isso. Criamos playbooks que qualquer time pode seguir, treinamos perfis específicos com o que eles precisam saber, e estabelecemos um funil claro para que projetos avancem com critérios técnicos — não com base em quem gritou mais alto.</p>
-    </div>
+                    <div class="summary-box">
+                        <div class="summary-box-label">📌 Resumo para todos</div>
+                        <p>Se o CoE Operacional for o único time que sabe construir IA na empresa, ele vira gargalo.
+                            Cada nova demanda depende de nós, o backlog cresce, os times ficam frustrados e a IA não
+                            escala.</p>
+                        <p>O Pilar 4 existe para evitar isso. Criamos playbooks que qualquer time pode seguir, treinamos
+                            perfis específicos com o que eles precisam saber, e estabelecemos um funil claro para que
+                            projetos avancem com critérios técnicos — não com base em quem gritou mais alto.</p>
+                    </div>
 
-    <div class="subsection">
-        <div class="subsection-title">Funil de Maturidade de IA <span class="badge">Critérios técnicos, não políticos</span></div>
-        <div class="prose">
-            <p>Todo projeto de IA passa por fases com critérios claros de entrada e saída. Avançar de fase não é uma decisão política — é uma decisão técnica baseada em evidências. O CoE Operacional define e aplica esses critérios.</p>
-        </div>
-        <div class="funnel" style="margin-top:16px;">
-            <div class="funnel-step">
-                <div class="funnel-num">01</div>
-                <div class="funnel-content">
-                    <div class="funnel-title">Exploração · 2–4 semanas</div>
-                    <div class="funnel-desc"><strong>Perguntas a responder:</strong> o problema está bem definido? Os dados necessários existem e têm qualidade suficiente? A complexidade técnica é compatível com o prazo e o budget? Existe um responsável de negócio comprometido?<br><strong>Entregável:</strong> ADR com avaliação técnica e recomendação de Go/No-Go.</div>
-                </div>
-                <div class="funnel-badge">Entrada</div>
-            </div>
-            <div class="funnel-step">
-                <div class="funnel-num">02</div>
-                <div class="funnel-content">
-                    <div class="funnel-title">PoC · 4–8 semanas</div>
-                    <div class="funnel-desc"><strong>Perguntas a responder:</strong> a abordagem técnica funciona no cenário real (não só no notebook)? Quais são as limitações concretas? Qual é o custo estimado de produção? As métricas de aceite foram atingidas?<br><strong>Entregável:</strong> demo funcional com métricas de qualidade medidas + estimativa de custo de produção.</div>
-                </div>
-                <div class="funnel-badge">Validação</div>
-            </div>
-            <div class="funnel-step">
-                <div class="funnel-num">03</div>
-                <div class="funnel-content">
-                    <div class="funnel-title">Piloto · 8–16 semanas</div>
-                    <div class="funnel-desc"><strong>Perguntas a responder:</strong> funciona com usuários reais em volume real? O ROI está se confirmando? O time de negócio está adotando? Os custos estão dentro do projetado?<br><strong>Entregável:</strong> produto com observabilidade ativa + dados de uso real + relatório de lições aprendidas.</div>
-                </div>
-                <div class="funnel-badge">Validação real</div>
-            </div>
-            <div class="funnel-step highlight-step">
-                <div class="funnel-num">04</div>
-                <div class="funnel-content">
-                    <div class="funnel-title">Produção</div>
-                    <div class="funnel-desc"><strong>Requisitos mínimos:</strong> passou pelo ARB; tem model card preenchido; observabilidade ativa (gateway, métricas, alertas); plano de rollback documentado; dono de negócio comprometido com manutenção; processo de revisão periódica agendado.<br><strong>Sem esses requisitos, o projeto não vai para produção.</strong></div>
-                </div>
-                <div class="funnel-badge">Destino final</div>
-            </div>
-        </div>
-    </div>
+                    <div class="subsection">
+                        <div class="subsection-title">Funil de Maturidade de IA <span class="badge">Critérios técnicos,
+                                não políticos</span></div>
+                        <div class="prose">
+                            <p>Todo projeto de IA passa por fases com critérios claros de entrada e saída. Avançar de
+                                fase não é uma decisão política — é uma decisão técnica baseada em evidências. O CoE
+                                Operacional define e aplica esses critérios.</p>
+                        </div>
+                        <div class="funnel" style="margin-top:16px;">
+                            <div class="funnel-step">
+                                <div class="funnel-num">01</div>
+                                <div class="funnel-content">
+                                    <div class="funnel-title">Exploração · 2–4 semanas</div>
+                                    <div class="funnel-desc"><strong>Perguntas a responder:</strong> o problema está bem
+                                        definido? Os dados necessários existem e têm qualidade suficiente? A
+                                        complexidade técnica é compatível com o prazo e o budget? Existe um responsável
+                                        de negócio comprometido?<br><strong>Entregável:</strong> ADR com avaliação
+                                        técnica e recomendação de Go/No-Go.</div>
+                                </div>
+                                <div class="funnel-badge">Entrada</div>
+                            </div>
+                            <div class="funnel-step">
+                                <div class="funnel-num">02</div>
+                                <div class="funnel-content">
+                                    <div class="funnel-title">PoC · 4–8 semanas</div>
+                                    <div class="funnel-desc"><strong>Perguntas a responder:</strong> a abordagem técnica
+                                        funciona no cenário real (não só no notebook)? Quais são as limitações
+                                        concretas? Qual é o custo estimado de produção? As métricas de aceite foram
+                                        atingidas?<br><strong>Entregável:</strong> demo funcional com métricas de
+                                        qualidade medidas + estimativa de custo de produção.</div>
+                                </div>
+                                <div class="funnel-badge">Validação</div>
+                            </div>
+                            <div class="funnel-step">
+                                <div class="funnel-num">03</div>
+                                <div class="funnel-content">
+                                    <div class="funnel-title">Piloto · 8–16 semanas</div>
+                                    <div class="funnel-desc"><strong>Perguntas a responder:</strong> funciona com
+                                        usuários reais em volume real? O ROI está se confirmando? O time de negócio está
+                                        adotando? Os custos estão dentro do projetado?<br><strong>Entregável:</strong>
+                                        produto com observabilidade ativa + dados de uso real + relatório de lições
+                                        aprendidas.</div>
+                                </div>
+                                <div class="funnel-badge">Validação real</div>
+                            </div>
+                            <div class="funnel-step highlight-step">
+                                <div class="funnel-num">04</div>
+                                <div class="funnel-content">
+                                    <div class="funnel-title">Produção</div>
+                                    <div class="funnel-desc"><strong>Requisitos mínimos:</strong> passou pelo ARB; tem
+                                        model card preenchido; observabilidade ativa (gateway, métricas, alertas); plano
+                                        de rollback documentado; dono de negócio comprometido com manutenção; processo
+                                        de revisão periódica agendado.<br><strong>Sem esses requisitos, o projeto não
+                                            vai para produção.</strong></div>
+                                </div>
+                                <div class="funnel-badge">Destino final</div>
+                            </div>
+                        </div>
+                    </div>
 
-    <div class="subsection">
-        <div class="subsection-title">Playbooks de Desenvolvimento</div>
-        <div class="prose">
-            <p>Playbooks são documentos vivos que qualquer time pode pegar e seguir para construir uma solução de IA seguindo os padrões do CoE. Eles eliminam a necessidade de o CoE estar presente em cada projeto.</p>
-            <p><strong>Playbooks disponíveis (em construção):</strong></p>
-        </div>
-        <ul class="doc-list" style="margin-top:14px;">
-            <li><strong>Discovery técnico:</strong> as perguntas certas para fazer ao negócio antes de começar a construir. Como identificar se o problema é realmente de IA ou se uma solução mais simples resolve.</li>
-            <li><strong>Setup do ambiente:</strong> como montar o ambiente de desenvolvimento padronizado com as ferramentas aprovadas pelo CoE.</li>
-            <li><strong>Prompt engineering:</strong> não os truques virais — a teoria real. Como estruturar prompts para serem testáveis, versionáveis e robustos a variações de input.</li>
-            <li><strong>Avaliação de modelos:</strong> como escolher e avaliar um LLM para uma tarefa específica antes de se comprometer com ele. Como construir um golden dataset.</li>
-            <li><strong>Código testável em IA:</strong> como estruturar código não-determinístico para ser testável. Como usar mocks de LLM em testes unitários.</li>
-            <li><strong>Deploy seguindo os padrões:</strong> checklist completo de deploy — do ARB ao monitoramento ativo.</li>
-        </ul>
-    </div>
+                    <div class="subsection">
+                        <div class="subsection-title">Playbooks de Desenvolvimento</div>
+                        <div class="prose">
+                            <p>Playbooks são documentos vivos que qualquer time pode pegar e seguir para construir uma
+                                solução de IA seguindo os padrões do CoE. Eles eliminam a necessidade de o CoE estar
+                                presente em cada projeto.</p>
+                            <p><strong>Playbooks disponíveis (em construção):</strong></p>
+                        </div>
+                        <ul class="doc-list" style="margin-top:14px;">
+                            <li><strong>Discovery técnico:</strong> as perguntas certas para fazer ao negócio antes de
+                                começar a construir. Como identificar se o problema é realmente de IA ou se uma solução
+                                mais simples resolve.</li>
+                            <li><strong>Setup do ambiente:</strong> como montar o ambiente de desenvolvimento
+                                padronizado com as ferramentas aprovadas pelo CoE.</li>
+                            <li><strong>Prompt engineering:</strong> não os truques virais — a teoria real. Como
+                                estruturar prompts para serem testáveis, versionáveis e robustos a variações de input.
+                            </li>
+                            <li><strong>Avaliação de modelos:</strong> como escolher e avaliar um LLM para uma tarefa
+                                específica antes de se comprometer com ele. Como construir um golden dataset.</li>
+                            <li><strong>Código testável em IA:</strong> como estruturar código não-determinístico para
+                                ser testável. Como usar mocks de LLM em testes unitários.</li>
+                            <li><strong>Deploy seguindo os padrões:</strong> checklist completo de deploy — do ARB ao
+                                monitoramento ativo.</li>
+                        </ul>
+                    </div>
 
-    <div class="subsection">
-        <div class="subsection-title">Evals como Cultura — Não como Opcional</div>
-        <div class="prose">
-            <p>O maior gap de maturidade na maioria das empresas com IA. Times tratam avaliação como opcional porque "o modelo é não-determinístico". Isso é um erro. Evals são o equivalente de testes unitários em IA — sem eles, você não sabe se o sistema melhorou ou piorou após uma mudança.</p>
-        </div>
-        <ul class="doc-list" style="margin-top:14px;">
-            <li><strong>Golden datasets por domínio:</strong> conjuntos de perguntas com respostas esperadas para cada área de negócio. Usados para comparar modelos, medir regressão e validar mudanças de prompt.</li>
-            <li><strong>LLM-as-judge:</strong> usar um modelo para avaliar as respostas de outro modelo em escala. Permite avaliação automática de qualidade sem revisão humana de cada resposta.</li>
-            <li><strong>Avaliação humana estruturada:</strong> quem faz, com qual frequência, usando qual critério (rubrica), como os resultados alimentam melhorias. Não é "alguém olha de vez em quando".</li>
-            <li><strong>Regra inegociável:</strong> nenhum projeto vai para produção sem ter medido a performance inicial (baseline). Sem baseline, você não tem como saber se melhorou ou piorou.</li>
-        </ul>
-    </div>
+                    <div class="subsection">
+                        <div class="subsection-title">Evals como Cultura — Não como Opcional</div>
+                        <div class="prose">
+                            <p>O maior gap de maturidade na maioria das empresas com IA. Times tratam avaliação como
+                                opcional porque "o modelo é não-determinístico". Isso é um erro. Evals são o equivalente
+                                de testes unitários em IA — sem eles, você não sabe se o sistema melhorou ou piorou após
+                                uma mudança.</p>
+                        </div>
+                        <ul class="doc-list" style="margin-top:14px;">
+                            <li><strong>Golden datasets por domínio:</strong> conjuntos de perguntas com respostas
+                                esperadas para cada área de negócio. Usados para comparar modelos, medir regressão e
+                                validar mudanças de prompt.</li>
+                            <li><strong>LLM-as-judge:</strong> usar um modelo para avaliar as respostas de outro modelo
+                                em escala. Permite avaliação automática de qualidade sem revisão humana de cada
+                                resposta.</li>
+                            <li><strong>Avaliação humana estruturada:</strong> quem faz, com qual frequência, usando
+                                qual critério (rubrica), como os resultados alimentam melhorias. Não é "alguém olha de
+                                vez em quando".</li>
+                            <li><strong>Regra inegociável:</strong> nenhum projeto vai para produção sem ter medido a
+                                performance inicial (baseline). Sem baseline, você não tem como saber se melhorou ou
+                                piorou.</li>
+                        </ul>
+                    </div>
 
-    <div class="subsection">
-        <div class="subsection-title">Trilhas de Capacitação por Perfil</div>
-        <div class="prose">
-            <p>Não damos um curso genérico de IA para todo mundo. Mapeamos os perfis técnicos dos times e criamos trilhas específicas com o que cada perfil precisa saber para trabalhar com IA com qualidade.</p>
-        </div>
-        <div class="doc-table-wrap" style="margin-top:16px;">
-            <table class="doc-table">
-                <thead>
-                    <tr><th>Perfil</th><th>Foco da trilha</th><th>Resultado esperado</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td><strong>Dev sem experiência em IA</strong></td><td>Fundamentos de LLMs, prompt engineering real, integração de API production-grade, testes em sistemas não-determinísticos</td><td>Consegue construir e integrar soluções de IA seguindo os padrões do CoE</td></tr>
-                    <tr><td><strong>Analista de dados</strong></td><td>Uso de LLMs para análise de dados não estruturados, pipelines com LLM embutido, avaliação de outputs</td><td>Consegue criar pipelines de análise com IA sem depender do time de engenharia</td></tr>
-                    <tr><td><strong>Arquiteto de outros times</strong></td><td>Segurança em sistemas de IA, trade-offs de arquitetura, como o CoE apoia sem criar dependência</td><td>Consegue avaliar e questionar decisões de arquitetura de IA nos projetos do seu time</td></tr>
-                    <tr><td><strong>Citizen Developer (negócio)</strong></td><td>Ferramentas low-code/no-code aprovadas, limites do que pode ser construído sem o CoE, quando escalar para o time técnico</td><td>Consegue construir automações e agentes simples com segurança e dentro dos padrões</td></tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+                    <div class="subsection">
+                        <div class="subsection-title">Trilhas de Capacitação por Perfil</div>
+                        <div class="prose">
+                            <p>Não damos um curso genérico de IA para todo mundo. Mapeamos os perfis técnicos dos times
+                                e criamos trilhas específicas com o que cada perfil precisa saber para trabalhar com IA
+                                com qualidade.</p>
+                        </div>
+                        <div class="doc-table-wrap" style="margin-top:16px;">
+                            <table class="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Perfil</th>
+                                        <th>Foco da trilha</th>
+                                        <th>Resultado esperado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Dev sem experiência em IA</strong></td>
+                                        <td>Fundamentos de LLMs, prompt engineering real, integração de API
+                                            production-grade, testes em sistemas não-determinísticos</td>
+                                        <td>Consegue construir e integrar soluções de IA seguindo os padrões do CoE</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Analista de dados</strong></td>
+                                        <td>Uso de LLMs para análise de dados não estruturados, pipelines com LLM
+                                            embutido, avaliação de outputs</td>
+                                        <td>Consegue criar pipelines de análise com IA sem depender do time de
+                                            engenharia</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Arquiteto de outros times</strong></td>
+                                        <td>Segurança em sistemas de IA, trade-offs de arquitetura, como o CoE apoia sem
+                                            criar dependência</td>
+                                        <td>Consegue avaliar e questionar decisões de arquitetura de IA nos projetos do
+                                            seu time</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Citizen Developer (negócio)</strong></td>
+                                        <td>Ferramentas low-code/no-code aprovadas, limites do que pode ser construído
+                                            sem o CoE, quando escalar para o time técnico</td>
+                                        <td>Consegue construir automações e agentes simples com segurança e dentro dos
+                                            padrões</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
 
-    <div class="subsection">
-        <div class="subsection-title">Comunidade Interna de Prática</div>
-        <div class="prose">
-            <p>Conhecimento que fica só no CoE não escala. A comunidade interna é o mecanismo para distribuir aprendizados para toda a empresa de forma contínua.</p>
-        </div>
-        <ul class="doc-list" style="margin-top:14px;">
-            <li><strong>Canal dedicado (Slack/Teams):</strong> padrão de postagem estruturado — problema enfrentado, solução encontrada, aprendizado para outros times. Não é um canal de dúvidas genéricas.</li>
-            <li><strong>Show & Tell quinzenal:</strong> times apresentam o que funcionou e o que não funcionou. Sessões de 30 minutos, abertas para toda a empresa.</li>
-            <li><strong>Biblioteca de prompts:</strong> prompts validados e reutilizáveis organizados por caso de uso. Qualquer time pode contribuir após revisão do CoE.</li>
-            <li><strong>Registro de experimentos que falharam:</strong> tão valioso quanto os que funcionaram. Evita que times diferentes repitam os mesmos erros.</li>
-        </ul>
-    </div>
-</section>
+                    <div class="subsection">
+                        <div class="subsection-title">Comunidade Interna de Prática</div>
+                        <div class="prose">
+                            <p>Conhecimento que fica só no CoE não escala. A comunidade interna é o mecanismo para
+                                distribuir aprendizados para toda a empresa de forma contínua.</p>
+                        </div>
+                        <ul class="doc-list" style="margin-top:14px;">
+                            <li><strong>Canal dedicado (Slack/Teams):</strong> padrão de postagem estruturado — problema
+                                enfrentado, solução encontrada, aprendizado para outros times. Não é um canal de dúvidas
+                                genéricas.</li>
+                            <li><strong>Show & Tell quinzenal:</strong> times apresentam o que funcionou e o que não
+                                funcionou. Sessões de 30 minutos, abertas para toda a empresa.</li>
+                            <li><strong>Biblioteca de prompts:</strong> prompts validados e reutilizáveis organizados
+                                por caso de uso. Qualquer time pode contribuir após revisão do CoE.</li>
+                            <li><strong>Registro de experimentos que falharam:</strong> tão valioso quanto os que
+                                funcionaram. Evita que times diferentes repitam os mesmos erros.</li>
+                        </ul>
+                    </div>
+                </section>
 
-<!-- ═══════════════════════════════════════════════
+                <!-- ═══════════════════════════════════════════════
      MÉTRICAS DE SUCESSO
 ════════════════════════════════════════════════ -->
-<section id="metricas" class="doc-section">
-    <div class="section-header">
-        <div class="section-tag">Resultados</div>
-        <h2 class="section-title">📊 Métricas de Sucesso do CoE</h2>
-        <p class="section-subtitle">Como a empresa sabe se o CoE Operacional está funcionando bem</p>
-    </div>
+                <section id="metricas" class="doc-section">
+                    <div class="section-header">
+                        <div class="section-tag">Resultados</div>
+                        <h2 class="section-title">📊 Métricas de Sucesso do CoE</h2>
+                        <p class="section-subtitle">Como a empresa sabe se o CoE Operacional está funcionando bem</p>
+                    </div>
 
-    <div class="summary-box">
-        <div class="summary-box-label">📌 Resumo para todos</div>
-        <p>Sem métricas definidas, o CoE não consegue demonstrar valor — e não consegue melhorar. Medimos quatro dimensões: o que está em produção, se os padrões estão sendo seguidos, se os custos estão sob controle e se os times estão ganhando autonomia.</p>
-    </div>
+                    <div class="summary-box">
+                        <div class="summary-box-label">📌 Resumo para todos</div>
+                        <p>Sem métricas definidas, o CoE não consegue demonstrar valor — e não consegue melhorar.
+                            Medimos quatro dimensões: o que está em produção, se os padrões estão sendo seguidos, se os
+                            custos estão sob controle e se os times estão ganhando autonomia.</p>
+                    </div>
 
-    <div class="cards cards-2" style="margin-top:24px;">
-        <div class="card">
-            <div class="card-icon">🏭</div>
-            <div class="card-title">Produção</div>
-            <div class="card-body">
-                <ul class="doc-list" style="margin:0;">
-                    <li>Número de soluções de IA em produção</li>
-                    <li>Taxa de conversão PoC → produção</li>
-                    <li>Tempo médio de PoC para produção</li>
-                    <li>Uptime e SLA dos sistemas em operação</li>
-                    <li>Número de incidentes de produção por mês</li>
-                </ul>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-icon">📐</div>
-            <div class="card-title">Adoção de Padrões</div>
-            <div class="card-body">
-                <ul class="doc-list" style="margin:0;">
-                    <li>% de projetos usando blueprints do CoE</li>
-                    <li>% de projetos com observabilidade ativa</li>
-                    <li>% de projetos com model card preenchido</li>
-                    <li>% de projetos com evals automatizados</li>
-                    <li>Número de ADRs publicados e atualizados</li>
-                </ul>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-icon">💰</div>
-            <div class="card-title">Eficiência de Custo</div>
-            <div class="card-body">
-                <ul class="doc-list" style="margin:0;">
-                    <li>Custo médio por interação por projeto</li>
-                    <li>Economia gerada por cache semântico</li>
-                    <li>ROI realizado vs estimado nos business cases</li>
-                    <li>% de chamadas usando modelo adequado à tarefa</li>
-                    <li>Custo de infraestrutura por solução em produção</li>
-                </ul>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-icon">🚀</div>
-            <div class="card-title">Capacitação e Autonomia</div>
-            <div class="card-body">
-                <ul class="doc-list" style="margin:0;">
-                    <li>Número de times com autonomia para construir sem o CoE</li>
-                    <li>Citizen Developers ativos e certificados</li>
-                    <li>Participação ativa na comunidade de prática</li>
-                    <li>NPS interno do CoE com os times parceiros</li>
-                    <li>Número de contribuições externas aos playbooks</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
+                    <div class="cards cards-2" style="margin-top:24px;">
+                        <div class="card">
+                            <div class="card-icon">🏭</div>
+                            <div class="card-title">Produção</div>
+                            <div class="card-body">
+                                <ul class="doc-list" style="margin:0;">
+                                    <li>Número de soluções de IA em produção</li>
+                                    <li>Taxa de conversão PoC → produção</li>
+                                    <li>Tempo médio de PoC para produção</li>
+                                    <li>Uptime e SLA dos sistemas em operação</li>
+                                    <li>Número de incidentes de produção por mês</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon">📐</div>
+                            <div class="card-title">Adoção de Padrões</div>
+                            <div class="card-body">
+                                <ul class="doc-list" style="margin:0;">
+                                    <li>% de projetos usando blueprints do CoE</li>
+                                    <li>% de projetos com observabilidade ativa</li>
+                                    <li>% de projetos com model card preenchido</li>
+                                    <li>% de projetos com evals automatizados</li>
+                                    <li>Número de ADRs publicados e atualizados</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon">💰</div>
+                            <div class="card-title">Eficiência de Custo</div>
+                            <div class="card-body">
+                                <ul class="doc-list" style="margin:0;">
+                                    <li>Custo médio por interação por projeto</li>
+                                    <li>Economia gerada por cache semântico</li>
+                                    <li>ROI realizado vs estimado nos business cases</li>
+                                    <li>% de chamadas usando modelo adequado à tarefa</li>
+                                    <li>Custo de infraestrutura por solução em produção</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon">🚀</div>
+                            <div class="card-title">Capacitação e Autonomia</div>
+                            <div class="card-body">
+                                <ul class="doc-list" style="margin:0;">
+                                    <li>Número de times com autonomia para construir sem o CoE</li>
+                                    <li>Citizen Developers ativos e certificados</li>
+                                    <li>Participação ativa na comunidade de prática</li>
+                                    <li>NPS interno do CoE com os times parceiros</li>
+                                    <li>Número de contribuições externas aos playbooks</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
 
-<!-- ═══════════════════════════════════════════════
+                <!-- ═══════════════════════════════════════════════
      PRIMEIROS 90 DIAS
 ════════════════════════════════════════════════ -->
-<section id="90dias" class="doc-section">
-    <div class="section-header">
-        <div class="section-tag">Agora</div>
-        <h2 class="section-title">📅 Primeiros 90 Dias</h2>
-        <p class="section-subtitle">Por onde começamos — o que fazemos na segunda-feira</p>
-    </div>
+                <section id="90dias" class="doc-section">
+                    <div class="section-header">
+                        <div class="section-tag">Agora</div>
+                        <h2 class="section-title">📅 Primeiros 90 Dias</h2>
+                        <p class="section-subtitle">Por onde começamos — o que fazemos na segunda-feira</p>
+                    </div>
 
-    <div class="summary-box">
-        <div class="summary-box-label">📌 Resumo para todos</div>
-        <p>Os primeiros 90 dias determinam se o CoE vai ser levado a sério ou vai virar mais um comitê que existe no papel. O foco é: entender o que já existe, colocar a infraestrutura básica no ar e entregar um primeiro projeto de referência que demonstre como o CoE trabalha na prática.</p>
-        <p>A maturidade atual da empresa muda radicalmente o que priorizamos. Se não existe data platform, começamos por lá. Se já existe, pulamos direto para os padrões de IA.</p>
-    </div>
+                    <div class="summary-box">
+                        <div class="summary-box-label">📌 Resumo para todos</div>
+                        <p>Os primeiros 90 dias determinam se o CoE vai ser levado a sério ou vai virar mais um comitê
+                            que existe no papel. O foco é: entender o que já existe, colocar a infraestrutura básica no
+                            ar e entregar um primeiro projeto de referência que demonstre como o CoE trabalha na
+                            prática.</p>
+                        <p>A maturidade atual da empresa muda radicalmente o que priorizamos. Se não existe data
+                            platform, começamos por lá. Se já existe, pulamos direto para os padrões de IA.</p>
+                    </div>
 
-    <div class="funnel" style="margin-top:24px;">
-        <div class="funnel-step">
-            <div class="funnel-num">M1</div>
-            <div class="funnel-content">
-                <div class="funnel-title">Diagnóstico e fundação · Semanas 1–4</div>
-                <div class="funnel-desc">
-                    <strong>O que fazemos:</strong> mapear a maturidade atual — existe data platform? Práticas de MLOps? Quais projetos de IA já existem? Auditar o que está em produção sem padrão (e que pode ser um risco).<br><br>
-                    <strong>Entregáveis:</strong> relatório de maturidade técnica; inventário de projetos de IA existentes; lista de riscos identificados; proposta de priorização dos primeiros padrões a publicar.
-                </div>
-            </div>
-        </div>
-        <div class="funnel-step">
-            <div class="funnel-num">M2</div>
-            <div class="funnel-content">
-                <div class="funnel-title">Primeiros padrões e infraestrutura · Semanas 5–8</div>
-                <div class="funnel-desc">
-                    <strong>O que fazemos:</strong> publicar os primeiros ADRs (stack de LLM, classificação de dados, padrão RAG básico). Subir o gateway de LLM centralizado. Definir a matriz de classificação de dados × modelo permitido. Criar o template de model card.<br><br>
-                    <strong>Entregáveis:</strong> gateway de LLM operacional; primeiros 3–5 ADRs publicados; matriz de classificação de dados aprovada; template de model card disponível.
-                </div>
-            </div>
-        </div>
-        <div class="funnel-step highlight-step">
-            <div class="funnel-num">M3</div>
-            <div class="funnel-content">
-                <div class="funnel-title">Primeiro projeto piloto de referência · Semanas 9–12</div>
-                <div class="funnel-desc">
-                    <strong>O que fazemos:</strong> escolher um projeto de baixo risco e alto valor visível para rodar do zero seguindo todos os pilares. Documentar cada decisão como referência para os próximos projetos. Apresentar os resultados para o CoE Estratégico e Executivo.<br><br>
-                    <strong>Entregáveis:</strong> projeto em produção com observabilidade ativa; model card preenchido; playbook do projeto documentado; apresentação de resultados com métricas reais.
-                </div>
-            </div>
-        </div>
-    </div>
+                    <div class="funnel" style="margin-top:24px;">
+                        <div class="funnel-step">
+                            <div class="funnel-num">M1</div>
+                            <div class="funnel-content">
+                                <div class="funnel-title">Diagnóstico e fundação · Semanas 1–4</div>
+                                <div class="funnel-desc">
+                                    <strong>O que fazemos:</strong> mapear a maturidade atual — existe data platform?
+                                    Práticas de MLOps? Quais projetos de IA já existem? Auditar o que está em produção
+                                    sem padrão (e que pode ser um risco).<br><br>
+                                    <strong>Entregáveis:</strong> relatório de maturidade técnica; inventário de
+                                    projetos de IA existentes; lista de riscos identificados; proposta de priorização
+                                    dos primeiros padrões a publicar.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="funnel-step">
+                            <div class="funnel-num">M2</div>
+                            <div class="funnel-content">
+                                <div class="funnel-title">Primeiros padrões e infraestrutura · Semanas 5–8</div>
+                                <div class="funnel-desc">
+                                    <strong>O que fazemos:</strong> publicar os primeiros ADRs (stack de LLM,
+                                    classificação de dados, padrão RAG básico). Subir o gateway de LLM centralizado.
+                                    Definir a matriz de classificação de dados × modelo permitido. Criar o template de
+                                    model card.<br><br>
+                                    <strong>Entregáveis:</strong> gateway de LLM operacional; primeiros 3–5 ADRs
+                                    publicados; matriz de classificação de dados aprovada; template de model card
+                                    disponível.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="funnel-step highlight-step">
+                            <div class="funnel-num">M3</div>
+                            <div class="funnel-content">
+                                <div class="funnel-title">Primeiro projeto piloto de referência · Semanas 9–12</div>
+                                <div class="funnel-desc">
+                                    <strong>O que fazemos:</strong> escolher um projeto de baixo risco e alto valor
+                                    visível para rodar do zero seguindo todos os pilares. Documentar cada decisão como
+                                    referência para os próximos projetos. Apresentar os resultados para o CoE Tático e
+                                    ao CoE Estratégico.<br><br>
+                                    <strong>Entregáveis:</strong> projeto em produção com observabilidade ativa; model
+                                    card preenchido; playbook do projeto documentado; apresentação de resultados com
+                                    métricas reais.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-    <div class="callout success" style="margin-top:24px;">
-        <div class="callout-label">✅ Critério de sucesso dos primeiros 90 dias</div>
-        Ao final do mês 3, a empresa deve ter: (1) um gateway de LLM centralizado operacional, (2) pelo menos 5 ADRs publicados e acessíveis, (3) um projeto em produção que demonstra como o CoE trabalha, e (4) pelo menos um time externo ao CoE que consegue consultar os padrões e trabalhar com autonomia.
-    </div>
-</section>
+                    <div class="callout success" style="margin-top:24px;">
+                        <div class="callout-label">✅ Critério de sucesso dos primeiros 90 dias</div>
+                        Ao final do mês 3, a empresa deve ter: (1) um gateway de LLM centralizado operacional, (2) pelo
+                        menos 5 ADRs publicados e acessíveis, (3) um projeto em produção que demonstra como o CoE
+                        trabalha, e (4) pelo menos um time externo ao CoE que consegue consultar os padrões e trabalhar
+                        com autonomia.
+                    </div>
+                </section>
 
-</div><!-- #content -->
+            </div><!-- #content -->
 
-<footer id="footer">
-    <span>CoE Operacional · Centro de Excelência em IA</span>
-    <span>v1.0 · Maio 2026 · Revisão trimestral</span>
-    <span class="footer-doc-links"><a href="index.html">Site em páginas</a><span class="footer-doc-sep" aria-hidden="true">·</span><a href="coe-operacional.html">Apresentação em slides</a></span>
-    <span class="footer-author">Criado por Claudio Ramirez - Arquiteto Tech Lead CoE Operacional</span>
-</footer>
-</div><!-- #main -->
-</div><!-- #layout -->
+            <footer id="footer">
+                <span>CoE Operacional · Centro de Excelência em IA</span>
+                <span>v1.0 · Maio 2026 · Revisão trimestral</span>
+                <span class="footer-doc-links"><a href="index.html">Site em páginas</a><span class="footer-doc-sep"
+                        aria-hidden="true">·</span><a href="coe-operacional.html">Apresentação em slides</a></span>
+                <span class="footer-author">Criado por Claudio Ramirez - Arquiteto Tech Lead CoE Operacional</span>
+            </footer>
+        </div><!-- #main -->
+    </div><!-- #layout -->
 
-<script>
-(function () {
-    // Progress bar
-    const bar = document.getElementById('progress-bar');
-    const main = document.getElementById('main');
-    main.addEventListener('scroll', () => {
-        const s = main.scrollTop, h = main.scrollHeight - main.clientHeight;
-        bar.style.width = (h > 0 ? (s / h) * 100 : 0) + '%';
-    });
+    <script>
+        (function () {
+            // Progress bar
+            const bar = document.getElementById('progress-bar');
+            const main = document.getElementById('main');
+            main.addEventListener('scroll', () => {
+                const s = main.scrollTop, h = main.scrollHeight - main.clientHeight;
+                bar.style.width = (h > 0 ? (s / h) * 100 : 0) + '%';
+            });
 
-    // Active sidebar link on scroll
-    const links = document.querySelectorAll('.sidebar-link[href^="#"]');
-    const sections = Array.from(links).map(l => document.querySelector(l.getAttribute('href'))).filter(Boolean);
+            // Active sidebar link on scroll
+            const links = document.querySelectorAll('.sidebar-link[href^="#"]');
+            const sections = Array.from(links).map(l => document.querySelector(l.getAttribute('href'))).filter(Boolean);
 
-    const obs = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-            if (e.isIntersecting) {
-                links.forEach(l => l.classList.remove('active'));
-                const active = document.querySelector(`.sidebar-link[href="#${e.target.id}"]`);
-                if (active) active.classList.add('active');
-            }
-        });
-    }, { root: main, rootMargin: '-20% 0px -70% 0px' });
+            const obs = new IntersectionObserver((entries) => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) {
+                        links.forEach(l => l.classList.remove('active'));
+                        const active = document.querySelector(`.sidebar-link[href="#${e.target.id}"]`);
+                        if (active) active.classList.add('active');
+                    }
+                });
+            }, { root: main, rootMargin: '-20% 0px -70% 0px' });
 
-    sections.forEach(s => obs.observe(s));
+            sections.forEach(s => obs.observe(s));
 
-    // Smooth scroll for sidebar links
-    links.forEach(l => {
-        l.addEventListener('click', e => {
-            e.preventDefault();
-            const target = document.querySelector(l.getAttribute('href'));
-            if (target) target.scrollIntoView({ behavior: 'smooth' });
-        });
-    });
-})();
-</script>
+            // Smooth scroll for sidebar links
+            links.forEach(l => {
+                l.addEventListener('click', e => {
+                    e.preventDefault();
+                    const target = document.querySelector(l.getAttribute('href'));
+                    if (target) target.scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+        })();
+    </script>
 </body>
+
 </html>
