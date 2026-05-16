@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
@@ -8,620 +8,426 @@
     <title>AI CoE · Assaí Atacadista</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,800;1,900&family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/shared.css">
     <style>
-        /* Home-specific */
+        :root {
+            --red-deep: #9B111E;
+            --red-accent: #E31E24;
+            --amber: #D97706;
+            --dark-base: #0F0F13;
+            --dark-card: #16161A;
+            --text-light: #F3F4F6;
+            --text-muted: #9CA3AF;
+        }
+
+        body { background: #FAFAFA; }
+
+        /* Nav overrides for home */
+        #topnav { background: var(--dark-base); border-bottom: 1px solid rgba(255,255,255,0.05); }
+
+        /* Home Hero */
         .home-hero {
-            background: var(--dark);
-            padding: 72px 24px 64px;
+            background: var(--dark-base);
+            padding: 100px 24px 80px;
             position: relative;
             overflow: hidden;
+            background-image: radial-gradient(circle at 80% 20%, rgba(227, 30, 36, 0.12) 0%, transparent 50%),
+                              url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
         }
-
-        .home-hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(227, 30, 36, 0.15) 0%, transparent 55%);
-            pointer-events: none;
-        }
-
         .home-hero::after {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(to right, var(--red), var(--yellow));
+            bottom: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(to right, var(--red-deep), var(--amber));
         }
 
         .home-hero-inner {
             max-width: 1200px;
             margin: 0 auto;
-            position: relative;
             display: flex;
-            gap: 48px;
+            gap: 60px;
             align-items: center;
             flex-wrap: wrap;
         }
 
-        .home-hero-text {
-            flex: 1;
-            min-width: 280px;
-        }
+        .home-hero-text { flex: 1; min-width: 300px; opacity: 0; animation: fadeUp 0.8s ease forwards; }
 
         .home-hero-eyebrow {
-            font-size: 0.72rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--red);
-            margin-bottom: 14px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            font-size: 0.75rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+            color: var(--amber); margin-bottom: 16px; display: flex; align-items: center; gap: 12px;
         }
-
-        .home-hero-eyebrow::before {
-            content: '';
-            display: block;
-            width: 24px;
-            height: 2px;
-            background: var(--red);
-            flex-shrink: 0;
-        }
+        .home-hero-eyebrow::before { content: ''; width: 30px; height: 1px; background: var(--amber); }
 
         .home-hero-title {
-            font-size: clamp(2rem, 5vw, 3.2rem);
-            font-weight: 800;
-            color: #fff;
-            line-height: 1.12;
-            margin-bottom: 16px;
+            font-size: clamp(3rem, 6vw, 4.5rem); font-weight: 800; color: #fff; line-height: 1.05; margin-bottom: 24px;
         }
-
-        .home-hero-title em {
-            color: var(--red);
-            font-style: normal;
+        .home-hero-title span {
+            font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.05em; font-style: italic; color: #fff; letter-spacing: -2px; padding-right: 6px;
         }
+        .home-hero-title em { color: var(--red-accent); font-style: normal; }
 
         .home-hero-sub {
-            font-size: 1.05rem;
-            color: rgba(255, 255, 255, 0.6);
-            max-width: 560px;
-            line-height: 1.7;
-            margin-bottom: 32px;
+            font-size: 1.15rem; color: var(--text-muted); max-width: 520px; line-height: 1.6; margin-bottom: 40px;
         }
 
-        .home-hero-stats {
-            display: flex;
-            gap: 32px;
-            flex-wrap: wrap;
-        }
+        .home-hero-stats { display: flex; gap: 48px; flex-wrap: wrap; }
+        .hstat { text-align: left; }
+        .hstat-val { font-family: 'Montserrat', sans-serif; font-style: italic; font-weight: 900; letter-spacing: -2px; font-size: 3.5rem; color: var(--red-accent); line-height: 1; display: block; margin-bottom: 4px; }
+        .hstat-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
 
-        .hstat {
-            text-align: center;
+        /* Orbital Visual */
+        .home-hero-visual {
+            flex: 1; display: flex; justify-content: center; align-items: center; min-width: 320px;
+            position: relative; height: 400px; opacity: 0; animation: fadeUp 1s ease 0.2s forwards;
         }
+        .orbit-center {
+            width: 80px; height: 80px; background: linear-gradient(135deg, var(--red-accent), var(--red-deep));
+            border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.5rem; color: #fff;
+            box-shadow: 0 0 40px rgba(227, 30, 36, 0.4); z-index: 10;
+        }
+        .orbit-ring { position: absolute; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 50%; }
+        .ring-1 { width: 180px; height: 180px; animation: spin 10s linear infinite; }
+        .ring-2 { width: 280px; height: 280px; animation: spin 20s linear infinite reverse; }
+        .ring-3 { width: 380px; height: 380px; animation: spin 30s linear infinite; }
+        .orbit-dot {
+            width: 14px; height: 14px; background: var(--white); border-radius: 50%; position: absolute; top: -7px; left: 50%; transform: translateX(-50%);
+            box-shadow: 0 0 15px rgba(255,255,255,0.6);
+        }
+        .ring-1 .orbit-dot { background: #93C5FD; box-shadow: 0 0 15px #93C5FD; }
+        .ring-2 .orbit-dot { background: var(--amber); box-shadow: 0 0 15px var(--amber); }
+        .ring-3 .orbit-dot { background: var(--red-accent); box-shadow: 0 0 15px var(--red-accent); }
 
-        .hstat-val {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--red);
-            display: block;
-            line-height: 1;
-        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        .hstat-label {
-            font-size: 0.72rem;
-            color: rgba(255, 255, 255, 0.45);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 4px;
-        }
+        /* Levels Section */
+        .levels { background: var(--dark-base); padding: 80px 24px 100px; position: relative; }
+        .levels-title { font-size: 2rem; font-weight: 800; color: #fff; text-align: center; margin-bottom: 12px; }
+        .levels-sub { color: var(--text-muted); text-align: center; max-width: 600px; margin: 0 auto 60px; font-size: 1.05rem; }
 
-        /* Levels section */
-        .levels {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 56px 24px;
+        .levels-wrapper {
+            max-width: 1200px; margin: 0 auto; position: relative;
         }
-
-        .levels-title {
-            font-size: 1.6rem;
-            font-weight: 800;
-            color: var(--dark);
-            margin-bottom: 8px;
+        
+        /* Connection Line */
+        .levels-line {
+            position: absolute; top: 100px; left: 50%; transform: translateX(-50%);
+            width: 80%; height: 2px; background: linear-gradient(to right, #475569, rgba(227,30,36,0.5), #475569);
+            z-index: 1; display: none;
         }
-
-        .levels-sub {
-            color: var(--muted);
-            font-size: 0.95rem;
-            margin-bottom: 36px;
-        }
+        @media (min-width: 992px) { .levels-line { display: block; } }
 
         .levels-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; position: relative; z-index: 2;
         }
 
         .level-card {
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: transform 0.2s, box-shadow 0.2s;
+            background: var(--dark-card); border-radius: 16px; position: relative; overflow: hidden;
+            border-top: 4px solid transparent; display: flex; flex-direction: column;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-decoration: none; color: #fff;
+        }
+        .level-card.c-est { border-top-color: #64748B; }
+        .level-card.c-tat { border-top-color: #3B82F6; }
+        .level-card.c-ope { border-top-color: var(--red-accent); }
+
+        .level-card:hover { transform: translateY(-8px); text-decoration: none; }
+        .level-card.c-est:hover { box-shadow: 0 15px 35px rgba(100,116,139, 0.2); }
+        .level-card.c-tat:hover { box-shadow: 0 15px 35px rgba(59,130,246, 0.2); }
+        .level-card.c-ope:hover { box-shadow: 0 15px 35px rgba(227,30,36, 0.2); }
+
+        .level-wm {
+            position: absolute; right: -10px; bottom: -20px; font-family: 'Montserrat', sans-serif; font-weight: 900; font-style: italic;
+            font-size: 10rem; color: rgba(255,255,255,0.03); line-height: 1; z-index: 0; pointer-events: none;
         }
 
-        .level-card:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-md);
+        .level-content { padding: 32px 24px; position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; }
+        
+        .level-icon { font-size: 2rem; margin-bottom: 20px; }
+        .level-name { font-size: 1.4rem; font-weight: 800; margin-bottom: 8px; color: #fff; }
+        .level-who { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
+        .level-mission { font-size: 0.95rem; color: #D1D5DB; line-height: 1.6; margin-bottom: 24px; flex: 1; }
+        
+        .level-arrow {
+            display: inline-flex; align-items: center; gap: 8px; font-size: 0.9rem; font-weight: 700; color: #fff;
+            transition: gap 0.2s;
         }
+        .level-card:hover .level-arrow { gap: 12px; }
+        .level-card.c-est .level-arrow { color: #94A3B8; }
+        .level-card.c-tat .level-arrow { color: #93C5FD; }
+        .level-card.c-ope .level-arrow { color: #FCA5A5; }
 
-        .level-card-header {
-            padding: 20px 22px 16px;
+        /* Process Flow */
+        .flow-section { background: #fff; padding: 80px 24px; }
+        .flow-inner { max-width: 1000px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-eyebrow { font-size: 0.8rem; font-weight: 700; color: var(--red-accent); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+        .section-title { font-size: 2.2rem; font-weight: 800; color: var(--dark-base); }
+        
+        .flow-steps { display: flex; flex-direction: column; gap: 20px; }
+        .flow-step {
+            display: flex; background: var(--light); border: 1px solid var(--border); border-radius: 12px; padding: 24px;
+            align-items: center; gap: 24px; transition: all 0.2s;
         }
-
-        .level-card-header.exec {
-            background: var(--dark);
+        .flow-step:hover { background: #fff; box-shadow: var(--shadow-md); border-color: #cbd5e1; }
+        .f-num {
+            width: 48px; height: 48px; background: var(--dark-base); color: #fff; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; font-family: 'Montserrat', sans-serif; font-weight: 900; font-style: italic; font-size: 1.5rem; flex-shrink: 0;
         }
+        .f-content { flex: 1; }
+        .f-title { font-size: 1.1rem; font-weight: 700; color: var(--dark-base); margin-bottom: 4px; }
+        .f-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.5; }
+        .f-badge { padding: 4px 12px; background: #E2E8F0; color: #475569; border-radius: 20px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; }
 
-        .level-card-header.tactic {
-            background: #1E3A8A;
-        }
-
-        .level-card-header.oper {
-            background: var(--red);
-        }
-
-        .level-num {
-            font-size: 0.65rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.5);
-            margin-bottom: 6px;
-        }
-
-        .level-name {
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: #fff;
-            margin-bottom: 4px;
-        }
-
-        .level-who {
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        .level-card-body {
-            padding: 20px 22px;
-        }
-
-        .level-mission {
-            font-size: 0.82rem;
-            color: var(--muted);
-            line-height: 1.6;
-            margin-bottom: 14px;
-        }
-
-        .level-items {
-            list-style: none;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .level-items li {
-            font-size: 0.8rem;
-            color: var(--text);
-            display: flex;
-            gap: 8px;
-            align-items: flex-start;
-            line-height: 1.5;
-        }
-
-        .level-items li::before {
-            content: '→';
-            color: var(--red);
-            font-weight: 700;
-            flex-shrink: 0;
-            font-size: 0.75rem;
-            margin-top: 1px;
-        }
-
-        .level-freq {
-            display: inline-block;
-            margin-top: 14px;
-            font-size: 0.72rem;
-            font-weight: 700;
-            background: var(--light);
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            padding: 3px 10px;
-            color: var(--muted);
-        }
-
-        .level-cta {
-            display: block;
-            margin-top: 16px;
-            text-align: center;
-            padding: 10px;
-            background: var(--red);
-            color: #fff;
-            border-radius: var(--radius);
-            font-size: 0.82rem;
-            font-weight: 700;
-            text-decoration: none;
-            transition: background 0.15s;
-        }
-
-        .level-cta:hover {
-            background: var(--red-dark);
-            text-decoration: none;
-        }
-
-        /* Pillars overview */
-        .pillars-section {
-            background: var(--dark);
-            padding: 56px 24px;
-        }
-
-        .pillars-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .pillars-header {
-            margin-bottom: 32px;
-        }
-
-        .pillars-header h2 {
-            font-size: 1.6rem;
-            font-weight: 800;
-            color: #fff;
-            margin-bottom: 8px;
-        }
-
-        .pillars-header p {
-            color: rgba(255, 255, 255, 0.55);
-            font-size: 0.95rem;
-        }
-
-        .pillars-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-        }
-
-        .pillar-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: var(--radius-lg);
-            padding: 24px;
-            border-top: 3px solid var(--red);
-            transition: transform 0.2s;
-            text-decoration: none;
-            display: block;
-        }
-
-        .pillar-card:hover {
-            transform: translateY(-2px);
-            text-decoration: none;
-        }
-
-        .pillar-icon {
-            font-size: 1.8rem;
-            margin-bottom: 12px;
-        }
-
-        .pillar-num-label {
-            font-size: 0.62rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--red);
-            margin-bottom: 6px;
-        }
-
-        .pillar-name {
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 8px;
-        }
-
-        .pillar-desc {
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.5);
-            line-height: 1.6;
-        }
-
-        /* Quick links */
-        .quicklinks {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 48px 24px 64px;
-        }
-
-        .quicklinks h2 {
-            font-size: 1.4rem;
-            font-weight: 800;
-            color: var(--dark);
-            margin-bottom: 24px;
-        }
-
-        .ql-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 14px;
-        }
-
+        /* Quicklinks */
+        .quicklinks { background: #FAFAFA; padding: 80px 24px; }
+        .ql-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
         .ql-card {
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 20px;
-            text-decoration: none;
-            display: flex;
-            gap: 14px;
-            align-items: flex-start;
-            box-shadow: var(--shadow);
-            transition: all 0.15s;
+            background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 24px; display: flex; gap: 16px;
+            text-decoration: none; color: inherit; transition: all 0.2s;
         }
+        .ql-card:hover { border-color: var(--red-accent); box-shadow: var(--shadow); transform: translateY(-2px); text-decoration: none; }
+        .ql-icon { font-size: 1.8rem; }
+        .ql-title { font-weight: 700; color: var(--dark-base); margin-bottom: 6px; }
+        .ql-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
 
-        .ql-card:hover {
-            border-color: var(--red);
-            box-shadow: var(--shadow-md);
-            text-decoration: none;
+        @media (max-width: 992px) {
+            .levels-grid { grid-template-columns: 1fr; gap: 20px; }
+            .ql-grid { grid-template-columns: repeat(2, 1fr); }
+            .home-hero-title { font-size: 3rem; }
+            .home-hero-stats { gap: 24px; }
         }
-
-        .ql-icon {
-            font-size: 1.5rem;
-            flex-shrink: 0;
+        @media (max-width: 768px) {
+            .ql-grid { grid-template-columns: 1fr; }
+            .flow-step { flex-direction: column; align-items: flex-start; text-align: left; }
+            .home-hero-visual { height: 300px; }
+            .ring-3 { width: 280px; height: 280px; }
         }
-
-        .ql-title {
-            font-size: 0.88rem;
-            font-weight: 700;
-            color: var(--dark);
-            margin-bottom: 4px;
+        
+        /* Modern Footer */
+        .site-footer {
+            background: var(--dark-base); color: #fff; padding: 60px 24px 40px; border-top: 4px solid var(--red-deep);
         }
-
-        .ql-desc {
-            font-size: 0.78rem;
-            color: var(--muted);
-            line-height: 1.5;
-        }
-
-        @media (max-width:1024px) {
-            .pillars-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width:768px) {
-
-            .levels-grid,
-            .pillars-grid,
-            .ql-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .home-hero-stats {
-                gap: 20px;
-            }
-        }
+        .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 40px; }
+        .footer-brand img { height: 40px; margin-bottom: 16px; filter: brightness(0) invert(1); }
+        .footer-brand p { color: var(--text-muted); font-size: 0.9rem; max-width: 300px; }
+        .footer-links-col { display: flex; flex-direction: column; gap: 12px; }
+        .footer-title { font-size: 0.85rem; font-weight: 700; color: var(--amber); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+        .footer-links-col a { color: #D1D5DB; font-size: 0.9rem; text-decoration: none; transition: color 0.2s; }
+        .footer-links-col a:hover { color: #fff; }
+        .footer-bottom { max-width: 1200px; margin: 40px auto 0; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; color: var(--text-muted); font-size: 0.8rem; }
     </style>
 </head>
 
 <body>
-    <div id="progress"></div>
-
     <!-- NAV -->
     <nav id="topnav" role="navigation" aria-label="Navegação principal">
         <div class="nav-inner">
             <a href="index.html" class="nav-logo" aria-label="Assaí Atacadista - AI CoE">
-                <img src="assets/Assaí_Atacadista_logo_2024.svg.png" alt="Assaí Atacadista">
-                <span class="nav-logo-divider" aria-hidden="true"></span>
-                <span class="nav-logo-label"><strong>AI CoE</strong>Centro de Excelência</span>
+                <img src="assets/Assaí_Atacadista_logo_2024.svg.png" alt="Assaí Atacadista" style="filter: brightness(0) invert(1);">
+                <span class="nav-logo-divider" aria-hidden="true" style="background: rgba(255,255,255,0.2);"></span>
+                <span class="nav-logo-label" style="color:#fff;"><strong>AI CoE</strong>Centro de Excelência</span>
             </a>
             <ul class="nav-links" role="list">
                 <li><a href="index.html" class="active">Início</a></li>
-                <li><a href="estrategico/visao-geral.html">CoE Estratégico</a></li>
-                <li><a href="tatico/visao-geral.html">CoE Tático</a></li>
-                <li><a href="operacional/time-e-fluxo.html">CoE Operacional</a></li>
+                <li><a href="estrategico/visao-geral.html">Estratégico</a></li>
+                <li><a href="tatico/visao-geral.html">Tático</a></li>
+                <li><a href="operacional/time-e-fluxo.html">Operacional</a></li>
             </ul>
-            <button id="nav-toggle" aria-label="Abrir menu" aria-expanded="false">
-                <span></span><span></span><span></span>
-            </button>
         </div>
     </nav>
-    <div id="nav-mobile" role="navigation" aria-label="Menu mobile">
-        <a href="index.html" class="active">🏠 Início</a>
-        <a href="estrategico/visao-geral.html">🏛️ CoE Estratégico</a>
-        <a href="tatico/visao-geral.html">📊 CoE Tático</a>
-        <a href="operacional/time-e-fluxo.html">⚙️ CoE Operacional</a>
-    </div>
 
     <!-- HERO -->
     <header class="home-hero">
         <div class="home-hero-inner">
             <div class="home-hero-text">
                 <div class="home-hero-eyebrow">Artificial Intelligence Center of Excellence</div>
-                <h1 class="home-hero-title">Assaí <em>AI CoE</em></h1>
-                <p class="home-hero-sub">Estrutura de governança em três frentes para transformar Inteligência
-                    Artificial em vantagem competitiva real — com segurança, escala e resultado mensurável.</p>
+                <h1 class="home-hero-title">
+                    <img src="assets/Assaí_Atacadista_logo_2024.svg.png" alt="Assaí" style="height: 0.9em; vertical-align: baseline; margin-right: 12px; filter: brightness(0) invert(1); display: inline-block; transform: translateY(4px);">
+                    <em>AI CoE</em>
+                </h1>
+                <p class="home-hero-sub">Estrutura de governança unificada para transformar Inteligência Artificial em vantagem competitiva real — com segurança, escala e resultado mensurável.</p>
                 <div class="home-hero-stats">
-                    <div class="hstat"><span class="hstat-val">3</span><span class="hstat-label">Frentes de
-                            Governança</span></div>
-                    <div class="hstat"><span class="hstat-val">4</span><span class="hstat-label">Pilares Técnicos</span>
-                    </div>
+                    <div class="hstat"><span class="hstat-val">3</span><span class="hstat-label">Níveis de Governança</span></div>
+                    <div class="hstat"><span class="hstat-val">4</span><span class="hstat-label">Pilares Técnicos</span></div>
                     <div class="hstat"><span class="hstat-val">∞</span><span class="hstat-label">Evolução Contínua</span></div>
+                </div>
+            </div>
+            <div class="home-hero-visual">
+                <div class="orbit-container">
+                    <div class="orbit-center">AI</div>
+                    <div class="orbit-ring ring-1"><div class="orbit-dot"></div></div>
+                    <div class="orbit-ring ring-2"><div class="orbit-dot"></div></div>
+                    <div class="orbit-ring ring-3"><div class="orbit-dot"></div></div>
                 </div>
             </div>
         </div>
     </header>
 
     <!-- 3 NÍVEIS -->
-    <section class="levels" aria-labelledby="levels-heading">
-        <h2 class="levels-title" id="levels-heading">Os 3 Níveis do CoE</h2>
-        <p class="levels-sub">Estratégico define prioridades e processos; Tático filtra orçamento, time e viabilidade;
-            Operacional implementa. A IA só escala quando os três funcionam em sincronia.</p>
-        <div class="levels-grid">
-            <div class="level-card">
-                <div class="level-card-header exec">
-                    <div class="level-num">Nível 01</div>
-                    <div class="level-name">🏛️ CoE Estratégico</div>
-                    <div class="level-who">Diretoria · Alta liderança</div>
-                </div>
-                <div class="level-card-body">
-                    <p class="level-mission">Define as prioridades de IA e os processos que precisam ser construídos — o
-                        que entra no portfólio, em que ordem e com qual direcionamento de negócio.</p>
-                    <ul class="level-items">
-                        <li>Definir roadmap e prioridades anuais de IA</li>
-                        <li>Estabelecer quais processos e capacidades serão construídos</li>
-                        <li>Alinhar IA aos objetivos do negócio e à conformidade (LGPD, ética)</li>
-                    </ul>
-                    <span class="level-freq">Reunião mensal</span>
-                    <a href="estrategico/visao-geral.html" class="level-cta" style="background:#0F172A;">Ver visão estratégica →</a>
-                </div>
+    <section class="levels">
+        <div class="levels-wrapper">
+            <div class="levels-line"></div>
+            <div class="levels-grid">
+                <a href="estrategico/visao-geral.html" class="level-card c-est">
+                    <div class="level-wm">01</div>
+                    <div class="level-content">
+                        <div class="level-icon">🏛️</div>
+                        <div class="level-name">CoE Estratégico</div>
+                        <div class="level-who">C-Level & Diretoria</div>
+                        <p class="level-mission">Define as prioridades anuais, o apetite a risco e a conformidade (LGPD). Libera o orçamento macro (CapEx) para inovação.</p>
+                        <div class="level-arrow">Acessar nível <span aria-hidden="true">→</span></div>
+                    </div>
+                </a>
+                
+                <a href="tatico/visao-geral.html" class="level-card c-tat">
+                    <div class="level-wm">02</div>
+                    <div class="level-content">
+                        <div class="level-icon">📊</div>
+                        <div class="level-name">CoE Tático</div>
+                        <div class="level-who">Sponsors & FinOps</div>
+                        <p class="level-mission">Filtra as ideias do negócio. Exige Business Case, avalia viabilidade de dados e aprova o ROI antes do desenvolvimento.</p>
+                        <div class="level-arrow">Acessar nível <span aria-hidden="true">→</span></div>
+                    </div>
+                </a>
+                
+                <a href="operacional/time-e-fluxo.html" class="level-card c-ope">
+                    <div class="level-wm">03</div>
+                    <div class="level-content">
+                        <div class="level-icon">⚙️</div>
+                        <div class="level-name">CoE Operacional</div>
+                        <div class="level-who">Arquitetos & Engenheiros</div>
+                        <p class="level-mission">Desenha a arquitetura, gerencia o Gateway LLM corporativo, implementa o código e monitora as métricas em produção.</p>
+                        <div class="level-arrow">Acessar nível <span aria-hidden="true">→</span></div>
+                    </div>
+                </a>
             </div>
-            <div class="level-card">
-                <div class="level-card-header tactic">
-                    <div class="level-num">Nível 02</div>
-                    <div class="level-name">📊 CoE Tático</div>
-                    <div class="level-who">Gerentes das áreas</div>
-                </div>
-                <div class="level-card-body">
-                    <p class="level-mission">Faz o filtro entre o que a estratégia pede e o que é possível agora:
-                        orçamento, time disponível e viabilidade de negócio antes de chegar ao CoE Operacional.</p>
-                    <ul class="level-items">
-                        <li>Filtrar demandas por budget e capacidade dos times</li>
-                        <li>Validar business cases e viabilidade de adoção</li>
-                        <li>Priorizar o backlog com o CoE Estratégico</li>
-                        <li>Monitorar KPIs e decidir continuidade dos projetos</li>
-                    </ul>
-                    <span class="level-freq">Reunião quinzenal</span>
-                    <a href="tatico/visao-geral.html" class="level-cta" style="background:#1E3A8A;">Ver processos táticos →</a>
-                </div>
+        </div>
+    </section>
+
+    <!-- FUNIL DIAGRAM -->
+    <section class="flow-section">
+        <div class="flow-inner">
+            <div class="section-header">
+                <div class="section-eyebrow">Como Trabalhamos</div>
+                <h2 class="section-title">O Funil de IA Corporativo</h2>
             </div>
-            <div class="level-card">
-                <div class="level-card-header oper">
-                    <div class="level-num">Nível 03</div>
-                    <div class="level-name">⚙️ CoE Operacional</div>
-                    <div class="level-who">Time técnico</div>
+            
+            <div class="flow-steps">
+                <div class="flow-step">
+                    <div class="f-num">1</div>
+                    <div class="f-content">
+                        <div class="f-title">Mapeamento da Dor (Intake Simplificado)</div>
+                        <div class="f-desc">Recebemos demandas de áreas variadas (técnicas ou não). A porta de entrada foca apenas em entender a "dor real" do negócio e o tempo/custo perdido hoje, sem exigir conhecimento prévio em IA.</div>
+                    </div>
+                    <div class="f-badge">Negócio</div>
                 </div>
-                <div class="level-card-body">
-                    <p class="level-mission">Implementa. Avalia viabilidade técnica, define padrões, constrói e opera
-                        soluções em produção, e distribui capacidade para os times seguirem os mesmos critérios.</p>
-                    <ul class="level-items">
-                        <li>Implementar soluções aprovadas pelo funil tático</li>
-                        <li>Definir arquitetura, padrões e revisão pré-produção (ARB)</li>
-                        <li>Operar e monitorar sistemas de IA em produção</li>
-                        <li>Capacitar times para construir com autonomia</li>
-                    </ul>
-                    <span class="level-freq">Reunião semanal</span>
-                    <a href="operacional/time-e-fluxo.html" class="level-cta">Ver documentação completa →</a>
+                <div class="flow-step">
+                    <div class="f-num">2</div>
+                    <div class="f-content">
+                        <div class="f-title">Refinamento e Business Case (Co-criação)</div>
+                        <div class="f-desc">O CoE Tático atua lado a lado com a área solicitante para transformar a dor em um caso de uso sólido. Juntos, avaliamos a viabilidade dos dados e calculamos o ROI potencial da solução.</div>
+                    </div>
+                    <div class="f-badge" style="background:#DBEAFE; color:#1E3A8A;">CoE Tático</div>
+                </div>
+                <div class="flow-step">
+                    <div class="f-num">3</div>
+                    <div class="f-content">
+                        <div class="f-title">Comitê de Priorização e Discovery Técnica</div>
+                        <div class="f-desc">Apenas projetos justificados avançam. Com o *Go* do comitê, a Engenharia (CoE Operacional) assume para validar a arquitetura, segurança (ARB) e viabilidade técnica das APIs.</div>
+                    </div>
+                    <div class="f-badge" style="background:#FEE2E2; color:#991B1B;">Decisão + Engenharia</div>
+                </div>
+                <div class="flow-step">
+                    <div class="f-num">4</div>
+                    <div class="f-content">
+                        <div class="f-title">Construção, Deploy e LLMOps</div>
+                        <div class="f-desc">O time constrói e implanta o modelo em produção via Gateway Corporativo, garantindo governança, monitoramento ativo de custos, alucinações e performance.</div>
+                    </div>
+                    <div class="f-badge" style="background:#DCFCE7; color:#166534;">Produção</div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- QUICK LINKS -->
-    <section class="quicklinks" aria-labelledby="ql-heading">
-        <h2 id="ql-heading">Navegue pelo Ecossistema</h2>
+    <section class="quicklinks">
+        <div class="section-header">
+            <div class="section-eyebrow">Ecossistema</div>
+            <h2 class="section-title">Acesso Rápido</h2>
+        </div>
         <div class="ql-grid">
-            
-            <!-- ESTRATÉGICO -->
-            <a href="estrategico/visao-geral.html" class="ql-card" style="border-top: 3px solid #0F172A;">
+            <a href="estrategico/documento.html" class="ql-card">
                 <span class="ql-icon">🏛️</span>
                 <div>
-                    <div class="ql-title">Visão Estratégica</div>
-                    <div class="ql-desc">Objetivos de negócio, conformidade e estruturação do portfólio.</div>
-                </div>
-            </a>
-            <a href="estrategico/documento.html" class="ql-card">
-                <span class="ql-icon">📄</span>
-                <div>
                     <div class="ql-title">Doc Estratégico</div>
-                    <div class="ql-desc">Regras de priorização executiva e aprovações orçamentárias.</div>
+                    <div class="ql-desc">Regras de priorização executiva e diretrizes LGPD.</div>
                 </div>
             </a>
-            <a href="estrategico/apresentacao.html" class="ql-card">
-                <span class="ql-icon">🎬</span>
-                <div>
-                    <div class="ql-title">Deck Executivo</div>
-                    <div class="ql-desc">Apresentação para o C-Level. Navegação ágil por slides.</div>
-                </div>
-            </a>
-
-            <!-- TÁTICO -->
-            <a href="tatico/visao-geral.html" class="ql-card" style="border-top: 3px solid #1E3A8A;">
+            <a href="tatico/visao-geral.html" class="ql-card">
                 <span class="ql-icon">📊</span>
                 <div>
                     <div class="ql-title">Visão Tática</div>
-                    <div class="ql-desc">Funil de demandas, business case e ROI das iniciativas.</div>
+                    <div class="ql-desc">O funil e como defender seu business case.</div>
                 </div>
             </a>
-            <a href="tatico/documento.html" class="ql-card">
-                <span class="ql-icon">📄</span>
+            <a href="operacional/pilar-1-arquitetura.html" class="ql-card">
+                <span class="ql-icon">🏗️</span>
                 <div>
-                    <div class="ql-title">Doc Tático</div>
-                    <div class="ql-desc">Documento linear detalhado com a Matriz RACI tática.</div>
+                    <div class="ql-title">Arquitetura</div>
+                    <div class="ql-desc">ADRs, stack e decisão de cloud.</div>
                 </div>
             </a>
-            <a href="tatico/apresentacao.html" class="ql-card">
-                <span class="ql-icon">🎬</span>
+            <a href="operacional/pilar-2-governanca.html" class="ql-card">
+                <span class="ql-icon">🛡️</span>
                 <div>
-                    <div class="ql-title">Deck Gerencial</div>
-                    <div class="ql-desc">Apresentação do funil de aprovação para gerentes e sponsors.</div>
+                    <div class="ql-title">Governança Técnica</div>
+                    <div class="ql-desc">ARB, checklists de deploy e mitigação de risco.</div>
                 </div>
             </a>
-
-            <!-- OPERACIONAL -->
-            <a href="operacional/time-e-fluxo.html" class="ql-card" style="border-top: 3px solid #e31e24;">
+            <a href="operacional/pilar-3-llmops.html" class="ql-card">
                 <span class="ql-icon">⚙️</span>
                 <div>
-                    <div class="ql-title">Visão Operacional</div>
-                    <div class="ql-desc">Acesso aos 4 Pilares Técnicos (Arquitetura, Gov, LLMOps, Enablement).</div>
+                    <div class="ql-title">LLMOps</div>
+                    <div class="ql-desc">Monitoramento, RAG e gateway.</div>
                 </div>
             </a>
-            <a href="operacional/documento.html" class="ql-card">
-                <span class="ql-icon">📄</span>
+            <a href="operacional/pilar-4-enablement.html" class="ql-card">
+                <span class="ql-icon">🚀</span>
                 <div>
-                    <div class="ql-title">Doc Técnico</div>
-                    <div class="ql-desc">Toda a base técnica consolidada (ADRs, Gateway, RAG, etc).</div>
+                    <div class="ql-title">Enablement</div>
+                    <div class="ql-desc">Comunidade e playbooks para os times.</div>
                 </div>
             </a>
-            <a href="operacional/apresentacao.html" class="ql-card">
-                <span class="ql-icon">🎬</span>
-                <div>
-                    <div class="ql-title">Deck Operacional</div>
-                    <div class="ql-desc">Apresentação focada na equipe técnica, engenheiros e arquitetos.</div>
-                </div>
-            </a>
-
         </div>
     </section>
 
     <!-- FOOTER -->
-    <footer id="footer">
-        <img src="assets/Assaí_Atacadista_logo_2024.svg.png" alt="Assaí Atacadista">
-        <span>AI CoE · Documentação Técnica</span>
-        <span>v1.0 · Maio 2026 · Confidencial</span>
-        <span class="footer-doc-links"><a href="operacional/documento.html">Documento linear (coe-doc)</a><span class="footer-doc-sep"
-                aria-hidden="true">·</span><a href="operacional/apresentacao.html">Apresentação em slides</a></span>
-        <span class="footer-author">Criado por Claudio Ramirez - Arquiteto Tech Lead CoE Operacional</span>
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <img src="assets/Assaí_Atacadista_logo_2024.svg.png" alt="Assaí AI CoE">
+                <p>Governança corporativa, escalabilidade e segurança para transformar inteligência artificial em valor.</p>
+            </div>
+            <div class="footer-links-col">
+                <div class="footer-title">Governança</div>
+                <a href="estrategico/visao-geral.html">Nível Estratégico</a>
+                <a href="tatico/visao-geral.html">Nível Tático</a>
+                <a href="operacional/time-e-fluxo.html">Nível Operacional</a>
+            </div>
+            <div class="footer-links-col">
+                <div class="footer-title">Operação Técnica</div>
+                <a href="operacional/pilar-1-arquitetura.html">Pilar 1: Arquitetura</a>
+                <a href="operacional/pilar-2-governanca.html">Pilar 2: Governança</a>
+                <a href="operacional/pilar-3-llmops.html">Pilar 3: LLMOps</a>
+                <a href="operacional/pilar-4-enablement.html">Pilar 4: Enablement</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2026 Assaí Atacadista. Uso restrito e confidencial.</span>
+            <span>Versão 1.2 · Tech Lead: Claudio Ramirez</span>
+        </div>
     </footer>
 
     <script src="js/shared.js"></script>
