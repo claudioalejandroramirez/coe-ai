@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Card · Documentação de Modelo — AI CoE · Assaí</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/shared.css?v=2">
+    <style>
+        :root { --switcher-h: 44px; }
+        .page-hero.docs { background: #141009; }
+        .page-hero.docs::after { background: linear-gradient(to right, #D97706, #F5A800); }
+        .hero-eyebrow.docs { color: #FDE68A; }
+        .hero-eyebrow.docs::before { background: #FDE68A; }
+        .chip.docs { border-color: rgba(245,168,0,0.3); color: #FDE68A; background: rgba(245,168,0,0.1); }
+
+        /* Form styles */
+        .form-group { margin-bottom: 20px; }
+        .form-label { font-size: 0.82rem; font-weight: 700; color: var(--dark); display: block; margin-bottom: 5px; }
+        .form-label.req::after { content: ' *'; color: var(--red); }
+        .form-hint { font-size: 0.74rem; color: var(--muted); margin-bottom: 6px; display: block; font-style: italic; }
+        .form-input {
+            width: 100%; padding: 9px 13px;
+            border: 1px solid var(--border); border-radius: var(--radius);
+            font-family: var(--font); font-size: 0.875rem; color: var(--text); background: #fff;
+            transition: border-color 0.15s;
+        }
+        .form-input:focus { outline: none; border-color: #D97706; box-shadow: 0 0 0 3px rgba(217,119,6,0.12); }
+        textarea.form-input { min-height: 80px; resize: vertical; line-height: 1.6; }
+        select.form-input { cursor: pointer; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+        .radio-group { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+        .radio-item { display: flex; align-items: center; gap: 9px; font-size: 0.875rem; cursor: pointer; }
+        .radio-item input[type="radio"] { accent-color: #D97706; width: 16px; height: 16px; flex-shrink: 0; }
+        .check-group { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+        .check-item { display: flex; align-items: flex-start; gap: 9px; font-size: 0.875rem; cursor: pointer; }
+        .check-item input[type="checkbox"] { accent-color: #D97706; width: 16px; height: 16px; flex-shrink: 0; margin-top: 2px; }
+        .form-divider { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+
+        /* Use case blocks */
+        .use-block { display: flex; gap: 20px; margin-top: 4px; }
+        .use-col { flex: 1; }
+        .use-col-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
+        .use-col.yes .use-col-label { color: #15803D; }
+        .use-col.no  .use-col-label { color: #B91C1C; }
+        .use-col.yes { background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: var(--radius); padding: 14px; }
+        .use-col.no  { background: #FEF2F2; border: 1px solid #FECACA; border-radius: var(--radius); padding: 14px; }
+        .use-item { display: flex; align-items: flex-start; gap: 8px; font-size: 0.82rem; margin-bottom: 8px; }
+        .use-item:last-child { margin-bottom: 0; }
+        .use-item textarea { min-height: 52px; }
+
+        /* Eval table */
+        .eval-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-top: 8px; }
+        .eval-table th { text-align: left; font-size: 0.75rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; padding: 8px 12px; background: #F9FAFB; border-bottom: 1px solid var(--border); }
+        .eval-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+        .eval-table tr:last-child td { border-bottom: none; }
+        .eval-table td:first-child { font-weight: 600; color: var(--dark); width: 26%; }
+        .eval-table td input.form-input { padding: 6px 10px; font-size: 0.82rem; }
+        .eval-trend { display: flex; gap: 10px; }
+        .eval-trend label { display: flex; align-items: center; gap: 5px; font-size: 0.82rem; cursor: pointer; }
+        .eval-trend input[type="radio"] { accent-color: #D97706; }
+
+        /* Status badge */
+        .status-badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: 20px; font-size: 0.78rem; font-weight: 600; }
+        .status-active  { background: #DCFCE7; color: #15803D; }
+        .status-pilot   { background: #EFF6FF; color: #1D4ED8; }
+        .status-retired { background: #F1F5F9; color: #64748B; }
+        .status-review  { background: #FEF9C3; color: #A16207; }
+
+        /* Responsible parties */
+        .resp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .resp-box { padding: 16px; border: 1px solid var(--border); border-radius: var(--radius); background: #F9FAFB; }
+        .resp-role { font-size: 0.72rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 10px; }
+
+        /* Version history */
+        .version-row { display: grid; grid-template-columns: 1fr 1fr 2fr auto; gap: 10px; align-items: center; margin-bottom: 10px; }
+        .version-row.header { font-size: 0.72rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 6px; }
+
+        .submit-area { margin-top: 48px; padding: 28px; background: #FFFBEB; border: 1px solid #FDE68A; border-radius: var(--radius-lg); }
+        .submit-note { font-size: 0.85rem; color: #92400E; margin-bottom: 16px; line-height: 1.6; }
+
+        @media (max-width: 900px) { .resp-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) {
+            .form-row, .form-row-3 { grid-template-columns: 1fr; }
+            .use-block { flex-direction: column; }
+            .version-row { grid-template-columns: 1fr 1fr; }
+        }
+        @media print {
+            #coe-switcher, .page-nav, .submit-area button { display: none; }
+            .form-input { border: 1px solid #ccc; }
+            .page-hero { padding: 24px !important; }
+            .doc-section { break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+    <div id="progress"></div>
+
+    <nav id="topnav" role="navigation" aria-label="Navegação principal">
+        <div class="nav-inner">
+            <a href="../index.html" class="nav-logo" aria-label="Assaí Atacadista - CoE IA">
+                <img src="../assets/Assaí_Atacadista_logo_2024.svg.png" alt="Assaí Atacadista">
+                <span class="nav-logo-divider" aria-hidden="true"></span>
+                <span class="nav-logo-label"><strong>AI CoE</strong>Documentos Operacionais</span>
+            </a>
+            <ul class="nav-links" role="list">
+                <li><a href="../index.html">← Início</a></li>
+                <li><a href="intake-solicitacao.html">📋 Intake</a></li>
+                <li><a href="verificacao-ia-existente.html">🔍 Verificação IA</a></li>
+                <li><a href="arb-checklist.html">✅ ARB</a></li>
+                <li><a href="model-card.html" class="active">📊 Model Card</a></li>
+            </ul>
+            <button id="nav-toggle" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span><span></span></button>
+        </div>
+    </nav>
+    <div id="nav-mobile" role="navigation" aria-label="Menu mobile">
+        <a href="../index.html">🏠 Início</a>
+        <a href="intake-solicitacao.html">📋 Intake</a>
+        <a href="verificacao-ia-existente.html">🔍 Verificação IA</a>
+        <a href="arb-checklist.html">✅ ARB</a>
+        <a href="model-card.html" class="active">📊 Model Card</a>
+    </div>
+
+    <div id="coe-switcher" aria-label="Navegar entre CoEs">
+        <div class="switcher-inner">
+            <span class="switcher-label">Nível</span>
+            <a href="../estrategico/visao-geral.html" class="switcher-item estrategico">
+                <span class="switcher-num">01</span>Estratégico
+            </a>
+            <span class="switcher-sep" aria-hidden="true"></span>
+            <a href="../tatico/visao-geral.html" class="switcher-item tatico">
+                <span class="switcher-num">02</span>Tático
+            </a>
+            <span class="switcher-sep" aria-hidden="true"></span>
+            <a href="../operacional/time-e-fluxo.html" class="switcher-item operacional active">
+                <span class="switcher-num">03</span>Operacional
+            </a>
+        </div>
+    </div>
+
+    <header class="page-hero docs">
+        <div class="page-hero-orbit" aria-hidden="true">
+            <div class="pho-ring pho-r1"></div>
+            <div class="pho-ring pho-r2"></div>
+            <div class="pho-ring pho-r3"></div>
+        </div>
+        <div class="hero-inner">
+            <div class="hero-eyebrow docs">Documentos Operacionais</div>
+            <h1 class="hero-title">Model <em>Card</em></h1>
+            <p class="hero-subtitle">Documentação obrigatória para toda solução de IA em produção. Registra o que o modelo faz, o que não faz, como foi avaliado e quem responde por ele.</p>
+            <div class="hero-chips">
+                <span class="chip docs">📋 Pilar 2 · Governança</span>
+                <span class="chip docs">100% dos projetos</span>
+                <span class="chip docs">🔒 Uso interno</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="page-body with-sidebar">
+        <aside class="sidebar" aria-label="Navegação da página">
+            <div class="sidebar-title">Nesta página</div>
+            <ul class="sidebar-nav">
+                <li><a href="#identificacao" class="active">📋 Identificação</a></li>
+                <li><a href="#capacidades">🎯 Capacidades</a></li>
+                <li><a href="#limitacoes">⚠️ Limitações</a></li>
+                <li><a href="#usos">✅ Usos recomendados</a></li>
+                <li><a href="#avaliacao">🧪 Avaliação & métricas</a></li>
+                <li><a href="#dados">💾 Dados & privacidade</a></li>
+                <li><a href="#responsaveis">👤 Responsáveis</a></li>
+                <li><a href="#versoes">🔄 Histórico de versões</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <nav class="breadcrumb" aria-label="Localização">
+                <a href="../index.html">Início</a>
+                <span class="breadcrumb-sep">›</span>
+                <a href="../operacional/pilar-2-governanca.html">Pilar 2 · Governança</a>
+                <span class="breadcrumb-sep">›</span>
+                <span>Model Card</span>
+            </nav>
+
+            <div class="summary-box" style="margin-bottom:40px;">
+                <div class="summary-box-label">📌 Para que serve este documento</div>
+                <p>O model card é o <strong>passaporte técnico de um modelo em produção</strong>. Ele responde às perguntas que surgem em incidentes, auditorias e onboarding de novos membros — sem precisar abrir o código. Exigido pelo CoE como critério de aceite do ARB. Deve ser mantido atualizado a cada mudança de versão de modelo.</p>
+            </div>
+
+            <form>
+                <!-- IDENTIFICAÇÃO -->
+                <section id="identificacao" class="doc-section">
+                    <div class="section-label">Seção 01</div>
+                    <h2 class="section-title">Identificação do modelo</h2>
+                    <p class="section-desc">Informações básicas para rastreabilidade e inventário de modelos</p>
+                    <hr class="section-divider">
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label req" for="mc-nome">Nome da solução / produto</label>
+                            <input type="text" id="mc-nome" class="form-input" placeholder="Ex: Assistente de Atendimento Assaí">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label req" for="mc-id">ID do projeto (Linear / Jira)</label>
+                            <input type="text" id="mc-id" class="form-input" placeholder="Ex: COE-142">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label req" for="mc-versao">Versão atual do model card</label>
+                            <input type="text" id="mc-versao" class="form-input" placeholder="Ex: v1.2">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label req" for="mc-status">Status</label>
+                            <select id="mc-status" class="form-input">
+                                <option value="">Selecione…</option>
+                                <option>Ativo em produção plena</option>
+                                <option>Piloto ativo</option>
+                                <option>Em revisão / atualização</option>
+                                <option>Desativado / aposentado</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row-3">
+                        <div class="form-group">
+                            <label class="form-label req" for="mc-modelo-base">Modelo base (LLM)</label>
+                            <input type="text" id="mc-modelo-base" class="form-input" placeholder="Ex: claude-sonnet-4-6">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="mc-provider">Provider</label>
+                            <select id="mc-provider" class="form-input">
+                                <option value="">Selecione…</option>
+                                <option>Anthropic</option>
+                                <option>OpenAI</option>
+                                <option>Google (Vertex AI)</option>
+                                <option>Azure OpenAI</option>
+                                <option>AWS Bedrock</option>
+                                <option>Hugging Face (self-hosted)</option>
+                                <option>Outro</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="mc-data-prod">Data de entrada em produção</label>
+                            <input type="date" id="mc-data-prod" class="form-input">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label req" for="mc-area">Área / domínio de negócio</label>
+                            <input type="text" id="mc-area" class="form-input" placeholder="Ex: Atendimento ao cliente, Operações logísticas…">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="mc-usuarios">Usuários impactados</label>
+                            <input type="text" id="mc-usuarios" class="form-input" placeholder="Ex: ~2.000 atendentes, clientes finais via app">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label req" for="mc-descricao">Descrição em uma frase</label>
+                        <span class="form-hint">O que este modelo/sistema faz, para quem, em qual contexto. Máximo 2 linhas.</span>
+                        <textarea id="mc-descricao" class="form-input" style="min-height:60px;" placeholder="Ex: Assistente conversacional que responde perguntas de atendentes sobre políticas da loja usando RAG sobre base de documentos internos."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="mc-arq-resumo">Arquitetura resumida</label>
+                        <span class="form-hint">Tipo de solução, pipeline, modelos envolvidos. Pode incluir stack técnica.</span>
+                        <textarea id="mc-arq-resumo" class="form-input" placeholder="Ex: RAG pipeline — Embedding: text-embedding-3-small (OpenAI) → Vector store: Pinecone → LLM: claude-sonnet-4-6 (Anthropic via AWS Bedrock). Gateway: LiteLLM. Orquestração: LangGraph."></textarea>
+                    </div>
+                </section>
+
+                <!-- CAPACIDADES -->
+                <section id="capacidades" class="doc-section">
+                    <div class="section-label">Seção 02</div>
+                    <h2 class="section-title">Capacidades</h2>
+                    <p class="section-desc">O que o modelo faz bem — com evidências de avaliação</p>
+                    <hr class="section-divider">
+
+                    <div class="form-group">
+                        <label class="form-label req" for="cap-principal">Tarefa principal</label>
+                        <span class="form-hint">Qual é a função central que este sistema executa?</span>
+                        <textarea id="cap-principal" class="form-input" placeholder="Ex: Responder perguntas de atendentes sobre procedimentos, políticas de troca, promoções vigentes e estoque, com base em documentos corporativos."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="cap-exemplos">Exemplos de uso bem-sucedido</label>
+                        <span class="form-hint">3 a 5 exemplos concretos de inputs que o modelo lida bem.</span>
+                        <textarea id="cap-exemplos" class="form-input" style="min-height:100px;" placeholder="1. 'Qual é a política de troca para produtos com defeito?' → Resposta precisa com referência à política v3.2&#10;2. 'Quais promoções do mês de maio estão ativas em Campinas?' → Lista correta com vigência&#10;3. 'Como registrar uma reclamação de cliente no sistema?' → Passo a passo com link ao runbook"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="cap-idiomas">Idiomas suportados</label>
+                        <input type="text" id="cap-idiomas" class="form-input" placeholder="Ex: Português brasileiro (principal), Inglês (básico)">
+                    </div>
+                </section>
+
+                <!-- LIMITAÇÕES -->
+                <section id="limitacoes" class="doc-section">
+                    <div class="section-label">Seção 03</div>
+                    <h2 class="section-title">Limitações conhecidas</h2>
+                    <p class="section-desc">O que o modelo não faz, onde erra e quais são os riscos operacionais</p>
+                    <hr class="section-divider">
+
+                    <div class="callout danger" style="margin-bottom:20px;">
+                        <div class="callout-label">⚠️ Campo obrigatório</div>
+                        Todo model card deve documentar limitações honestas. Um campo em branco aqui é sinal de avaliação insuficiente — não de ausência de limitações.
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label req" for="lim-conhecidas">Limitações técnicas documentadas</label>
+                        <span class="form-hint">O que o sistema erra, onde falha, quais cenários foram testados e falharam.</span>
+                        <textarea id="lim-conhecidas" class="form-input" style="min-height:110px;" placeholder="Ex:&#10;• Não responde corretamente sobre produtos lançados há menos de 7 dias (pipeline de ingestão com delay)&#10;• Confunde políticas de lojas com formatos diferentes (cluster atacado vs varejo)&#10;• Qualidade degradada em perguntas com mais de 400 palavras&#10;• Não tem conhecimento de eventos externos (greves, eventos regionais)"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="lim-vies">Vieses identificados</label>
+                        <span class="form-hint">Grupos ou contextos onde o modelo pode performar de forma desigual.</span>
+                        <textarea id="lim-vies" class="form-input" placeholder="Ex: Documentação em linguagem formal; atendentes com linguagem mais coloquial podem obter respostas menos precisas."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="lim-alucinacao">Padrão de alucinações observado</label>
+                        <span class="form-hint">Tipos de perguntas onde o modelo tende a inventar ou confundir informações.</span>
+                        <textarea id="lim-alucinacao" class="form-input" placeholder="Ex: Tende a alucinar preços específicos quando não encontra no contexto recuperado. Confunde nomes de produtos similares."></textarea>
+                    </div>
+                </section>
+
+                <!-- USOS RECOMENDADOS -->
+                <section id="usos" class="doc-section">
+                    <div class="section-label">Seção 04</div>
+                    <h2 class="section-title">Usos recomendados e proibidos</h2>
+                    <p class="section-desc">Deixa explícito o que pode e o que não deve ser feito com esta solução</p>
+                    <hr class="section-divider">
+
+                    <div class="use-block">
+                        <div class="use-col yes">
+                            <div class="use-col-label">✅ Usos recomendados</div>
+                            <div class="use-item">
+                                <textarea class="form-input" placeholder="Ex: Consulta por atendentes para informações operacionais"></textarea>
+                            </div>
+                            <div class="use-item">
+                                <textarea class="form-input" placeholder="Ex: Triagem de perguntas frequentes"></textarea>
+                            </div>
+                            <div class="use-item">
+                                <textarea class="form-input" placeholder="Ex: Sugestão de resposta (humano revisa antes de enviar)"></textarea>
+                            </div>
+                        </div>
+                        <div class="use-col no">
+                            <div class="use-col-label">🚫 Usos proibidos / não recomendados</div>
+                            <div class="use-item">
+                                <textarea class="form-input" placeholder="Ex: Tomada de decisão financeira autônoma"></textarea>
+                            </div>
+                            <div class="use-item">
+                                <textarea class="form-input" placeholder="Ex: Comunicação direta ao cliente sem revisão humana"></textarea>
+                            </div>
+                            <div class="use-item">
+                                <textarea class="form-input" placeholder="Ex: Processamento de dados sensíveis de clientes (LGPD)"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="margin-top:16px;">
+                        <label class="form-label" for="uso-autonomia">Nível de autonomia em produção</label>
+                        <div class="radio-group" style="margin-top:8px;">
+                            <label class="radio-item"><input type="radio" name="uso-autonomia" value="assistivo"> Assistivo — toda saída é revisada por humano antes do uso</label>
+                            <label class="radio-item"><input type="radio" name="uso-autonomia" value="semi"> Semi-autônomo — humano revisa casos de baixa confiança</label>
+                            <label class="radio-item"><input type="radio" name="uso-autonomia" value="autonomo"> Autônomo — age sem revisão humana em fluxo normal</label>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- AVALIAÇÃO & MÉTRICAS -->
+                <section id="avaliacao" class="doc-section">
+                    <div class="section-label">Seção 05</div>
+                    <h2 class="section-title">Avaliação & métricas em produção</h2>
+                    <p class="section-desc">Como o modelo é medido e qual é a baseline de qualidade</p>
+                    <hr class="section-divider">
+
+                    <div class="form-row" style="margin-bottom:8px;">
+                        <div class="form-group">
+                            <label class="form-label" for="eval-metodo">Método de avaliação principal</label>
+                            <select id="eval-metodo" class="form-input">
+                                <option value="">Selecione…</option>
+                                <option>LLM-as-judge com golden dataset</option>
+                                <option>Avaliação humana periódica (amostragem)</option>
+                                <option>Métricas automáticas (ROUGE, BERTScore)</option>
+                                <option>Feedback implícito do usuário (thumbs up/down)</option>
+                                <option>Combinação de métodos</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="eval-dataset">Link do golden dataset</label>
+                            <input type="text" id="eval-dataset" class="form-input" placeholder="Ex: Confluence · /CoE/Evals/assistente-atendimento-v2">
+                        </div>
+                    </div>
+
+                    <table class="eval-table">
+                        <thead>
+                            <tr>
+                                <th>Métrica</th>
+                                <th>Limiar mínimo</th>
+                                <th>Último valor medido</th>
+                                <th>Tendência</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Taxa de alucinação</td>
+                                <td><input type="text" class="form-input" placeholder="Ex: ≤ 3%"></td>
+                                <td><input type="text" class="form-input" placeholder="Ex: 1,8%"></td>
+                                <td>
+                                    <div class="eval-trend">
+                                        <label><input type="radio" name="trend1" value="up"> ↑</label>
+                                        <label><input type="radio" name="trend1" value="stable"> →</label>
+                                        <label><input type="radio" name="trend1" value="down"> ↓</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Faithfulness (RAG)</td>
+                                <td><input type="text" class="form-input" placeholder="Ex: ≥ 85%"></td>
+                                <td><input type="text" class="form-input" placeholder="Ex: 91%"></td>
+                                <td>
+                                    <div class="eval-trend">
+                                        <label><input type="radio" name="trend2" value="up"> ↑</label>
+                                        <label><input type="radio" name="trend2" value="stable"> →</label>
+                                        <label><input type="radio" name="trend2" value="down"> ↓</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Latência P95</td>
+                                <td><input type="text" class="form-input" placeholder="Ex: ≤ 4s"></td>
+                                <td><input type="text" class="form-input" placeholder="Ex: 2,3s"></td>
+                                <td>
+                                    <div class="eval-trend">
+                                        <label><input type="radio" name="trend3" value="up"> ↑</label>
+                                        <label><input type="radio" name="trend3" value="stable"> →</label>
+                                        <label><input type="radio" name="trend3" value="down"> ↓</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Custo por interação</td>
+                                <td><input type="text" class="form-input" placeholder="Ex: ≤ R$ 0,04"></td>
+                                <td><input type="text" class="form-input" placeholder="Ex: R$ 0,02"></td>
+                                <td>
+                                    <div class="eval-trend">
+                                        <label><input type="radio" name="trend4" value="up"> ↑</label>
+                                        <label><input type="radio" name="trend4" value="stable"> →</label>
+                                        <label><input type="radio" name="trend4" value="down"> ↓</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Satisfação do usuário</td>
+                                <td><input type="text" class="form-input" placeholder="Ex: ≥ 4,0/5,0"></td>
+                                <td><input type="text" class="form-input" placeholder="Ex: 4,2/5,0"></td>
+                                <td>
+                                    <div class="eval-trend">
+                                        <label><input type="radio" name="trend5" value="up"> ↑</label>
+                                        <label><input type="radio" name="trend5" value="stable"> →</label>
+                                        <label><input type="radio" name="trend5" value="down"> ↓</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Métrica adicional</td>
+                                <td><input type="text" class="form-input" placeholder="Defina…"></td>
+                                <td><input type="text" class="form-input" placeholder="Valor…"></td>
+                                <td>
+                                    <div class="eval-trend">
+                                        <label><input type="radio" name="trend6" value="up"> ↑</label>
+                                        <label><input type="radio" name="trend6" value="stable"> →</label>
+                                        <label><input type="radio" name="trend6" value="down"> ↓</label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="form-group" style="margin-top:16px;">
+                        <label class="form-label" for="eval-cadencia">Cadência de reavaliação</label>
+                        <select id="eval-cadencia" class="form-input">
+                            <option value="">Selecione…</option>
+                            <option>Contínua (monitoramento automático em produção)</option>
+                            <option>Semanal</option>
+                            <option>Quinzenal</option>
+                            <option>Mensal</option>
+                            <option>A cada mudança de versão de modelo</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="eval-obs">Observações sobre a avaliação</label>
+                        <textarea id="eval-obs" class="form-input" placeholder="Ex: Avaliação humana mensal com amostra de 200 conversas. LLM-as-judge roda diariamente no pipeline de observabilidade do gateway."></textarea>
+                    </div>
+                </section>
+
+                <!-- DADOS & PRIVACIDADE -->
+                <section id="dados" class="doc-section">
+                    <div class="section-label">Seção 06</div>
+                    <h2 class="section-title">Dados & privacidade</h2>
+                    <p class="section-desc">Quais dados o modelo processa e como a LGPD é respeitada</p>
+                    <hr class="section-divider">
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label req">Processa dados pessoais (LGPD)?</label>
+                            <div class="radio-group" style="margin-top:8px; flex-direction:row; gap:20px;">
+                                <label class="radio-item"><input type="radio" name="lgpd" value="sim"> Sim</label>
+                                <label class="radio-item"><input type="radio" name="lgpd" value="nao"> Não</label>
+                                <label class="radio-item"><input type="radio" name="lgpd" value="anonimizado"> Sim, mas anonimizado</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label req">Dados de clientes são enviados ao provider?</label>
+                            <div class="radio-group" style="margin-top:8px; flex-direction:row; gap:20px;">
+                                <label class="radio-item"><input type="radio" name="dados-provider" value="sim"> Sim</label>
+                                <label class="radio-item"><input type="radio" name="dados-provider" value="nao"> Não</label>
+                                <label class="radio-item"><input type="radio" name="dados-provider" value="anonimizado"> Apenas anonimizados</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label req" for="dados-tipos">Tipos de dados processados</label>
+                        <span class="form-hint">Liste todos os tipos de dado que chegam ao modelo (prompt ou contexto).</span>
+                        <textarea id="dados-tipos" class="form-input" placeholder="Ex: Texto livre de atendentes (sem dados pessoais de clientes). Documentos internos (políticas, manuais). Consultas sobre produtos."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="dados-retencao">Política de retenção dos logs</label>
+                        <input type="text" id="dados-retencao" class="form-input" placeholder="Ex: 90 dias no gateway (LiteLLM) + DataDog. Sem armazenamento de dados pessoais no histórico.">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="dados-dpo">Base legal e registro no DPO</label>
+                        <input type="text" id="dados-dpo" class="form-input" placeholder="Ex: Legítimo interesse (interno). Registrado no inventário de dados do DPO em [data].">
+                    </div>
+                </section>
+
+                <!-- RESPONSÁVEIS -->
+                <section id="responsaveis" class="doc-section">
+                    <div class="section-label">Seção 07</div>
+                    <h2 class="section-title">Responsáveis</h2>
+                    <p class="section-desc">Quem responde por este modelo em cada dimensão</p>
+                    <hr class="section-divider">
+
+                    <div class="resp-grid">
+                        <div class="resp-box">
+                            <div class="resp-role">Responsável Técnico (CoE Operacional)</div>
+                            <div class="form-group">
+                                <label class="form-label req" for="resp1-nome">Nome</label>
+                                <input type="text" id="resp1-nome" class="form-input" placeholder="Nome completo">
+                            </div>
+                            <div class="form-group" style="margin-bottom:0">
+                                <label class="form-label" for="resp1-contato">Contato (Teams / e-mail)</label>
+                                <input type="text" id="resp1-contato" class="form-input" placeholder="@usuario ou email@assai.com.br">
+                            </div>
+                        </div>
+                        <div class="resp-box">
+                            <div class="resp-role">Dono de Negócio</div>
+                            <div class="form-group">
+                                <label class="form-label req" for="resp2-nome">Nome</label>
+                                <input type="text" id="resp2-nome" class="form-input" placeholder="Nome completo + área">
+                            </div>
+                            <div class="form-group" style="margin-bottom:0">
+                                <label class="form-label" for="resp2-contato">Contato (Teams / e-mail)</label>
+                                <input type="text" id="resp2-contato" class="form-input" placeholder="@usuario ou email@assai.com.br">
+                            </div>
+                        </div>
+                        <div class="resp-box">
+                            <div class="resp-role">Responsável por Qualidade / Evals</div>
+                            <div class="form-group">
+                                <label class="form-label" for="resp3-nome">Nome</label>
+                                <input type="text" id="resp3-nome" class="form-input" placeholder="Nome completo (pode ser o técnico)">
+                            </div>
+                            <div class="form-group" style="margin-bottom:0">
+                                <label class="form-label" for="resp3-contato">Contato</label>
+                                <input type="text" id="resp3-contato" class="form-input" placeholder="@usuario ou email@assai.com.br">
+                            </div>
+                        </div>
+                        <div class="resp-box">
+                            <div class="resp-role">Escalação de Incidente (on-call)</div>
+                            <div class="form-group">
+                                <label class="form-label" for="resp4-nome">Nome ou canal</label>
+                                <input type="text" id="resp4-nome" class="form-input" placeholder="Ex: Canal #coe-ia-oncall ou nome do on-call">
+                            </div>
+                            <div class="form-group" style="margin-bottom:0">
+                                <label class="form-label" for="resp4-runbook">Link do runbook de incidente</label>
+                                <input type="text" id="resp4-runbook" class="form-input" placeholder="Ex: Confluence · /CoE/Runbooks/assistente-atendimento">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- HISTÓRICO DE VERSÕES -->
+                <section id="versoes" class="doc-section">
+                    <div class="section-label">Seção 08</div>
+                    <h2 class="section-title">Histórico de versões</h2>
+                    <p class="section-desc">Registro de mudanças relevantes — modelo base, prompt, dados, critérios</p>
+                    <hr class="section-divider">
+
+                    <div class="version-row header">
+                        <span>Versão</span>
+                        <span>Data</span>
+                        <span>Descrição da mudança</span>
+                        <span>Responsável</span>
+                    </div>
+
+                    <div class="version-row">
+                        <input type="text" class="form-input" placeholder="v1.0">
+                        <input type="date" class="form-input">
+                        <input type="text" class="form-input" placeholder="Lançamento inicial em produção piloto">
+                        <input type="text" class="form-input" placeholder="Nome">
+                    </div>
+                    <div class="version-row">
+                        <input type="text" class="form-input" placeholder="v1.1">
+                        <input type="date" class="form-input">
+                        <input type="text" class="form-input" placeholder="Ex: Atualização do modelo base (gpt-4o → claude-sonnet-4)">
+                        <input type="text" class="form-input" placeholder="Nome">
+                    </div>
+                    <div class="version-row">
+                        <input type="text" class="form-input" placeholder="v1.2">
+                        <input type="date" class="form-input">
+                        <input type="text" class="form-input" placeholder="Ex: Reindexação com novo chunking semântico">
+                        <input type="text" class="form-input" placeholder="Nome">
+                    </div>
+                    <div class="version-row">
+                        <input type="text" class="form-input" placeholder="v…">
+                        <input type="date" class="form-input">
+                        <input type="text" class="form-input" placeholder="Próxima mudança…">
+                        <input type="text" class="form-input" placeholder="Nome">
+                    </div>
+
+                    <div class="form-group" style="margin-top:20px;">
+                        <label class="form-label" for="mc-proxima-revisao">Data da próxima revisão obrigatória</label>
+                        <span class="form-hint">Model cards devem ser revisados a cada mudança de modelo e no mínimo a cada 6 meses.</span>
+                        <input type="date" id="mc-proxima-revisao" class="form-input" style="max-width:220px;">
+                    </div>
+                </section>
+
+                <div class="submit-area">
+                    <p class="submit-note">
+                        O model card preenchido deve ser arquivado em <strong>Confluence → CoE IA → Model Cards</strong> e o link deve ser registrado no Linear vinculado ao card do projeto.<br>
+                        Um model card é pré-requisito obrigatório para aprovação no ARB. Mantenha-o atualizado — um model card desatualizado é tratado como ausente nas auditorias.
+                    </p>
+                    <div style="display:flex; gap:12px; flex-wrap:wrap;">
+                        <button type="button" onclick="window.print()" style="padding:10px 20px; background:#1A1A1A; color:#fff; border:none; border-radius:var(--radius); font-family:var(--font); font-size:0.875rem; font-weight:600; cursor:pointer;">🖨 Imprimir / Salvar PDF</button>
+                        <button type="reset" style="padding:10px 20px; background:#fff; color:var(--dark); border:1px solid var(--border); border-radius:var(--radius); font-family:var(--font); font-size:0.875rem; font-weight:600; cursor:pointer;">↺ Limpar formulário</button>
+                    </div>
+                </div>
+            </form>
+
+            <nav class="page-nav" aria-label="Navegação entre páginas">
+                <a href="arb-checklist.html" class="page-nav-card">
+                    <div class="page-nav-dir">← Anterior</div>
+                    <div class="page-nav-title">ARB Checklist</div>
+                </a>
+                <a href="intake-solicitacao.html" class="page-nav-card next">
+                    <div class="page-nav-dir">Início dos docs →</div>
+                    <div class="page-nav-title">Formulário de Intake</div>
+                </a>
+            </nav>
+        </main>
+    </div>
+
+    <footer id="footer">
+        <img src="../assets/Assaí_Atacadista_logo_2024.svg.png" alt="Assaí Atacadista">
+        <span>AI CoE · Documentação Técnica</span>
+        <span>v1.0 · Maio 2026 · Confidencial</span>
+        <span class="footer-doc-links"><a href="../operacional/pilar-2-governanca.html">Pilar 2 · Governança</a><span class="footer-doc-sep" aria-hidden="true">·</span><a href="arb-checklist.html">ARB Checklist</a></span>
+        <span class="footer-author">Criado por Claudio Ramirez - Arquiteto Tech Lead CoE Operacional</span>
+    </footer>
+
+    <script src="../js/shared.js"></script>
+</body>
+</html>

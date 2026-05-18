@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Intake · Solicitação de IA — AI CoE · Assaí</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/shared.css?v=2">
+    <style>
+        :root { --switcher-h: 44px; }
+        .page-hero.docs { background: #141009; }
+        .page-hero.docs::after { background: linear-gradient(to right, #D97706, #F5A800); }
+        .hero-eyebrow.docs { color: #FDE68A; }
+        .hero-eyebrow.docs::before { background: #FDE68A; }
+        .chip.docs { border-color: rgba(245,168,0,0.3); color: #FDE68A; background: rgba(245,168,0,0.1); }
+
+        /* Form styles */
+        .form-group { margin-bottom: 20px; }
+        .form-label { font-size: 0.82rem; font-weight: 700; color: var(--dark); display: block; margin-bottom: 5px; }
+        .form-label.req::after { content: ' *'; color: var(--red); }
+        .form-hint { font-size: 0.74rem; color: var(--muted); margin-bottom: 6px; display: block; font-style: italic; }
+        .form-input {
+            width: 100%; padding: 9px 13px;
+            border: 1px solid var(--border); border-radius: var(--radius);
+            font-family: var(--font); font-size: 0.875rem; color: var(--text); background: #fff;
+            transition: border-color 0.15s;
+        }
+        .form-input:focus { outline: none; border-color: #D97706; box-shadow: 0 0 0 3px rgba(217,119,6,0.12); }
+        textarea.form-input { min-height: 90px; resize: vertical; line-height: 1.6; }
+        select.form-input { cursor: pointer; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+        .radio-group { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+        .radio-item { display: flex; align-items: center; gap: 9px; font-size: 0.875rem; cursor: pointer; }
+        .radio-item input[type="radio"] { accent-color: #D97706; width: 16px; height: 16px; flex-shrink: 0; }
+        .check-group { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+        .check-item { display: flex; align-items: flex-start; gap: 9px; font-size: 0.875rem; cursor: pointer; }
+        .check-item input[type="checkbox"] { accent-color: #D97706; width: 16px; height: 16px; flex-shrink: 0; margin-top: 2px; }
+
+        .form-divider { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+
+        .submit-area { margin-top: 48px; padding: 28px; background: #FFFBEB; border: 1px solid #FDE68A; border-radius: var(--radius-lg); }
+        .submit-note { font-size: 0.85rem; color: #92400E; margin-bottom: 16px; line-height: 1.6; }
+
+        @media (max-width: 768px) {
+            .form-row, .form-row-3 { grid-template-columns: 1fr; }
+        }
+        @media print {
+            #coe-switcher, .page-nav, .submit-area button { display: none; }
+            .form-input { border: 1px solid #ccc; }
+            .page-hero { padding: 24px !important; }
+        }
+    </style>
+</head>
+<body>
+    <div id="progress"></div>
+
+    <nav id="topnav" role="navigation" aria-label="Navegação principal">
+        <div class="nav-inner">
+            <a href="../index.html" class="nav-logo" aria-label="Assaí Atacadista - CoE IA">
+                <img src="../assets/Assaí_Atacadista_logo_2024.svg.png" alt="Assaí Atacadista">
+                <span class="nav-logo-divider" aria-hidden="true"></span>
+                <span class="nav-logo-label"><strong>AI CoE</strong>Documentos Operacionais</span>
+            </a>
+            <ul class="nav-links" role="list">
+                <li><a href="../index.html">← Início</a></li>
+                <li><a href="index.html">📖 Instruções</a></li>
+                <li><a href="intake-solicitacao.html" class="active">📋 Intake</a></li>
+                <li><a href="verificacao-ia-existente.html">🔍 Verificação IA</a></li>
+                <li><a href="arb-checklist.html">✅ ARB</a></li>
+                <li><a href="model-card.html">📊 Model Card</a></li>
+            </ul>
+            <button id="nav-toggle" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span><span></span></button>
+        </div>
+    </nav>
+    <div id="nav-mobile" role="navigation" aria-label="Menu mobile">
+        <a href="../index.html">🏠 Início</a>
+        <a href="index.html">📖 Instruções</a>
+        <a href="intake-solicitacao.html" class="active">📋 Intake</a>
+        <a href="verificacao-ia-existente.html">🔍 Verificação IA</a>
+        <a href="arb-checklist.html">✅ ARB</a>
+        <a href="model-card.html">📊 Model Card</a>
+    </div>
+
+    <div id="coe-switcher" aria-label="Navegar entre CoEs">
+        <div class="switcher-inner">
+            <span class="switcher-label">Nível</span>
+            <a href="../estrategico/visao-geral.html" class="switcher-item estrategico">
+                <span class="switcher-num">01</span>Estratégico
+            </a>
+            <span class="switcher-sep" aria-hidden="true"></span>
+            <a href="../tatico/visao-geral.html" class="switcher-item tatico">
+                <span class="switcher-num">02</span>Tático
+            </a>
+            <span class="switcher-sep" aria-hidden="true"></span>
+            <a href="../operacional/time-e-fluxo.html" class="switcher-item operacional active">
+                <span class="switcher-num">03</span>Operacional
+            </a>
+        </div>
+    </div>
+
+    <header class="page-hero docs">
+        <div class="page-hero-orbit" aria-hidden="true">
+            <div class="pho-ring pho-r1"></div>
+            <div class="pho-ring pho-r2"></div>
+            <div class="pho-ring pho-r3"></div>
+        </div>
+        <div class="hero-inner">
+            <div class="hero-eyebrow docs">Documentos Operacionais</div>
+            <h1 class="hero-title">Formulário de <em>Intake</em></h1>
+            <p class="hero-subtitle">Preencha este formulário para submeter uma solicitação de projeto de IA ao CoE. O Comitê Tático avalia e retorna em até 5 dias úteis.</p>
+            <div class="hero-chips">
+                <span class="chip docs">📋 CoE Tático</span>
+                <span class="chip docs">⏱ Retorno em 5 dias</span>
+                <span class="chip docs">🔒 Uso interno</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="page-body with-sidebar">
+        <aside class="sidebar" aria-label="Navegação da página">
+            <div class="sidebar-title">Nesta página</div>
+            <ul class="sidebar-nav">
+                <li><a href="#identificacao" class="active">👤 Identificação</a></li>
+                <li><a href="#problema">🎯 Descrição do Problema</a></li>
+                <li><a href="#dados">💾 Dados & Contexto</a></li>
+                <li><a href="#impacto">📈 Impacto Esperado</a></li>
+                <li><a href="#sponsor">🤝 Sponsor & Aprovação</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <nav class="breadcrumb" aria-label="Localização">
+                <a href="../index.html">Início</a>
+                <span class="breadcrumb-sep">›</span>
+                <a href="../operacional/time-e-fluxo.html">CoE Operacional</a>
+                <span class="breadcrumb-sep">›</span>
+                <span>Intake · Solicitação de IA</span>
+            </nav>
+
+            <div class="summary-box" style="margin-bottom:40px;">
+                <div class="summary-box-label">📌 Como funciona</div>
+                <p>Este formulário é a <strong>porta de entrada do funil de IA</strong>. Você não precisa conhecer IA para preenchê-lo — apenas descreva a dor do negócio. O CoE Tático avalia viabilidade, dados e retorno esperado em conjunto com você.</p>
+            </div>
+
+            <form>
+                <!-- IDENTIFICAÇÃO -->
+                <section id="identificacao" class="doc-section">
+                    <div class="section-label">Seção 01</div>
+                    <h2 class="section-title">Identificação</h2>
+                    <p class="section-desc">Quem está solicitando e de qual área</p>
+                    <hr class="section-divider">
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label req" for="solicitante">Nome do solicitante</label>
+                            <input type="text" id="solicitante" class="form-input" placeholder="Ex: Ana Silva">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label req" for="cargo">Cargo</label>
+                            <input type="text" id="cargo" class="form-input" placeholder="Ex: Gerente de Operações">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label req" for="area">Área / Departamento</label>
+                            <input type="text" id="area" class="form-input" placeholder="Ex: Comercial, RH, Logística">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="data">Data da solicitação</label>
+                            <input type="date" id="data" class="form-input">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="email">E-mail corporativo</label>
+                            <input type="email" id="email" class="form-input" placeholder="nome@assai.com.br">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label req" for="prioridade">Prioridade estimada pelo negócio</label>
+                            <select id="prioridade" class="form-input">
+                                <option value="">Selecione...</option>
+                                <option>Alta — impacto crítico, urgência imediata</option>
+                                <option>Média — relevante, mas pode aguardar ciclo</option>
+                                <option>Baixa — melhoria contínua, sem urgência</option>
+                            </select>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- DESCRIÇÃO DO PROBLEMA -->
+                <section id="problema" class="doc-section">
+                    <div class="section-label">Seção 02</div>
+                    <h2 class="section-title">Descrição do Problema</h2>
+                    <p class="section-desc">Descreva a dor — sem precisar saber a solução</p>
+                    <hr class="section-divider">
+
+                    <div class="callout info" style="margin-bottom:24px;">
+                        <div class="callout-label">💡 Dica</div>
+                        Não se preocupe em descrever a solução tecnológica. Foque no problema real e no impacto que ele causa hoje.
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label req" for="situacao-atual">Qual é a situação atual? O que acontece hoje?</label>
+                        <span class="form-hint">Descreva o processo manual, repetitivo ou ineficiente que você quer resolver.</span>
+                        <textarea id="situacao-atual" class="form-input" placeholder="Ex: Hoje nossa equipe de atendimento leva em média 40 minutos para responder cada consulta sobre estoque porque precisa consultar 3 sistemas diferentes manualmente..."></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label req" for="frequencia">Com que frequência este problema ocorre?</label>
+                            <select id="frequencia" class="form-input">
+                                <option value="">Selecione...</option>
+                                <option>Várias vezes por dia</option>
+                                <option>Diariamente</option>
+                                <option>Semanalmente</option>
+                                <option>Mensalmente</option>
+                                <option>Sob demanda / variável</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label req" for="volume">Volume aproximado de ocorrências</label>
+                            <input type="text" id="volume" class="form-input" placeholder="Ex: ~500 consultas/dia, ~200 documentos/mês">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="custo-atual">Quanto tempo ou recurso é gasto hoje com isso?</label>
+                        <span class="form-hint">Estime horas/pessoa, custo financeiro ou outro indicador relevante.</span>
+                        <textarea id="custo-atual" class="form-input" style="min-height:70px;" placeholder="Ex: 3 analistas dedicam 4h/dia a esta tarefa. Custo estimado: R$12k/mês em horas."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="ja-tentado">O que já foi tentado para resolver isso?</label>
+                        <textarea id="ja-tentado" class="form-input" style="min-height:70px;" placeholder="Ex: Tentamos com RPA em 2023, mas falhou porque os sistemas legados mudam frequentemente. Atualmente usamos uma planilha compartilhada."></textarea>
+                    </div>
+                </section>
+
+                <!-- DADOS & CONTEXTO -->
+                <section id="dados" class="doc-section">
+                    <div class="section-label">Seção 03</div>
+                    <h2 class="section-title">Dados & Contexto Técnico</h2>
+                    <p class="section-desc">Informações sobre os dados envolvidos</p>
+                    <hr class="section-divider">
+
+                    <div class="form-group">
+                        <label class="form-label req" for="fontes-dados">Quais dados existem e onde estão armazenados?</label>
+                        <span class="form-hint">Liste sistemas, planilhas, bancos de dados, documentos, etc.</span>
+                        <textarea id="fontes-dados" class="form-input" placeholder="Ex: Histórico de pedidos no SAP, catálogo de produtos no Oracle, registros de atendimento no Salesforce, políticas internas em PDFs no SharePoint."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label req">Os dados envolvidos contêm informações sensíveis?</label>
+                        <div class="check-group">
+                            <label class="check-item"><input type="checkbox"> Dados pessoais de clientes (CPF, endereço, histórico de compras)</label>
+                            <label class="check-item"><input type="checkbox"> Dados pessoais de colaboradores</label>
+                            <label class="check-item"><input type="checkbox"> Dados financeiros / transacionais</label>
+                            <label class="check-item"><input type="checkbox"> Dados estratégicos / confidenciais da empresa</label>
+                            <label class="check-item"><input type="checkbox"> Não — dados são públicos ou internos sem sensibilidade</label>
+                            <label class="check-item"><input type="checkbox"> Não sei / preciso verificar</label>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Integrações com sistemas necessárias?</label>
+                            <div class="radio-group">
+                                <label class="radio-item"><input type="radio" name="integracao"> Sim — múltiplos sistemas</label>
+                                <label class="radio-item"><input type="radio" name="integracao"> Sim — um sistema</label>
+                                <label class="radio-item"><input type="radio" name="integracao"> Não — dados offline / manual</label>
+                                <label class="radio-item"><input type="radio" name="integracao"> Não sei ainda</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Qualidade dos dados disponíveis</label>
+                            <div class="radio-group">
+                                <label class="radio-item"><input type="radio" name="qualidade-dados"> Boa — dados estruturados, histórico rico</label>
+                                <label class="radio-item"><input type="radio" name="qualidade-dados"> Média — existe mas incompleto</label>
+                                <label class="radio-item"><input type="radio" name="qualidade-dados"> Ruim — desestruturado ou insuficiente</label>
+                                <label class="radio-item"><input type="radio" name="qualidade-dados"> Não sei</label>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- IMPACTO ESPERADO -->
+                <section id="impacto" class="doc-section">
+                    <div class="section-label">Seção 04</div>
+                    <h2 class="section-title">Impacto Esperado</h2>
+                    <p class="section-desc">O que muda quando o problema for resolvido</p>
+                    <hr class="section-divider">
+
+                    <div class="form-group">
+                        <label class="form-label req" for="resultado-ideal">Como seria o mundo ideal após a solução?</label>
+                        <span class="form-hint">Descreva o estado desejado — sem preocupação com viabilidade técnica.</span>
+                        <textarea id="resultado-ideal" class="form-input" placeholder="Ex: A equipe de atendimento receberia a resposta sobre estoque em segundos, sem precisar consultar nenhum sistema manualmente. A IA entenderia a pergunta em linguagem natural e retornaria a informação formatada."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label req" for="kpis">Como saberemos que a solução funcionou? (KPIs)</label>
+                        <span class="form-hint">Liste métricas mensuráveis que indicarão sucesso.</span>
+                        <textarea id="kpis" class="form-input" style="min-height:70px;" placeholder="Ex: Tempo de resposta < 30 segundos (vs 40 min atual). Satisfação do atendente > 80%. Redução de 70% nas consultas manuais entre sistemas."></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Tipo principal de benefício esperado</label>
+                            <select class="form-input">
+                                <option value="">Selecione...</option>
+                                <option>Redução de custo operacional</option>
+                                <option>Aumento de velocidade / eficiência</option>
+                                <option>Melhora de qualidade / precisão</option>
+                                <option>Melhora de experiência do cliente</option>
+                                <option>Redução de risco / compliance</option>
+                                <option>Geração de receita</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Prazo desejado para ter a solução</label>
+                            <select class="form-input">
+                                <option value="">Selecione...</option>
+                                <option>Imediato (até 1 mês)</option>
+                                <option>Curto prazo (1–3 meses)</option>
+                                <option>Médio prazo (3–6 meses)</option>
+                                <option>Longo prazo (6–12 meses)</option>
+                                <option>Sem urgência definida</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Estimativa de ROI / retorno financeiro</label>
+                        <span class="form-hint">Se souber, estime o valor em jogo. Não precisa ser exato.</span>
+                        <input type="text" class="form-input" placeholder="Ex: Estimamos economia de R$15k/mês em horas de trabalho, ou aumento de 10% nas vendas do setor.">
+                    </div>
+                </section>
+
+                <!-- SPONSOR -->
+                <section id="sponsor" class="doc-section">
+                    <div class="section-label">Seção 05</div>
+                    <h2 class="section-title">Sponsor & Aprovação</h2>
+                    <p class="section-desc">Garantindo que o projeto tem patrocínio real</p>
+                    <hr class="section-divider">
+
+                    <div class="callout warn" style="margin-bottom:24px;">
+                        <div class="callout-label">⚠️ Requisito</div>
+                        Projetos sem sponsor da área têm menor chance de avançar. O CoE não entrega projetos que não têm um responsável de negócio comprometido com a adoção.
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label req" for="sponsor-nome">Nome do sponsor / responsável da área</label>
+                            <input type="text" id="sponsor-nome" class="form-input" placeholder="Gerente ou Diretor que patrocina o projeto">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label req" for="sponsor-cargo">Cargo do sponsor</label>
+                            <input type="text" id="sponsor-cargo" class="form-input" placeholder="Ex: Diretor de Operações">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label req">O sponsor está ciente e aprova esta solicitação?</label>
+                        <div class="radio-group">
+                            <label class="radio-item"><input type="radio" name="aprovacao"> Sim — aprovou verbalmente e acompanhará o projeto</label>
+                            <label class="radio-item"><input type="radio" name="aprovacao"> Sim — aprovou e designou ponto focal de negócio</label>
+                            <label class="radio-item"><input type="radio" name="aprovacao"> Ainda não — preciso alinhar antes de avançar</label>
+                            <label class="radio-item"><input type="radio" name="aprovacao"> Não aplicável — sou o próprio responsável da área</label>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="ponto-focal">Ponto focal de negócio designado</label>
+                            <span class="form-hint">Quem acompanhará o projeto pelo lado da área solicitante</span>
+                            <input type="text" id="ponto-focal" class="form-input" placeholder="Nome e cargo do ponto focal">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Disponibilidade de orçamento</label>
+                            <div class="radio-group">
+                                <label class="radio-item"><input type="radio" name="orcamento"> Sim — budget já aprovado</label>
+                                <label class="radio-item"><input type="radio" name="orcamento"> Conditional — depende de aprovação do CoE Tático</label>
+                                <label class="radio-item"><input type="radio" name="orcamento"> Não definido ainda</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="info-adicional">Informações adicionais relevantes</label>
+                        <textarea id="info-adicional" class="form-input" style="min-height:70px;" placeholder="Contexto histórico, iniciativas relacionadas, dependências, restrições técnicas ou de compliance que devemos saber..."></textarea>
+                    </div>
+
+                    <div class="submit-area">
+                        <p class="submit-note"><strong>📤 Como submeter:</strong> Salve ou imprima este formulário preenchido e envie para o canal <strong>#coe-ia-intake</strong> no Teams, ou abra um card no projeto <strong>CoE AI Intake</strong> no Linear com este formulário em anexo. O CoE Tático retornará em até <strong>5 dias úteis</strong> com uma avaliação inicial.</p>
+                        <p class="submit-note" style="margin-bottom:0;">Dúvidas? Contate <strong>Claudio Ramirez</strong> — Arquiteto Tech Lead CoE Operacional.</p>
+                    </div>
+                </section>
+            </form>
+
+            <nav class="page-nav" aria-label="Próximo documento">
+                <div></div>
+                <a href="verificacao-ia-existente.html" class="page-nav-card next">
+                    <div class="page-nav-dir">Próximo →</div>
+                    <div class="page-nav-title">Verificação de IA Existente</div>
+                </a>
+            </nav>
+        </main>
+    </div>
+
+    <footer id="footer">
+        <img src="../assets/Assaí_Atacadista_logo_2024.svg.png" alt="Assaí Atacadista">
+        <span>AI CoE · Documentos Operacionais</span>
+        <span>v1.0 · Maio 2026 · Uso interno</span>
+        <span class="footer-doc-links">
+            <a href="verificacao-ia-existente.html">Verificação de IA Existente</a>
+            <span class="footer-doc-sep">·</span>
+            <a href="arb-checklist.html">ARB Checklist</a>
+            <span class="footer-doc-sep">·</span>
+            <a href="model-card.html">Model Card</a>
+        </span>
+        <span class="footer-author">Criado por Claudio Ramirez — Arquiteto Tech Lead CoE Operacional</span>
+    </footer>
+
+    <script src="../js/shared.js"></script>
+</body>
+</html>

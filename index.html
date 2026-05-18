@@ -180,6 +180,33 @@
         .f-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.5; }
         .f-badge { padding: 4px 12px; background: #E2E8F0; color: #475569; border-radius: 20px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; }
 
+        /* Docs Section */
+        .docs-section { background: #FFFBEB; padding: 80px 24px; border-top: 3px solid #D97706; border-bottom: 1px solid #FDE68A; }
+        .docs-inner { max-width: 1200px; margin: 0 auto; }
+        .docs-eyebrow { font-size: 0.8rem; font-weight: 700; color: #D97706; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; text-align: center; }
+        .docs-title { font-size: 2.2rem; font-weight: 800; color: var(--dark-base); text-align: center; margin-bottom: 12px; }
+        .docs-sub { color: var(--muted); text-align: center; max-width: 560px; margin: 0 auto 48px; font-size: 1rem; line-height: 1.6; }
+        .docs-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-bottom: 32px; }
+        .docs-card {
+            background: #fff; border: 1px solid #FDE68A; border-radius: 14px; padding: 24px;
+            display: flex; gap: 18px; align-items: flex-start;
+            text-decoration: none; color: inherit; transition: all 0.2s;
+        }
+        .docs-card:hover { border-color: #D97706; box-shadow: 0 6px 20px rgba(217,119,6,0.12); transform: translateY(-2px); }
+        .docs-card-icon { width: 48px; height: 48px; border-radius: 10px; background: #FFFBEB; border: 1px solid #FDE68A; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0; }
+        .docs-card-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #D97706; margin-bottom: 4px; }
+        .docs-card-title { font-size: 0.95rem; font-weight: 700; color: var(--dark-base); margin-bottom: 5px; }
+        .docs-card-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.55; }
+        .docs-cta { text-align: center; }
+        .docs-cta-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 12px 28px; background: #1A1A1A; color: #fff; border-radius: 8px;
+            font-size: 0.9rem; font-weight: 700; text-decoration: none; transition: background 0.2s;
+        }
+        .docs-cta-btn:hover { background: #D97706; text-decoration: none; color: #fff; }
+        .docs-pdf-note { margin-top: 12px; font-size: 0.8rem; color: #92400E; display: flex; align-items: center; justify-content: center; gap: 6px; }
+        @media (max-width: 768px) { .docs-grid { grid-template-columns: 1fr; } }
+
         /* Quicklinks */
         .quicklinks { background: #FAFAFA; padding: 80px 24px; }
         .ql-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
@@ -234,6 +261,7 @@
                 <li><a href="estrategico/visao-geral.html">Estratégico</a></li>
                 <li><a href="tatico/visao-geral.html">Tático</a></li>
                 <li><a href="operacional/time-e-fluxo.html">Operacional</a></li>
+                <li><a href="docs/index.html" style="color:#F5A800; font-weight:700;">📋 Documentos</a></li>
             </ul>
         </div>
     </nav>
@@ -320,6 +348,7 @@
                     <div class="f-content">
                         <div class="f-title">Mapeamento da Dor (Intake Simplificado)</div>
                         <div class="f-desc">Recebemos demandas de áreas variadas (técnicas ou não). A porta de entrada foca apenas em entender a "dor real" do negócio e o tempo/custo perdido hoje, sem exigir conhecimento prévio em IA.</div>
+                        <a href="docs/intake-solicitacao.html" style="display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:0.8rem;font-weight:700;color:#D97706;text-decoration:none;">📋 Abrir Formulário de Intake →</a>
                     </div>
                     <div class="f-badge">Negócio</div>
                 </div>
@@ -336,6 +365,10 @@
                     <div class="f-content">
                         <div class="f-title">Comitê de Priorização e Discovery Técnica</div>
                         <div class="f-desc">Apenas projetos justificados avançam. Com o *Go* do comitê, a Engenharia (CoE Operacional) assume para validar a arquitetura, segurança (ARB) e viabilidade técnica das APIs.</div>
+                        <div style="display:flex;gap:16px;margin-top:10px;flex-wrap:wrap;">
+                            <a href="docs/arb-checklist.html" style="display:inline-flex;align-items:center;gap:6px;font-size:0.8rem;font-weight:700;color:#D97706;text-decoration:none;">✅ ARB Checklist →</a>
+                            <a href="docs/model-card.html" style="display:inline-flex;align-items:center;gap:6px;font-size:0.8rem;font-weight:700;color:#D97706;text-decoration:none;">📊 Model Card →</a>
+                        </div>
                     </div>
                     <div class="f-badge" style="background:#FEE2E2; color:#991B1B;">Decisão + Engenharia</div>
                 </div>
@@ -347,6 +380,53 @@
                     </div>
                     <div class="f-badge" style="background:#DCFCE7; color:#166534;">Produção</div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DOCUMENTOS OPERACIONAIS -->
+    <section class="docs-section">
+        <div class="docs-inner">
+            <div class="docs-eyebrow">Documentos Operacionais</div>
+            <h2 class="docs-title">Formulários &amp; Checklists</h2>
+            <p class="docs-sub">Ferramentas práticas do CoE — preenchidas no navegador, exportadas em PDF e anexadas ao chamado no Jira para abertura oficial do processo.</p>
+            <div class="docs-grid">
+                <a href="docs/intake-solicitacao.html" class="docs-card">
+                    <div class="docs-card-icon">📋</div>
+                    <div>
+                        <div class="docs-card-label">Porta de entrada</div>
+                        <div class="docs-card-title">Formulário de Intake</div>
+                        <div class="docs-card-desc">Qualquer área preenche para submeter uma ideia de IA. Sem conhecimento técnico necessário — descreva a dor do negócio.</div>
+                    </div>
+                </a>
+                <a href="docs/verificacao-ia-existente.html" class="docs-card">
+                    <div class="docs-card-icon">🔍</div>
+                    <div>
+                        <div class="docs-card-label">Auditoria</div>
+                        <div class="docs-card-title">Verificação de IA Existente</div>
+                        <div class="docs-card-desc">Avalia IAs que já estão rodando fora do padrão CoE. Gera decisão: manter, adaptar ou desativar — com plano e prazo.</div>
+                    </div>
+                </a>
+                <a href="docs/arb-checklist.html" class="docs-card">
+                    <div class="docs-card-icon">✅</div>
+                    <div>
+                        <div class="docs-card-label">Pré-deploy obrigatório</div>
+                        <div class="docs-card-title">ARB Checklist</div>
+                        <div class="docs-card-desc">6 perguntas de governança que todo projeto responde antes de ir a produção. Sem aprovação do ARB, o deploy não acontece.</div>
+                    </div>
+                </a>
+                <a href="docs/model-card.html" class="docs-card">
+                    <div class="docs-card-icon">📊</div>
+                    <div>
+                        <div class="docs-card-label">Produção contínua</div>
+                        <div class="docs-card-title">Model Card</div>
+                        <div class="docs-card-desc">Passaporte técnico de cada modelo em produção: capacidades, limitações, métricas, responsáveis e histórico de versões.</div>
+                    </div>
+                </a>
+            </div>
+            <div class="docs-cta">
+                <a href="docs/index.html" class="docs-cta-btn">📖 Ver instruções completas e fluxo de uso →</a>
+                <div class="docs-pdf-note">🖨 Todos os formulários exportam em PDF · PDF é o anexo oficial do chamado no Jira</div>
             </div>
         </div>
     </section>
@@ -422,6 +502,14 @@
                 <a href="operacional/pilar-2-governanca.html">Pilar 2: Governança</a>
                 <a href="operacional/pilar-3-llmops.html">Pilar 3: LLMOps</a>
                 <a href="operacional/pilar-4-enablement.html">Pilar 4: Enablement</a>
+            </div>
+            <div class="footer-links-col">
+                <div class="footer-title" style="color:#F5A800;">Documentos</div>
+                <a href="docs/index.html">Instruções &amp; fluxo</a>
+                <a href="docs/intake-solicitacao.html">Formulário de Intake</a>
+                <a href="docs/verificacao-ia-existente.html">Verificação de IA</a>
+                <a href="docs/arb-checklist.html">ARB Checklist</a>
+                <a href="docs/model-card.html">Model Card</a>
             </div>
         </div>
         <div class="footer-bottom">

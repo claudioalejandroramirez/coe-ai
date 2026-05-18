@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARB Checklist · Revisão de Arquitetura — AI CoE · Assaí</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/shared.css?v=2">
+    <style>
+        :root { --switcher-h: 44px; }
+        .page-hero.docs { background: #141009; }
+        .page-hero.docs::after { background: linear-gradient(to right, #D97706, #F5A800); }
+        .hero-eyebrow.docs { color: #FDE68A; }
+        .hero-eyebrow.docs::before { background: #FDE68A; }
+        .chip.docs { border-color: rgba(245,168,0,0.3); color: #FDE68A; background: rgba(245,168,0,0.1); }
+
+        /* Form styles */
+        .form-group { margin-bottom: 20px; }
+        .form-label { font-size: 0.82rem; font-weight: 700; color: var(--dark); display: block; margin-bottom: 5px; }
+        .form-label.req::after { content: ' *'; color: var(--red); }
+        .form-hint { font-size: 0.74rem; color: var(--muted); margin-bottom: 6px; display: block; font-style: italic; }
+        .form-input {
+            width: 100%; padding: 9px 13px;
+            border: 1px solid var(--border); border-radius: var(--radius);
+            font-family: var(--font); font-size: 0.875rem; color: var(--text); background: #fff;
+            transition: border-color 0.15s;
+        }
+        .form-input:focus { outline: none; border-color: #D97706; box-shadow: 0 0 0 3px rgba(217,119,6,0.12); }
+        textarea.form-input { min-height: 80px; resize: vertical; line-height: 1.6; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+        .radio-group { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+        .radio-item { display: flex; align-items: center; gap: 9px; font-size: 0.875rem; cursor: pointer; }
+        .radio-item input[type="radio"] { accent-color: #D97706; width: 16px; height: 16px; flex-shrink: 0; }
+        .check-item { display: flex; align-items: flex-start; gap: 9px; font-size: 0.875rem; cursor: pointer; }
+        .check-item input[type="checkbox"] { accent-color: #D97706; width: 16px; height: 16px; flex-shrink: 0; margin-top: 2px; }
+        .form-divider { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+
+        /* ARB question blocks */
+        .arb-question {
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-bottom: 16px;
+            background: #fff;
+            transition: border-color 0.15s;
+        }
+        .arb-question:focus-within { border-color: #D97706; }
+        .arb-q-header { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 14px; }
+        .arb-q-num {
+            width: 28px; height: 28px; border-radius: 50%;
+            background: #1A1A1A; color: #fff;
+            font-size: 0.72rem; font-weight: 700;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0; margin-top: 2px;
+        }
+        .arb-q-num.warn { background: #D97706; }
+        .arb-q-num.pass { background: #16A34A; }
+        .arb-q-text { font-size: 0.9rem; font-weight: 600; color: var(--dark); line-height: 1.5; }
+        .arb-q-why { font-size: 0.78rem; color: var(--muted); margin-top: 2px; font-style: italic; }
+        .arb-inline-radio { display: flex; gap: 20px; margin-bottom: 12px; flex-wrap: wrap; }
+        .arb-inline-radio label { display: flex; align-items: center; gap: 7px; font-size: 0.85rem; cursor: pointer; }
+        .arb-inline-radio input[type="radio"] { accent-color: #D97706; width: 15px; height: 15px; }
+        .arb-inline-radio .opt-na input[type="radio"] { accent-color: #6B7280; }
+
+        /* Critérios de aceite table */
+        .aceite-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-top: 8px; }
+        .aceite-table th { text-align: left; font-size: 0.75rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; padding: 8px 12px; background: #F9FAFB; border-bottom: 1px solid var(--border); }
+        .aceite-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+        .aceite-table tr:last-child td { border-bottom: none; }
+        .aceite-table td:first-child { font-weight: 600; color: var(--dark); width: 28%; }
+        .aceite-table td input.form-input { padding: 6px 10px; font-size: 0.82rem; }
+        .aceite-status { display: flex; gap: 12px; }
+        .aceite-status label { display: flex; align-items: center; gap: 6px; font-size: 0.82rem; cursor: pointer; }
+        .aceite-status input[type="radio"] { accent-color: #D97706; width: 14px; height: 14px; }
+
+        /* Risk badge */
+        .risk-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 20px; font-size: 0.78rem; font-weight: 600; }
+        .risk-low    { background: #DCFCE7; color: #15803D; }
+        .risk-med    { background: #FEF9C3; color: #A16207; }
+        .risk-high   { background: #FEE2E2; color: #B91C1C; }
+        .risk-crit   { background: #2D0A0A; color: #FCA5A5; }
+
+        /* Decision block */
+        .decision-block { margin-top: 8px; display: flex; flex-direction: column; gap: 10px; }
+        .decision-opt {
+            display: flex; align-items: flex-start; gap: 12px;
+            padding: 14px 16px; border-radius: var(--radius);
+            border: 2px solid var(--border); cursor: pointer;
+            transition: border-color 0.15s;
+        }
+        .decision-opt.approved { border-color: #BBF7D0; background: #F0FDF4; }
+        .decision-opt.conditional { border-color: #FDE68A; background: #FFFBEB; }
+        .decision-opt.rejected { border-color: #FECACA; background: #FEF2F2; }
+        .decision-opt input[type="radio"] { accent-color: #D97706; width: 16px; height: 16px; flex-shrink: 0; margin-top: 2px; }
+        .decision-opt-label { font-size: 0.875rem; font-weight: 600; color: var(--dark); }
+        .decision-opt-desc { font-size: 0.8rem; color: var(--muted); margin-top: 2px; }
+
+        /* Signature grid */
+        .sig-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+        .sig-box { padding: 16px; border: 1px solid var(--border); border-radius: var(--radius); background: #F9FAFB; }
+        .sig-role { font-size: 0.72rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 10px; }
+
+        .submit-area { margin-top: 48px; padding: 28px; background: #FFFBEB; border: 1px solid #FDE68A; border-radius: var(--radius-lg); }
+        .submit-note { font-size: 0.85rem; color: #92400E; margin-bottom: 16px; line-height: 1.6; }
+
+        @media (max-width: 900px) { .sig-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) {
+            .form-row, .form-row-3 { grid-template-columns: 1fr; }
+        }
+        @media print {
+            #coe-switcher, .page-nav, .submit-area button { display: none; }
+            .form-input { border: 1px solid #ccc; }
+            .page-hero { padding: 24px !important; }
+            .arb-question { break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+    <div id="progress"></div>
+
+    <nav id="topnav" role="navigation" aria-label="Navegação principal">
+        <div class="nav-inner">
+            <a href="../index.html" class="nav-logo" aria-label="Assaí Atacadista - CoE IA">
+                <img src="../assets/Assaí_Atacadista_logo_2024.svg.png" alt="Assaí Atacadista">
+                <span class="nav-logo-divider" aria-hidden="true"></span>
+                <span class="nav-logo-label"><strong>AI CoE</strong>Documentos Operacionais</span>
+            </a>
+            <ul class="nav-links" role="list">
+                <li><a href="../index.html">← Início</a></li>
+                <li><a href="intake-solicitacao.html">📋 Intake</a></li>
+                <li><a href="verificacao-ia-existente.html">🔍 Verificação IA</a></li>
+                <li><a href="arb-checklist.html" class="active">✅ ARB</a></li>
+                <li><a href="model-card.html">📊 Model Card</a></li>
+            </ul>
+            <button id="nav-toggle" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span><span></span></button>
+        </div>
+    </nav>
+    <div id="nav-mobile" role="navigation" aria-label="Menu mobile">
+        <a href="../index.html">🏠 Início</a>
+        <a href="intake-solicitacao.html">📋 Intake</a>
+        <a href="verificacao-ia-existente.html">🔍 Verificação IA</a>
+        <a href="arb-checklist.html" class="active">✅ ARB</a>
+        <a href="model-card.html">📊 Model Card</a>
+    </div>
+
+    <div id="coe-switcher" aria-label="Navegar entre CoEs">
+        <div class="switcher-inner">
+            <span class="switcher-label">Nível</span>
+            <a href="../estrategico/visao-geral.html" class="switcher-item estrategico">
+                <span class="switcher-num">01</span>Estratégico
+            </a>
+            <span class="switcher-sep" aria-hidden="true"></span>
+            <a href="../tatico/visao-geral.html" class="switcher-item tatico">
+                <span class="switcher-num">02</span>Tático
+            </a>
+            <span class="switcher-sep" aria-hidden="true"></span>
+            <a href="../operacional/time-e-fluxo.html" class="switcher-item operacional active">
+                <span class="switcher-num">03</span>Operacional
+            </a>
+        </div>
+    </div>
+
+    <header class="page-hero docs">
+        <div class="page-hero-orbit" aria-hidden="true">
+            <div class="pho-ring pho-r1"></div>
+            <div class="pho-ring pho-r2"></div>
+            <div class="pho-ring pho-r3"></div>
+        </div>
+        <div class="hero-inner">
+            <div class="hero-eyebrow docs">Documentos Operacionais</div>
+            <h1 class="hero-title">ARB <em>Checklist</em></h1>
+            <p class="hero-subtitle">Architecture Review Board — checklist técnico obrigatório antes de qualquer deploy de IA em produção. Sem aprovação do ARB, o deploy não acontece.</p>
+            <div class="hero-chips">
+                <span class="chip docs">🛡️ Pilar 2 · Governança</span>
+                <span class="chip docs">6 perguntas obrigatórias</span>
+                <span class="chip docs">🔒 Uso interno</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="page-body with-sidebar">
+        <aside class="sidebar" aria-label="Navegação da página">
+            <div class="sidebar-title">Nesta página</div>
+            <ul class="sidebar-nav">
+                <li><a href="#identificacao" class="active">📋 Identificação</a></li>
+                <li><a href="#checklist">✅ 6 Perguntas ARB</a></li>
+                <li><a href="#criterios">📐 Critérios de aceite</a></li>
+                <li><a href="#risco">⊞ Risco do projeto</a></li>
+                <li><a href="#decisao">🔏 Decisão & assinaturas</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <nav class="breadcrumb" aria-label="Localização">
+                <a href="../index.html">Início</a>
+                <span class="breadcrumb-sep">›</span>
+                <a href="../operacional/pilar-2-governanca.html">Pilar 2 · Governança</a>
+                <span class="breadcrumb-sep">›</span>
+                <span>ARB Checklist</span>
+            </nav>
+
+            <div class="callout danger" style="margin-bottom:32px;">
+                <div class="callout-label">⚠️ Pré-requisito de deploy</div>
+                Este checklist deve ser preenchido pelo <strong>responsável técnico do projeto</strong> e revisado pelo <strong>CoE Operacional</strong>. Todas as 6 perguntas precisam de resposta "Sim" ou justificativa documentada. Projetos com risco Alto ou Crítico exigem aprovação do CoE Estratégico.
+            </div>
+
+            <form>
+                <!-- IDENTIFICAÇÃO -->
+                <section id="identificacao" class="doc-section">
+                    <div class="section-label">Seção 01</div>
+                    <h2 class="section-title">Identificação do projeto</h2>
+                    <p class="section-desc">Informações básicas para rastreabilidade do processo de revisão</p>
+                    <hr class="section-divider">
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label req" for="proj-nome">Nome do projeto / solução</label>
+                            <input type="text" id="proj-nome" class="form-input" placeholder="Ex: Assistente de Atendimento ao Cliente">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label req" for="proj-id">ID do projeto (Linear / Jira)</label>
+                            <input type="text" id="proj-id" class="form-input" placeholder="Ex: COE-142">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label req" for="resp-tecnico">Responsável técnico</label>
+                            <input type="text" id="resp-tecnico" class="form-input" placeholder="Nome completo">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label req" for="dono-negocio">Dono de negócio</label>
+                            <input type="text" id="dono-negocio" class="form-input" placeholder="Nome completo + área">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="data-arb">Data da revisão ARB</label>
+                            <input type="date" id="data-arb" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label req" for="fase-deploy">Fase de deploy</label>
+                            <select id="fase-deploy" class="form-input">
+                                <option value="">Selecione…</option>
+                                <option>Piloto (ambiente controlado)</option>
+                                <option>Produção limitada (grupo beta)</option>
+                                <option>Produção plena</option>
+                                <option>Nova versão de modelo em produção existente</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="descricao-arb">Descrição resumida da solução</label>
+                        <span class="form-hint">O que faz, quais modelos usa, onde está hospedado, quantos usuários impacta.</span>
+                        <textarea id="descricao-arb" class="form-input" placeholder="Descreva em até 5 linhas…"></textarea>
+                    </div>
+                </section>
+
+                <!-- 6 PERGUNTAS ARB -->
+                <section id="checklist" class="doc-section">
+                    <div class="section-label">Seção 02</div>
+                    <h2 class="section-title">As 6 perguntas obrigatórias</h2>
+                    <p class="section-desc">Todas precisam de "Sim" ou de justificativa documentada para "Não / N.A."</p>
+                    <hr class="section-divider">
+
+                    <!-- Pergunta 1 -->
+                    <div class="arb-question">
+                        <div class="arb-q-header">
+                            <div class="arb-q-num" id="num-q1">01</div>
+                            <div>
+                                <div class="arb-q-text">A solução tem fallback se o modelo alucinar ou falhar?</div>
+                                <div class="arb-q-why">Sem fallback, uma falha do modelo pode travar o fluxo do usuário ou expor resposta incorreta como verdade.</div>
+                            </div>
+                        </div>
+                        <div class="arb-inline-radio">
+                            <label><input type="radio" name="q1" value="sim"> Sim — implementado</label>
+                            <label><input type="radio" name="q1" value="nao"> Não — justificativa obrigatória</label>
+                            <label class="opt-na"><input type="radio" name="q1" value="na"> N.A.</label>
+                        </div>
+                        <div class="form-group" style="margin-bottom:0">
+                            <label class="form-label" for="q1-desc">Descreva o mecanismo de fallback (ou justifique ausência)</label>
+                            <textarea id="q1-desc" class="form-input" placeholder="Ex: Retorna resposta padrão 'Não sei responder isso agora' e registra log de falha. Agente humano é notificado via Teams."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Pergunta 2 -->
+                    <div class="arb-question">
+                        <div class="arb-q-header">
+                            <div class="arb-q-num" id="num-q2">02</div>
+                            <div>
+                                <div class="arb-q-text">Como o sistema detecta que uma resposta está errada?</div>
+                                <div class="arb-q-why">Alucinações silenciosas são o maior risco de sistemas RAG e generativos. Detecção ativa previne dano acumulado.</div>
+                            </div>
+                        </div>
+                        <div class="arb-inline-radio">
+                            <label><input type="radio" name="q2" value="sim"> Sim — implementado</label>
+                            <label><input type="radio" name="q2" value="nao"> Não — justificativa obrigatória</label>
+                            <label class="opt-na"><input type="radio" name="q2" value="na"> N.A.</label>
+                        </div>
+                        <div class="form-group" style="margin-bottom:0">
+                            <label class="form-label" for="q2-desc">Descreva o mecanismo de detecção de erros</label>
+                            <textarea id="q2-desc" class="form-input" placeholder="Ex: LLM-as-judge compara resposta gerada com contexto recuperado. Score de faithfulness abaixo de 0,7 dispara alerta."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Pergunta 3 -->
+                    <div class="arb-question">
+                        <div class="arb-q-header">
+                            <div class="arb-q-num" id="num-q3">03</div>
+                            <div>
+                                <div class="arb-q-text">Existe logging suficiente para debugar um incidente?</div>
+                                <div class="arb-q-why">Sem logs de prompt, resposta, contexto e latência, incidentes em produção se tornam indebuguáveis — exigindo rollback cego.</div>
+                            </div>
+                        </div>
+                        <div class="arb-inline-radio">
+                            <label><input type="radio" name="q3" value="sim"> Sim — implementado</label>
+                            <label><input type="radio" name="q3" value="nao"> Não — justificativa obrigatória</label>
+                            <label class="opt-na"><input type="radio" name="q3" value="na"> N.A.</label>
+                        </div>
+                        <div class="form-group" style="margin-bottom:0">
+                            <label class="form-label" for="q3-desc">O que é logado? Onde? Por quanto tempo?</label>
+                            <textarea id="q3-desc" class="form-input" placeholder="Ex: Prompt completo, response, retrieval_docs, latência por etapa, custo_tokens. Logs no gateway (LiteLLM) + DataDog. Retenção 90 dias."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Pergunta 4 -->
+                    <div class="arb-question">
+                        <div class="arb-q-header">
+                            <div class="arb-q-num" id="num-q4">04</div>
+                            <div>
+                                <div class="arb-q-text">Foi testado com adversarial inputs (prompt injection)?</div>
+                                <div class="arb-q-why">Sistemas de IA são alvos naturais de manipulação via prompt. Testes adversariais são obrigatórios antes de exposição a usuários externos.</div>
+                            </div>
+                        </div>
+                        <div class="arb-inline-radio">
+                            <label><input type="radio" name="q4" value="sim"> Sim — testado e documentado</label>
+                            <label><input type="radio" name="q4" value="parcial"> Parcial — em andamento</label>
+                            <label><input type="radio" name="q4" value="nao"> Não — justificativa obrigatória</label>
+                        </div>
+                        <div class="form-group" style="margin-bottom:0">
+                            <label class="form-label" for="q4-desc">Descreva os testes realizados e resultados</label>
+                            <textarea id="q4-desc" class="form-input" placeholder="Ex: 50 casos de prompt injection manual + suite Garak. Nenhum bypass de instrução de sistema identificado. Jailbreak tentado em 20 variações — bloqueados pelo guardrail de conteúdo."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Pergunta 5 -->
+                    <div class="arb-question">
+                        <div class="arb-q-header">
+                            <div class="arb-q-num" id="num-q5">05</div>
+                            <div>
+                                <div class="arb-q-text">O custo projetado por mês foi calculado e aprovado?</div>
+                                <div class="arb-q-why">Modelos de LLM em produção podem gerar custos inesperados em escala. Custo surpresa na fatura é sinal de governança fraca.</div>
+                            </div>
+                        </div>
+                        <div class="arb-inline-radio">
+                            <label><input type="radio" name="q5" value="sim"> Sim — calculado e aprovado</label>
+                            <label><input type="radio" name="q5" value="nao"> Não — justificativa obrigatória</label>
+                            <label class="opt-na"><input type="radio" name="q5" value="na"> N.A.</label>
+                        </div>
+                        <div class="form-group" style="margin-bottom:0">
+                            <label class="form-label" for="q5-desc">Estimativa de custo mensal e quem aprovou</label>
+                            <textarea id="q5-desc" class="form-input" placeholder="Ex: R$ 3.200/mês (baseado em 80k requests × avg 4k tokens). Aprovado por [gerente financeiro] em [data]. Alerta configurado a 80% do budget no gateway."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Pergunta 6 -->
+                    <div class="arb-question">
+                        <div class="arb-q-header">
+                            <div class="arb-q-num" id="num-q6">06</div>
+                            <div>
+                                <div class="arb-q-text">Existe plano de rollback documentado?</div>
+                                <div class="arb-q-why">Todo sistema em produção pode degradar. Um plano de rollback claro reduz tempo de incidente de horas para minutos.</div>
+                            </div>
+                        </div>
+                        <div class="arb-inline-radio">
+                            <label><input type="radio" name="q6" value="sim"> Sim — documentado</label>
+                            <label><input type="radio" name="q6" value="nao"> Não — justificativa obrigatória</label>
+                            <label class="opt-na"><input type="radio" name="q6" value="na"> N.A.</label>
+                        </div>
+                        <div class="form-group" style="margin-bottom:0">
+                            <label class="form-label" for="q6-desc">Descreva o plano de rollback (versão anterior, feature flag, etc.)</label>
+                            <textarea id="q6-desc" class="form-input" placeholder="Ex: Feature flag no LaunchDarkly. Desligar em < 5 min redireciona para fluxo humano. Versão anterior do modelo mantida por 30 dias. Runbook: [link]."></textarea>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- CRITÉRIOS DE ACEITE -->
+                <section id="criterios" class="doc-section">
+                    <div class="section-label">Seção 03</div>
+                    <h2 class="section-title">Critérios de aceite técnico</h2>
+                    <p class="section-desc">Preencha os limiares definidos para este projeto. Limiares não atingidos = deploy bloqueado.</p>
+                    <hr class="section-divider">
+
+                    <div class="callout info" style="margin-bottom:20px;">
+                        <div class="callout-label">💡 Limiares por domínio</div>
+                        Os valores de X, Y, Z, W são definidos por domínio e revisados trimestralmente com o CoE Estratégico. Use os padrões do seu domínio ou justifique valores diferentes.
+                    </div>
+
+                    <table class="aceite-table">
+                        <thead>
+                            <tr>
+                                <th>Critério</th>
+                                <th>Limiar definido</th>
+                                <th>Valor medido</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Taxa de alucinação</td>
+                                <td><input type="text" class="form-input" placeholder="Ex: ≤ 3%"></td>
+                                <td><input type="text" class="form-input" placeholder="Ex: 1,8%"></td>
+                                <td>
+                                    <div class="aceite-status">
+                                        <label><input type="radio" name="ac1" value="ok"> ✅</label>
+                                        <label><input type="radio" name="ac1" value="fail"> ❌</label>
+                                        <label><input type="radio" name="ac1" value="na"> N.A.</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Latência P95</td>
+                                <td><input type="text" class="form-input" placeholder="Ex: ≤ 4s"></td>
+                                <td><input type="text" class="form-input" placeholder="Ex: 2,3s"></td>
+                                <td>
+                                    <div class="aceite-status">
+                                        <label><input type="radio" name="ac2" value="ok"> ✅</label>
+                                        <label><input type="radio" name="ac2" value="fail"> ❌</label>
+                                        <label><input type="radio" name="ac2" value="na"> N.A.</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Custo por interação</td>
+                                <td><input type="text" class="form-input" placeholder="Ex: ≤ R$ 0,04"></td>
+                                <td><input type="text" class="form-input" placeholder="Ex: R$ 0,02"></td>
+                                <td>
+                                    <div class="aceite-status">
+                                        <label><input type="radio" name="ac3" value="ok"> ✅</label>
+                                        <label><input type="radio" name="ac3" value="fail"> ❌</label>
+                                        <label><input type="radio" name="ac3" value="na"> N.A.</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Faithfulness do RAG</td>
+                                <td><input type="text" class="form-input" placeholder="Ex: ≥ 85%"></td>
+                                <td><input type="text" class="form-input" placeholder="Ex: 91%"></td>
+                                <td>
+                                    <div class="aceite-status">
+                                        <label><input type="radio" name="ac4" value="ok"> ✅</label>
+                                        <label><input type="radio" name="ac4" value="fail"> ❌</label>
+                                        <label><input type="radio" name="ac4" value="na"> N.A.</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Model card preenchido</td>
+                                <td>Sim (obrigatório)</td>
+                                <td><input type="text" class="form-input" placeholder="Link do model card"></td>
+                                <td>
+                                    <div class="aceite-status">
+                                        <label><input type="radio" name="ac5" value="ok"> ✅</label>
+                                        <label><input type="radio" name="ac5" value="fail"> ❌</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Critério adicional</td>
+                                <td><input type="text" class="form-input" placeholder="Defina o critério…"></td>
+                                <td><input type="text" class="form-input" placeholder="Valor medido…"></td>
+                                <td>
+                                    <div class="aceite-status">
+                                        <label><input type="radio" name="ac6" value="ok"> ✅</label>
+                                        <label><input type="radio" name="ac6" value="fail"> ❌</label>
+                                        <label><input type="radio" name="ac6" value="na"> N.A.</label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- RISCO DO PROJETO -->
+                <section id="risco" class="doc-section">
+                    <div class="section-label">Seção 04</div>
+                    <h2 class="section-title">Classificação de risco</h2>
+                    <p class="section-desc">Impacto do erro × autonomia do sistema — define o nível de aprovação exigido</p>
+                    <hr class="section-divider">
+
+                    <div class="form-row" style="margin-bottom:16px;">
+                        <div class="form-group">
+                            <label class="form-label req">Autonomia do sistema</label>
+                            <span class="form-hint">O sistema toma decisões sem revisão humana?</span>
+                            <div class="radio-group">
+                                <label class="radio-item"><input type="radio" name="autonomia" value="assistivo"> Assistivo — humano sempre revisa</label>
+                                <label class="radio-item"><input type="radio" name="autonomia" value="semi"> Semi-autônomo — humano revisa casos de dúvida</label>
+                                <label class="radio-item"><input type="radio" name="autonomia" value="autonomo"> Autônomo — age sem revisão humana</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label req">Impacto máximo do erro</label>
+                            <span class="form-hint">O que acontece no pior caso se o sistema errar?</span>
+                            <div class="radio-group">
+                                <label class="radio-item"><input type="radio" name="impacto" value="baixo"> Baixo — desconforto ou retrabalho pontual</label>
+                                <label class="radio-item"><input type="radio" name="impacto" value="medio"> Médio — impacto financeiro ou operacional limitado</label>
+                                <label class="radio-item"><input type="radio" name="impacto" value="alto"> Alto — dano financeiro, legal ou reputacional significativo</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label req">Nível de risco resultante</label>
+                        <span class="form-hint">Consulte a matriz no Pilar 2 · Governança para determinar o quadrante.</span>
+                        <div class="radio-group" style="flex-direction:row; flex-wrap:wrap; gap:12px; margin-top:8px;">
+                            <label class="radio-item"><input type="radio" name="risco-nivel" value="baixo"> <span class="risk-badge risk-low">Baixo</span></label>
+                            <label class="radio-item"><input type="radio" name="risco-nivel" value="medio"> <span class="risk-badge risk-med">Médio</span></label>
+                            <label class="radio-item"><input type="radio" name="risco-nivel" value="alto"> <span class="risk-badge risk-high">Alto</span></label>
+                            <label class="radio-item"><input type="radio" name="risco-nivel" value="critico"> <span class="risk-badge risk-crit">Crítico</span></label>
+                        </div>
+                    </div>
+
+                    <div class="callout info">
+                        <div class="callout-label">📋 Nível de aprovação exigido</div>
+                        <strong>Baixo / Médio:</strong> aprovação do CoE Operacional (Tech Lead + Arquiteto).<br>
+                        <strong>Alto:</strong> aprovação do CoE Operacional + CoE Tático (Product Manager).<br>
+                        <strong>Crítico:</strong> aprovação plena — CoE Operacional + Tático + Estratégico (C-Level / DPO).
+                    </div>
+                </section>
+
+                <!-- DECISÃO & ASSINATURAS -->
+                <section id="decisao" class="doc-section">
+                    <div class="section-label">Seção 05</div>
+                    <h2 class="section-title">Decisão & assinaturas</h2>
+                    <p class="section-desc">Preenchido pelo CoE Operacional após a sessão de revisão</p>
+                    <hr class="section-divider">
+
+                    <div class="form-group">
+                        <label class="form-label req">Decisão do ARB</label>
+                        <div class="decision-block">
+                            <label class="decision-opt approved">
+                                <input type="radio" name="decisao" value="aprovado">
+                                <div>
+                                    <div class="decision-opt-label">✅ Aprovado para deploy</div>
+                                    <div class="decision-opt-desc">Todos os critérios foram atendidos. Deploy autorizado conforme fase indicada.</div>
+                                </div>
+                            </label>
+                            <label class="decision-opt conditional">
+                                <input type="radio" name="decisao" value="condicional">
+                                <div>
+                                    <div class="decision-opt-label">⚠️ Aprovado com condições</div>
+                                    <div class="decision-opt-desc">Deploy autorizado após resolução dos itens pendentes listados abaixo. Prazo máximo definido.</div>
+                                </div>
+                            </label>
+                            <label class="decision-opt rejected">
+                                <input type="radio" name="decisao" value="rejeitado">
+                                <div>
+                                    <div class="decision-opt-label">❌ Rejeitado — retornar para ajustes</div>
+                                    <div class="decision-opt-desc">Critérios críticos não atendidos. Resubmissão necessária após correções documentadas.</div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="condicoes">Condições / itens pendentes (se aprovado com condições ou rejeitado)</label>
+                        <textarea id="condicoes" class="form-input" placeholder="Liste os itens pendentes com prazo e responsável para cada um…"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="obs-arb">Observações adicionais do ARB</label>
+                        <textarea id="obs-arb" class="form-input" placeholder="Contexto, recomendações ou registros adicionais da sessão de revisão…"></textarea>
+                    </div>
+
+                    <hr class="form-divider">
+
+                    <div class="sig-grid">
+                        <div class="sig-box">
+                            <div class="sig-role">Responsável Técnico do Projeto</div>
+                            <div class="form-group">
+                                <label class="form-label req" for="sig1-nome">Nome</label>
+                                <input type="text" id="sig1-nome" class="form-input" placeholder="Nome completo">
+                            </div>
+                            <div class="form-group" style="margin-bottom:0">
+                                <label class="form-label" for="sig1-data">Data</label>
+                                <input type="date" id="sig1-data" class="form-input">
+                            </div>
+                        </div>
+                        <div class="sig-box">
+                            <div class="sig-role">Revisor ARB — CoE Operacional</div>
+                            <div class="form-group">
+                                <label class="form-label req" for="sig2-nome">Nome</label>
+                                <input type="text" id="sig2-nome" class="form-input" placeholder="Nome completo">
+                            </div>
+                            <div class="form-group" style="margin-bottom:0">
+                                <label class="form-label" for="sig2-data">Data</label>
+                                <input type="date" id="sig2-data" class="form-input">
+                            </div>
+                        </div>
+                        <div class="sig-box">
+                            <div class="sig-role">Aprovador Final (se risco Alto / Crítico)</div>
+                            <div class="form-group">
+                                <label class="form-label" for="sig3-nome">Nome</label>
+                                <input type="text" id="sig3-nome" class="form-input" placeholder="Nome completo">
+                            </div>
+                            <div class="form-group" style="margin-bottom:0">
+                                <label class="form-label" for="sig3-data">Data</label>
+                                <input type="date" id="sig3-data" class="form-input">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="submit-area">
+                    <p class="submit-note">
+                        Após preencher, envie este checklist para <strong>#coe-ia-arb</strong> no Teams junto com o link do model card preenchido.<br>
+                        O registro da decisão deve ser arquivado no Linear com a tag <code>arb-review</code> vinculada ao card do projeto.<br>
+                        Projetos com risco <strong>Alto ou Crítico</strong> exigem aprovação adicional antes do envio ao Teams.
+                    </p>
+                    <div style="display:flex; gap:12px; flex-wrap:wrap;">
+                        <button type="button" onclick="window.print()" style="padding:10px 20px; background:#1A1A1A; color:#fff; border:none; border-radius:var(--radius); font-family:var(--font); font-size:0.875rem; font-weight:600; cursor:pointer;">🖨 Imprimir / Salvar PDF</button>
+                        <button type="reset" style="padding:10px 20px; background:#fff; color:var(--dark); border:1px solid var(--border); border-radius:var(--radius); font-family:var(--font); font-size:0.875rem; font-weight:600; cursor:pointer;">↺ Limpar formulário</button>
+                    </div>
+                </div>
+            </form>
+
+            <nav class="page-nav" aria-label="Navegação entre páginas">
+                <a href="verificacao-ia-existente.html" class="page-nav-card">
+                    <div class="page-nav-dir">← Anterior</div>
+                    <div class="page-nav-title">Verificação de IA Existente</div>
+                </a>
+                <a href="model-card.html" class="page-nav-card next">
+                    <div class="page-nav-dir">Próximo →</div>
+                    <div class="page-nav-title">Model Card</div>
+                </a>
+            </nav>
+        </main>
+    </div>
+
+    <footer id="footer">
+        <img src="../assets/Assaí_Atacadista_logo_2024.svg.png" alt="Assaí Atacadista">
+        <span>AI CoE · Documentação Técnica</span>
+        <span>v1.0 · Maio 2026 · Confidencial</span>
+        <span class="footer-doc-links"><a href="../operacional/pilar-2-governanca.html">Pilar 2 · Governança</a><span class="footer-doc-sep" aria-hidden="true">·</span><a href="intake-solicitacao.html">Formulário de Intake</a></span>
+        <span class="footer-author">Criado por Claudio Ramirez - Arquiteto Tech Lead CoE Operacional</span>
+    </footer>
+
+    <script src="../js/shared.js"></script>
+</body>
+</html>

@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentos Operacionais · Instruções — AI CoE · Assaí</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/shared.css?v=2">
+    <style>
+        :root { --switcher-h: 44px; }
+        .page-hero.docs { background: #141009; }
+        .page-hero.docs::after { background: linear-gradient(to right, #D97706, #F5A800); }
+        .hero-eyebrow.docs { color: #FDE68A; }
+        .hero-eyebrow.docs::before { background: #FDE68A; }
+        .chip.docs { border-color: rgba(245,168,0,0.3); color: #FDE68A; background: rgba(245,168,0,0.1); }
+
+        /* Doc cards */
+        .doc-card {
+            display: flex; gap: 20px;
+            padding: 24px; border: 1px solid var(--border); border-radius: var(--radius-lg);
+            background: #fff; margin-bottom: 16px;
+            transition: border-color 0.15s, box-shadow 0.15s;
+            text-decoration: none; color: inherit;
+        }
+        .doc-card:hover { border-color: #D97706; box-shadow: 0 4px 16px rgba(217,119,6,0.1); }
+        .doc-card-icon {
+            width: 52px; height: 52px; border-radius: 12px;
+            background: #FFFBEB; border: 1px solid #FDE68A;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; flex-shrink: 0;
+        }
+        .doc-card-body { flex: 1; min-width: 0; }
+        .doc-card-title { font-size: 1rem; font-weight: 700; color: var(--dark); margin-bottom: 4px; }
+        .doc-card-subtitle { font-size: 0.8rem; color: var(--muted); margin-bottom: 10px; }
+        .doc-card-desc { font-size: 0.875rem; color: var(--text); line-height: 1.6; margin-bottom: 12px; }
+        .doc-card-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+        .doc-tag {
+            font-size: 0.72rem; font-weight: 600; padding: 3px 9px; border-radius: 20px;
+            background: #F3F4F6; color: var(--muted);
+        }
+        .doc-tag.warn { background: #FEF9C3; color: #A16207; }
+        .doc-tag.ok   { background: #DCFCE7; color: #15803D; }
+        .doc-tag.info { background: #EFF6FF; color: #1D4ED8; }
+        .doc-card-arrow { align-self: center; color: #D97706; font-size: 1.2rem; flex-shrink: 0; }
+
+        /* Flow steps */
+        .flow { display: flex; flex-direction: column; gap: 0; }
+        .flow-step { display: flex; gap: 16px; position: relative; }
+        .flow-step:not(:last-child)::before {
+            content: ''; position: absolute; left: 19px; top: 44px;
+            width: 2px; height: calc(100% - 12px); background: var(--border);
+        }
+        .flow-num {
+            width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
+            background: #1A1A1A; color: #fff;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.8rem; font-weight: 700; z-index: 1;
+        }
+        .flow-num.amber { background: #D97706; }
+        .flow-num.green { background: #16A34A; }
+        .flow-content { padding-bottom: 28px; flex: 1; }
+        .flow-title { font-size: 0.95rem; font-weight: 700; color: var(--dark); margin-bottom: 4px; padding-top: 8px; }
+        .flow-desc { font-size: 0.85rem; color: var(--text); line-height: 1.6; }
+        .flow-doc-link {
+            display: inline-flex; align-items: center; gap: 6px;
+            margin-top: 8px; padding: 6px 12px;
+            background: #FFFBEB; border: 1px solid #FDE68A; border-radius: var(--radius);
+            font-size: 0.8rem; font-weight: 600; color: #92400E; text-decoration: none;
+            transition: background 0.15s;
+        }
+        .flow-doc-link:hover { background: #FEF3C7; }
+
+        /* PDF tip box */
+        .pdf-box {
+            background: #1A1A1A; color: #E5E7EB;
+            border-radius: var(--radius-lg); padding: 28px;
+            display: flex; gap: 20px; align-items: flex-start;
+            margin-bottom: 0;
+        }
+        .pdf-box-icon { font-size: 2rem; flex-shrink: 0; line-height: 1; }
+        .pdf-box-title { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 8px; }
+        .pdf-box-body { font-size: 0.875rem; line-height: 1.7; }
+        .pdf-box-body strong { color: #FDE68A; }
+        .pdf-box-body code {
+            font-family: monospace; font-size: 0.82rem;
+            background: rgba(255,255,255,0.1); padding: 2px 7px; border-radius: 4px;
+            color: #FDE68A;
+        }
+        .pdf-steps { margin-top: 14px; display: flex; flex-direction: column; gap: 7px; }
+        .pdf-step { display: flex; align-items: flex-start; gap: 10px; font-size: 0.85rem; }
+        .pdf-step-num {
+            width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0;
+            background: #D97706; color: #fff; font-size: 0.72rem; font-weight: 700;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        /* Who uses what table */
+        .who-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        .who-table th { text-align: left; font-size: 0.72rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; padding: 8px 14px; background: #F9FAFB; border-bottom: 1px solid var(--border); }
+        .who-table td { padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+        .who-table tr:last-child td { border-bottom: none; }
+        .who-table td:first-child { font-weight: 600; color: var(--dark); }
+        .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #D97706; }
+        .dot.empty { background: transparent; border: 2px solid var(--border); }
+
+        @media (max-width: 768px) {
+            .doc-card { flex-direction: column; gap: 14px; }
+            .doc-card-arrow { display: none; }
+            .pdf-box { flex-direction: column; gap: 14px; }
+        }
+        @media print {
+            #coe-switcher { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div id="progress"></div>
+
+    <nav id="topnav" role="navigation" aria-label="Navegação principal">
+        <div class="nav-inner">
+            <a href="../index.html" class="nav-logo" aria-label="Assaí Atacadista - CoE IA">
+                <img src="../assets/Assaí_Atacadista_logo_2024.svg.png" alt="Assaí Atacadista">
+                <span class="nav-logo-divider" aria-hidden="true"></span>
+                <span class="nav-logo-label"><strong>AI CoE</strong>Documentos Operacionais</span>
+            </a>
+            <ul class="nav-links" role="list">
+                <li><a href="../index.html">← Início</a></li>
+                <li><a href="index.html" class="active">📖 Instruções</a></li>
+                <li><a href="intake-solicitacao.html">📋 Intake</a></li>
+                <li><a href="verificacao-ia-existente.html">🔍 Verificação IA</a></li>
+                <li><a href="arb-checklist.html">✅ ARB</a></li>
+                <li><a href="model-card.html">📊 Model Card</a></li>
+            </ul>
+            <button id="nav-toggle" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span><span></span></button>
+        </div>
+    </nav>
+    <div id="nav-mobile" role="navigation" aria-label="Menu mobile">
+        <a href="../index.html">🏠 Início</a>
+        <a href="index.html" class="active">📖 Instruções</a>
+        <a href="intake-solicitacao.html">📋 Intake</a>
+        <a href="verificacao-ia-existente.html">🔍 Verificação IA</a>
+        <a href="arb-checklist.html">✅ ARB</a>
+        <a href="model-card.html">📊 Model Card</a>
+    </div>
+
+    <div id="coe-switcher" aria-label="Navegar entre CoEs">
+        <div class="switcher-inner">
+            <span class="switcher-label">Nível</span>
+            <a href="../estrategico/visao-geral.html" class="switcher-item estrategico">
+                <span class="switcher-num">01</span>Estratégico
+            </a>
+            <span class="switcher-sep" aria-hidden="true"></span>
+            <a href="../tatico/visao-geral.html" class="switcher-item tatico">
+                <span class="switcher-num">02</span>Tático
+            </a>
+            <span class="switcher-sep" aria-hidden="true"></span>
+            <a href="../operacional/time-e-fluxo.html" class="switcher-item operacional active">
+                <span class="switcher-num">03</span>Operacional
+            </a>
+        </div>
+    </div>
+
+    <header class="page-hero docs">
+        <div class="page-hero-orbit" aria-hidden="true">
+            <div class="pho-ring pho-r1"></div>
+            <div class="pho-ring pho-r2"></div>
+            <div class="pho-ring pho-r3"></div>
+        </div>
+        <div class="hero-inner">
+            <div class="hero-eyebrow docs">Documentos Operacionais</div>
+            <h1 class="hero-title">Como usar <em>estes documentos</em></h1>
+            <p class="hero-subtitle">Guia de uso dos formulários e checklists do CoE IA — quem preenche, quando, em qual ordem, e como o PDF exportado abre o chamado no Jira.</p>
+            <div class="hero-chips">
+                <span class="chip docs">4 documentos</span>
+                <span class="chip docs">🖨 Exportável em PDF</span>
+                <span class="chip docs">🎫 Integra com Jira</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="page-body with-sidebar">
+        <aside class="sidebar" aria-label="Navegação da página">
+            <div class="sidebar-title">Nesta página</div>
+            <ul class="sidebar-nav">
+                <li><a href="#documentos" class="active">📄 Os 4 documentos</a></li>
+                <li><a href="#fluxo">🔄 Quando usar cada um</a></li>
+                <li><a href="#pdf">🖨 PDF & abertura no Jira</a></li>
+                <li><a href="#quem">👤 Quem preenche o quê</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <nav class="breadcrumb" aria-label="Localização">
+                <a href="../index.html">Início</a>
+                <span class="breadcrumb-sep">›</span>
+                <span>Documentos Operacionais · Instruções</span>
+            </nav>
+
+            <!-- OS 4 DOCUMENTOS -->
+            <section id="documentos" class="doc-section">
+                <div class="section-label">Visão geral</div>
+                <h2 class="section-title">Os 4 documentos do CoE</h2>
+                <p class="section-desc">Cada documento tem um momento específico no funil de maturidade de IA</p>
+                <hr class="section-divider">
+
+                <a href="intake-solicitacao.html" class="doc-card">
+                    <div class="doc-card-icon">📋</div>
+                    <div class="doc-card-body">
+                        <div class="doc-card-title">Formulário de Intake · Solicitação de IA</div>
+                        <div class="doc-card-subtitle">Fase: Exploração → entrada no funil · Preenchido pelo solicitante</div>
+                        <div class="doc-card-desc">
+                            A porta de entrada do funil. Qualquer pessoa que identifica uma oportunidade de IA preenche este formulário — sem precisar conhecer tecnologia. Descreve a dor do negócio, contexto de dados, impacto esperado e quem patrocina. O CoE Tático avalia e retorna em até 5 dias úteis.
+                        </div>
+                        <div class="doc-card-tags">
+                            <span class="doc-tag warn">Obrigatório para novos projetos</span>
+                            <span class="doc-tag">Qualquer área</span>
+                            <span class="doc-tag">Sem conhecimento técnico</span>
+                        </div>
+                    </div>
+                    <div class="doc-card-arrow">→</div>
+                </a>
+
+                <a href="verificacao-ia-existente.html" class="doc-card">
+                    <div class="doc-card-icon">🔍</div>
+                    <div class="doc-card-body">
+                        <div class="doc-card-title">Verificação de IA Existente</div>
+                        <div class="doc-card-subtitle">Fase: Auditoria de soluções fora do padrão CoE · Preenchido pelo CoE Operacional</div>
+                        <div class="doc-card-desc">
+                            Usado para auditar IAs que já estão rodando mas foram criadas antes ou fora do padrão do CoE. Avalia stack técnica, conformidade LGPD, governança, segurança, observabilidade e qualidade. Gera uma decisão: manter, adaptar ou desativar — com plano de ação e prazo.
+                        </div>
+                        <div class="doc-card-tags">
+                            <span class="doc-tag warn">IAs legadas / fora do padrão</span>
+                            <span class="doc-tag">CoE Operacional</span>
+                            <span class="doc-tag info">Auditoria periódica</span>
+                        </div>
+                    </div>
+                    <div class="doc-card-arrow">→</div>
+                </a>
+
+                <a href="arb-checklist.html" class="doc-card">
+                    <div class="doc-card-icon">✅</div>
+                    <div class="doc-card-body">
+                        <div class="doc-card-title">ARB Checklist · Architecture Review Board</div>
+                        <div class="doc-card-subtitle">Fase: Antes do deploy em produção · Preenchido pelo responsável técnico + revisado pelo CoE</div>
+                        <div class="doc-card-desc">
+                            Checklist obrigatório que todo projeto passa antes de ir para produção. Responde às 6 perguntas de governança do Pilar 2 (fallback, detecção de erro, logging, testes adversariais, custo aprovado, plano de rollback), define critérios de aceite com valores medidos e registra a decisão formal de deploy com assinaturas.
+                        </div>
+                        <div class="doc-card-tags">
+                            <span class="doc-tag warn">Obrigatório antes do deploy</span>
+                            <span class="doc-tag">Responsável técnico</span>
+                            <span class="doc-tag">CoE Operacional revisa</span>
+                        </div>
+                    </div>
+                    <div class="doc-card-arrow">→</div>
+                </a>
+
+                <a href="model-card.html" class="doc-card">
+                    <div class="doc-card-icon">📊</div>
+                    <div class="doc-card-body">
+                        <div class="doc-card-title">Model Card · Documentação do Modelo</div>
+                        <div class="doc-card-subtitle">Fase: Produção e manutenção contínua · Preenchido e mantido pelo responsável técnico</div>
+                        <div class="doc-card-desc">
+                            O "passaporte técnico" de um modelo em produção. Documenta o que o modelo faz, o que não faz, como foi avaliado, quais dados processa, quem responde por ele e o histórico de versões. É pré-requisito para aprovação no ARB e deve ser mantido atualizado a cada mudança de modelo.
+                        </div>
+                        <div class="doc-card-tags">
+                            <span class="doc-tag warn">Pré-requisito do ARB</span>
+                            <span class="doc-tag ok">Atualizado a cada versão</span>
+                            <span class="doc-tag">100% dos projetos</span>
+                        </div>
+                    </div>
+                    <div class="doc-card-arrow">→</div>
+                </a>
+            </section>
+
+            <!-- FLUXO -->
+            <section id="fluxo" class="doc-section">
+                <div class="section-label">Sequência</div>
+                <h2 class="section-title">Quando usar cada documento</h2>
+                <p class="section-desc">A ordem segue o funil de maturidade do CoE — cada etapa habilita a próxima</p>
+                <hr class="section-divider">
+
+                <div class="flow">
+                    <div class="flow-step">
+                        <div class="flow-num">1</div>
+                        <div class="flow-content">
+                            <div class="flow-title">Ideia identificada → Formulário de Intake</div>
+                            <div class="flow-desc">
+                                Alguém de qualquer área identifica uma oportunidade de IA (redução de custo, melhoria de processo, novo produto). Preenche o Intake descrevendo o problema — sem precisar saber qual tecnologia usar. O CoE Tático analisa viabilidade e prioriza no backlog.
+                            </div>
+                            <a href="intake-solicitacao.html" class="flow-doc-link">📋 Abrir Formulário de Intake</a>
+                        </div>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="flow-num amber">2</div>
+                        <div class="flow-content">
+                            <div class="flow-title">Projeto aprovado → Desenvolvimento com padrões CoE</div>
+                            <div class="flow-desc">
+                                Após aprovação no Intake, o projeto entra no funil (Exploração → PoC → Piloto). O responsável técnico segue os padrões dos Pilares 1, 2 e 3 — arquitetura, governança e LLMOps. Paralelamente, começa a preencher o Model Card com as informações do modelo escolhido.
+                            </div>
+                            <a href="model-card.html" class="flow-doc-link">📊 Iniciar Model Card durante o PoC</a>
+                        </div>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="flow-num amber">3</div>
+                        <div class="flow-content">
+                            <div class="flow-title">Antes do deploy → ARB Checklist</div>
+                            <div class="flow-desc">
+                                Com o piloto validado e o Model Card preenchido, o responsável técnico preenche o ARB Checklist respondendo as 6 perguntas obrigatórias e registrando os critérios de aceite medidos. O CoE Operacional revisa e emite a decisão formal. Sem aprovação do ARB, o deploy não acontece.
+                            </div>
+                            <a href="arb-checklist.html" class="flow-doc-link">✅ Abrir ARB Checklist</a>
+                        </div>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="flow-num green">4</div>
+                        <div class="flow-content">
+                            <div class="flow-title">Em produção → Model Card vivo + auditorias periódicas</div>
+                            <div class="flow-desc">
+                                O Model Card é mantido atualizado a cada mudança de modelo, prompt ou dados. IAs que já existem fora do padrão do CoE passam pela Verificação de IA Existente — o CoE Operacional audita e decide entre manter, adaptar ou desativar com prazo definido.
+                            </div>
+                            <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:8px;">
+                                <a href="model-card.html" class="flow-doc-link">📊 Atualizar Model Card</a>
+                                <a href="verificacao-ia-existente.html" class="flow-doc-link">🔍 Verificar IA existente</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PDF & JIRA -->
+            <section id="pdf" class="doc-section">
+                <div class="section-label">PDF & Jira</div>
+                <h2 class="section-title">Exportar PDF e abrir chamado no Jira</h2>
+                <p class="section-desc">O PDF exportado é o anexo oficial que acompanha o chamado</p>
+                <hr class="section-divider">
+
+                <div class="pdf-box">
+                    <div class="pdf-box-icon">🖨</div>
+                    <div>
+                        <div class="pdf-box-title">Como gerar o PDF e abrir o chamado</div>
+                        <div class="pdf-box-body">
+                            Todos os formulários têm o botão <strong>"Imprimir / Salvar PDF"</strong> no rodapé. O PDF gerado é o documento oficial que deve ser anexado ao chamado no Jira — ele garante rastreabilidade e serve de registro formal da solicitação ou decisão.
+                        </div>
+                        <div class="pdf-steps">
+                            <div class="pdf-step">
+                                <div class="pdf-step-num">1</div>
+                                <span>Preencha o formulário completo no navegador. Campos obrigatórios estão marcados com <strong style="color:#FDE68A;">*</strong>.</span>
+                            </div>
+                            <div class="pdf-step">
+                                <div class="pdf-step-num">2</div>
+                                <span>Clique em <strong style="color:#FDE68A;">"Imprimir / Salvar PDF"</strong> — o diálogo de impressão do navegador abre automaticamente.</span>
+                            </div>
+                            <div class="pdf-step">
+                                <div class="pdf-step-num">3</div>
+                                <span>No diálogo, selecione <strong style="color:#FDE68A;">destino → Salvar como PDF</strong>. Use o nome padrão: <code>coe-[tipo]-[projeto]-v1.pdf</code> (ex: <code>coe-intake-assistente-atendimento-v1.pdf</code>).</span>
+                            </div>
+                            <div class="pdf-step">
+                                <div class="pdf-step-num">4</div>
+                                <span>Abra o chamado no Jira no projeto <strong style="color:#FDE68A;">COE-IA</strong>. Use o tipo de issue correspondente ao documento (veja tabela abaixo). Anexe o PDF e preencha a descrição com o resumo do projeto.</span>
+                            </div>
+                            <div class="pdf-step">
+                                <div class="pdf-step-num">5</div>
+                                <span>Poste o link do chamado no canal <strong style="color:#FDE68A;">#coe-ia-intake</strong> (novos projetos) ou <strong style="color:#FDE68A;">#coe-ia-arb</strong> (revisões e deploys) no Teams para notificar o CoE.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cards cards-2" style="margin-top:20px;">
+                    <div class="card">
+                        <div class="card-icon">📋</div>
+                        <div class="card-title">Intake · tipo no Jira</div>
+                        <div class="card-body">
+                            Issue type: <strong>New AI Request</strong><br>
+                            Projeto: <strong>COE-IA</strong><br>
+                            Label: <strong>intake</strong><br>
+                            Assignee: CoE Tático (PM responsável)
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🔍</div>
+                        <div class="card-title">Verificação IA · tipo no Jira</div>
+                        <div class="card-body">
+                            Issue type: <strong>AI Audit</strong><br>
+                            Projeto: <strong>COE-IA</strong><br>
+                            Label: <strong>auditoria</strong><br>
+                            Assignee: CoE Operacional (Tech Lead)
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">✅</div>
+                        <div class="card-title">ARB Checklist · tipo no Jira</div>
+                        <div class="card-body">
+                            Issue type: <strong>ARB Review</strong><br>
+                            Projeto: <strong>COE-IA</strong><br>
+                            Label: <strong>arb-review</strong><br>
+                            Assignee: CoE Operacional (Arquiteto)
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">📊</div>
+                        <div class="card-title">Model Card · tipo no Jira</div>
+                        <div class="card-body">
+                            Issue type: <strong>Model Card</strong><br>
+                            Projeto: <strong>COE-IA</strong><br>
+                            Label: <strong>model-card</strong><br>
+                            Assignee: Responsável técnico do projeto
+                        </div>
+                    </div>
+                </div>
+
+                <div class="callout info" style="margin-top:20px;">
+                    <div class="callout-label">💡 Dica de nomenclatura</div>
+                    Use o padrão <strong>COE-[TIPO]-[SIGLA DO PROJETO]-[ANO]</strong> tanto no nome do PDF quanto no título do chamado Jira. Exemplo: <code>COE-ARB-ASSIST-ATEND-2026</code>. Isso facilita a busca e o vínculo entre documento e ticket.
+                </div>
+            </section>
+
+            <!-- QUEM PREENCHE O QUÊ -->
+            <section id="quem" class="doc-section">
+                <div class="section-label">Responsabilidades</div>
+                <h2 class="section-title">Quem preenche o quê</h2>
+                <p class="section-desc">Referência rápida de responsabilidade por perfil</p>
+                <hr class="section-divider">
+
+                <table class="who-table">
+                    <thead>
+                        <tr>
+                            <th>Perfil</th>
+                            <th>Intake</th>
+                            <th>Verificação IA</th>
+                            <th>ARB Checklist</th>
+                            <th>Model Card</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Solicitante de negócio (qualquer área)</td>
+                            <td><span class="dot" title="Responsável"></span></td>
+                            <td><span class="dot empty" title="Não se aplica"></span></td>
+                            <td><span class="dot empty"></span></td>
+                            <td><span class="dot empty"></span></td>
+                        </tr>
+                        <tr>
+                            <td>Responsável técnico do projeto</td>
+                            <td><span class="dot empty"></span></td>
+                            <td><span class="dot empty"></span></td>
+                            <td><span class="dot" title="Preenche"></span></td>
+                            <td><span class="dot" title="Preenche e mantém"></span></td>
+                        </tr>
+                        <tr>
+                            <td>CoE Operacional (Arquiteto / Tech Lead)</td>
+                            <td><span class="dot empty"></span></td>
+                            <td><span class="dot" title="Conduz a auditoria"></span></td>
+                            <td><span class="dot" title="Revisa e assina"></span></td>
+                            <td><span class="dot empty"></span></td>
+                        </tr>
+                        <tr>
+                            <td>CoE Tático (Product Manager)</td>
+                            <td><span class="dot" title="Avalia e responde"></span></td>
+                            <td><span class="dot empty"></span></td>
+                            <td><span class="dot empty"></span></td>
+                            <td><span class="dot empty"></span></td>
+                        </tr>
+                        <tr>
+                            <td>CoE Estratégico (C-Level / DPO)</td>
+                            <td><span class="dot empty"></span></td>
+                            <td><span class="dot empty"></span></td>
+                            <td><span class="dot" title="Apenas projetos de risco Alto ou Crítico"></span></td>
+                            <td><span class="dot empty"></span></td>
+                        </tr>
+                        <tr>
+                            <td>Dono de negócio (sponsor)</td>
+                            <td><span class="dot" title="Assina como sponsor"></span></td>
+                            <td><span class="dot empty"></span></td>
+                            <td><span class="dot" title="Assina como responsável de negócio"></span></td>
+                            <td><span class="dot" title="Identificado como dono do modelo"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="callout success" style="margin-top:20px;">
+                    <div class="callout-label">✅ Regra de ouro</div>
+                    Nenhum projeto de IA vai para produção sem <strong>ARB Checklist aprovado</strong> + <strong>Model Card preenchido</strong>. O chamado Jira de deploy só avança para "Done" quando ambos os PDFs estão anexados ao ticket.
+                </div>
+
+                <div class="callout info">
+                    <div class="callout-label">❓ Dúvidas sobre qual documento usar</div>
+                    Poste no canal <strong>#coe-ia-duvidas</strong> no Teams ou abra um issue tipo <strong>Question</strong> no projeto COE-IA do Jira. O CoE Operacional responde em até 2 dias úteis.
+                </div>
+            </section>
+
+            <nav class="page-nav" aria-label="Navegação entre páginas">
+                <a href="../operacional/pilar-4-enablement.html" class="page-nav-card">
+                    <div class="page-nav-dir">← Referência</div>
+                    <div class="page-nav-title">Pilar 4 · Enablement</div>
+                </a>
+                <a href="intake-solicitacao.html" class="page-nav-card next">
+                    <div class="page-nav-dir">Primeiro documento →</div>
+                    <div class="page-nav-title">Formulário de Intake</div>
+                </a>
+            </nav>
+        </main>
+    </div>
+
+    <footer id="footer">
+        <img src="../assets/Assaí_Atacadista_logo_2024.svg.png" alt="Assaí Atacadista">
+        <span>AI CoE · Documentação Técnica</span>
+        <span>v1.0 · Maio 2026 · Confidencial</span>
+        <span class="footer-doc-links"><a href="../operacional/time-e-fluxo.html">CoE Operacional</a><span class="footer-doc-sep" aria-hidden="true">·</span><a href="../operacional/pilar-2-governanca.html">Pilar 2 · Governança</a></span>
+        <span class="footer-author">Criado por Claudio Ramirez - Arquiteto Tech Lead CoE Operacional</span>
+    </footer>
+
+    <script src="../js/shared.js"></script>
+</body>
+</html>

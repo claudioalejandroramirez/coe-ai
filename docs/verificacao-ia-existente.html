@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificação de IA Existente — AI CoE · Assaí</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/shared.css?v=2">
+    <style>
+        :root { --switcher-h: 44px; }
+        .page-hero.docs { background: #141009; }
+        .page-hero.docs::after { background: linear-gradient(to right, #D97706, #F5A800); }
+        .hero-eyebrow.docs { color: #FDE68A; }
+        .hero-eyebrow.docs::before { background: #FDE68A; }
+        .chip.docs { border-color: rgba(245,168,0,0.3); color: #FDE68A; background: rgba(245,168,0,0.1); }
+
+        .form-group { margin-bottom: 20px; }
+        .form-label { font-size: 0.82rem; font-weight: 700; color: var(--dark); display: block; margin-bottom: 5px; }
+        .form-label.req::after { content: ' *'; color: var(--red); }
+        .form-hint { font-size: 0.74rem; color: var(--muted); margin-bottom: 6px; display: block; font-style: italic; }
+        .form-input {
+            width: 100%; padding: 9px 13px;
+            border: 1px solid var(--border); border-radius: var(--radius);
+            font-family: var(--font); font-size: 0.875rem; color: var(--text); background: #fff;
+            transition: border-color 0.15s;
+        }
+        .form-input:focus { outline: none; border-color: #D97706; box-shadow: 0 0 0 3px rgba(217,119,6,0.12); }
+        textarea.form-input { min-height: 80px; resize: vertical; }
+        select.form-input { cursor: pointer; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .radio-group { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+        .radio-item { display: flex; align-items: flex-start; gap: 9px; font-size: 0.875rem; cursor: pointer; }
+        .radio-item input[type="radio"] { accent-color: #D97706; width: 16px; height: 16px; flex-shrink: 0; margin-top: 2px; }
+        .check-group { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+        .check-item { display: flex; align-items: flex-start; gap: 9px; font-size: 0.875rem; cursor: pointer; }
+        .check-item input[type="checkbox"] { accent-color: #D97706; width: 16px; height: 16px; flex-shrink: 0; margin-top: 2px; }
+
+        /* Conformidade indicator */
+        .conf-row { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 0; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 4px; }
+        .conf-row + .conf-row { border-top: none; border-radius: 0; }
+        .conf-row:last-child { border-radius: 0 0 var(--radius) var(--radius); }
+        .conf-header { display: grid; grid-template-columns: 2fr 1fr 1fr; border: 1px solid var(--border); border-bottom: none; border-radius: var(--radius) var(--radius) 0 0; overflow: hidden; background: var(--light); }
+        .conf-cell { padding: 10px 14px; font-size: 0.82rem; border-right: 1px solid var(--border); }
+        .conf-cell:last-child { border-right: none; }
+        .conf-header .conf-cell { font-weight: 700; color: var(--muted); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1px; }
+        .conf-row:nth-child(even) { background: #FAFAFA; }
+        .conf-cell.center { text-align: center; }
+        .conf-cell.center input { accent-color: #D97706; }
+
+        /* Risk matrix */
+        .risk-matrix { display: grid; grid-template-columns: auto 1fr 1fr 1fr; gap: 0; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin: 16px 0; }
+        .rm-cell { padding: 12px; font-size: 0.78rem; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+        .rm-cell:last-child { border-right: none; }
+        .rm-header { background: var(--dark); color: #fff; font-weight: 700; font-size: 0.72rem; letter-spacing: 1px; text-transform: uppercase; }
+        .rm-label { background: var(--light); font-weight: 600; font-size: 0.78rem; color: var(--text); }
+        .rm-low { background: #F0FDF4; color: #166534; }
+        .rm-med { background: #FFFBEB; color: #92400E; }
+        .rm-high { background: #FEF2F2; color: #991B1B; }
+        .rm-crit { background: #7F1D1D; color: #FEF2F2; }
+        .rm-selected { outline: 3px solid #D97706; outline-offset: -3px; font-weight: 800; }
+
+        /* Decision boxes */
+        .decision-option { display: flex; align-items: flex-start; gap: 16px; padding: 20px; border: 2px solid var(--border); border-radius: var(--radius-lg); margin-bottom: 12px; cursor: pointer; transition: all 0.15s; }
+        .decision-option:hover { border-color: #D97706; background: #FFFBEB; }
+        .decision-option input[type="radio"] { accent-color: #D97706; width: 18px; height: 18px; flex-shrink: 0; margin-top: 2px; }
+        .decision-option-label { font-weight: 700; font-size: 0.9rem; color: var(--dark); margin-bottom: 4px; }
+        .decision-option-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+        .decision-option.green { border-color: #16A34A; background: #F0FDF4; }
+        .decision-option.yellow { border-color: #D97706; background: #FFFBEB; }
+        .decision-option.red { border-color: var(--red); background: var(--red-light); }
+
+        @media (max-width: 768px) {
+            .form-row { grid-template-columns: 1fr; }
+            .conf-row, .conf-header { grid-template-columns: 1fr; }
+            .risk-matrix { grid-template-columns: 1fr; }
+        }
+        @media print {
+            #coe-switcher, .page-nav { display: none; }
+            .form-input { border: 1px solid #ccc; }
+        }
+    </style>
+</head>
+<body>
+    <div id="progress"></div>
+
+    <nav id="topnav" role="navigation" aria-label="Navegação principal">
+        <div class="nav-inner">
+            <a href="../index.html" class="nav-logo" aria-label="Assaí Atacadista - CoE IA">
+                <img src="../assets/Assaí_Atacadista_logo_2024.svg.png" alt="Assaí Atacadista">
+                <span class="nav-logo-divider" aria-hidden="true"></span>
+                <span class="nav-logo-label"><strong>AI CoE</strong>Documentos Operacionais</span>
+            </a>
+            <ul class="nav-links" role="list">
+                <li><a href="../index.html">← Início</a></li>
+                <li><a href="index.html">📖 Instruções</a></li>
+                <li><a href="intake-solicitacao.html">📋 Intake</a></li>
+                <li><a href="verificacao-ia-existente.html" class="active">🔍 Verificação IA</a></li>
+                <li><a href="arb-checklist.html">✅ ARB</a></li>
+                <li><a href="model-card.html">📊 Model Card</a></li>
+            </ul>
+            <button id="nav-toggle" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span><span></span></button>
+        </div>
+    </nav>
+    <div id="nav-mobile" role="navigation" aria-label="Menu mobile">
+        <a href="../index.html">🏠 Início</a>
+        <a href="index.html">📖 Instruções</a>
+        <a href="intake-solicitacao.html">📋 Intake</a>
+        <a href="verificacao-ia-existente.html" class="active">🔍 Verificação IA</a>
+        <a href="arb-checklist.html">✅ ARB</a>
+        <a href="model-card.html">📊 Model Card</a>
+    </div>
+
+    <div id="coe-switcher" aria-label="Navegar entre CoEs">
+        <div class="switcher-inner">
+            <span class="switcher-label">Nível</span>
+            <a href="../estrategico/visao-geral.html" class="switcher-item estrategico">
+                <span class="switcher-num">01</span>Estratégico
+            </a>
+            <span class="switcher-sep" aria-hidden="true"></span>
+            <a href="../tatico/visao-geral.html" class="switcher-item tatico">
+                <span class="switcher-num">02</span>Tático
+            </a>
+            <span class="switcher-sep" aria-hidden="true"></span>
+            <a href="../operacional/time-e-fluxo.html" class="switcher-item operacional active">
+                <span class="switcher-num">03</span>Operacional
+            </a>
+        </div>
+    </div>
+
+    <header class="page-hero docs">
+        <div class="page-hero-orbit" aria-hidden="true">
+            <div class="pho-ring pho-r1"></div>
+            <div class="pho-ring pho-r2"></div>
+            <div class="pho-ring pho-r3"></div>
+        </div>
+        <div class="hero-inner">
+            <div class="hero-eyebrow docs">Documentos Operacionais · Pilar 2</div>
+            <h1 class="hero-title">Verificação de IA <em>Existente</em></h1>
+            <p class="hero-subtitle">Auditoria de conformidade para sistemas de IA implantados fora dos padrões do CoE. Resultado: manter, adaptar ou desativar.</p>
+            <div class="hero-chips">
+                <span class="chip docs">🔍 Auditoria</span>
+                <span class="chip docs">⚖️ Conformidade</span>
+                <span class="chip docs">🛡️ Pilar 2 · Governança</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="page-body with-sidebar">
+        <aside class="sidebar" aria-label="Navegação da página">
+            <div class="sidebar-title">Nesta página</div>
+            <ul class="sidebar-nav">
+                <li><a href="#identificacao" class="active">🏷️ Identificação</a></li>
+                <li><a href="#stack">⚙️ Stack Técnica</a></li>
+                <li><a href="#lgpd">🔒 Conformidade LGPD</a></li>
+                <li><a href="#governanca">📋 Governança</a></li>
+                <li><a href="#seguranca">🛡️ Segurança</a></li>
+                <li><a href="#observabilidade">📊 Observabilidade</a></li>
+                <li><a href="#qualidade">✅ Qualidade</a></li>
+                <li><a href="#risco">⊞ Matriz de Risco</a></li>
+                <li><a href="#decisao">🎯 Decisão</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <nav class="breadcrumb" aria-label="Localização">
+                <a href="../index.html">Início</a>
+                <span class="breadcrumb-sep">›</span>
+                <a href="../operacional/pilar-2-governanca.html">Pilar 2 · Governança</a>
+                <span class="breadcrumb-sep">›</span>
+                <span>Verificação de IA Existente</span>
+            </nav>
+
+            <div class="summary-box" style="margin-bottom:40px;">
+                <div class="summary-box-label">📌 Objetivo</div>
+                <p>Este documento é usado pelo CoE Operacional para auditar sistemas de IA que estão em uso mas foram criados <strong>sem passar pelo funil do CoE</strong>. O resultado determina se o sistema pode continuar operando, precisa ser adaptado aos padrões ou deve ser desativado.</p>
+            </div>
+
+            <form>
+                <!-- IDENTIFICAÇÃO -->
+                <section id="identificacao" class="doc-section">
+                    <div class="section-label">Seção 01</div>
+                    <h2 class="section-title">Identificação do Sistema</h2>
+                    <hr class="section-divider">
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label req" for="sistema-nome">Nome do sistema / projeto</label>
+                            <input type="text" id="sistema-nome" class="form-input" placeholder="Ex: Bot de Atendimento SAC, Classificador de NFe">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label req" for="equipe">Equipe responsável</label>
+                            <input type="text" id="equipe" class="form-input" placeholder="Ex: Time Comercial, Squad Fiscal">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="deploy-data">Data de deploy / início de uso</label>
+                            <input type="date" id="deploy-data" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label req" for="ambiente">Ambiente atual</label>
+                            <select id="ambiente" class="form-input">
+                                <option value="">Selecione...</option>
+                                <option>Produção — usuários reais</option>
+                                <option>Piloto — grupo restrito</option>
+                                <option>Desenvolvimento / Teste</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="usuarios">Número estimado de usuários ativos</label>
+                            <input type="text" id="usuarios" class="form-input" placeholder="Ex: ~50 colaboradores, ~2000 clientes/mês">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="auditor">Auditor do CoE responsável</label>
+                            <input type="text" id="auditor" class="form-input" placeholder="Nome do membro do CoE que conduz a auditoria">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="data-auditoria">Data da auditoria</label>
+                            <input type="date" id="data-auditoria" class="form-input">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- STACK TÉCNICA -->
+                <section id="stack" class="doc-section">
+                    <div class="section-label">Seção 02</div>
+                    <h2 class="section-title">Stack Técnica Utilizada</h2>
+                    <hr class="section-divider">
+
+                    <div class="form-group">
+                        <label class="form-label req" for="modelos">Modelo(s) de IA utilizados</label>
+                        <span class="form-hint">Liste todos os modelos — inclua versão se souber.</span>
+                        <input type="text" id="modelos" class="form-input" placeholder="Ex: GPT-4o (OpenAI API direta), text-embedding-3-small, Claude 3.5 Sonnet">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label req">Tipo de conexão com o modelo</label>
+                            <div class="radio-group">
+                                <label class="radio-item"><input type="radio" name="tipo-api"> API direta ao fornecedor (OpenAI, Anthropic, Google...)</label>
+                                <label class="radio-item"><input type="radio" name="tipo-api"> Azure OpenAI (API da Microsoft)</label>
+                                <label class="radio-item"><input type="radio" name="tipo-api"> Gateway Corporativo do CoE</label>
+                                <label class="radio-item"><input type="radio" name="tipo-api"> Modelo self-hosted / on-premise</label>
+                                <label class="radio-item"><input type="radio" name="tipo-api"> Outro</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Passa pelo Gateway Corporativo do CoE?</label>
+                            <div class="radio-group">
+                                <label class="radio-item"><input type="radio" name="gateway"> Sim</label>
+                                <label class="radio-item"><input type="radio" name="gateway"> Não — conexão direta</label>
+                                <label class="radio-item"><input type="radio" name="gateway"> Não sei / não verificado</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="infra">Framework, linguagem e infraestrutura</label>
+                        <input type="text" id="infra" class="form-input" placeholder="Ex: Python + LangChain, deploy na VM interna, banco vetorial Chroma">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Custo mensal estimado em APIs</label>
+                        <input type="text" class="form-input" placeholder="Ex: ~R$1.200/mês, não monitorado, desconhecido">
+                    </div>
+                </section>
+
+                <!-- LGPD -->
+                <section id="lgpd" class="doc-section">
+                    <div class="section-label">Seção 03</div>
+                    <h2 class="section-title">Conformidade de Dados · LGPD</h2>
+                    <hr class="section-divider">
+
+                    <div class="form-group">
+                        <label class="form-label req">Que tipos de dados o sistema processa ou acessa?</label>
+                        <div class="check-group">
+                            <label class="check-item"><input type="checkbox"> Dados públicos (sem sensibilidade)</label>
+                            <label class="check-item"><input type="checkbox"> Dados internos da empresa (não públicos, mas não pessoais)</label>
+                            <label class="check-item"><input type="checkbox"> PII — dados pessoais de clientes (CPF, nome, endereço, compras)</label>
+                            <label class="check-item"><input type="checkbox"> PII — dados pessoais de colaboradores</label>
+                            <label class="check-item"><input type="checkbox"> Dados financeiros / transacionais</label>
+                            <label class="check-item"><input type="checkbox"> Dados de saúde</label>
+                            <label class="check-item"><input type="checkbox"> Informações estratégicas / confidenciais</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label req">Dados PII ou confidenciais são enviados ao modelo externo?</label>
+                        <div class="radio-group">
+                            <label class="radio-item"><input type="radio" name="pii-enviado"> Não — dados são anonimizados/mascarados antes de enviar ao modelo</label>
+                            <label class="radio-item"><input type="radio" name="pii-enviado"> Não — o sistema só usa dados internos sem acesso externo</label>
+                            <label class="radio-item"><input type="radio" name="pii-enviado"> Sim — PII é enviado diretamente sem tratamento ⚠️</label>
+                            <label class="radio-item"><input type="radio" name="pii-enviado"> Não sei / não verificado</label>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">DPA assinado com o fornecedor do modelo?</label>
+                            <div class="radio-group">
+                                <label class="radio-item"><input type="radio" name="dpa"> Sim — Data Processing Agreement firmado</label>
+                                <label class="radio-item"><input type="radio" name="dpa"> Não — sem acordo formal ⚠️</label>
+                                <label class="radio-item"><input type="radio" name="dpa"> Não aplicável — sem dados sensíveis</label>
+                                <label class="radio-item"><input type="radio" name="dpa"> Não sei</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Dados em trânsito e repouso são criptografados?</label>
+                            <div class="radio-group">
+                                <label class="radio-item"><input type="radio" name="criptografia"> Sim — HTTPS + criptografia no armazenamento</label>
+                                <label class="radio-item"><input type="radio" name="criptografia"> Parcialmente</label>
+                                <label class="radio-item"><input type="radio" name="criptografia"> Não / não verificado ⚠️</label>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- GOVERNANÇA -->
+                <section id="governanca" class="doc-section">
+                    <div class="section-label">Seção 04</div>
+                    <h2 class="section-title">Governança & Responsabilidade</h2>
+                    <hr class="section-divider">
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label req">Existe responsável técnico designado?</label>
+                            <div class="radio-group">
+                                <label class="radio-item"><input type="radio" name="resp-tecnico"> Sim</label>
+                                <label class="radio-item"><input type="radio" name="resp-tecnico"> Não — responsabilidade difusa ⚠️</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="resp-nome">Nome do responsável técnico</label>
+                            <input type="text" id="resp-nome" class="form-input" placeholder="Nome e e-mail">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">O projeto passou por algum processo de revisão técnica/segurança antes de ir a produção?</label>
+                        <div class="radio-group">
+                            <label class="radio-item"><input type="radio" name="revisao"> Sim — revisão formal pela equipe de TI/Segurança</label>
+                            <label class="radio-item"><input type="radio" name="revisao"> Revisão informal (apenas o time da área)</label>
+                            <label class="radio-item"><input type="radio" name="revisao"> Não — entrou em produção sem revisão externa ⚠️</label>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Existe documentação técnica do sistema?</label>
+                            <div class="radio-group">
+                                <label class="radio-item"><input type="radio" name="doc-existe"> Sim — documentação atualizada</label>
+                                <label class="radio-item"><input type="radio" name="doc-existe"> Parcialmente — incompleta</label>
+                                <label class="radio-item"><input type="radio" name="doc-existe"> Não</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">TI / Segurança tinha conhecimento do projeto?</label>
+                            <div class="radio-group">
+                                <label class="radio-item"><input type="radio" name="ti-sabia"> Sim — aprovado pela TI</label>
+                                <label class="radio-item"><input type="radio" name="ti-sabia"> Sim — informados, sem aprovação formal</label>
+                                <label class="radio-item"><input type="radio" name="ti-sabia"> Não — TI não foi envolvida ⚠️</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Segredos e API keys estão armazenados de forma segura?</label>
+                        <div class="radio-group">
+                            <label class="radio-item"><input type="radio" name="secrets"> Sim — Vault / variáveis de ambiente / secret manager</label>
+                            <label class="radio-item"><input type="radio" name="secrets"> Não — hardcodado no código ou em arquivos texto ⚠️</label>
+                            <label class="radio-item"><input type="radio" name="secrets"> Não sei</label>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SEGURANÇA -->
+                <section id="seguranca" class="doc-section">
+                    <div class="section-label">Seção 05</div>
+                    <h2 class="section-title">Segurança & Resiliência</h2>
+                    <hr class="section-divider">
+
+                    <div class="conf-header">
+                        <div class="conf-cell">Critério</div>
+                        <div class="conf-cell center">Sim</div>
+                        <div class="conf-cell center">Não / N.S.</div>
+                    </div>
+                    <div class="conf-row">
+                        <div class="conf-cell">O sistema tem fallback se o modelo falhar ou alucinar?</div>
+                        <div class="conf-cell center"><input type="radio" name="s1"></div>
+                        <div class="conf-cell center"><input type="radio" name="s1"></div>
+                    </div>
+                    <div class="conf-row">
+                        <div class="conf-cell">O sistema detecta automaticamente respostas incorretas?</div>
+                        <div class="conf-cell center"><input type="radio" name="s2"></div>
+                        <div class="conf-cell center"><input type="radio" name="s2"></div>
+                    </div>
+                    <div class="conf-row">
+                        <div class="conf-cell">Foi testado com adversarial inputs (prompt injection)?</div>
+                        <div class="conf-cell center"><input type="radio" name="s3"></div>
+                        <div class="conf-cell center"><input type="radio" name="s3"></div>
+                    </div>
+                    <div class="conf-row">
+                        <div class="conf-cell">Existe plano de rollback documentado?</div>
+                        <div class="conf-cell center"><input type="radio" name="s4"></div>
+                        <div class="conf-cell center"><input type="radio" name="s4"></div>
+                    </div>
+                    <div class="conf-row">
+                        <div class="conf-cell">Existe humano no loop para decisões críticas?</div>
+                        <div class="conf-cell center"><input type="radio" name="s5"></div>
+                        <div class="conf-cell center"><input type="radio" name="s5"></div>
+                    </div>
+                    <div class="conf-row" style="border-radius: 0 0 var(--radius) var(--radius);">
+                        <div class="conf-cell">Rate limiting está configurado para evitar uso excessivo?</div>
+                        <div class="conf-cell center"><input type="radio" name="s6"></div>
+                        <div class="conf-cell center"><input type="radio" name="s6"></div>
+                    </div>
+
+                    <div class="form-group" style="margin-top:16px;">
+                        <label class="form-label" for="obs-seg">Observações de segurança</label>
+                        <textarea id="obs-seg" class="form-input" style="min-height:60px;" placeholder="Vulnerabilidades encontradas, riscos identificados, mitigações já aplicadas..."></textarea>
+                    </div>
+                </section>
+
+                <!-- OBSERVABILIDADE -->
+                <section id="observabilidade" class="doc-section">
+                    <div class="section-label">Seção 06</div>
+                    <h2 class="section-title">Observabilidade & Custo</h2>
+                    <hr class="section-divider">
+
+                    <div class="conf-header">
+                        <div class="conf-cell">Critério</div>
+                        <div class="conf-cell center">Sim</div>
+                        <div class="conf-cell center">Não / N.S.</div>
+                    </div>
+                    <div class="conf-row">
+                        <div class="conf-cell">Latência das respostas é monitorada?</div>
+                        <div class="conf-cell center"><input type="radio" name="o1"></div>
+                        <div class="conf-cell center"><input type="radio" name="o1"></div>
+                    </div>
+                    <div class="conf-row">
+                        <div class="conf-cell">Custo por interação / mensal é monitorado?</div>
+                        <div class="conf-cell center"><input type="radio" name="o2"></div>
+                        <div class="conf-cell center"><input type="radio" name="o2"></div>
+                    </div>
+                    <div class="conf-row">
+                        <div class="conf-cell">Existe alerta de custo ao atingir limites?</div>
+                        <div class="conf-cell center"><input type="radio" name="o3"></div>
+                        <div class="conf-cell center"><input type="radio" name="o3"></div>
+                    </div>
+                    <div class="conf-row">
+                        <div class="conf-cell">Logging das interações (inputs/outputs) está ativo?</div>
+                        <div class="conf-cell center"><input type="radio" name="o4"></div>
+                        <div class="conf-cell center"><input type="radio" name="o4"></div>
+                    </div>
+                    <div class="conf-row">
+                        <div class="conf-cell">Existe alarme para falhas e outages?</div>
+                        <div class="conf-cell center"><input type="radio" name="o5"></div>
+                        <div class="conf-cell center"><input type="radio" name="o5"></div>
+                    </div>
+                    <div class="conf-row" style="border-radius: 0 0 var(--radius) var(--radius);">
+                        <div class="conf-cell">Feedback dos usuários é coletado sistematicamente?</div>
+                        <div class="conf-cell center"><input type="radio" name="o6"></div>
+                        <div class="conf-cell center"><input type="radio" name="o6"></div>
+                    </div>
+                </section>
+
+                <!-- QUALIDADE -->
+                <section id="qualidade" class="doc-section">
+                    <div class="section-label">Seção 07</div>
+                    <h2 class="section-title">Qualidade das Respostas</h2>
+                    <hr class="section-divider">
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Taxa de alucinação estimada</label>
+                            <select class="form-input">
+                                <option value="">Selecione...</option>
+                                <option>Não medida — sem avaliação formal</option>
+                                <option>Baixa — &lt;5% de respostas incorretas</option>
+                                <option>Média — 5% a 20%</option>
+                                <option>Alta — &gt;20% ⚠️</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Satisfação dos usuários</label>
+                            <select class="form-input">
+                                <option value="">Selecione...</option>
+                                <option>Não medida</option>
+                                <option>Alta — &gt;90% satisfeitos</option>
+                                <option>Boa — 70% a 90%</option>
+                                <option>Baixa — &lt;70% ⚠️</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Existem golden datasets / testes de regressão?</label>
+                            <div class="radio-group">
+                                <label class="radio-item"><input type="radio" name="golden"> Sim — conjunto de testes definido</label>
+                                <label class="radio-item"><input type="radio" name="golden"> Não — sem testes formais ⚠️</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Model card publicado?</label>
+                            <div class="radio-group">
+                                <label class="radio-item"><input type="radio" name="model-card-existe"> Sim</label>
+                                <label class="radio-item"><input type="radio" name="model-card-existe"> Não — precisa ser criado</label>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- MATRIZ DE RISCO -->
+                <section id="risco" class="doc-section">
+                    <div class="section-label">Seção 08</div>
+                    <h2 class="section-title">Matriz de Risco</h2>
+                    <p class="section-desc">Classifique o projeto pelo impacto do erro e o nível de autonomia do sistema</p>
+                    <hr class="section-divider">
+
+                    <div class="form-row" style="margin-bottom:16px;">
+                        <div class="form-group">
+                            <label class="form-label req">Impacto de um erro do sistema</label>
+                            <div class="radio-group">
+                                <label class="radio-item"><input type="radio" name="impacto-erro"> Baixo — informativo, usuário verifica</label>
+                                <label class="radio-item"><input type="radio" name="impacto-erro"> Médio — afeta operação, reversível</label>
+                                <label class="radio-item"><input type="radio" name="impacto-erro"> Alto — impacto financeiro ou legal</label>
+                                <label class="radio-item"><input type="radio" name="impacto-erro"> Crítico — risco à segurança ou compliance ⚠️</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label req">Nível de autonomia do sistema</label>
+                            <div class="radio-group">
+                                <label class="radio-item"><input type="radio" name="autonomia"> Informativo — usuário sempre decide</label>
+                                <label class="radio-item"><input type="radio" name="autonomia"> Semi-autônomo — IA sugere, humano confirma</label>
+                                <label class="radio-item"><input type="radio" name="autonomia"> Autônomo — age sem humano no loop ⚠️</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="risk-matrix">
+                        <div class="rm-cell rm-header" style="border-bottom:1px solid rgba(255,255,255,0.1);">Autonomia ↓ / Impacto →</div>
+                        <div class="rm-cell rm-header">Baixo</div>
+                        <div class="rm-cell rm-header">Alto</div>
+                        <div class="rm-cell rm-header">Crítico</div>
+                        <div class="rm-cell rm-label">Informativo</div>
+                        <div class="rm-cell rm-low">🟢 Baixo — ARB simplificado</div>
+                        <div class="rm-cell rm-med">🟡 Médio — ARB + model card</div>
+                        <div class="rm-cell rm-high">🔴 Alto — ARB completo + audit trimestral</div>
+                        <div class="rm-cell rm-label">Semi-autônomo</div>
+                        <div class="rm-cell rm-med">🟡 Médio — ARB + critérios de aceite</div>
+                        <div class="rm-cell rm-high">🔴 Alto — ARB + observabilidade obrigatória</div>
+                        <div class="rm-cell rm-crit">⛔ Crítico — aprovação CoE Estratégico</div>
+                        <div class="rm-cell rm-label">Autônomo</div>
+                        <div class="rm-cell rm-high">🔴 Alto — ARB obrigatório</div>
+                        <div class="rm-cell rm-crit">⛔ Crítico — revisão completa + HITL</div>
+                        <div class="rm-cell rm-crit" style="border-right:none;">⛔ Proibido sem aprovação executiva</div>
+                    </div>
+
+                    <div class="form-group" style="margin-top:16px;">
+                        <label class="form-label req" for="classe-risco">Classificação de risco resultante</label>
+                        <select id="classe-risco" class="form-input">
+                            <option value="">Selecione com base na matriz acima...</option>
+                            <option>🟢 Baixo</option>
+                            <option>🟡 Médio</option>
+                            <option>🔴 Alto</option>
+                            <option>⛔ Crítico</option>
+                        </select>
+                    </div>
+                </section>
+
+                <!-- DECISÃO -->
+                <section id="decisao" class="doc-section">
+                    <div class="section-label">Seção 09</div>
+                    <h2 class="section-title">Decisão & Plano de Ação</h2>
+                    <p class="section-desc">Resultado da auditoria</p>
+                    <hr class="section-divider">
+
+                    <div class="form-group">
+                        <label class="form-label req">Recomendação do CoE</label>
+
+                        <label class="decision-option green" style="margin-top:12px;">
+                            <input type="radio" name="decisao-final">
+                            <div>
+                                <div class="decision-option-label">✅ Manter — em conformidade ou de baixo risco</div>
+                                <div class="decision-option-desc">O sistema pode continuar operando. Registrar no inventário do CoE e criar model card se ausente. Próxima revisão em 6 meses.</div>
+                            </div>
+                        </label>
+
+                        <label class="decision-option yellow">
+                            <input type="radio" name="decisao-final">
+                            <div>
+                                <div class="decision-option-label">⚠️ Adaptar — não conforme, mas pode ser ajustado</div>
+                                <div class="decision-option-desc">O sistema pode continuar operando temporariamente com plano de adequação formal. Prazo máximo: 90 dias. ARB deve ser realizado antes do prazo.</div>
+                            </div>
+                        </label>
+
+                        <label class="decision-option red">
+                            <input type="radio" name="decisao-final">
+                            <div>
+                                <div class="decision-option-label">🛑 Desativar — risco inaceitável ou dados críticos expostos</div>
+                                <div class="decision-option-desc">O sistema deve ser desativado imediatamente ou migrado para solução conforme. Risco de compliance, segurança ou governança inaceitável para continuar em produção.</div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="form-group" style="margin-top:24px;">
+                        <label class="form-label" for="plano-acao">Plano de ação detalhado</label>
+                        <span class="form-hint">Liste as ações, responsáveis e prazos para adequação ou desativação.</span>
+                        <textarea id="plano-acao" class="form-input" placeholder="Ex: 1. Implementar mascaramento de PII até 15/jun (resp: Eng. João). 2. Configurar alertas de custo até 20/jun (resp: CoE). 3. Criar model card até 30/jun. 4. ARB de revisão: 1/jul."></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="prazo-adequacao">Prazo para adequação</label>
+                            <input type="date" id="prazo-adequacao" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="resp-adequacao">Responsável pela adequação</label>
+                            <input type="text" id="resp-adequacao" class="form-input" placeholder="Nome e contato">
+                        </div>
+                    </div>
+
+                    <div class="form-row" style="margin-top:8px; padding-top:24px; border-top:2px solid var(--border);">
+                        <div class="form-group">
+                            <label class="form-label">Assinatura do Auditor (CoE)</label>
+                            <input type="text" class="form-input" placeholder="Nome · Data">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Ciência do Responsável Técnico</label>
+                            <input type="text" class="form-input" placeholder="Nome · Data">
+                        </div>
+                    </div>
+                </section>
+            </form>
+
+            <nav class="page-nav" aria-label="Navegação entre documentos">
+                <a href="intake-solicitacao.html" class="page-nav-card">
+                    <div class="page-nav-dir">← Anterior</div>
+                    <div class="page-nav-title">Formulário de Intake</div>
+                </a>
+                <a href="arb-checklist.html" class="page-nav-card next">
+                    <div class="page-nav-dir">Próximo →</div>
+                    <div class="page-nav-title">ARB Checklist</div>
+                </a>
+            </nav>
+        </main>
+    </div>
+
+    <footer id="footer">
+        <img src="../assets/Assaí_Atacadista_logo_2024.svg.png" alt="Assaí Atacadista">
+        <span>AI CoE · Documentos Operacionais</span>
+        <span>v1.0 · Maio 2026 · Uso interno</span>
+        <span class="footer-doc-links">
+            <a href="intake-solicitacao.html">Formulário de Intake</a>
+            <span class="footer-doc-sep">·</span>
+            <a href="arb-checklist.html">ARB Checklist</a>
+            <span class="footer-doc-sep">·</span>
+            <a href="model-card.html">Model Card</a>
+        </span>
+        <span class="footer-author">Criado por Claudio Ramirez — Arquiteto Tech Lead CoE Operacional</span>
+    </footer>
+
+    <script src="../js/shared.js"></script>
+</body>
+</html>
