@@ -87,6 +87,14 @@
             .form-row, .form-row-3 { grid-template-columns: 1fr; }
             .use-block { flex-direction: column; }
             .version-row { grid-template-columns: 1fr 1fr; }
+            .eval-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .eval-table thead, .eval-table tbody { min-width: 480px; }
+            .who-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .who-table thead, .who-table tbody { min-width: 440px; }
+        }
+        @media (max-width: 480px) {
+            .version-row { grid-template-columns: 1fr; }
+            .resp-grid { grid-template-columns: 1fr; }
         }
         @media print {
             #coe-switcher, .page-nav, .submit-area button { display: none; }

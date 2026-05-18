@@ -109,6 +109,17 @@
             .doc-card { flex-direction: column; gap: 14px; }
             .doc-card-arrow { display: none; }
             .pdf-box { flex-direction: column; gap: 14px; }
+            .who-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .who-table thead, .who-table tbody { min-width: 440px; }
+            .cards.cards-2 { grid-template-columns: 1fr; }
+            .flow-step:not(:last-child)::before { left: 15px; }
+            .flow-num { width: 32px; height: 32px; font-size: 0.75rem; }
+        }
+        @media (max-width: 480px) {
+            .pdf-box { padding: 20px 16px; }
+            .pdf-box-title { font-size: 0.9rem; }
+            .doc-card { padding: 16px; }
+            .doc-card-icon { width: 40px; height: 40px; font-size: 1.2rem; }
         }
         @media print {
             #coe-switcher { display: none; }

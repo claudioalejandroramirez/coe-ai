@@ -1486,14 +1486,101 @@ ol {
         display: block;
     }
 
+    /* ── Layout: sidebar vira aba horizontal com scroll ── */
     .page-body.with-sidebar {
         display: block;
+        padding-top: 0;
     }
 
     .sidebar {
+        display: block;
+        position: -webkit-sticky;
+        position: sticky;
+        top: calc(var(--nav-h) + var(--switcher-h));
+        z-index: 95;
+        width: 100%;
+        max-height: none;
+        background: #fff;
+        border-bottom: 2px solid var(--border);
+        -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        padding: 0;
+        overflow: hidden;
+        margin-bottom: 0;
+    }
+
+    .sidebar-title {
         display: none;
     }
 
+    .sidebar-nav {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        white-space: nowrap;
+        padding: 0 12px;
+        margin: 0;
+        gap: 0;
+    }
+
+    .sidebar-nav::-webkit-scrollbar {
+        display: none;
+    }
+
+    .sidebar-nav li {
+        -ms-flex-negative: 0;
+        flex-shrink: 0;
+    }
+
+    .sidebar-nav li + li {
+        margin-top: 0;
+    }
+
+    .sidebar-nav a {
+        display: -webkit-inline-box;
+        display: -ms-inline-flexbox;
+        display: inline-flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        gap: 5px;
+        padding: 12px 13px;
+        font-size: 0.79rem;
+        border-left: none !important;
+        border-bottom: 2px solid transparent;
+        border-radius: 0;
+        white-space: nowrap;
+        color: var(--muted);
+        background: transparent;
+        min-height: 44px;
+    }
+
+    .sidebar-nav a.active {
+        color: var(--red);
+        background: transparent;
+        border-left-color: transparent !important;
+        border-bottom-color: var(--red);
+        font-weight: 600;
+    }
+
+    .sidebar-nav a:hover {
+        color: var(--text);
+        background: var(--light);
+    }
+
+    /* Scroll margin compensa nav + switcher + aba de seções (~44px) */
+    .doc-section {
+        scroll-margin-top: calc(var(--nav-h) + var(--switcher-h) + 44px + 16px);
+    }
+
+    /* ── Grids ── */
     .cards-2,
     .cards-3,
     .cards-4 {
@@ -1509,14 +1596,20 @@ ol {
         grid-template-columns: 1fr;
     }
 
+    /* ── Espaçamentos ── */
     .page-hero {
-        padding: 36px 20px 32px;
+        padding: 32px 20px 28px;
     }
 
     .page-body {
-        padding: 32px 20px 60px;
+        padding: 28px 20px 60px;
     }
 
+    .doc-section {
+        margin-bottom: 48px;
+    }
+
+    /* ── Componentes ── */
     .team-card {
         -webkit-box-orient: vertical;
         -webkit-box-direction: normal;
@@ -1525,12 +1618,38 @@ ol {
         gap: 10px;
     }
 
+    .funnel-step {
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    }
+
+    .funnel-badge {
+        -webkit-box-ordinal-group: 0;
+        -ms-flex-order: -1;
+        order: -1;
+        font-size: 0.68rem;
+        padding: 2px 8px;
+        background: var(--light);
+        border-radius: 4px;
+        border: 1px solid var(--border);
+        white-space: nowrap;
+    }
+
+    /* ── Footer ── */
     #footer {
         -webkit-box-orient: vertical;
         -webkit-box-direction: normal;
         -ms-flex-direction: column;
         flex-direction: column;
         text-align: center;
+        padding: 24px 20px;
+        gap: 8px;
+    }
+
+    /* ── Tabelas com overflow ── */
+    .table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
     }
 }
 
@@ -1543,17 +1662,44 @@ ol {
         display: none;
     }
 
-    .funnel-badge {
-        display: none;
-    }
-
     .doc-table {
         font-size: 0.78rem;
     }
 
     .doc-table th,
     .doc-table td {
-        padding: 9px 12px;
+        padding: 9px 10px;
+    }
+
+    /* Switcher compacto — touch targets mantidos */
+    .switcher-label {
+        display: none;
+    }
+
+    .switcher-item {
+        padding: 6px 10px;
+        font-size: 0.75rem;
+        min-height: 44px;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+    }
+
+    .switcher-num {
+        display: none;
+    }
+
+    /* Hero mais compacto */
+    .page-hero {
+        padding: 24px 16px 20px;
+    }
+
+    .page-body {
+        padding: 20px 16px 52px;
+    }
+
+    .hero-subtitle {
+        font-size: 0.88rem;
     }
 }
 

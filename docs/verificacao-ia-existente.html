@@ -74,7 +74,13 @@
         @media (max-width: 768px) {
             .form-row { grid-template-columns: 1fr; }
             .conf-row, .conf-header { grid-template-columns: 1fr; }
+            .risk-matrix { grid-template-columns: 1fr 1fr; }
+            .decision-option { padding: 14px 12px; gap: 10px; }
+        }
+        @media (max-width: 480px) {
             .risk-matrix { grid-template-columns: 1fr; }
+            .conf-header { display: none; }
+            .conf-row { border: 1px solid var(--border); border-radius: var(--radius); padding: 12px; margin-bottom: 8px; }
         }
         @media print {
             #coe-switcher, .page-nav { display: none; }

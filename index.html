@@ -227,9 +227,28 @@
         }
         @media (max-width: 768px) {
             .ql-grid { grid-template-columns: 1fr; }
-            .flow-step { flex-direction: column; align-items: flex-start; text-align: left; }
+            .flow-step { flex-direction: column; align-items: flex-start; gap: 12px; }
+            .f-badge { align-self: flex-start; }
             .home-hero-visual { height: 220px; }
             .ring-3 { width: 210px; height: 210px; }
+            .home-hero-inner { gap: 32px; }
+            .home-hero-stats { gap: 20px; flex-wrap: wrap; }
+            .levels { padding: 52px 20px 64px; }
+            .flow-section { padding: 52px 20px; }
+            .quicklinks { padding: 52px 20px; }
+            .docs-section { padding: 52px 20px; }
+        }
+        @media (max-width: 480px) {
+            .home-hero-visual { display: none; }
+            .home-hero-text { opacity: 1; animation: none; }
+            .hstat-val { font-size: 2.2rem; }
+            .levels-title { font-size: 1.6rem; }
+            .section-title { font-size: 1.7rem; }
+            .docs-title { font-size: 1.7rem; }
+            .level-content { padding: 24px 20px; }
+            .flow-step { padding: 18px 16px; }
+            .docs-grid { gap: 14px; }
+            .docs-card { padding: 18px 14px; gap: 14px; }
         }
         
         /* Modern Footer */
@@ -263,8 +282,16 @@
                 <li><a href="operacional/time-e-fluxo.html">Operacional</a></li>
                 <li><a href="docs/index.html" style="color:#F5A800; font-weight:700;">📋 Documentos</a></li>
             </ul>
+            <button id="nav-toggle" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span><span></span></button>
         </div>
     </nav>
+    <div id="nav-mobile" role="navigation" aria-label="Menu mobile">
+        <a href="index.html" class="active">🏠 Início</a>
+        <a href="estrategico/visao-geral.html">🏛️ Estratégico</a>
+        <a href="tatico/visao-geral.html">📊 Tático</a>
+        <a href="operacional/time-e-fluxo.html">⚙️ Operacional</a>
+        <a href="docs/index.html" style="color:#F5A800;">📋 Documentos</a>
+    </div>
 
     <!-- HERO -->
     <header class="home-hero">
