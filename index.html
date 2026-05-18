@@ -29,7 +29,7 @@
         /* Home Hero */
         .home-hero {
             background: var(--dark-base);
-            padding: 100px 24px 80px;
+            padding: 56px 24px 48px;
             position: relative;
             overflow: hidden;
             background-image: radial-gradient(circle at 80% 20%, rgba(227, 30, 36, 0.12) 0%, transparent 50%),
@@ -60,7 +60,7 @@
         .home-hero-eyebrow::before { content: ''; width: 30px; height: 1px; background: var(--amber); }
 
         .home-hero-title {
-            font-size: clamp(3rem, 6vw, 4.5rem); font-weight: 800; color: #fff; line-height: 1.05; margin-bottom: 24px;
+            font-size: clamp(2.4rem, 5vw, 3.6rem); font-weight: 800; color: #fff; line-height: 1.05; margin-bottom: 20px;
         }
         .home-hero-title span {
             font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.05em; font-style: italic; color: #fff; letter-spacing: -2px; padding-right: 6px;
@@ -68,35 +68,35 @@
         .home-hero-title em { color: var(--red-accent); font-style: normal; }
 
         .home-hero-sub {
-            font-size: 1.15rem; color: var(--text-muted); max-width: 520px; line-height: 1.6; margin-bottom: 40px;
+            font-size: 1rem; color: var(--text-muted); max-width: 520px; line-height: 1.6; margin-bottom: 32px;
         }
 
-        .home-hero-stats { display: flex; gap: 48px; flex-wrap: wrap; }
+        .home-hero-stats { display: flex; gap: 40px; flex-wrap: wrap; }
         .hstat { text-align: left; }
-        .hstat-val { font-family: 'Montserrat', sans-serif; font-style: italic; font-weight: 900; letter-spacing: -2px; font-size: 3.5rem; color: var(--red-accent); line-height: 1; display: block; margin-bottom: 4px; }
-        .hstat-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+        .hstat-val { font-family: 'Montserrat', sans-serif; font-style: italic; font-weight: 900; letter-spacing: -2px; font-size: 2.8rem; color: var(--red-accent); line-height: 1; display: block; margin-bottom: 4px; }
+        .hstat-label { font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
 
         /* Orbital Visual */
         .home-hero-visual {
-            flex: 1; display: flex; justify-content: center; align-items: center; min-width: 320px;
-            position: relative; height: 400px; opacity: 0; animation: fadeUp 1s ease 0.2s forwards;
+            flex: 1; display: flex; justify-content: center; align-items: center; min-width: 260px;
+            position: relative; height: 300px; opacity: 0; animation: fadeUp 1s ease 0.2s forwards;
         }
         .orbit-center {
-            width: 80px; height: 80px; background: linear-gradient(135deg, var(--red-accent), var(--red-deep));
-            border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.5rem; color: #fff;
-            box-shadow: 0 0 40px rgba(227, 30, 36, 0.4); z-index: 10;
+            width: 64px; height: 64px; background: linear-gradient(135deg, var(--red-accent), var(--red-deep));
+            border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.2rem; color: #fff;
+            box-shadow: 0 0 30px rgba(227, 30, 36, 0.4); z-index: 10;
         }
         .orbit-ring { position: absolute; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 50%; }
-        .ring-1 { width: 180px; height: 180px; animation: spin 10s linear infinite; }
-        .ring-2 { width: 280px; height: 280px; animation: spin 20s linear infinite reverse; }
-        .ring-3 { width: 380px; height: 380px; animation: spin 30s linear infinite; }
+        .ring-1 { width: 140px; height: 140px; animation: spin 10s linear infinite; }
+        .ring-2 { width: 220px; height: 220px; animation: spin 20s linear infinite reverse; }
+        .ring-3 { width: 300px; height: 300px; animation: spin 30s linear infinite; }
         .orbit-dot {
-            width: 14px; height: 14px; background: var(--white); border-radius: 50%; position: absolute; top: -7px; left: 50%; transform: translateX(-50%);
-            box-shadow: 0 0 15px rgba(255,255,255,0.6);
+            width: 10px; height: 10px; background: var(--white); border-radius: 50%; position: absolute; top: -5px; left: 50%; transform: translateX(-50%);
+            box-shadow: 0 0 10px rgba(255,255,255,0.6);
         }
-        .ring-1 .orbit-dot { background: #93C5FD; box-shadow: 0 0 15px #93C5FD; }
-        .ring-2 .orbit-dot { background: var(--amber); box-shadow: 0 0 15px var(--amber); }
-        .ring-3 .orbit-dot { background: var(--red-accent); box-shadow: 0 0 15px var(--red-accent); }
+        .ring-1 .orbit-dot { background: #93C5FD; box-shadow: 0 0 10px #93C5FD; }
+        .ring-2 .orbit-dot { background: var(--amber); box-shadow: 0 0 10px var(--amber); }
+        .ring-3 .orbit-dot { background: var(--red-accent); box-shadow: 0 0 10px var(--red-accent); }
 
         @keyframes spin { 100% { transform: rotate(360deg); } }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
@@ -201,8 +201,8 @@
         @media (max-width: 768px) {
             .ql-grid { grid-template-columns: 1fr; }
             .flow-step { flex-direction: column; align-items: flex-start; text-align: left; }
-            .home-hero-visual { height: 300px; }
-            .ring-3 { width: 280px; height: 280px; }
+            .home-hero-visual { height: 220px; }
+            .ring-3 { width: 210px; height: 210px; }
         }
         
         /* Modern Footer */

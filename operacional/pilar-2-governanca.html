@@ -13,6 +13,7 @@
         href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="../css/shared.css">
+    <style>:root { --switcher-h: 44px; }</style>
 </head>
 
 <body>
@@ -48,7 +49,29 @@
         <a href="operacao-e-metricas.html">📊 Operação</a>
     </div>
 
+    <div id="coe-switcher" aria-label="Navegar entre CoEs">
+        <div class="switcher-inner">
+            <span class="switcher-label">Nível</span>
+            <a href="../estrategico/visao-geral.html" class="switcher-item estrategico">
+                <span class="switcher-num">01</span>Estratégico
+            </a>
+            <span class="switcher-sep" aria-hidden="true"></span>
+            <a href="../tatico/visao-geral.html" class="switcher-item tatico">
+                <span class="switcher-num">02</span>Tático
+            </a>
+            <span class="switcher-sep" aria-hidden="true"></span>
+            <a href="time-e-fluxo.html" class="switcher-item operacional active">
+                <span class="switcher-num">03</span>Operacional
+            </a>
+        </div>
+    </div>
+
     <header class="page-hero">
+        <div class="page-hero-orbit" aria-hidden="true">
+            <div class="pho-ring pho-r1"></div>
+            <div class="pho-ring pho-r2"></div>
+            <div class="pho-ring pho-r3"></div>
+        </div>
         <div class="hero-inner">
             <div class="hero-eyebrow">Pilar 2</div>
             <h1 class="hero-title">Governança <em>Técnica</em></h1>
