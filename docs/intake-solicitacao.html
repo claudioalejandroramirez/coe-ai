@@ -285,6 +285,25 @@
                             </div>
                         </div>
                     </div>
+
+                    <hr class="form-divider">
+
+                    <div class="form-group">
+                        <label class="form-label req">Esta solução usa ou depende de IA de terceiro?</label>
+                        <span class="form-hint">SaaS com IA embutida (Copilot, Salesforce Einstein, SAP AI, etc.), API de modelo externo (OpenAI, Anthropic, Google), ou qualquer modelo não hospedado pela Assaí.</span>
+                        <div class="radio-group">
+                            <label class="radio-item"><input type="radio" name="ia-terceiro"> Não — a IA será desenvolvida ou operada internamente pelo CoE</label>
+                            <label class="radio-item"><input type="radio" name="ia-terceiro"> Sim — usa API de modelo externo (ex: OpenAI, Anthropic, Cohere)</label>
+                            <label class="radio-item"><input type="radio" name="ia-terceiro"> Sim — usa SaaS com IA embutida (ex: Copilot, Salesforce Einstein, SAP AI)</label>
+                            <label class="radio-item"><input type="radio" name="ia-terceiro"> Misto — combinação de componentes internos e de terceiros</label>
+                            <label class="radio-item"><input type="radio" name="ia-terceiro"> Não sei — preciso verificar</label>
+                        </div>
+                    </div>
+
+                    <div class="callout warn" style="margin-top:0;">
+                        <div class="callout-label">⚠️ Risco de IA de terceiro</div>
+                        Soluções com IA de terceiro exigem avaliação adicional: onde os dados do Assaí vão, quais termos de uso se aplicam, se o provider usa dados para treinamento e como a LGPD é respeitada. O CoE avaliará isso na triagem do intake e poderá solicitar avaliação de fornecedor (TPRM) antes de avançar.
+                    </div>
                 </section>
 
                 <!-- IMPACTO ESPERADO -->

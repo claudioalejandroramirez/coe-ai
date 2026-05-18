@@ -182,7 +182,7 @@
             <p class="hero-subtitle">Architecture Review Board — checklist técnico obrigatório antes de qualquer deploy de IA em produção. Sem aprovação do ARB, o deploy não acontece.</p>
             <div class="hero-chips">
                 <span class="chip docs">🛡️ Pilar 2 · Governança</span>
-                <span class="chip docs">6 perguntas obrigatórias</span>
+                <span class="chip docs">8 perguntas obrigatórias</span>
                 <span class="chip docs">🔒 Uso interno</span>
             </div>
         </div>
@@ -193,7 +193,7 @@
             <div class="sidebar-title">Nesta página</div>
             <ul class="sidebar-nav">
                 <li><a href="#identificacao" class="active">📋 Identificação</a></li>
-                <li><a href="#checklist">✅ 6 Perguntas ARB</a></li>
+                <li><a href="#checklist">✅ 8 Perguntas ARB</a></li>
                 <li><a href="#criterios">📐 Critérios de aceite</a></li>
                 <li><a href="#risco">⊞ Risco do projeto</a></li>
                 <li><a href="#decisao">🔏 Decisão & assinaturas</a></li>
@@ -211,7 +211,7 @@
 
             <div class="callout danger" style="margin-bottom:32px;">
                 <div class="callout-label">⚠️ Pré-requisito de deploy</div>
-                Este checklist deve ser preenchido pelo <strong>responsável técnico do projeto</strong> e revisado pelo <strong>CoE Operacional</strong>. Todas as 6 perguntas precisam de resposta "Sim" ou justificativa documentada. Projetos com risco Alto ou Crítico exigem aprovação do CoE Estratégico.
+                Este checklist deve ser preenchido pelo <strong>responsável técnico do projeto</strong> e revisado pelo <strong>CoE Operacional</strong>. Todas as 8 perguntas precisam de resposta "Sim" ou justificativa documentada. Projetos com risco Alto ou Crítico exigem aprovação do CoE Estratégico.
             </div>
 
             <form>
@@ -271,7 +271,7 @@
                 <!-- 6 PERGUNTAS ARB -->
                 <section id="checklist" class="doc-section">
                     <div class="section-label">Seção 02</div>
-                    <h2 class="section-title">As 6 perguntas obrigatórias</h2>
+                    <h2 class="section-title">As 8 perguntas obrigatórias</h2>
                     <p class="section-desc">Todas precisam de "Sim" ou de justificativa documentada para "Não / N.A."</p>
                     <hr class="section-divider">
 
@@ -394,6 +394,47 @@
                             <textarea id="q6-desc" class="form-input" placeholder="Ex: Feature flag no LaunchDarkly. Desligar em < 5 min redireciona para fluxo humano. Versão anterior do modelo mantida por 30 dias. Runbook: [link]."></textarea>
                         </div>
                     </div>
+
+                    <!-- Pergunta 7 -->
+                    <div class="arb-question">
+                        <div class="arb-q-header">
+                            <div class="arb-q-num" id="num-q7">07</div>
+                            <div>
+                                <div class="arb-q-text">Agentes de IA têm identidade registrada (NHI) com permissões mínimas documentadas?</div>
+                                <div class="arb-q-why">Agentes autônomos são identidades não-humanas (NHI) com acesso real a sistemas. Sem inventário e controle de permissões, o blast radius em caso de comprometimento é desconhecido — e invisível para o time de segurança.</div>
+                            </div>
+                        </div>
+                        <div class="arb-inline-radio">
+                            <label><input type="radio" name="q7" value="sim"> Sim — registrado e documentado no model card</label>
+                            <label><input type="radio" name="q7" value="nao"> Não — justificativa obrigatória</label>
+                            <label class="opt-na"><input type="radio" name="q7" value="na"> N.A. — solução sem agentes autônomos</label>
+                        </div>
+                        <div class="form-group" style="margin-bottom:0">
+                            <label class="form-label" for="q7-desc">ID da identidade do agente, permissões autorizadas e blast radius estimado</label>
+                            <textarea id="q7-desc" class="form-input" placeholder="Ex: svc-coe-chatbot-prod — acesso read-only a SharePoint e vector store. Sem acesso a dados transacionais ou financeiros. Blast radius: documentos internos públicos apenas. Owner: @nome.responsavel. Registrado no Model Card seção Identificação."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Pergunta 8 -->
+                    <div class="arb-question">
+                        <div class="arb-q-header">
+                            <div class="arb-q-num" id="num-q8">08</div>
+                            <div>
+                                <div class="arb-q-text">Se a solução usa MCP servers, todos estão na lista de aprovados pelo CoE?</div>
+                                <div class="arb-q-why">MCP servers permitem que agentes chamem sistemas externos, bancos de dados e APIs internas. Um MCP não aprovado pode expor dados ou executar ações não autorizadas fora do escopo do projeto — sem rastreabilidade.</div>
+                            </div>
+                        </div>
+                        <div class="arb-inline-radio">
+                            <label><input type="radio" name="q8" value="sim"> Sim — todos os MCP servers usados têm ADR de aprovação</label>
+                            <label><input type="radio" name="q8" value="nao"> Não — aprovação pendente (justificativa obrigatória)</label>
+                            <label class="opt-na"><input type="radio" name="q8" value="na"> N.A. — solução não usa MCP servers</label>
+                        </div>
+                        <div class="form-group" style="margin-bottom:0">
+                            <label class="form-label" for="q8-desc">Liste os MCP servers utilizados e confirme aprovação ou justifique ausência</label>
+                            <textarea id="q8-desc" class="form-input" placeholder="Ex: MCP filesystem (aprovado — ADR-012), MCP Confluence (aprovado — ADR-015), MCP SAP-query (solicitação em andamento — COE-198, deploy condicional). N.A. se a solução não usa agentes com ferramentas externas."></textarea>
+                        </div>
+                    </div>
+
                 </section>
 
                 <!-- CRITÉRIOS DE ACEITE -->

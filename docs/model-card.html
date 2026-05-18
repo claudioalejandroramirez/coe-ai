@@ -179,6 +179,7 @@
                 <li><a href="#dados">💾 Dados & privacidade</a></li>
                 <li><a href="#responsaveis">👤 Responsáveis</a></li>
                 <li><a href="#versoes">🔄 Histórico de versões</a></li>
+                <li><a href="#roi">📈 ROI realizado</a></li>
             </ul>
         </aside>
 
@@ -277,6 +278,36 @@
                         <label class="form-label" for="mc-arq-resumo">Arquitetura resumida</label>
                         <span class="form-hint">Tipo de solução, pipeline, modelos envolvidos. Pode incluir stack técnica.</span>
                         <textarea id="mc-arq-resumo" class="form-input" placeholder="Ex: RAG pipeline — Embedding: text-embedding-3-small (OpenAI) → Vector store: Pinecone → LLM: claude-sonnet-4-6 (Anthropic via AWS Bedrock). Gateway: LiteLLM. Orquestração: LangGraph."></textarea>
+                    </div>
+
+                    <hr class="form-divider">
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label req">Esta solução usa IA de terceiro?</label>
+                            <span class="form-hint">API de provider externo, SaaS com IA embutida ou qualquer modelo não hospedado pela Assaí.</span>
+                            <div class="radio-group" style="margin-top:8px;">
+                                <label class="radio-item"><input type="radio" name="mc-terceiro"> Não — modelo interno ou self-hosted</label>
+                                <label class="radio-item"><input type="radio" name="mc-terceiro"> Sim — API de provider externo (OpenAI, Anthropic, etc.)</label>
+                                <label class="radio-item"><input type="radio" name="mc-terceiro"> Sim — SaaS com IA embutida</label>
+                                <label class="radio-item"><input type="radio" name="mc-terceiro"> Misto — componentes internos e externos</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label req">Esta solução inclui agentes de IA autônomos?</label>
+                            <span class="form-hint">Agentes que chamam ferramentas, APIs externas ou executam ações além de gerar texto.</span>
+                            <div class="radio-group" style="margin-top:8px;">
+                                <label class="radio-item"><input type="radio" name="mc-agente"> Não — apenas geração / classificação de texto</label>
+                                <label class="radio-item"><input type="radio" name="mc-agente"> Sim — agente com ferramentas (function calling / MCP)</label>
+                                <label class="radio-item"><input type="radio" name="mc-agente"> Sim — agente multi-step (workflow / orquestração)</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="mc-nhi">Identidade do agente (NHI) e permissões autorizadas</label>
+                        <span class="form-hint">Preencher se a solução tem agentes autônomos. Liste: ID da identidade não-humana, quais ferramentas/sistemas pode acessar, e o blast radius estimado se comprometido.</span>
+                        <textarea id="mc-nhi" class="form-input" placeholder="Ex: ID: svc-coe-atendimento-prod. Ferramentas: search_docs (read-only), send_teams_message (canal #atendimento). Blast radius: acesso a 2 canais Teams + vector store de documentos internos (sem PII). Owner: @nome.responsavel. MCP servers: filesystem (ADR-012), Confluence (ADR-015)."></textarea>
                     </div>
                 </section>
 
@@ -649,6 +680,100 @@
                         <label class="form-label" for="mc-proxima-revisao">Data da próxima revisão obrigatória</label>
                         <span class="form-hint">Model cards devem ser revisados a cada mudança de modelo e no mínimo a cada 6 meses.</span>
                         <input type="date" id="mc-proxima-revisao" class="form-input" style="max-width:220px;">
+                    </div>
+                </section>
+
+                <!-- ROI REALIZADO -->
+                <section id="roi" class="doc-section">
+                    <div class="section-label">Seção 09</div>
+                    <h2 class="section-title">ROI realizado vs. projetado</h2>
+                    <p class="section-desc">Fecha o loop do Business Case — compara o retorno estimado no intake com o valor real medido em produção</p>
+                    <hr class="section-divider">
+
+                    <div class="callout info" style="margin-bottom:20px;">
+                        <div class="callout-label">💡 Por que rastrear</div>
+                        O Business Case aprovado no intake estimou um ROI. Esta seção verifica se o valor se realizou. ROI abaixo de 50% do projetado por 2 ciclos consecutivos deve acionar revisão pelo CoE Tático — não como punição, mas para entender o que ajustar.
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="roi-projetado">ROI projetado no Business Case</label>
+                            <span class="form-hint">Valor estimado na submissão do intake. Não alterar após aprovação.</span>
+                            <input type="text" id="roi-projetado" class="form-input" placeholder="Ex: Economia de R$ 15k/mês em horas + redução de 70% no tempo de consulta">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="roi-metrica">Métrica de negócio principal (KPI do intake)</label>
+                            <span class="form-hint">Indicador definido no intake que será monitorado mensalmente.</span>
+                            <input type="text" id="roi-metrica" class="form-input" placeholder="Ex: Tempo médio de atendimento (min), % de consultas resolvidas sem escalonamento">
+                        </div>
+                    </div>
+
+                    <table class="eval-table" style="margin-top:8px;">
+                        <thead>
+                            <tr>
+                                <th>Mês</th>
+                                <th>Valor baseline (pré-IA)</th>
+                                <th>Valor realizado</th>
+                                <th>ROI mensal estimado</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="text" class="form-input" placeholder="Ex: Jun/2026"></td>
+                                <td><input type="text" class="form-input" placeholder="Ex: 40 min/consulta"></td>
+                                <td><input type="text" class="form-input" placeholder="Ex: 8 min/consulta"></td>
+                                <td><input type="text" class="form-input" placeholder="Ex: R$ 12k"></td>
+                                <td>
+                                    <div class="eval-trend">
+                                        <label><input type="radio" name="roi-s1" value="meta"> ✅</label>
+                                        <label><input type="radio" name="roi-s1" value="parcial"> ⚠️</label>
+                                        <label><input type="radio" name="roi-s1" value="abaixo"> ❌</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" class="form-input" placeholder="Ex: Jul/2026"></td>
+                                <td><input type="text" class="form-input" placeholder="Mesmo baseline"></td>
+                                <td><input type="text" class="form-input" placeholder="Valor…"></td>
+                                <td><input type="text" class="form-input" placeholder="R$…"></td>
+                                <td>
+                                    <div class="eval-trend">
+                                        <label><input type="radio" name="roi-s2" value="meta"> ✅</label>
+                                        <label><input type="radio" name="roi-s2" value="parcial"> ⚠️</label>
+                                        <label><input type="radio" name="roi-s2" value="abaixo"> ❌</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" class="form-input" placeholder="Ex: Ago/2026"></td>
+                                <td><input type="text" class="form-input" placeholder="Mesmo baseline"></td>
+                                <td><input type="text" class="form-input" placeholder="Valor…"></td>
+                                <td><input type="text" class="form-input" placeholder="R$…"></td>
+                                <td>
+                                    <div class="eval-trend">
+                                        <label><input type="radio" name="roi-s3" value="meta"> ✅</label>
+                                        <label><input type="radio" name="roi-s3" value="parcial"> ⚠️</label>
+                                        <label><input type="radio" name="roi-s3" value="abaixo"> ❌</label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="form-group" style="margin-top:16px;">
+                        <label class="form-label">ROI acumulado atingiu a meta do Business Case?</label>
+                        <div class="radio-group" style="margin-top:8px;">
+                            <label class="radio-item"><input type="radio" name="roi-status"> Sim — igual ou acima do projetado</label>
+                            <label class="radio-item"><input type="radio" name="roi-status"> Parcialmente — entre 50% e 100% do projetado</label>
+                            <label class="radio-item"><input type="radio" name="roi-status"> Abaixo de 50% do projetado — acionar CoE Tático para revisão</label>
+                            <label class="radio-item"><input type="radio" name="roi-status"> Em medição — menos de 3 meses em produção</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="roi-obs">Observações sobre o ROI realizado</label>
+                        <textarea id="roi-obs" class="form-input" placeholder="Contexto, fatores que influenciaram (positivos ou negativos), ajustes de meta necessários, próximos ciclos de medição…"></textarea>
                     </div>
                 </section>
 
