@@ -2,3 +2,6 @@
 Thumbs.db
 Desktop.ini
 *.log
+
+# Claude Code local config (permissões e estado local da sessão)
+.claude/
