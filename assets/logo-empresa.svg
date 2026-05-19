@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 40" width="160" height="40">
+  <rect width="160" height="40" rx="6" fill="#E31E24"/>
+  <text x="80" y="15" font-family="Inter, Arial, sans-serif" font-size="8" font-weight="700" fill="rgba(255,255,255,0.6)" text-anchor="middle" letter-spacing="2">SUA</text>
+  <text x="80" y="30" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="1">EMPRESA</text>
+</svg>
